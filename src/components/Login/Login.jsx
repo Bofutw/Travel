@@ -10,8 +10,10 @@ import {
 
 import React, { useEffect, useRef, useState } from "react";
 import { auth } from "../../Firebase/firebase-config";
-import { createnewuser, getmemberid, getuseremail } from "./LoginConditional";
+import { createnewuser, existenceemaillpassword, getmemberid, getuseremail } from "./LoginConditional";
 import "./login.css";
+import { useNavigate } from "react-router-dom";
+
 
 const Login = () => {
   const [registerEmail, setRegisterEmail] = useState("");
@@ -19,6 +21,7 @@ const Login = () => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
+  const navigate = useNavigate();
 
 
   const [user, setUser] = useState({});
@@ -28,8 +31,7 @@ const Login = () => {
     setUser(currentUser);
     console.log('user', user);
   })
-
-
+//set true false condition listen user state 
 
   const register = async () => {
     try {
@@ -45,7 +47,7 @@ const Login = () => {
 
       setRegisterEmail("")
       setRegisterPassword("")
-      window.location.href = "/"
+      navigate("/")
 
 
     } catch (error) {
@@ -60,14 +62,20 @@ const Login = () => {
 
   const login = async (e) => {
     e.preventDefault();
-    try {
+    try {      
+      
+      await existenceemaillpassword(loginEmail,loginPassword);     
+      
+      const user = await signInWithEmailAndPassword(
+        auth,
+        loginEmail,
+        loginPassword
+      );
 
-      const axiosuseremail = await axios.get(`http://localhost:8080/member/email=${loginEmail}`);
-      const axiosuserdata = await axiosuseremail.data;
-      const queryemailresult = await axiosuserdata.memberemail;
-      var testemail = queryemailresult;
+     const useremail= await getuseremail(loginEmail);
 
-
+     console.log("loginfn",useremail);
+      
       // if (loginEmail === queryemailresult) {
       //   alert("已經重複囉")
       // }
@@ -76,11 +84,6 @@ const Login = () => {
 
 
 
-      const user = await signInWithEmailAndPassword(
-        auth,
-        loginEmail,
-        loginPassword
-      );
 
       console.log(user.user.email);
 
@@ -101,8 +104,7 @@ const Login = () => {
 
 
 
-      window.location.href = "/"
-
+      navigate("/");
 
       alert("Welcome")
 
@@ -111,8 +113,8 @@ const Login = () => {
       // if (testemail === loginEmail && !!loginPassword === !!null) {
       //   alert('密碼錯誤')
       // }
-      alert(error.message)
-      console.log(error.message);
+      //alert("該帳號不存在")
+      console.log("loginfn,errormessage",error.message);
     }
   };
 
