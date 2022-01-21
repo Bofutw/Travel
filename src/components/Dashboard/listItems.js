@@ -37,7 +37,7 @@ export const mainListItems = (
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
-      <ListItemText primary="Reports" />
+      <ListItemText primary="Github" />
     </ListItem>
    {/*  <ListItem button onClick={()=>window.location.href='/employee'}>
       <ListItemIcon>

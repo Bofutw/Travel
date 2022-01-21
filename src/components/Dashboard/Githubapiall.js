@@ -24,8 +24,8 @@ function Githubapiall() {
 
     let eventurl = 'https://api.github.com/users/Bofutw/received_events'
     let mainurl = 'https://api.github.com/repos/EEIT36-Travel/Brian_Web_Demo/commits'
-    let developurl = 'https://api.github.com/repos/EEIT36-Travel/Brian_Web_Demo/commits?sha=229defa830568cc282e54da70f730ccd7cd347b6'
-    let googlemapurl = 'https://api.github.com/repos/EEIT36-Travel/Brian_Web_Demo/commits?sha=5062effd839af96ed2c4a40363a6e2562f3b1cf4'
+    let developurl = 'https://api.github.com/repos/EEIT36-Travel/Brian_Web_Demo/commits?sha=8c374a64c64415d8c615fae21ff31152e1d929cd'
+    let googlemapurl = 'https://api.github.com/repos/EEIT36-Travel/Brian_Web_Demo/commits?sha=a55100bd03252b2693259335125d203fc08bd3e1'
 
         async function fetchapi(){
            try {

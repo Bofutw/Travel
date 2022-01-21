@@ -14,6 +14,7 @@ import Favorite from './components/Favorite/Favorite';
 import Test from './components/Practice/Bootstrap';
 import Dashboard from './components/Dashboard/Dashboard';
 import Github from './components/Dashboard/Github';
+import Member from './components/Dashboard/Member';
 
 function App() {
   const location=useLocation()
@@ -35,6 +36,7 @@ function App() {
           <Route path="/test" element={<Test />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/github" element={<Github />} />
+          <Route path="/member" element={<Member />} />
         </Routes>
        
         {!isdashboardRendering && <Footer />}

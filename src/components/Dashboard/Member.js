@@ -28,7 +28,8 @@ import Areachart from './Areachart';
 import Agechart from './Agechart'
 import { height, margin, padding } from '@mui/system';
 import Githubapi from './Githubapi';
-
+import Citychart from './Citychart'
+import Genderchart from './Genderchart'
 
 
 function Copyright(props) {
@@ -164,7 +165,7 @@ const handleMenuClose = () => {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-            不可以色色の後台
+            不可以色色の後台一會員資料
             </Typography>
             <IconButton color="usewhite" >
               {/* Content可以塞data state */}
@@ -236,34 +237,40 @@ const handleMenuClose = () => {
               </Grid>
               {/* Recent Orders */}
              
-              <Grid container spacing={3}>
-              <Grid item xs={4.5} >
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:3 }}>
+              <Grid container spacing={1}>
+              
+              </Grid>
+              <Grid item xs={12}>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2,paddingLeft:0}}>
+                
+                  <Citychart></Citychart>
+              
+                </Paper>
+              </Grid>      
+              
+            </Grid>
+
+            <Grid container spacing={2}>
+            <Grid item xs={4.5} >
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:0 }}>
             
                   <Areachart></Areachart>
               
                   {/* <Orders /> */}
                 </Paper>
-              </Grid>
-              <Grid item xs={5}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2,paddingLeft:0}}>
-                
-                  <Agechart></Agechart>
-              
-                  {/* <Orders /> */}
-                </Paper>
-              </Grid>
 
-              <Grid item xs={2.5}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2}}>
-                
-                  <Githubapi></Githubapi>
-              
-                  {/* <Orders /> */}
-                </Paper>
+                </Grid>
+              <Grid item xs={4.5} >
+              <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:0 }}>
+          
+                <Genderchart></Genderchart>
+            
+                {/* <Orders /> */}
+              </Paper>
+
               </Grid>
-              
-            </Grid>
+                
+
             </Grid>
             <Copyright sx={{ pt: 4 }} />
           </Container>

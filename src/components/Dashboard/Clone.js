@@ -8,7 +8,7 @@ import { useEffect,useState } from 'react';
 import fs from 'fs' */
 
 
-const token = ''
+const token = 'token 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'
 const url = 'https://api.github.com/repos/EEIT36-Travel/Brian_Web_Demo/traffic/clones'
 let clones = [];
 
