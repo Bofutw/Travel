@@ -23,7 +23,7 @@ function Githubstatus({data,data1,data2,align,branch}) {
           <TableRow>
             <TableCell align="center" ><h3>分支</h3></TableCell>
             <TableCell align="center">Main</TableCell>
-            <TableCell align="center">Dashboard</TableCell>
+            <TableCell align="center">BackendAPI</TableCell>
             <TableCell align="center">Googlemap</TableCell>
             
           </TableRow>
