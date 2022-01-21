@@ -8,7 +8,7 @@ export async function getuseremail(useremail) {
         console.log("GetUserInfo", axiosresult.memberemail);
         return axiosresult.memberemail;
     } catch (error) {
-
+        
     }
 
 
@@ -35,4 +35,15 @@ export async function getmemberid(currentuseremail) {
     console.log("這是memberID", memberid);
     return memberid
 
+}
+
+export async function existenceemaillpassword(loginEmail,loginPassword){
+    
+    const useremail = await getuseremail(loginEmail);
+//write useremail error message
+    console.log(useremail);
+    
+    if(!!loginPassword===!!null){
+        alert("密碼記得填寫")
+    }
 }
