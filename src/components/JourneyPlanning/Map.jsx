@@ -111,10 +111,10 @@ function MyComponent() {
               onPlaceChanged={() => {
                 
                 
-                console.log(autocomplete.getPlace().photos[0].getUrl());
+              /*   console.log(autocomplete.getPlace().photos[0].getUrl());
                 console.log(autocomplete.getPlace());
                 picurl = autocomplete.getPlace().photos[0].getUrl();
-
+ */
 
                 if (autocomplete.getPlace().geometry!=undefined) {
                   setPlacedetail(autocomplete.getPlace());
@@ -201,33 +201,28 @@ function MyComponent() {
            <br></br>
            {/* {placedetail.opening_hours==undefined?null:JSON.stringify(placedetail.opening_hours.weekday_text)}  */}
            {placedetail.opening_hours==undefined?null:placedetail.opening_hours.weekday_text[0]}
-           <br></br>
+           {placedetail.opening_hours==undefined?null:<br></br>}
            {placedetail.opening_hours==undefined?null:placedetail.opening_hours.weekday_text[1]}
-           <br></br>
+           {placedetail.opening_hours==undefined?null:<br></br>}
            {placedetail.opening_hours==undefined?null:placedetail.opening_hours.weekday_text[2]}
-           <br></br>
+           {placedetail.opening_hours==undefined?null:<br></br>}
            {placedetail.opening_hours==undefined?null:placedetail.opening_hours.weekday_text[3]}
-           <br></br>
+           {placedetail.opening_hours==undefined?null:<br></br>}
            {placedetail.opening_hours==undefined?null:placedetail.opening_hours.weekday_text[4]}
-           <br></br>
+           {placedetail.opening_hours==undefined?null:<br></br>}
            {placedetail.opening_hours==undefined?null:placedetail.opening_hours.weekday_text[5]}
-           <br></br>
+           {placedetail.opening_hours==undefined?null:<br></br>}
            {placedetail.opening_hours==undefined?null:placedetail.opening_hours.weekday_text[6]}
+           {placedetail.opening_hours==undefined?null:<br></br>}
+         
            <br></br>
-           <br></br>
-           
           {/*  <img src={placedetail.photos[0].getUrl()} width={270} height={200}></img>   */}
            <Carousel>
            {placedetail.photos==undefined?null:<img src={placedetail.photos[0].getUrl()} width={270} height={200}></img>}
            {placedetail.photos==undefined?null:<img src={placedetail.photos[1].getUrl()} width={270} height={200}></img>}
            {placedetail.photos==undefined?null:<img src={placedetail.photos[2].getUrl()} width={270} height={200}></img>}
            </Carousel>
-            
 
-
-
-
-           <br></br>
            <Button  color="primary" onClick={handleSent} variant="contained" style={{marginLeft:'28%',marginTop:'10%'}}>加入行程</Button>
            {/* 三元運算 */}
 
