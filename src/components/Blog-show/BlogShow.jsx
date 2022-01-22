@@ -13,10 +13,11 @@ export default function BlogShow() {
         <div style={{display: 'grid',gridTemplateColumns:'70% 30%'}}>
             <div>
                 <div class="bls" style={{ width:'1000px',height:'350px',margin: '70px',display: 'flex',justifyContent: 'center',alignItems: 'center'}}>
-                    <img src='\blogimg\b1\44879896482_720c553daa_c.jpg' style={{width: '100%',height: '100%',objectFit:'cover'}}></img>
+                    <img src={blogdata.blogdetail.url} style={{width: '100%',height: '100%',objectFit:'cover'}}></img>
                 </div>
                 <div style={{marginLeft:'100px', marginTop:"-50px",marginBottom:'60px',width:'900px'}}>
                     <h1>{blogdata.blogdetail.title}</h1>
+                    <h5>{blogdata.blogdetail.decrption}</h5>
                 </div>
                 <div >
                     <div class="leftcolumn"style={{backgroundColor:'',overflow: 'auto',height:'1000px'}}>
@@ -27,12 +28,11 @@ export default function BlogShow() {
                             list.push(<div class="card"style={{display: 'grid',gridTemplateColumns:'65% 35%'}}>
                             <div >
                                 <h3><i class="fa fa-map-marker" aria-hidden="true"></i>  {item.eachplace[i].subTitle}</h3>
-                                <p><i class="fa fa-calendar" aria-hidden="true"></i>  2022 / 1 /20</p>
                                 <p> {item.eachplace[i].text}</p>
                                 
                             </div>
                             <div>
-                            <img src='\blogimg\b1\1583291348-1103427651.jpg' style={{width:'350px',height:'250px'}}></img>
+                            <img src={item.eachplace[i].pic} style={{width:'350px',height:'250px'}}></img>
                            
                             
                             </div>

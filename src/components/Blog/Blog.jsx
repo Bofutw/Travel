@@ -8,14 +8,15 @@ import './blog.css'
 
 function Blog () {
     let temp = 0
-    const [data,setData] = useState([])
-   
+    const [populardata,setPopulardata] = useState([])
+    const [newblogdata,setNewblogdata] = useState([])
     useEffect((()=>{
-        getData()
+        getPopularData()
+        getNewblogData()
     }),
     [])
-    function getData(){
-        fetch("http://localhost:8080/blog/popular")
+    function getPopularData(){
+        fetch("http://localhost:8080/blog/topblog")
         .then((res)=>{
             
             return res.json()
@@ -27,11 +28,26 @@ function Blog () {
                 result[i].blogdetail = JSON.parse(result[i].blogdetail)
             }
             console.log(result)
-            setData(result)
+            setPopulardata(result)
         })
-
-
-        
+   
+    }
+    function getNewblogData(){
+        fetch("http://localhost:8080/blog/newblog")
+        .then((res)=>{
+            
+            return res.json()
+        })
+        .then((result)=>{
+            
+            for(let i =0;i<result.length;i++){
+                console.log(result[i].blogdetail)
+                result[i].blogdetail = JSON.parse(result[i].blogdetail)
+            }
+            console.log(result)
+            setNewblogdata(result)
+        })
+   
     }
     function test(e){
         fetch("http://localhost:8080/blog/"+(e.target.id).slice(6,8))
@@ -57,7 +73,7 @@ function Blog () {
                                 {/* <!-- Carousel indicators --> */}
                                 <ol class="carousel-indicators">
                                
-                                    {data.map((item,id)=>{
+                                    {populardata.map((item,id)=>{
                                         if(id%3==0){
                                             temp++;
                                             return<li data-target="#myCarousel" ></li>
@@ -68,20 +84,20 @@ function Blog () {
                                 </ol>
 
                                 <div class="carousel-inner">
-                                    {data.map((item,index) => {
+                                    {populardata.map((item,index) => {
                                         if(index==0){
                                             let lists = [];        
                                             for(let i=index;i<=(index+2);i++){
-                                                if(data[i]){
+                                                if(populardata[i]){
                                                     lists.push(<div class="col-sm-4">
                                                     <div class="thumb-wrapper">
                                                         <div class="img-box">
-                                                            <img src="\blogimg\b1\44879896482_720c553daa_c.jpg" class="img-fluid" alt="" />
+                                                            <img src={populardata[i].blogdetail.url} class="img-fluid" alt="" />
                                                         </div>
                                                         <div class="thumb-content">
-                                                            <h4>{data[i].blogdetail.title}</h4>
-                                                            <p>{data[i].blogdetail.decrption}</p>
-                                                            <a onClick={test} class="btn btn-primary" id={`blogid${data[i].blogid}`}>More <i class="fa fa-angle-right"></i></a>
+                                                            <h4>{populardata[i].blogdetail.title}</h4>
+                                                            <p>{populardata[i].blogdetail.decrption}</p>
+                                                            <a onClick={test} class="btn btn-primary" id={`blogid${populardata[i].blogid}`}>More <i class="fa fa-angle-right"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>)
@@ -97,16 +113,16 @@ function Blog () {
                                         if(index%3==0&&index!=0){
                                             let lists = [];        
                                             for(let i=index;i<=(index+2);i++){                                                          
-                                                if(data[i]){
+                                                if(populardata[i]){
                                                     lists.push(<div class="col-sm-4">
                                                     <div class="thumb-wrapper">
                                                         <div class="img-box">
-                                                            <img src="\blogimg\b1\44879896482_720c553daa_c.jpg" class="img-fluid" alt="" />
+                                                            <img src={populardata[i].blogdetail.url} class="img-fluid" alt="" />
                                                         </div>
                                                         <div class="thumb-content">
-                                                            <h4>{data[i].blogdetail.title}</h4>
-                                                            <p>{data[i].blogdetail.decrption}</p>
-                                                            <a onClick={test} class="btn btn-primary" id={`blogid${data[i].blogid}`}>More <i class="fa fa-angle-right"></i></a>
+                                                            <h4>{populardata[i].blogdetail.title}</h4>
+                                                            <p>{populardata[i].blogdetail.decrption}</p>
+                                                            <a onClick={test} class="btn btn-primary" id={`blogid${populardata[i].blogid}`}>More <i class="fa fa-angle-right"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>)
@@ -139,10 +155,10 @@ function Blog () {
                     <div style={{ paddingBottom: '10px' }}>
 
 
-                        {data.map((item)=>{
+                        {newblogdata.map((item)=>{
                             return <div class="blog-card">
                             <div class="meta">
-                                <div class="photo" style={{ backgroundImage: "url(/images/7.jpg)" }}></div>
+                                <div class="photo" style={{ backgroundImage: `url(${item.blogdetail.url})` }}></div>
                                 <ul class="details">
                                     <li class="author"><a href="#">John Doe</a></li>
                                     <li class="date">Aug. 24, 2015</li>
