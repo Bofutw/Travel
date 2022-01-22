@@ -1,5 +1,7 @@
 import Typography from '@mui/material/Typography';
 import React from "react";
+import axios from 'axios'
+import { useEffect,useState } from 'react';
 import {
   BarChart,
   Bar,
@@ -10,7 +12,8 @@ import {
   Legend
 } from "recharts";
 
-const data = [
+const url = 'http://localhost:8080/backstage/allmemberagedata'
+/* const data2 = [
   {
     name: "0-14",
     male: 20,
@@ -53,9 +56,35 @@ const data = [
     female: 7,
     amt: 2100
   }
-];
+]; */
+
 
 export default function App() {
+
+
+// fetch sql
+
+async function fetchapi(){
+  try {
+   const res = await axios({
+    method: 'get',
+    url: url
+  });
+
+  setData(res.data)
+
+  } catch (error) {
+      console.log(error);
+  }
+}
+
+const [data, setData] = useState([])
+useEffect(() => {
+  fetchapi();
+  console.log(data);
+  
+}, [])
+
   return (
       <>
     <Typography
@@ -83,11 +112,11 @@ export default function App() {
     >
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="name" />
-      <YAxis />
+      <YAxis tickCount='3'/>
       <Tooltip />
       <Legend />
-      <Bar dataKey="female" stackId="a" fill="#8884d8" />
-      <Bar dataKey="male" stackId="a" fill="#82ca9d" />
+      {/* <Bar dataKey="total" stackId="a" fill="#8884d8" /> */}
+      <Bar dataKey="total" name="人數" stackId="a" fill="#82ca9d" />
     </BarChart>
     </>
   );

@@ -4,11 +4,11 @@ import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer,Tooltip } fro
 import Title from './Title';
 import axios from 'axios'
 import { useEffect,useState } from 'react';
-/* import config from 'config'
-import fs from 'fs' */
+
+/* _7VMGdQjHx47DOxMkbnfTUDsMIJ2nXx3LDQgY */
 
 
-const token = ''
+const token = 'token ghp'
 const url = 'https://api.github.com/repos/EEIT36-Travel/Brian_Web_Demo/traffic/clones'
 let clones = [];
 

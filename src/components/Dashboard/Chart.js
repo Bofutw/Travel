@@ -9,23 +9,51 @@ function createData(time, amount) {
 }
 
 const data = [
-  createData('00:00', 60),
-  createData('03:00', 12),
-  createData('06:00', 7),
-  createData('09:00', 60),
-  createData('12:00', 89),
-  createData('15:00', 77),
-  createData('18:00', 53),
-  createData('21:00', 78),
-  createData('24:00', 60),
+  
+createData('12-27',5),
+createData('12-28',19),
+createData('12-30',7),
+createData('01-01',12),
+createData('01-04',29),
+createData('01-05',4),
+createData('01-06',130),
+createData('01-08',9),
+createData('01-09',422),
+createData('01-10',885),
+createData('01-11',1768),
+createData('01-12',1418),
+createData('01-13',2170),
+createData('01-14',974),
+createData('01-15',298),
+createData('01-16',2261),
+createData('01-17',1164),
+createData('01-18',1333),
+createData('01-19',1203),
+createData('01-20',1024)
 ];
+let date = new Date();
+let month = date.getMonth();
+
+switch (month) {
+  case 0:
+    month = 'January'
+    break;
+
+  case 1:
+    month = 'February' 
+  
+  default:
+    month = ''
+    break;
+}
+
 
 export default function Chart() {
   const theme = useTheme();
 
   return (
     <React.Fragment>
-      <Title>Today</Title>
+      <Title>{month}</Title>
       <ResponsiveContainer>
         <LineChart
           data={data}

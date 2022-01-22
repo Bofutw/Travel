@@ -11,6 +11,10 @@ function preventDefault(event) {
   event.preventDefault();
 }
 
+
+
+
+
 const url = 'https://api.github.com/repos/EEIT36-Travel/Brian_Web_Demo/stats/commit_activity'
 
 export default function Deposits() {
@@ -27,8 +31,8 @@ export default function Deposits() {
       }
     });
     console.log(res.data[res.data.length-2]);
-    setData(res.data[res.data.length-2])
-    setData1(res.data[res.data.length-3])
+    setData(res.data[res.data.length-1])
+    setData1(res.data[res.data.length-2])
  /*    clones = res.data.clones;
     clones.map((dataa)=>{
       console.log(dataa.timestamp.substr(5,5));
@@ -46,11 +50,11 @@ export default function Deposits() {
   const [data1, setData1] = useState([])
   useEffect(() => {
     fetchapi();
-    
+      
   }, [])
   return (
     <React.Fragment>
-      <Title>Git push count</Title>
+      <Title>Git Commit Count</Title>
       <Typography component="p" variant="h4">
       <Depositsnum num={data.total} duration={1000}></Depositsnum>
       </Typography>

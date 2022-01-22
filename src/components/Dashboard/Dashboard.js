@@ -5,7 +5,6 @@ import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
@@ -29,9 +28,6 @@ import Areachart from './Areachart';
 import Agechart from './Agechart'
 import { height, margin, padding } from '@mui/system';
 import Githubapi from './Githubapi';
-import { useNavigate } from 'react-router-dom';
-import { async } from '@firebase/util';
-import { Avatar } from '@mui/material';
 
 
 
@@ -121,47 +117,32 @@ function DashboardContent() {
   const toggleDrawer = () => {
     setOpen(!open);
   };
-  let navaigate = useNavigate();
-
 
   // DropDownBar
-  /* const [anchorEl, setAnchorEl] = useState(null);
-  const Elopen = Boolean(anchorEl);
-  const handleMenuOpen = (e) => {
-      setAnchorEl(e.currentTarget);
-      console.log(e.currentTarget.style)
-  };
-  const handleMenuClose = () => {
-      setAnchorEl(null);
-  }; */
-
-  const logout = async () => {
-
-
-    setTimeout(() => {
-      navaigate("/dashboardlogin")
-      window.location.reload();
-
-    }, 1)
-    localStorage.setItem("isadmin", "false")
-
-
-  }
+/* const [anchorEl, setAnchorEl] = useState(null);
+const Elopen = Boolean(anchorEl);
+const handleMenuOpen = (e) => {
+    setAnchorEl(e.currentTarget);
+    console.log(e.currentTarget.style)
+};
+const handleMenuClose = () => {
+    setAnchorEl(null);
+}; */
 
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
-
+        
         <CssBaseline />
         <AppBar position="absolute" open={open}  >
-
+          
           <Toolbar
-
+          
             sx={{
               pr: '24px', // keep right padding when drawer closed
             }}
           >
-
+            
             <IconButton
               edge="start"
               color="inherit"
@@ -172,9 +153,9 @@ function DashboardContent() {
                 ...(open && { display: 'none' }),
               }}
             >
-
+              
               <MenuIcon />
-
+              
             </IconButton>
             <Typography
               component="h1"
@@ -183,17 +164,15 @@ function DashboardContent() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              不可以色色の後台
+            不可以色色の後台
             </Typography>
-
-            <Avatar sx={{ marginRight: '10px', transition: 'width 0.15s ,height 0.15s', '&:hover': { cursor: 'pointer', width: 50, height: 50, boxShadow: ' 3px 7px #888888' } }} >B</Avatar>
             <IconButton color="usewhite" >
               {/* Content可以塞data state */}
-              <Badge badgeContent={0} color="neutral" >
+              <Badge badgeContent={4} color="neutral">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            <Button onClick={logout} sx={{ bgcolor: 'white', color: '#a5d6a7', '&:hover': { backgroundColor: 'whitesmoke', color: 'black', fontWeight: 'bold', boxShadow: ' 3px 7px #888888' }, borderRadius: '10%', width: 90, height: 40 }}>登出</Button>
+           
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -256,35 +235,35 @@ function DashboardContent() {
                 </Paper>
               </Grid>
               {/* Recent Orders */}
-
+             
               <Grid container spacing={3}>
-                <Grid item xs={4.5} >
-                  <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', marginTop: 2, marginLeft: 3 }}>
-
-                    <Areachart></Areachart>
-
-                    {/* <Orders /> */}
-                  </Paper>
-                </Grid>
-                <Grid item xs={5}>
-                  <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', marginTop: 2, paddingLeft: 0 }}>
-
-                    <Agechart></Agechart>
-
-                    {/* <Orders /> */}
-                  </Paper>
-                </Grid>
-
-                <Grid item xs={2.5}>
-                  <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', marginTop: 2 }}>
-
-                    <Githubapi></Githubapi>
-
-                    {/* <Orders /> */}
-                  </Paper>
-                </Grid>
-
+              <Grid item xs={4.5} >
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:3 }}>
+            
+                  <Areachart></Areachart>
+              
+                  {/* <Orders /> */}
+                </Paper>
               </Grid>
+              <Grid item xs={5}>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2,paddingLeft:0}}>
+                
+                  <Agechart></Agechart>
+              
+                  {/* <Orders /> */}
+                </Paper>
+              </Grid>
+
+              <Grid item xs={2.5}>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2}}>
+                
+                  <Githubapi></Githubapi>
+              
+                  {/* <Orders /> */}
+                </Paper>
+              </Grid>
+              
+            </Grid>
             </Grid>
             <Copyright sx={{ pt: 4 }} />
           </Container>
@@ -293,7 +272,6 @@ function DashboardContent() {
     </ThemeProvider>
   );
 }
-
 
 export default function Dashboard() {
   return <DashboardContent />;

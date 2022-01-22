@@ -103,7 +103,7 @@ export default function Cloneweek() {
     });
     
     
-    temp = res.data[res.data.length-2].days
+    temp = res.data[res.data.length-1].days
     clones.map((yo)=>{
       yo['points'] = temp.shift();
     })
@@ -153,7 +153,7 @@ export default function Cloneweek() {
     align="center"
     sx={{ flexGrow: 1 }}
   >
-  Git push count (week)
+  Git Commit count (This Week)
   </Typography>
     <RadarChart
       cx={200}
