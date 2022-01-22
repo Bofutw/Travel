@@ -18,8 +18,9 @@ export default function HomePage() {
           const  res = await axios.get('https://api.unsplash.com/photos/random?client_id=k-qvIjBpFwU9A_1HhaVakxTJhwLbUEaksJU4XqM_zus',{
             //URL参數放在params屬性裏面
             params: {
-               query:'travel'
-               
+               query:'travel',
+               orientation:'landscape'
+            
             }
         })
        const pic = await res.data.urls.full

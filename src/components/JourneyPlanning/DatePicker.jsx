@@ -4,6 +4,8 @@ import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateRangePicker from '@mui/lab/DateRangePicker';
+import DesktopDateRangePicker from '@mui/lab/DesktopDateRangePicker';
+import MobileDateRangePicker from '@mui/lab/MobileDateRangePicker';
 import Box from '@mui/material/Box';
 import { zhTW } from 'date-fns/locale'
 import { formatRelative, subDays } from 'date-fns';
@@ -68,7 +70,7 @@ export default function DatePicker() {
 
             <LocalizationProvider dateAdapter={AdapterDateFns}  locale={zhTW}>
 
-                <DateRangePicker
+                <MobileDateRangePicker
 
                     okText='OK'
                     startText="開始"
