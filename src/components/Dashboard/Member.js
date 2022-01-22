@@ -30,6 +30,8 @@ import { height, margin, padding } from '@mui/system';
 import Githubapi from './Githubapi';
 import Citychart from './Citychart'
 import Genderchart from './Genderchart'
+import { logout } from './Dashboard';
+import { Avatar, Button } from '@mui/material';
 
 
 function Copyright(props) {
@@ -120,30 +122,30 @@ function DashboardContent() {
   };
 
   // DropDownBar
-/* const [anchorEl, setAnchorEl] = useState(null);
-const Elopen = Boolean(anchorEl);
-const handleMenuOpen = (e) => {
-    setAnchorEl(e.currentTarget);
-    console.log(e.currentTarget.style)
-};
-const handleMenuClose = () => {
-    setAnchorEl(null);
-}; */
+  /* const [anchorEl, setAnchorEl] = useState(null);
+  const Elopen = Boolean(anchorEl);
+  const handleMenuOpen = (e) => {
+      setAnchorEl(e.currentTarget);
+      console.log(e.currentTarget.style)
+  };
+  const handleMenuClose = () => {
+      setAnchorEl(null);
+  }; */
 
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
-        
+
         <CssBaseline />
         <AppBar position="absolute" open={open}  >
-          
+
           <Toolbar
-          
+
             sx={{
               pr: '24px', // keep right padding when drawer closed
             }}
           >
-            
+
             <IconButton
               edge="start"
               color="inherit"
@@ -154,9 +156,9 @@ const handleMenuClose = () => {
                 ...(open && { display: 'none' }),
               }}
             >
-              
+
               <MenuIcon />
-              
+
             </IconButton>
             <Typography
               component="h1"
@@ -165,15 +167,18 @@ const handleMenuClose = () => {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-            不可以色色の後台一會員資料
+              不可以色色の後台一會員資料
             </Typography>
+
+            <Avatar sx={{ marginRight: '10px', transition: 'width 0.15s ,height 0.15s', '&:hover': { cursor: 'pointer', width: 50, height: 50, boxShadow: ' 3px 7px #888888' } }} >B</Avatar>
             <IconButton color="usewhite" >
               {/* Content可以塞data state */}
-              <Badge badgeContent={4} color="neutral">
+              <Badge badgeContent={0} color="neutral">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-           
+
+            <Button onClick={logout} sx={{ bgcolor: 'white', color: '#4fc3f7', '&:hover': { backgroundColor: 'whitesmoke', color: 'black', fontWeight: 'bold', boxShadow: ' 3px 7px #888888' }, borderRadius: '10%', width: 90, height: 40 }}>登出</Button>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -236,40 +241,40 @@ const handleMenuClose = () => {
                 </Paper>
               </Grid>
               {/* Recent Orders */}
-             
+
               <Grid container spacing={1}>
-              
+
               </Grid>
               <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2,paddingLeft:0}}>
-                
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', marginTop: 2, paddingLeft: 0 }}>
+
                   <Citychart></Citychart>
-              
+
                 </Paper>
-              </Grid>      
-              
+              </Grid>
+
             </Grid>
 
             <Grid container spacing={2}>
-            <Grid item xs={4.5} >
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:0 }}>
-            
+              <Grid item xs={4.5} >
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', marginTop: 2, marginLeft: 0 }}>
+
                   <Areachart></Areachart>
-              
+
                   {/* <Orders /> */}
                 </Paper>
 
-                </Grid>
+              </Grid>
               <Grid item xs={4.5} >
-              <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:0 }}>
-          
-                <Genderchart></Genderchart>
-            
-                {/* <Orders /> */}
-              </Paper>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', marginTop: 2, marginLeft: 0 }}>
+
+                  <Genderchart></Genderchart>
+
+                  {/* <Orders /> */}
+                </Paper>
 
               </Grid>
-                
+
 
             </Grid>
             <Copyright sx={{ pt: 4 }} />

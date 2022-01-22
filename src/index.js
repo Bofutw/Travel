@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import App from "./App";
 import FirebaseTest1 from "./Test/FirebaseDatabase/FirebaseTest1";
-import Test3 from "./Test/Test3";
+
 
 ReactDOM.render(
   <React.StrictMode>

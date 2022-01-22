@@ -32,6 +32,8 @@ import Clone from './Clone';
 import Depositsgit from './Depositsgit'
 import Githubapiall from './Githubapiall';
 import Cloneweek from './Cloneweek'
+import { Avatar, Button } from '@mui/material';
+import { logout } from './Dashboard';
 
 
 function Copyright(props) {
@@ -125,17 +127,17 @@ function DashboardContent() {
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
-        
+
         <CssBaseline />
         <AppBar position="absolute" open={open}  >
-          
+
           <Toolbar
-          
+
             sx={{
               pr: '24px', // keep right padding when drawer closed
             }}
           >
-            
+
             <IconButton
               edge="start"
               color="inherit"
@@ -146,9 +148,9 @@ function DashboardContent() {
                 ...(open && { display: 'none' }),
               }}
             >
-              
+
               <MenuIcon />
-              
+
             </IconButton>
             <Typography
               component="h1"
@@ -157,15 +159,19 @@ function DashboardContent() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-            不可以色色の後台
+              不可以色色の後台
             </Typography>
+
+            <Avatar sx={{ marginRight: '10px', transition: 'width 0.15s ,height 0.15s', '&:hover': { cursor: 'pointer', width: 50, height: 50, boxShadow: ' 3px 7px #888888' } }} >B</Avatar>
             <IconButton color="usewhite" >
               {/* Content可以塞data state */}
-              <Badge badgeContent={4} color="neutral">
+              <Badge badgeContent={0} color="neutral">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-           
+            <Button onClick={logout} sx={{ bgcolor: 'white', color: '#be9c91', '&:hover': { backgroundColor: 'whitesmoke', color: 'black', fontWeight: 'bold', boxShadow: ' 3px 7px #888888' }, borderRadius: '10%', width: 90, height: 40 }}>登出</Button>
+
+
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -201,7 +207,7 @@ function DashboardContent() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={2}>
-            <Grid item xs={12} md={4} lg={3}>
+              <Grid item xs={12} md={4} lg={3}>
                 <Paper
                   sx={{
                     p: 2,
@@ -228,29 +234,29 @@ function DashboardContent() {
                 </Paper>
               </Grid>
               {/* Recent Deposits */}
-              
-              {/* Recent Orders */}
-             
-              <Grid container spacing={2}>
-              <Grid item xs={5} >
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:2 }}>
-                  
-                  <Cloneweek></Cloneweek>
-                  {/* <Areachart></Areachart> */}
-              
-                  {/* <Orders /> */}
-                </Paper>
-              </Grid>
-              <Grid item xs={7} >
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2,paddingLeft:0}}>
-                
-                  {/* <Agechart></Agechart> */}
-                  <Githubapiall></Githubapiall>
-                  {/* <Orders /> */}
-                </Paper>
-              </Grid>
 
-            </Grid>
+              {/* Recent Orders */}
+
+              <Grid container spacing={2}>
+                <Grid item xs={5} >
+                  <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', marginTop: 2, marginLeft: 2 }}>
+
+                    <Cloneweek></Cloneweek>
+                    {/* <Areachart></Areachart> */}
+
+                    {/* <Orders /> */}
+                  </Paper>
+                </Grid>
+                <Grid item xs={7} >
+                  <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', marginTop: 2, paddingLeft: 0 }}>
+
+                    {/* <Agechart></Agechart> */}
+                    <Githubapiall></Githubapiall>
+                    {/* <Orders /> */}
+                  </Paper>
+                </Grid>
+
+              </Grid>
             </Grid>
             <Copyright sx={{ pt: 4 }} />
           </Container>

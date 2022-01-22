@@ -16,7 +16,10 @@ import { useState } from "react";
 import { AppContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 import { getDatabase, ref, child, get, set } from "firebase/database";
+import firebase from "firebase/compat/app"
 
+import { getadminloginpage, getfirebaseinfo } from "./DBoardLoginInfo";
+import Dashboard from "../Dashboard/Dashboard";
 
 function Copyright(props) {
   return (
@@ -38,58 +41,64 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function DashBoardLogin({ isadmin, setIsAdmin }) {
+export default function DashBoardLogin({ isadmin, setIsAdmin, setAdminLoginPage, adminloginpage }) {
 
 
 
   //
-  const dbRef = ref(getDatabase());
+
 
   let navigate = useNavigate();
 
-  const admininfo = {
-    email: "admin@mail.com",
-    password: "admin",
-  };
 
-  const handleSubmit = (event) => {
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-
-    setIsAdmin(JSON.stringify(admininfo) === JSON.stringify({ email: data.get("email"), password: data.get("password") }));
+    const cnoditiontofirebse = await getfirebaseinfo(data.get("email"), data.get("password"));
+    console.log(cnoditiontofirebse);
+    setIsAdmin(cnoditiontofirebse)
+    //console.log(JSON.stringify(getdatabaseemailpassword) === JSON.stringify({ email: data.get("email"), password: data.get("password") }));
 
     // console.log({
     //   email: data.get('email'),
     //   password: data.get('password'),
     // });
 
-    // console.log(JSON.stringify(admininfo), JSON.stringify({ email: data.get("email"), password: data.get("password") }))
-
-
   };
+
+  //判斷登入是否在登入畫面
+  useEffect(() => {
+    const isloginpage = () => {
+      // setAdminLoginPage("true")
+      localStorage.setItem("adminloginpage", "true")
+    }
+
+    isloginpage();
+
+  }, [])
+
 
   //判斷登入
   useEffect(() => {
     const admincondition = () => {
-      if (isadmin) {
+      if (isadmin === "true") {
         localStorage.setItem("isadmin", true);
         navigate("/dashboard");
         window.location.reload();
+      } else {
+        return false;
       }
     };
     admincondition();
-    //console.log("useeffect判斷後台登入",isadmin);
+
   }, [handleSubmit, isadmin]);
+
+
   //預計放firebase realtimedatabase 判斷
-  useEffect(() => {
+  // useEffect(() => {
 
-  }, [])
-
-  //console.log(typeof localStorage.getItem("isadmin"));
-
-  // console.log(admininfo);
-  // console.log("判斷後台登入",isadmin);
-  // console.log(admindata);
+  // }, [])
 
   return (
     <ThemeProvider theme={theme}>
@@ -164,3 +173,5 @@ export default function DashBoardLogin({ isadmin, setIsAdmin }) {
     </ThemeProvider>
   );
 }
+
+

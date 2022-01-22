@@ -8,6 +8,7 @@ import {
   signOut,
 } from "firebase/auth";
 
+
 import React, { useEffect, useRef, useState } from "react";
 import { auth } from "../../Firebase/firebase-config";
 import { createnewuser, existenceemaillpassword, getmemberid, getuseremail } from "./LoginConditional";
@@ -31,7 +32,7 @@ const Login = () => {
     setUser(currentUser);
     console.log('user', user);
   })
-//set true false condition listen user state 
+  //set true false condition listen user state 
 
   const register = async () => {
     try {
@@ -62,20 +63,20 @@ const Login = () => {
 
   const login = async (e) => {
     e.preventDefault();
-    try {      
-      
-      await existenceemaillpassword(loginEmail,loginPassword);     
-      
+    try {
+
+      await existenceemaillpassword(loginEmail, loginPassword);
+
       const user = await signInWithEmailAndPassword(
         auth,
         loginEmail,
         loginPassword
       );
 
-     const useremail= await getuseremail(loginEmail);
+      const useremail = await getuseremail(loginEmail);
 
-     console.log("loginfn",useremail);
-      
+      console.log("loginfn", useremail);
+
       // if (loginEmail === queryemailresult) {
       //   alert("已經重複囉")
       // }
@@ -114,7 +115,7 @@ const Login = () => {
       //   alert('密碼錯誤')
       // }
       //alert("該帳號不存在")
-      console.log("loginfn,errormessage",error.message);
+      console.log("loginfn,errormessage", error.message);
     }
   };
 

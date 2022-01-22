@@ -7,9 +7,6 @@ import Skeleton from '@mui/material/Skeleton';
 import { Typography } from '@mui/material'
 
 export default function HomePage() {
-    /*     let pic = '';
-     */   /*  let res = null; */
-
     const [data, setData] = useState('')
     console.log({ data });
     async function getpic() {
@@ -37,6 +34,7 @@ export default function HomePage() {
     }
     useEffect(() => {
         /* setTimeout(getpic,5000) */
+        localStorage.setItem("adminloginpage", "false")
         getpic();
 
     }, [])

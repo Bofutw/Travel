@@ -30,6 +30,8 @@ import QuestionAnswer from './components/QA/QuestionAnswer';
 import DashBoardLogin from './components/DashBoardLogin/DashBoardLogin';
 import Github from "./components/Dashboard/Github";
 import Member from './components/Dashboard/Member'
+import { getadminloginpage, getisadmin, setisadmin } from "./components/DashBoardLogin/DBoardLoginInfo";
+
 
 
 export const AppContext = createContext();
@@ -51,19 +53,31 @@ function App() {
   //判斷後台和後台登入
   const location = useLocation();
 
-  const isdashboardRendering = (location.pathname === "/dashboard" || "/members" || "reports" || "employee") || (location.pathname === "/dashboardlogin");
-
+  // const isdashboardRendering = (location.pathname === "/dashboard" || "/members" || "reports" || "employee") || (location.pathname === "/dashboardlogin");
   const ismap = location.pathname === "/map";
+  const [isadmin, setIsAdmin] = useState("");
+  const [adminloginpage, setAdminLoginPage] = useState("")
+  useEffect(() => {
+    const conditionbackendlogin = async () => {
+      setIsAdmin(await getisadmin())
+    }
 
-  const [isadmin, setIsAdmin] = useState(false);
+    conditionbackendlogin();
+
+  }, [isadmin])
+  const adminlogin = localStorage.getItem("adminloginpage");
+  console.log("adminloginpage", adminlogin);
+
+
+
 
   //console.log("App",isadmin);
   return (
     <AppContext.Provider value={{ user, isadmin, setIsAdmin }}>
       <div className="App">
 
-        {!isdashboardRendering && <ScrollTop />}
-        {!isdashboardRendering && (user ? <Navbar user={user} /> : <NavbarGuest user={user} />)}
+        {(isadmin === "false" && adminlogin === "false") && <ScrollTop />}
+        {(isadmin === "false" && adminlogin === "false") && (user ? <Navbar user={user} /> : <NavbarGuest user={user} />)}
 
 
         <Routes>
@@ -80,12 +94,13 @@ function App() {
           {user && <Route path="/favorite" element={<Favorite />} />}
           <Route path="/journeyplanhome" element={user ? <JourneyHome openMap={openMap} setOpenMap={setOpenMap} /> : <Login />} />
           {user && <Route path="/map" element={<Map />} />}
-          {localStorage.getItem("isadmin") === "true" && <Route path="/github" element={<Github />} />}
           <Route path="/dashboardlogin/*" element={<DashBoardLogin isadmin={isadmin} setIsAdmin={setIsAdmin} />} />
-          {localStorage.getItem("isadmin") === "true" && <Route path="/dashboard" element={<Dashboard />} />}
-          {localStorage.getItem("isadmin") === "true" && <Route path="/member" element={<Member />} />}
+          {isadmin === "true" && <Route path="/dashboard" element={<Dashboard />} />}
+          {isadmin === "true" && <Route path="/dashboard/github" element={<Github />} />}
+          {isadmin === "true" && <Route path="/dashboard/member" element={<Member />} />}
+          <Route path="/dashboard/*" element={<BackendLoading />} />
         </Routes>
-        {(!isdashboardRendering & !ismap) && <Footer />}
+        {(isadmin === "false" && adminlogin === "false" & !ismap) && <Footer />}
 
 
 
@@ -98,4 +113,10 @@ function App() {
 }
 export default App;
 
+const BackendLoading = () => {
+  return (
+    <div className="backendloading" style={{ backgroundColor: 'whitesmoke' }}>
 
+    </div>
+  )
+}

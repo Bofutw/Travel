@@ -15,31 +15,31 @@ import { unstable_HistoryRouter } from 'react-router-dom';
 
 export const mainListItems = (
   <div>
-    <ListItem button onClick={()=>window.location.href='/dashboard'}>
+    <ListItem button onClick={() => window.location.href = '/dashboard'}>
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItem>
-    <ListItem button onClick={()=>window.location.href='/member'}>
+    <ListItem button onClick={() => window.location.href = '/dashboard/member'}>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
       <ListItemText primary="Members" />
     </ListItem>
-   {/*  <ListItem button>
+    {/*  <ListItem button>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
       <ListItemText primary="Customers" />
     </ListItem> */}
-    <ListItem button onClick={()=>window.location.href='/github'}>
+    <ListItem button onClick={() => window.location.href = '/dashboard/github'}>
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
       <ListItemText primary="Github" />
     </ListItem>
-   {/*  <ListItem button onClick={()=>window.location.href='/employee'}>
+    {/*  <ListItem button onClick={()=>window.location.href='/employee'}>
       <ListItemIcon>
         <BadgeIcon />
       </ListItemIcon>
@@ -50,7 +50,7 @@ export const mainListItems = (
 
 export const secondaryListItems = (
   <div>
-    
+
     <ListSubheader inset>Saved reports</ListSubheader>
     <ListItem button>
       <ListItemIcon>
