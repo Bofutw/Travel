@@ -1,0 +1,262 @@
+* {
+    box-sizing: border-box; }
+  
+
+  
+  .demo {
+    width: 100%;
+    height: 100%; 
+    
+  }
+  
+  .penName {
+    padding-top: 100px;
+    text-align: center;
+    font-size: 45px; 
+    font-weight: bold;
+    animation-name: mainCard;
+    animation-duration: 1s;
+    animation-delay: 0s;
+    animation-fill-mode: both;
+    margin-left: 430px;
+    color: #fff;
+    
+}
+  
+  .mainCard {
+    text-align: center;
+    display: block;
+    /* margin: 60px auto; */
+    /* background-color: rgb(24, 197, 145); */
+    /* box-shadow: 0 5px 40px rgba(0, 0, 0, 0.2); */
+    width: 80%;
+    height: 70%;
+    margin-left: 210px;
+    animation-name: mainCard;
+    animation-duration: 1s;
+    animation-delay: 0s;
+    animation-fill-mode: both; }
+  
+  @keyframes mainCard {
+    0% {
+      transform: scale(0); } }
+  
+  .mainCardHeader {
+    background-color: AQUAMARINE;
+    height: 200px;
+    width: 100%;
+    animation-name: mainCardHeader;
+    animation-duration: 0.4s;
+    animation-delay: 1s;
+    animation-fill-mode: both; 
+  
+  }
+  
+  @keyframes mainCardHeader {
+    0% {
+      transform: scaleY(0); } }
+  
+  .mainCardContent {
+    /* margin: 0 auto; */
+    text-align: center;
+    position: relative;
+    /* top: 210px; */
+    /* left: 50px; */
+    height: 700px;
+    width: 90%; 
+    margin-left: 20px;
+    /* background-color: rgb(170, 11, 11); */
+    
+    
+  }
+  
+  .miniCard {
+    display: inline-block;
+    /* padding: 5px; */
+    /* margin: 0 20px 20px 0; */
+    /* background-color: white; */
+    height: 285px;
+    width: 200px;
+    /* border-radius: 5px; */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    animation-name: miniCard;
+    animation-duration: 1s;
+    animation-delay: 0.8s;
+    animation-fill-mode: both; 
+    margin: 5px;
+    margin-left: 30px;
+    margin-top: 40px;
+    text-align: left;
+    background: #fff;
+    box-shadow: 2px 2px 4px 3px rgba(44, 44, 44, 0.5);
+    border-style: ridge;
+    border-width: 7px;
+    border-color: rgb(255, 239, 184);
+    -webkit-transition: all 250ms cubic-bezier(0.02, 0.01, 0.9, 0.9);
+		transition: all 250ms cubic-bezier(.02, .01, 0.9, 0.9);
+		word-break: break-all;
+
+  }
+  
+  .miniCard:hover {
+    box-shadow: 0px 2rem 4rem 0px rgba(44, 61, 51, 0.8);
+    transform: translate(0,4000px);
+    transition-delay: 0s !important;}
+
+  
+  @keyframes miniCard {
+    0% {
+      transform: scale(0); }
+    50% {
+      transform: scale(1.05); }
+    100% {
+      transform: scale(1); } }
+  
+
+    
+      
+      @import url('https://fonts.googleapis.com/css?family=Raleway:300,400,600&subset=latin-ext');
+      * {
+        box-sizing: border-box;
+     }
+      html, body {
+        font-family: 'Raleway', sans-serif;
+        font-size: 16px;
+     }
+      @media screen and (max-width: 768px) {
+        html, body {
+          font-size: 12px;
+       }
+     }
+  
+      .button {
+        text-decoration: none;
+        font-size: 25px;
+        /* font-weight: 300;
+        text-transform: uppercase; */
+        display: inline-block;
+        border-radius: 50%;
+        background-color: rgb(165, 165, 165);
+        color: #9191e9;
+        padding:10px 14px;
+        
+     }
+      .popup {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        bottom: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, .80);
+        z-index: 2;
+        visibility: hidden;
+        opacity: 0;
+        overflow: hiden;
+        transition: 0.64s ease-in-out;
+     }
+      .popup-inner {
+        position: relative;
+        bottom: -100vw;
+        right: -100vh;
+        display: flex;
+        flex-direction:column;
+        align-items: center;
+        max-width: 800px;
+        max-height: 600px;
+        width: 60%;
+        height: 80%;
+        background-color: #fff;
+        transform: rotate(32deg);
+        transition: 0.64s ease-in-out;
+     }
+      /* .popup__photo {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        width: 40%;
+        height: 100%;
+        overflow: hidden;
+     } */
+      /* .popup__photo img {
+        width: auto;
+        height: 100%;
+     } */
+      .popup__text {
+        display: flex;
+        flex-direction: row;
+        justify-content:left;
+        width: 700px;
+        height: 480px;
+        padding: 0px;
+        flex-wrap:wrap;
+        margin-left:70px;
+     }
+      .popup__text h1 {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 2rem;
+        text-transform: uppercase;
+        color: #0a0a0a;
+     }
+      .popup__text p {
+        font-size: 0.875rem;
+        color: #686868;
+        line-height: 1.5;
+     }
+      .popup:target {
+        visibility: visible;
+        opacity: 1;
+     }
+      .popup:target .popup-inner {
+        bottom: 0;
+        right: 0;
+        transform: rotate(0);
+     }
+      .popup__close {
+        position: absolute;
+        right: -1rem;
+        top: -1rem;
+        width: 3rem;
+        height: 3rem;
+        font-size: 0.875rem;
+        font-weight: 300;
+        border-radius: 100%;
+        background-color: #0a0a0a;
+        z-index: 4;
+        color: #fff;
+        line-height: 3rem;
+        text-align: center;
+        cursor: pointer;
+        text-decoration: none;
+     }
+      
+     .popCard {
+      display: inline-block;
+      /* padding: 5px; */
+      /* margin: 0 20px 20px 0; */
+      /* background-color: white; */
+      height: 180px;
+      width: 150px;
+      /* border-radius: 5px; */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      animation-name: miniCard;
+      animation-duration: 1s;
+      animation-delay: 0.8s;
+      animation-fill-mode: both; 
+      margin: 5px;
+      /* margin-left: 30px;
+      margin-top: 40px; */
+      text-align: left;
+      background: #fff;
+      box-shadow: 2px 2px 4px 3px rgba(44, 44, 44, 0.5);
+      /* border-style: ridge;
+      border-width: 7px;
+      border-color: rgb(255, 239, 184); */
+      /* -webkit-transition: all 250ms cubic-bezier(0.02, 0.01, 0.9, 0.9);
+      transition: all 250ms cubic-bezier(.02, .01, 0.9, 0.9);
+      word-break: break-all; */
+  
+    }
