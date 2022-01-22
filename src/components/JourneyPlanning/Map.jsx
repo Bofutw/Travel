@@ -1,4 +1,4 @@
-import React, { useState , useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Marker, useJsApiLoader, useLoadScript, GoogleMap, LoadScript, DirectionsRenderer, Autocomplete } from '@react-google-maps/api';
 import { margin, padding } from '@mui/system';
 
@@ -9,9 +9,7 @@ import Modal from '@mui/material/Modal';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+
 import PlanTable from './PlanTable';
 
 import './map.css'
@@ -47,13 +45,15 @@ let autocomplete = null;//自動完成的結果
 let openhour = null;
 
 function MyComponent() {
-//
+  //
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const handleSent = () => {setPlace({"place_id":placedetail.place_id,"place_name":placedetail.name});
-  /* setOpen(false); */}
-//
+  const handleSent = () => {
+    setPlace({ "place_id": placedetail.place_id, "place_name": placedetail.name });
+    /* setOpen(false); */
+}
+  //
 
   const [center, setCenter] = useState({
     lat: 24.1369434,
@@ -72,26 +72,26 @@ function MyComponent() {
   const [zoomin, setZoomin] = useState(18)//自動完成後zoomin用
   const [resault, setResault] = useState({})//direction 
   const { isLoaded, loadError } = useLoadScript({
-  //  AIzaSyAyzMJTILn9Et7hkWpxfA3jyOdILF7zCig
-   
+    //  AIzaSyAyzMJTILn9Et7hkWpxfA3jyOdILF7zCig
+
     googleMapsApiKey: "AIzaSyC-PEqQflUzaDeh1SUbTI1wSS1onLCvTKY",
     libraries: ["places"]
   })
 
- 
-  
-  
-  
+
+
+
+
 
   if (loadError) {
     return <div>Map cannot be loaded right now, sorry.</div>
   }
   return isLoaded ? (
     <>
-     
-      
+
+
       <div className='maps'>
-        <div className='plan'><PlanTableTest setResault={setResault} detail={placedetail} place={place} setOpen ={setOpen}/*把方法丟給table給他取用*//></div>
+        <div className='plan'><PlanTableTest setResault={setResault} detail={placedetail} place={place} setOpen={setOpen}/*把方法丟給table給他取用*/ /></div>
         <div>
           {/* {  <LoadScript
         googleMapsApiKey="AIzaSyAyzMJTILn9Et7hkWpxfA3jyOdILF7zCig"
@@ -107,24 +107,24 @@ function MyComponent() {
             <Autocomplete
               onLoad={(auto) => { autocomplete = auto }/**/}
               onPlaceChanged={() => {
-                
-                
+
+
                 console.log(autocomplete);
                 console.log(autocomplete.getPlace());
-                
-                if (autocomplete.getPlace().geometry!=undefined) {
+
+                if (autocomplete.getPlace().geometry != undefined) {
                   setPlacedetail(autocomplete.getPlace());
                   setCenter(autocomplete.getPlace().geometry.location);//重新定位
                   setMark(autocomplete.getPlace().geometry.location);//標記
                   setZoomin(20);//拉近
-                  {handleOpen()};
+                  { handleOpen() };
                 } else {
-                  
-                }
-                
 
-               
-              
+                }
+
+
+
+
               }}
             >
               <input
@@ -148,7 +148,7 @@ function MyComponent() {
                 }}
               />
             </Autocomplete>
-            
+
             <Marker
               position={mark}
             />
@@ -163,61 +163,61 @@ function MyComponent() {
 
 
           <div>
-            
-          <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-        hideBackdrop="true"
-       /*  sx={{display:'flex'}} */
-      >
-        <Box sx={style}>
-        {/* <Button variant="outlined"  sx={{width:'10px'}} size='small' onClick={handleClose} style={{float: 'right'}}  startIcon={<DeleteIcon />} >X</Button> */}
-        <IconButton aria-label="delete" onClick={handleClose} style={{float: 'right'}}>
-       <CloseIcon />
-        </IconButton>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            <a href={placedetail.url}>{placedetail.name}</a>
-            <hr></hr>
-          </Typography>
-          <Typography inline id="modal-modal-description" sx={{ mt: 2 }}>
-           <b>電話：</b><br/>{placedetail.formatted_phone_number}<br></br><br></br>
-           <b>地址：</b><br/>{placedetail.formatted_address} <br></br><br></br>
-           
-           {console.log('test')}
-            <b>
-           {/*  {placedetail.opening_hours==undefined?null:placedetail.opening_hours.weekday_text[0]}  */}
-           
-           {/*  {placedetail.opening_hours==undefined?null:placedetail.opening_hours.map((res)=>{return res.weekday_text})}  */}
-           {placedetail.opening_hours==undefined?null:"開放時間： "} 
-           </b>
-           <br></br>
-           {/* {placedetail.opening_hours==undefined?null:JSON.stringify(placedetail.opening_hours.weekday_text)}  */}
-           {placedetail.opening_hours==undefined?null:placedetail.opening_hours.weekday_text[0]}
-           <br></br>
-           {placedetail.opening_hours==undefined?null:placedetail.opening_hours.weekday_text[1]}
-           <br></br>
-           {placedetail.opening_hours==undefined?null:placedetail.opening_hours.weekday_text[2]}
-           <br></br>
-           {placedetail.opening_hours==undefined?null:placedetail.opening_hours.weekday_text[3]}
-           <br></br>
-           {placedetail.opening_hours==undefined?null:placedetail.opening_hours.weekday_text[4]}
-           <br></br>
-           {placedetail.opening_hours==undefined?null:placedetail.opening_hours.weekday_text[5]}
-           <br></br>
-           {placedetail.opening_hours==undefined?null:placedetail.opening_hours.weekday_text[6]}
-           <br></br>
 
-           <br></br>
-           <Button  color="primary" onClick={handleSent} variant="contained" style={{marginLeft:'28%',marginTop:'10%'}}>加入行程</Button>
-           {/* 三元運算 */}
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+              hideBackdrop="true"
+            /*  sx={{display:'flex'}} */
+            >
+              <Box sx={style}>
+                {/* <Button variant="outlined"  sx={{width:'10px'}} size='small' onClick={handleClose} style={{float: 'right'}}  startIcon={<DeleteIcon />} >X</Button> */}
+                <IconButton aria-label="delete" onClick={handleClose} style={{ float: 'right' }}>
+                  <CloseIcon />
+                </IconButton>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  <a href={placedetail.url}>{placedetail.name}</a>
+                  <hr></hr>
+                </Typography>
+                <Typography inline id="modal-modal-description" sx={{ mt: 2 }}>
+                  <b>電話：</b><br />{placedetail.formatted_phone_number}<br></br><br></br>
+                  <b>地址：</b><br />{placedetail.formatted_address} <br></br><br></br>
 
-          {/* test: {placeopen} */}
-         {/*  test2: {placedetail.opening_hours.weekday_text[0]} */}
+                  {console.log('test')}
+                  <b>
+                    {/*  {placedetail.opening_hours==undefined?null:placedetail.opening_hours.weekday_text[0]}  */}
 
-           
-           {/* 開放時間： <br></br>
+                    {/*  {placedetail.opening_hours==undefined?null:placedetail.opening_hours.map((res)=>{return res.weekday_text})}  */}
+                    {placedetail.opening_hours == undefined ? null : "開放時間： "}
+                  </b>
+                  <br></br>
+                  {/* {placedetail.opening_hours==undefined?null:JSON.stringify(placedetail.opening_hours.weekday_text)}  */}
+                  {placedetail.opening_hours == undefined ? null : placedetail.opening_hours.weekday_text[0]}
+                  <br></br>
+                  {placedetail.opening_hours == undefined ? null : placedetail.opening_hours.weekday_text[1]}
+                  <br></br>
+                  {placedetail.opening_hours == undefined ? null : placedetail.opening_hours.weekday_text[2]}
+                  <br></br>
+                  {placedetail.opening_hours == undefined ? null : placedetail.opening_hours.weekday_text[3]}
+                  <br></br>
+                  {placedetail.opening_hours == undefined ? null : placedetail.opening_hours.weekday_text[4]}
+                  <br></br>
+                  {placedetail.opening_hours == undefined ? null : placedetail.opening_hours.weekday_text[5]}
+                  <br></br>
+                  {placedetail.opening_hours == undefined ? null : placedetail.opening_hours.weekday_text[6]}
+                  <br></br>
+
+                  <br></br>
+                  <Button color="primary" onClick={handleSent} variant="contained" style={{ marginLeft: '28%', marginTop: '10%' }}>加入行程</Button>
+                  {/* 三元運算 */}
+
+                  {/* test: {placeopen} */}
+                  {/*  test2: {placedetail.opening_hours.weekday_text[0]} */}
+
+
+                  {/* 開放時間： <br></br>
            {
            placedetail.opening_hours.weekday_text[0] 
            }<br></br>
@@ -239,17 +239,17 @@ function MyComponent() {
             {
            placedetail.opening_hours.weekday_text[6] 
            }<br></br> */}
-           
-          
-          
-          
-          </Typography>
-        </Box>
-      </Modal>
-      
-      
-      
-      </div>
+
+
+
+
+                </Typography>
+              </Box>
+            </Modal>
+
+
+
+          </div>
 
 
 

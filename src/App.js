@@ -41,7 +41,7 @@ function App() {
   const [user, setUser] = useState({});
 
 
-  //登出狀態 監聽
+  //登入登出狀態 監聽
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
   });
@@ -56,7 +56,7 @@ function App() {
   // const isdashboardRendering = (location.pathname === "/dashboard" || "/members" || "reports" || "employee") || (location.pathname === "/dashboardlogin");
   const ismap = location.pathname === "/map";
   const [isadmin, setIsAdmin] = useState("");
-  const [adminloginpage, setAdminLoginPage] = useState("")
+  // const [adminloginpage, setAdminLoginPage] = useState("")
   useEffect(() => {
     const conditionbackendlogin = async () => {
       setIsAdmin(await getisadmin())
@@ -77,7 +77,7 @@ function App() {
       <div className="App">
 
         {(isadmin === "false" && adminlogin === "false") && <ScrollTop />}
-        {(isadmin === "false" && adminlogin === "false") && (user ? <Navbar user={user} /> : <NavbarGuest user={user} />)}
+        {/* isadmin === "false" &&  */}{(adminlogin === "false") && (user ? <Navbar user={user} /> : <NavbarGuest user={user} />)}
 
 
         <Routes>
@@ -100,7 +100,7 @@ function App() {
           {isadmin === "true" && <Route path="/dashboard/member" element={<Member />} />}
           <Route path="/dashboard/*" element={<BackendLoading />} />
         </Routes>
-        {(isadmin === "false" && adminlogin === "false" & !ismap) && <Footer />}
+        {(adminlogin === "false" && !ismap) && <Footer />}
 
 
 

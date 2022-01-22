@@ -11,9 +11,10 @@ import {
 
 import React, { useEffect, useRef, useState } from "react";
 import { auth } from "../../Firebase/firebase-config";
-import { createnewuser, existenceemaillpassword, getmemberid, getuseremail } from "./LoginConditional";
+import { createnewuser, existenceemaillpassword, getmemberid, getmemberimgurl, getuseremail, setregmemberid } from "./LoginConditional";
 import "./login.css";
 import { useNavigate } from "react-router-dom";
+import LoginMessage from "./LoginErrorMessage";
 
 
 const Login = () => {
@@ -21,30 +22,45 @@ const Login = () => {
   const [registerPassword, setRegisterPassword] = useState("");
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  //錯誤訊息和開關
+  const [open, setOpen] = useState(false)
+  const [errormessage, setErrorMessage] = useState("");
+
 
   const navigate = useNavigate();
-
 
   const [user, setUser] = useState({});
   const [pagechange, setPageChange] = useState(1);
 
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-    console.log('user', user);
-  })
+  // onAuthStateChanged(auth, (currentUser) => {
+  //   setUser(currentUser);
+  //   console.log('user', user);
+  // })
   //set true false condition listen user state 
-
+  //用戶註冊事件
   const register = async () => {
     try {
-      const userdata = await createUserWithEmailAndPassword(
+      const reguserdata = await createUserWithEmailAndPassword(
         auth,
         registerEmail,
         registerPassword
       );
-      console.log(userdata);
-      localStorage.setItem("email", userdata.user.email);
-      localStorage.setItem("name", userdata.user.displayName);
-      localStorage.setItem("profileURL", user.user.photoURL);
+      console.log(reguserdata);
+      //0122 to do  memberid
+      const newuserimgurl = `https://static.vecteezy.com/system/resources/previews/002/002/332/large_2x/ablack-man-avatar-character-isolated-icon-free-vector.jpg`;
+      const newfrmemberid = await setregmemberid();
+      await createnewuser(registerEmail, `NewMember${newfrmemberid}`, newuserimgurl);
+      const newmemberid = await getmemberid(registerEmail);
+
+      onAuthStateChanged(auth, (currentUser) => {
+        setUser(currentUser);
+        console.log('user', user);
+      })
+
+      localStorage.setItem("email", reguserdata.user.email);
+      localStorage.setItem("name", `user${newmemberid}`);
+      localStorage.setItem("profileURL", newuserimgurl);
+      localStorage.setItem("memberid", newmemberid);
 
       setRegisterEmail("")
       setRegisterPassword("")
@@ -52,20 +68,36 @@ const Login = () => {
 
 
     } catch (error) {
+      const findreguseremail = await getuseremail(registerEmail);
+      console.log("loginInfo", findreguseremail);
+      if (findreguseremail === "false") {
+        const geterrormessage = await existenceemaillpassword(registerEmail, registerPassword);
+        console.log("47", geterrormessage);
+        setOpen(true)
+        setErrorMessage(() => geterrormessage.message)
 
-
-
-
-      alert(error.message)
+      } else if (findreguseremail === registerEmail) {
+        setOpen(true);
+        const errmes = "帳號已經註冊過囉!!!";
+        setErrorMessage(() => errmes);
+      }
+      // alert(error.message)
       console.log(error.message);
     }
   };
-
+  //用戶登入事件
   const login = async (e) => {
     e.preventDefault();
     try {
+      const currentuseremail = await getuseremail(loginEmail);
+      const avatarurl = `https://static.vecteezy.com/system/resources/previews/002/002/332/large_2x/ablack-man-avatar-character-isolated-icon-free-vector.jpg`;
 
-      await existenceemaillpassword(loginEmail, loginPassword);
+      if (currentuseremail === "false") {
+        await createnewuser(loginEmail, "guest", avatarurl);
+      }
+      const memberid = await getmemberid(loginEmail);
+      const memberurl = await getmemberimgurl(memberid);
+      console.log(memberurl);
 
       const user = await signInWithEmailAndPassword(
         auth,
@@ -73,58 +105,34 @@ const Login = () => {
         loginPassword
       );
 
-      const useremail = await getuseremail(loginEmail);
-
-      console.log("loginfn", useremail);
-
-      // if (loginEmail === queryemailresult) {
-      //   alert("已經重複囉")
-      // }
+      onAuthStateChanged(auth, (currentUser) => {
+        setUser(currentUser);
+        console.log('user', user);
+      })
 
 
-
-
-
-
-      console.log(user.user.email);
-
-
-
-
-      setLoginEmail("")
-      setLoginPassword("")
       localStorage.setItem("email", user.user.email);
       localStorage.setItem("name", user.user.displayName);
-
-      if (user.user.photoURL == null) {
-        localStorage.setItem("profileURL", "./img/3.jpg")
-      } else {
-        localStorage.setItem("profileURL", user.user.photoURL);
-      }
-
-
-
+      localStorage.setItem("profileURL", memberurl)
+      localStorage.setItem("memberid", memberid);
+      setLoginEmail("")
+      setLoginPassword("")
 
       navigate("/");
 
-      alert("Welcome")
-
-
     } catch (error) {
-      // if (testemail === loginEmail && !!loginPassword === !!null) {
-      //   alert('密碼錯誤')
-      // }
-      //alert("該帳號不存在")
-      console.log("loginfn,errormessage", error.message);
+      const loginer = "請檢查您的信箱地址與密碼!!!"
+      setOpen(true)
+      setErrorMessage(() => loginer)
+      console.log("loginfn,errormessage", error);
     }
   };
-
 
 
   const handlePageChange = (index) => {
     setPageChange(index);
   };
-
+  //Google 註冊事件
   const singInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
 
@@ -143,6 +151,11 @@ const Login = () => {
         if (currentuseremail !== existenceemail) {
           await createnewuser(currentuseremail, currentusername, currentuserprofileURL);
         }
+        onAuthStateChanged(auth, (currentUser) => {
+          setUser(currentUser);
+          console.log('user', user);
+        })
+
         const memberid = await getmemberid(currentuseremail);
         localStorage.setItem("email", res.user.email);
         localStorage.setItem("name", res.user.displayName);
@@ -237,6 +250,7 @@ const Login = () => {
                 <path d="M12.075,10.812c1.358-0.853,2.242-2.507,2.242-4.037c0-2.181-1.795-4.618-4.198-4.618S5.921,4.594,5.921,6.775c0,1.53,0.884,3.185,2.242,4.037c-3.222,0.865-5.6,3.807-5.6,7.298c0,0.23,0.189,0.42,0.42,0.42h14.273c0.23,0,0.42-0.189,0.42-0.42C17.676,14.619,15.297,11.677,12.075,10.812 M6.761,6.775c0-2.162,1.773-3.778,3.358-3.778s3.359,1.616,3.359,3.778c0,2.162-1.774,3.778-3.359,3.778S6.761,8.937,6.761,6.775 M3.415,17.69c0.218-3.51,3.142-6.297,6.704-6.297c3.562,0,6.486,2.787,6.705,6.297H3.415z"></path>
               </svg>
               <input type="email"
+                required
                 className='login-user-input'
                 placeholder='輸入信箱...'
                 value={loginEmail}
@@ -251,6 +265,7 @@ const Login = () => {
               </svg>
               <input
                 type="password"
+                required
                 className='login-pass-input'
                 placeholder='輸入密碼...'
                 value={loginPassword}
@@ -271,6 +286,8 @@ const Login = () => {
         </div>
 
       </div>)}
+      {open && <LoginMessage open={open} setOpen={setOpen} errormessage={errormessage} />}
+
     </div>
 
   );

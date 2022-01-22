@@ -7,7 +7,8 @@ import {
     signInWithPopup,
     signOut
 } from 'firebase/auth'
-import {getDatabase} from 'firebase/database'
+import { getDatabase } from 'firebase/database'
+import { getAnalytics } from "firebase/analytics";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -23,11 +24,12 @@ export const firebaseConfig = {
     messagingSenderId: "560653789068",
     appId: "1:560653789068:web:7d6a85da9cd208e3e318a9",
     measurementId: "G-JWFZ0BMCNH"
-  };
+};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+export const analytics = getAnalytics(app);
 
 
 

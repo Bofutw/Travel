@@ -128,7 +128,7 @@ export default function DashBoardLogin({ isadmin, setIsAdmin, setAdminLoginPage,
               margin="normal"
 
               error={false}
-              required
+              required={true}
               fullWidth
 
               id="email"
@@ -139,7 +139,7 @@ export default function DashBoardLogin({ isadmin, setIsAdmin, setAdminLoginPage,
             />
             <TextField
               margin="normal"
-              required
+              required={true}
 
               fullWidth
               name="password"
