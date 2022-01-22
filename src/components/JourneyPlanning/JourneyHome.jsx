@@ -16,7 +16,8 @@ import JourneyDialog from './JourneyDialog';
 import Stack from '@mui/material/Stack';
 import Grow from '@mui/material/Grow';
 
-
+import MovingIcon from '@mui/icons-material/Moving';
+import WrongLocationIcon from '@mui/icons-material/WrongLocation';
 
 
 
@@ -112,8 +113,8 @@ function deleteButton(e){
         alignItems="center"
         spacing={2} > */}
         
-          <Button sx={{marginX:'30px'}} size="small" id={item.journeyid} onClick={continuteButton}>繼續旅程</Button>
-          <Button size="small" id={"del"+item.journeyid} onClick={deleteButton}>旅程掰掰</Button>
+          <Button color='primary' variant="outlined" endIcon={<MovingIcon/>} sx={{marginX:'10px'}} size="small" id={item.journeyid} onClick={continuteButton}>繼續旅程</Button>
+          <Button color='warning' variant="outlined" endIcon={<WrongLocationIcon  />} size="small" id={"del"+item.journeyid} onClick={deleteButton}>旅程掰掰</Button>
           
          {/* </Stack> */}
         </CardActions>

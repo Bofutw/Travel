@@ -68,6 +68,7 @@ function MyComponent() {
   const [place, setPlace] = useState("");
 
   let lists = null;
+  let picurl = '';
 
   const [zoomin, setZoomin] = useState(18)//自動完成後zoomin用
   const [resault, setResault] = useState({})//direction 
@@ -109,9 +110,11 @@ function MyComponent() {
               onPlaceChanged={() => {
                 
                 
-                console.log(autocomplete);
+                console.log(autocomplete.getPlace().photos[0].getUrl());
                 console.log(autocomplete.getPlace());
-                
+                picurl = autocomplete.getPlace().photos[0].getUrl();
+
+
                 if (autocomplete.getPlace().geometry!=undefined) {
                   setPlacedetail(autocomplete.getPlace());
                   setCenter(autocomplete.getPlace().geometry.location);//重新定位
@@ -165,11 +168,13 @@ function MyComponent() {
           <div>
             
           <Modal
+        sx={{overflow:'scroll'}}
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         hideBackdrop="true"
+        
        /*  sx={{display:'flex'}} */
       >
         <Box sx={style}>
@@ -185,7 +190,7 @@ function MyComponent() {
            <b>電話：</b><br/>{placedetail.formatted_phone_number}<br></br><br></br>
            <b>地址：</b><br/>{placedetail.formatted_address} <br></br><br></br>
            
-           {console.log('test')}
+           
             <b>
            {/*  {placedetail.opening_hours==undefined?null:placedetail.opening_hours.weekday_text[0]}  */}
            
@@ -208,6 +213,15 @@ function MyComponent() {
            <br></br>
            {placedetail.opening_hours==undefined?null:placedetail.opening_hours.weekday_text[6]}
            <br></br>
+           <br></br>
+           
+          {/*  <img src={placedetail.photos[0].getUrl()} width={270} height={200}></img>   */}
+           {placedetail.photos==undefined?null:<img src={placedetail.photos[0].getUrl()} width={270} height={200}></img>}
+            
+            
+
+
+
 
            <br></br>
            <Button  color="primary" onClick={handleSent} variant="contained" style={{marginLeft:'28%',marginTop:'10%'}}>加入行程</Button>
@@ -259,8 +273,7 @@ function MyComponent() {
 
 
     </>
-  ) : <div><h1>oops</h1></div>
-
+  ) : <></>
 }
 
 export default React.memo(MyComponent)
