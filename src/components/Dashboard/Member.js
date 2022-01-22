@@ -30,6 +30,7 @@ import { height, margin, padding } from '@mui/system';
 import Githubapi from './Githubapi';
 import Citychart from './Citychart'
 import Genderchart from './Genderchart'
+import Membertime from './Membertime'
 
 
 function Copyright(props) {
@@ -209,8 +210,8 @@ const handleMenuClose = () => {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
+              
+              {/* <Grid item xs={12} md={8} lg={9}>
                 <Paper
                   sx={{
                     p: 2,
@@ -219,10 +220,9 @@ const handleMenuClose = () => {
                     height: 240,
                   }}
                 >
-                  <Chart />
+                  <Membertime></Membertime>
                 </Paper>
               </Grid>
-              {/* Recent Deposits */}
               <Grid item xs={12} md={4} lg={3}>
                 <Paper
                   sx={{
@@ -234,9 +234,42 @@ const handleMenuClose = () => {
                 >
                   <Deposits />
                 </Paper>
-              </Grid>
-              {/* Recent Orders */}
+              </Grid> */}
              
+             
+              
+            </Grid>
+
+            <Grid container spacing={3}>
+            <Grid item xs={3.5} >
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:0 }}>
+            
+                  <Areachart></Areachart>
+              
+                  {/* <Orders /> */}
+                </Paper>
+
+                </Grid>
+              <Grid item xs={3.5} >
+              <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:0 }}>
+          
+                <Genderchart></Genderchart>
+            
+                {/* <Orders /> */}
+              </Paper>
+
+              </Grid>
+
+              <Grid item xs={5} >
+              <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:0 }}>
+          
+              <Agechart></Agechart>
+            
+                {/* <Orders /> */}
+              </Paper>
+
+              </Grid>
+
               <Grid container spacing={1}>
               
               </Grid>
@@ -247,28 +280,6 @@ const handleMenuClose = () => {
               
                 </Paper>
               </Grid>      
-              
-            </Grid>
-
-            <Grid container spacing={2}>
-            <Grid item xs={4.5} >
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:0 }}>
-            
-                  <Areachart></Areachart>
-              
-                  {/* <Orders /> */}
-                </Paper>
-
-                </Grid>
-              <Grid item xs={4.5} >
-              <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:0 }}>
-          
-                <Genderchart></Genderchart>
-            
-                {/* <Orders /> */}
-              </Paper>
-
-              </Grid>
                 
 
             </Grid>

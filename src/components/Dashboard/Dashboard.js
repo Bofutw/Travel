@@ -28,7 +28,7 @@ import Areachart from './Areachart';
 import Agechart from './Agechart'
 import { height, margin, padding } from '@mui/system';
 import Githubapi from './Githubapi';
-
+import Membertime from './Membertime'
 
 
 function Copyright(props) {
@@ -218,7 +218,8 @@ const handleMenuClose = () => {
                     height: 240,
                   }}
                 >
-                  <Chart />
+                  <Membertime></Membertime>
+                  
                 </Paper>
               </Grid>
               {/* Recent Deposits */}
@@ -236,30 +237,27 @@ const handleMenuClose = () => {
               </Grid>
               {/* Recent Orders */}
              
-              <Grid container spacing={3}>
-              <Grid item xs={4.5} >
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:3 }}>
-            
-                  <Areachart></Areachart>
+              <Grid container spacing={2}>
+             <Grid item xs={9} >
+                <Paper sx={{ height: 400, p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:3 }}>
+                <Chart />
+                
               
-                  {/* <Orders /> */}
                 </Paper>
               </Grid>
-              <Grid item xs={5}>
+             { /* <Grid item xs={5}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2,paddingLeft:0}}>
                 
                   <Agechart></Agechart>
               
-                  {/* <Orders /> */}
                 </Paper>
-              </Grid>
+              </Grid> */}
 
-              <Grid item xs={2.5}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2}}>
+              <Grid item xs={3}>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:1}}>
                 
                   <Githubapi></Githubapi>
               
-                  {/* <Orders /> */}
                 </Paper>
               </Grid>
               

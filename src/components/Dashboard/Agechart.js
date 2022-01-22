@@ -99,14 +99,14 @@ useEffect(() => {
   </Typography>
 
     <BarChart
-      width={500}
+      width={470}
       height={400}
-      barSize={30}
+      barSize={15}
       data={data}
       margin={{
         top: 20,
         right: 40,
-        left: 0,
+        left: -40,
         bottom: 5
       }}
     >
