@@ -20,6 +20,7 @@ import PlanTableTest from './PlanTableTest';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 
+import Carousel from 'react-material-ui-carousel'
 
 // Modal
 const style = {
@@ -216,8 +217,11 @@ function MyComponent() {
            <br></br>
            
           {/*  <img src={placedetail.photos[0].getUrl()} width={270} height={200}></img>   */}
+           <Carousel>
            {placedetail.photos==undefined?null:<img src={placedetail.photos[0].getUrl()} width={270} height={200}></img>}
-            
+           {placedetail.photos==undefined?null:<img src={placedetail.photos[1].getUrl()} width={270} height={200}></img>}
+           {placedetail.photos==undefined?null:<img src={placedetail.photos[2].getUrl()} width={270} height={200}></img>}
+           </Carousel>
             
 
 
