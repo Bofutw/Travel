@@ -121,7 +121,7 @@ export default function BlogShow() {
         }else{
             
             let index1 = (e.target.id).slice(3,4)
-            let index2 = (e.target.id).slice(4,5)      
+            let index2 = (e.target.id).slice(4,5)                
             blog.blogdetail.eachDay[index1].eachplace[index2].pic = `https://storage.googleapis.com/travelproject/${logicname}.png`
         } 
         imagesave(e.target.files[0],logicname)
