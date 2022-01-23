@@ -8,13 +8,15 @@ import Logout from "@mui/icons-material/Logout";
 import StarIcon from "@mui/icons-material/Star";
 import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 import PlaceSharpIcon from "@mui/icons-material/PlaceSharp";
+import ArticleIcon from '@mui/icons-material/Article';
 import Settings from "@mui/icons-material/Settings";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import MenuBookTwoToneIcon from '@mui/icons-material/MenuBookTwoTone';
+
+
 import { Link } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../../Firebase/firebase-config";
@@ -27,7 +29,9 @@ const Dropdownbar = () => {
   const logout = async () => {
     await signOut(auth);
 
-    localStorage.clear();
+    localStorage.removeItem("email");
+    localStorage.removeItem("name");
+    localStorage.removeItem("profileURL");
     window.location.href = "/";
   };
 
@@ -43,7 +47,7 @@ const Dropdownbar = () => {
       </Link>
       <Divider />
       <Link
-        to="/journeyplanhome"
+        to="/journeyplan"
         style={{ textDecoration: "none", color: "black" }}
       >
         <MenuItem>
@@ -53,20 +57,24 @@ const Dropdownbar = () => {
           <li style={{ fontWeight: "bolder" }}>行程規劃</li>
         </MenuItem>
       </Link>
-      <MenuItem>
-        <ListItemIcon>
-          <EditTwoToneIcon sx={{ color: "#ffb74d" }} fontSize="medium" />
-        </ListItemIcon>
-        <li style={{ fontWeight: "bolder" }}>開始撰寫文章</li>
-      </MenuItem>
 
-      <MenuItem>
-        <ListItemIcon>
-          <MenuBookTwoToneIcon sx={{ color: "#1b0000" }} fontSize="medium" />
-        </ListItemIcon>
-        <li style={{ fontWeight: "bolder" }}>我的文章</li>
-      </MenuItem>
+      <Link to="/myblog" style={{ textDecoration: "none", color: "black" }} >
+        <MenuItem>
+          <ListItemIcon>
+            <ArticleIcon sx={{ color: "grey" }} fontSize="medium" />
+          </ListItemIcon>
+          <li style={{ fontWeight: "bolder" }}>我的遊記</li>
+        </MenuItem>
+      </Link>
 
+      <Link to="/blogeditor" style={{ textDecoration: "none", color: "black" }} >
+        <MenuItem>
+          <ListItemIcon>
+            <EditTwoToneIcon sx={{ color: "black" }} fontSize="medium" />
+          </ListItemIcon>
+          <li style={{ fontWeight: "bolder" }}>開始撰寫文章</li>
+        </MenuItem>
+      </Link>
       <Link to="/favorite" style={{ textDecoration: "none", color: "black" }}>
         <MenuItem>
           <ListItemIcon>
