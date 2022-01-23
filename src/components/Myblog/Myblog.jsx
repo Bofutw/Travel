@@ -14,14 +14,10 @@ export default function BlogShow() {
         getmemberjourney(memberid)
     }, [])
     function popcard(e) {
-        document.getElementById(`popcard-${e.target.id.slice(8,11)}`).setAttribute('checked', 'checked')       
-        let temp = document.getElementsByName("popcard")
-        for(let i =0 ;i<temp.length;i++){
-            if(temp[i].checked){
-                journeyid = temp[i].value.slice(9,13)
-            }
-        }
-        
+        journeyid = document.getElementById(`popcard-${e.target.id.slice(8,11)}`).value.slice(9,13)  
+        document.getElementById("journeyname").innerHTML  = `為 <b>${document.getElementById("popcard-"+e.target.id.slice(8,11)).closest('div').querySelector('h5').innerText}</b> 寫下一些回憶`
+        document.getElementById("buttonForNewBlog").setAttribute("style","")
+        document.getElementById("buttonForNewBlog").innerText = "出發"
     }
     function getmemberblog(id) {
         fetch(`http://localhost:8080/blog/memberid=${id}`)
@@ -95,17 +91,21 @@ export default function BlogShow() {
                     <div class="popup-inner">
                         <div style={{ marginTop: '30px' }}>
                             <h2>—撰寫遊程—</h2>
-                            <p>選擇想要新增的旅遊紀錄吧</p>
+                            
+                            
                         </div>
+                        <p id='journeyname'>-選擇想要新增的旅遊紀錄吧-</p>
+                        <button id ={"buttonForNewBlog"}onClick={editExistJourney} style={{ marginLeft: '650px', marginBottom: '13px', display:"none" }}></button>
                         <div class="popup__text">
                         {journey.map((item,id)=>{
-                            return <div><input type='radio' id={`popcard-${id}`} name='popcard' style={{ display: 'none' }} value={"journeyid"+item.journeyid}/>
+                            return <div><input type='radio' id={`popcard-${id}`} name='popcard' style={{display:"none"}} value={"journeyid"+item.journeyid}/>
                             <div class="popCard" id={`element-${id}`} onClick={popcard}>
                                 <div id={`element-${id}`} class="" >
                                     <img id={`element-${id}`} src="\blogimg\b1\44879896482_720c553daa_c.jpg" class="img-fluid" alt="" style={{}} />
                                 </div>
                                 <div id={`element-${id}`} class="myblog-content" style={{ padding: '10px' }}>
                                     <h5 id={`element-${id}`}>{item.journeydetail.title}</h5>
+                                    <div id={`element-${id}`}>{`(${item.journeydetail.beginDate})`}</div>
                                 </div>
                             </div></div>
                         })}
@@ -113,7 +113,6 @@ export default function BlogShow() {
 
 
                         </div>
-                        <button onClick={editExistJourney} style={{ marginLeft: '650px', marginBottom: '13px' }}>開始撰寫</button>
                         <a class="popup__close" href="#">X</a>
                     </div>
                 </div>
