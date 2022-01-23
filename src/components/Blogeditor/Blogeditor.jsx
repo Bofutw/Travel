@@ -134,7 +134,7 @@ export default function BlogShow() {
             <div>            
             <div class="bls" style={{ width:'1000px',height:'350px',margin: '70px',display: 'flex',justifyContent: 'center',alignItems: 'center'}}>
                     <input id='topimginput' type={"file"} onChange={imgchange}></input>
-                    <img id='topimg'  style={{width: '100%',height: '100%',objectFit:'cover'}}></img>
+                    <img id='topimg' src={blog.blogdetail.url} style={{width: '100%',height: '100%',objectFit:'cover'}}></img>
                 </div>
                 <div style={{marginLeft:'100px', marginTop:"-50px",marginBottom:'60px',width:'900px'}}>
                 <textarea onChange={changeText} id ="titlearea">{(blog.blogdetail.title)?blog.blogdetail.title:"為您的旅程設下一個標題...."}</textarea>
@@ -155,7 +155,7 @@ export default function BlogShow() {
                             </div>
                             <div>
                             <input id={`img${idex}${i}input`} type={"file"} onChange={imgchange}></input>
-                            <img id={`img${idex}${i}`}  style={{width: '100%',height: '100%',objectFit:'cover'}}></img>
+                            <img id={`img${idex}${i}`} src={item.eachplace[i].pic} style={{width: '100%',height: '100%',objectFit:'cover'}}></img>
  
                             
                             </div>
