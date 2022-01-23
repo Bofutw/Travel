@@ -1,12 +1,12 @@
-import * as React from "react";
+import React from "react";
 import { useRef, useState, useEffect } from "react";
 import "./profile3.css";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import { Avatar, Button, Divider, Fab } from "@mui/material";
-import EditIcon from '@mui/icons-material/Edit';
-
+import EditIcon from "@mui/icons-material/Edit";
 import ProfileData from "./ProfileData";
+import { getmemberallinfo } from "./getmemberinfo";
+import BorderColorSharpIcon from "@mui/icons-material/BorderColorSharp";
+// TODO :  City ID
 
 export default function Profile3() {
   //用戶資訊
@@ -14,27 +14,47 @@ export default function Profile3() {
   const nicknameref = useRef("");
   const realnameref = useRef("");
   const birthdayref = useRef("");
-
-  const genderref = useRef("");
   const arearef = useRef("");
   const signref = useRef("");
 
   //星座
   const [constellation, setConstellation] = useState("");
-  //日期抓取
-  const [date, setDate] = useState("");
-  // const [time, setTime] = useState("");
-
-  //能否修改
-  const [edit, setEdit] = useState(false);
-
-  const handleEdit = (e) => {
-    e.preventDefault();
-    setEdit(!edit);
-  }
 
   //用戶照片URL
   let profileURL = localStorage.getItem("profileURL");
+  //當前用戶所有資訊
+  const [memberinfo, setMemberInfo] = useState({});
+  //當前用戶生日
+  const [currentbirth, setCurrentBirth] = useState("");
+  //性別
+  const [curgender, setCurGender] = useState("");
+
+  useEffect(() => {
+    const gdata = async () => {
+      const axiosmemberinfo = await getmemberallinfo(
+        localStorage.getItem("email")
+      );
+      if (axiosmemberinfo.memberbirth != null) {
+        let memberbirth2 = await axiosmemberinfo.memberbirth;
+        memberbirth2 = memberbirth2.toString().slice(0, 10);
+        setCurrentBirth(() => memberbirth2);
+      }
+      setMemberInfo(axiosmemberinfo);
+
+      return axiosmemberinfo;
+    };
+    gdata();
+  }, []);
+  //  var d1 = new Date(memberinfo.memberbirth);
+  //    let memberbirth2 = d1.toISOString().slice(0,10)
+  //   console.log((memberinfo.memberbirth).toString().slice(0,10));
+
+  //能否修改
+  const [edit, setEdit] = useState(false);
+  const handleEdit = (e) => {
+    e.preventDefault();
+    setEdit(!edit);
+  };
 
   const [profilesend, setProfileSend] = useState(false);
 
@@ -43,20 +63,15 @@ export default function Profile3() {
     await setProfileSend(!profilesend);
   };
 
-  if (profileURL == null) {
-    console.log("true");
-  } else {
-    //console.log(profileURL);
-  }
   //判斷星座
   useEffect(() => {
-    const month = parseInt(date.substr(5, 2));
-    const day = parseInt(date.substr(8, 2));
+    const month = parseInt(birthdayref.current.value.substr(5, 2));
+    const day = parseInt(birthdayref.current.value.substr(8, 2));
+
     //console.log("月：", month);
     //console.log("日期:", date.substr(8, 2));
 
     const conditionconstellation = () => {
-
       switch (month) {
         case 1:
           setConstellation(day < 21 ? `♑摩羯座` : `♒水瓶座`);
@@ -100,52 +115,67 @@ export default function Profile3() {
         default:
           break;
       }
-    }
+    };
     conditionconstellation();
-
-
-
-  }, [date])
-
+  }, [birthdayref.current.value]);
 
   return (
-    <div style={{ padding: '150px 300px 150px 300px', display: "flex" }}>
+    <div
+      style={{
+        padding: "350px 300px 200px 440px",
+        display: "flex",
+        backgroundImage: 'url("/images/683602d049d4e3854580d5180cbbdaba.png")',
+        backgroundSize: "100% 100%",
+      }}
+    >
       <div className="profile-container" style={{ fontSize: "1.5rem" }}>
-
-        {profilesend && <ProfileData
-          profilesend={profilesend}
-          setProfileSend={setProfileSend}
-          emailref={emailref}
-          nicknameref={nicknameref}
-          realnameref={realnameref}
-          genderref={genderref}
-          birthdayref={birthdayref}
-          arearef={arearef}
-          signref={signref}
-          profileURL={profileURL}
-
-        />
-        }
-
-
+        {profilesend && (
+          <ProfileData
+            profilesend={profilesend}
+            setProfileSend={setProfileSend}
+            emailref={emailref}
+            nicknameref={nicknameref}
+            realnameref={realnameref}
+            curgender={curgender}
+            birthdayref={birthdayref}
+            arearef={arearef}
+            signref={signref}
+            profileURL={profileURL}
+          />
+        )}
 
         <form action="">
           <div className="row">
             <div className="background">
-              <img className="profile3-backgroundimg" src="./img/1.jpg" alt="" />
+              <img
+                className="profile3-backgroundimg"
+                src="./img/1.jpg"
+                alt=""
+              />
             </div>
 
             <div className="profile3-img">
-
-              <img className="avatarimg" src={profileURL === null ? "" : profileURL} alt="" />
+              <img className="avatarimg" src={profileURL} alt="" />
             </div>
           </div>
           <div className="profile-editbtn">
-            <button className="profile-editbtn" onClick={handleEdit} ><i class="fas fa-edit"></i></button>
+            <button
+              className="profile-editbtn"
+              style={{
+                border: "none",
+                backgroundColor: "transparent",
+                justifyContent: "right",
+              }}
+              onClick={handleEdit}
+            >
+              <BorderColorSharpIcon sx={{ color: edit ? "red" : "black" }} />
+            </button>
           </div>
           <div className="profile3-row">
             <div className="col-25">
-              <label className="profile-label" htmlFor="email">電子信箱：</label>
+              <label className="profile-label" htmlFor="email">
+                電子信箱：
+              </label>
             </div>
 
             <div className="col-75">
@@ -163,12 +193,15 @@ export default function Profile3() {
           </div>
           <div className="profile3-row">
             <div className="col-25">
-              <label className="profile-label" htmlFor="nickname">暱稱：</label>
+              <label className="profile-label" htmlFor="nickname">
+                暱稱：
+              </label>
             </div>
             <div className="col-75">
               <input
                 type="text"
                 required
+                defaultValue={memberinfo.membernickname}
                 ref={nicknameref}
                 disabled={edit ? null : "disabled"}
                 className="text"
@@ -180,12 +213,15 @@ export default function Profile3() {
           </div>
           <div className="profile3-row">
             <div className="col-25">
-              <label className="profile-label" htmlFor="fname">姓名：</label>
+              <label className="profile-label" htmlFor="fname">
+                姓名：
+              </label>
             </div>
             <div className="col-75">
               <input
                 type="text"
                 disabled={edit ? null : "disabled"}
+                defaultValue={memberinfo.membername}
                 ref={realnameref}
                 className="text"
                 id="fname"
@@ -197,14 +233,16 @@ export default function Profile3() {
 
           <div className="profile3-row">
             <div className="col-25">
-              <label className="profile-label" htmlFor="birthday">生日：</label>
+              <label className="profile-label" htmlFor="birthday">
+                生日：
+              </label>
             </div>
             <div className="col-75">
               <input
                 disabled={edit ? null : "disabled"}
+                defaultValue={currentbirth}
                 className="profile-date"
                 type="date"
-                onChange={(e) => setDate(e.target.value)}
                 ref={birthdayref}
                 id="birthday"
                 name="lastname"
@@ -212,9 +250,52 @@ export default function Profile3() {
               />
             </div>
           </div>
+          <div>
+            <div>
+              <label>性別：</label>
+            </div>
+            <div style={{ marginLeft: "230px", marginTop: "-40px" }}>
+              {console.log(memberinfo.membergender===1)}
+              {console.log(curgender)}
+
+              <input
+                disabled={edit ? null : "disabled"}
+                //defaultChecked={(memberinfo.membergender) !== 2}
+                onChange={(e) => setCurGender(e.target.value)}
+                type="radio"
+                id="r1"
+                name="gender"
+                value="1"
+              />
+              <label for="r1">
+                <span>男生</span>
+              </label>
+              <input
+                type="radio"
+                //defaultChecked={(memberinfo.membergender) ===1}
+                disabled={edit ? null : "disabled"}
+                value="2"
+                id="r2"
+                onChange={(e) => setCurGender(e.target.value)}
+                name="gender"
+                style={{ marginLeft: "80px" }}
+              />
+              <label for="r2">
+                <span>女生</span>
+              </label>
+              
+            </div>
+            {memberinfo.membergender != null? <>當前性別：<span style={{marginLeft:'120px'}}>{(memberinfo.membergender) ===1?"男生":"女生"}</span></> : ""}
+            {console.log(memberinfo.membergender)}
+          </div>
+          <div>
+         
+          </div>
           <div className="profile3-row">
             <div className="col-25">
-              <label className="profile-label" htmlFor="constellations ">星座：</label>
+              <label className="profile-label" htmlFor="constellations ">
+                星座：
+              </label>
             </div>
             <div className="col-75">
               <input
@@ -230,29 +311,37 @@ export default function Profile3() {
           </div>
           <div className="profile3-row">
             <div className="col-25">
-              <label className="profile-label" htmlFor="area">地區：</label>
+              <label className="profile-label" htmlFor="area">
+                地區：
+              </label>
             </div>
             <div className="col-75">
-              <select id="area" name="country" ref={arearef} disabled={edit ? null : "disabled"}>
+              <select
+                id="area"
+                name="country"
+                ref={arearef}
+                defaultValue={memberinfo.membercityid}
+                disabled={edit ? null : "disabled"}
+              >
                 <optgroup label="北">
-                  <option value="1">基隆</option>
-                  <option value="2">臺北</option>
-                  <option value="3">新北</option>
+                  <option value="1">基隆市</option>
+                  <option value="2">臺北市</option>
+                  <option value="3">新北市</option>
 
-                  <option value="4">桃園</option>
+                  <option value="4">桃園市</option>
                   <option value="5">新竹市</option>
                   <option value="6">新竹縣</option>
 
-                  <option value="19">宜蘭</option>
+                  <option value="19">宜蘭縣</option>
                 </optgroup>
                 <optgroup label="中">
                   <option value="7">苗栗縣</option>
-                  <option value="8">臺中</option>
+                  <option value="8">臺中市</option>
                   <option value="9">彰化縣</option>
                   <option value="10">南投縣</option>
                 </optgroup>
                 <optgroup label="南">
-                  <option value="11">雲林</option>
+                  <option value="11">雲林縣</option>
                   <option value="12">嘉義市</option>
                   <option value="13">嘉義縣</option>
                   <option value="14">台南市</option>
@@ -274,10 +363,13 @@ export default function Profile3() {
           </div>
           <div className="profile3-row">
             <div className="col-25">
-              <label className="profile-label" htmlFor="sign">個性簽名：</label>
+              <label className="profile-label" htmlFor="sign">
+                個性簽名：
+              </label>
             </div>
             <div className="col-75">
               <textarea
+                defaultValue={memberinfo.memberintro}
                 id="sign"
                 disabled={edit ? null : "disabled"}
                 ref={signref}
@@ -299,13 +391,17 @@ export default function Profile3() {
               justifyContent: "center",
             }}
           >
-            <input disabled={edit ? null : "disabled"} className={edit ? "profile3-submit" : "profile3-notsubmit"} type="submit" value="送出" onClick={submitClick} />
+            <input
+              disabled={edit ? null : "disabled"}
+              className={edit ? "profile3-submit" : "profile3-notsubmit"}
+              type="submit"
+              value="送出"
+              onClick={submitClick}
+            />
           </div>
         </form>
         <Divider sx={{ color: "black" }} />
       </div>
-
     </div>
-
   );
 }
