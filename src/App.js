@@ -27,6 +27,7 @@ import Map from "./components/JourneyPlanning/Map";
 import About from "./components/About/About";
 import QuestionAnswer from "./components/QA/QuestionAnswer";
 import Blog from "./components/Blog/Blog";
+import Myblog from "./components/Myblog/Myblog";
 import BlogShow from "./components/Blog-show/BlogShow";
 import BlogShow2 from "./components/Blog-show/BlogShow2";
 import BlogShow3 from "./components/Blog-show/BlogShow3";
@@ -63,6 +64,7 @@ function App() {
             <Route path="/qa" element={<QuestionAnswer/>} /> 
           
             <Route path="/blog" element={<Blog/>} />
+            <Route path="/myblog" element={<Myblog/>} />
             <Route path="/profile" element={<Profile3 />} />
             <Route path="/favorite" element={<Favorite />} />
             <Route path="/journeyplanhome" element={<JourneyHome />} />
@@ -74,7 +76,7 @@ function App() {
             <Route path="/blogshow5" element={<BlogShow5 />} />
             <Route path="/blogeditor" element={<Blogeditor />} />
           </Routes>
-          {/* <Footer /> */}
+          <Footer />
         </BrowserRouter>
 
       </div>

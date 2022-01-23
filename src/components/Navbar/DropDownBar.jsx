@@ -8,6 +8,7 @@ import Logout from "@mui/icons-material/Logout";
 import StarIcon from "@mui/icons-material/Star";
 import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
 import PlaceSharpIcon from "@mui/icons-material/PlaceSharp";
+import ArticleIcon from '@mui/icons-material/Article';
 import Settings from "@mui/icons-material/Settings";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -55,6 +56,16 @@ const Dropdownbar = () => {
           <li style={{ fontWeight: "bolder" }}>行程規劃</li>
         </MenuItem>
       </Link>
+
+      <Link to="/myblog"style={{ textDecoration: "none", color: "black" }} >
+      <MenuItem>
+        <ListItemIcon>
+          <ArticleIcon sx={{ color: "grey" }} fontSize="medium" />
+        </ListItemIcon>
+        <li style={{ fontWeight: "bolder" }}>我的遊記</li>
+      </MenuItem>
+      </Link>
+
       <Link to="/blogeditor"style={{ textDecoration: "none", color: "black" }} >
       <MenuItem>
         <ListItemIcon>
