@@ -63,7 +63,7 @@ export default function Areachart() {
             <PieChart width={800} height={400}>
       <Pie
         data={data}
-        cx={190}
+        cx={140}
         cy={200}
         innerRadius={60}
         outerRadius={80}

@@ -31,6 +31,7 @@ import Githubapi from './Githubapi';
 import { Avatar, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { setfradminloginpage, setisadmin } from '../DashBoardLogin/DBoardLoginInfo';
+import Membertime from './Membertime'
 
 
 
@@ -131,32 +132,30 @@ function DashboardContent() {
   };
 
   // DropDownBar
-  /* const [anchorEl, setAnchorEl] = useState(null);
-  const Elopen = Boolean(anchorEl);
-  const handleMenuOpen = (e) => {
-      setAnchorEl(e.currentTarget);
-      console.log(e.currentTarget.style)
-  };
-  const handleMenuClose = () => {
-      setAnchorEl(null);
-  }; */
-
-
+/* const [anchorEl, setAnchorEl] = useState(null);
+const Elopen = Boolean(anchorEl);
+const handleMenuOpen = (e) => {
+    setAnchorEl(e.currentTarget);
+    console.log(e.currentTarget.style)
+};
+const handleMenuClose = () => {
+    setAnchorEl(null);
+}; */
 
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
-
+        
         <CssBaseline />
         <AppBar position="absolute" open={open}  >
-
+          
           <Toolbar
-
+          
             sx={{
               pr: '24px', // keep right padding when drawer closed
             }}
           >
-
+            
             <IconButton
               edge="start"
               color="inherit"
@@ -167,9 +166,9 @@ function DashboardContent() {
                 ...(open && { display: 'none' }),
               }}
             >
-
+              
               <MenuIcon />
-
+              
             </IconButton>
             <Typography
               component="h1"
@@ -235,7 +234,8 @@ function DashboardContent() {
                     height: 240,
                   }}
                 >
-                  <Chart />
+                  <Membertime></Membertime>
+                  
                 </Paper>
               </Grid>
               {/* Recent Deposits */}
@@ -252,35 +252,32 @@ function DashboardContent() {
                 </Paper>
               </Grid>
               {/* Recent Orders */}
-
-              <Grid container spacing={3}>
-                <Grid item xs={4.5} >
-                  <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', marginTop: 2, marginLeft: 3 }}>
-
-                    <Areachart></Areachart>
-
-                    {/* <Orders /> */}
-                  </Paper>
-                </Grid>
-                <Grid item xs={5}>
-                  <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', marginTop: 2, paddingLeft: 0 }}>
-
-                    <Agechart></Agechart>
-
-                    {/* <Orders /> */}
-                  </Paper>
-                </Grid>
-
-                <Grid item xs={2.5}>
-                  <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', marginTop: 2 }}>
-
-                    <Githubapi></Githubapi>
-
-                    {/* <Orders /> */}
-                  </Paper>
-                </Grid>
-
+             
+              <Grid container spacing={2}>
+             <Grid item xs={9} >
+                <Paper sx={{ height: 400, p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:3 }}>
+                <Chart />
+                
+              
+                </Paper>
               </Grid>
+             { /* <Grid item xs={5}>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2,paddingLeft:0}}>
+                
+                  <Agechart></Agechart>
+              
+                </Paper>
+              </Grid> */}
+
+              <Grid item xs={3}>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:1}}>
+                
+                  <Githubapi></Githubapi>
+              
+                </Paper>
+              </Grid>
+              
+            </Grid>
             </Grid>
             <Copyright sx={{ pt: 4 }} />
           </Container>
