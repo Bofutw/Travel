@@ -25,6 +25,8 @@ const Login = () => {
   //錯誤訊息和開關
   const [open, setOpen] = useState(false)
   const [errormessage, setErrorMessage] = useState("");
+  const [suopen, setSuOpen] = useState(false);
+  const [sumessage, setSuMessage] = useState("");
 
 
   const navigate = useNavigate();
@@ -79,6 +81,10 @@ const Login = () => {
       } else if (findreguseremail === registerEmail) {
         setOpen(true);
         const errmes = "帳號已經註冊過囉!!!";
+        setErrorMessage(() => errmes);
+      } else {
+        setOpen(true);
+        const errmes = "您的郵件地址與密碼格式有誤!!!";
         setErrorMessage(() => errmes);
       }
       // alert(error.message)
@@ -286,7 +292,7 @@ const Login = () => {
         </div>
 
       </div>)}
-      {open && <LoginMessage open={open} setOpen={setOpen} errormessage={errormessage} />}
+      {open && <LoginMessage open={open} setOpen={setOpen} errormessage={errormessage} sumessage={sumessage} suopen={suopen} setSuOpen={setSuOpen} />}
 
     </div>
 

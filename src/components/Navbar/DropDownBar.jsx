@@ -16,22 +16,26 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../../Firebase/firebase-config";
 
 const Dropdownbar = () => {
+  let navigate = useNavigate();
   const [dialogopen, setDiaLogOpen] = useState(true);
 
 
 
   const logout = async () => {
     await signOut(auth);
+    navigate("/");
+    window.location.reload();
+    //window.location.href = "/";
+    localStorage.clear();
+    // localStorage.removeItem("email");
+    // localStorage.removeItem("name");
+    // localStorage.removeItem("profileURL");
 
-    localStorage.removeItem("email");
-    localStorage.removeItem("name");
-    localStorage.removeItem("profileURL");
-    window.location.href = "/";
   };
 
   const profileURL = localStorage.getItem("profileURL");
@@ -46,7 +50,7 @@ const Dropdownbar = () => {
       </Link>
       <Divider />
       <Link
-        to="/journeyplan"
+        to="/journeyplanhome"
         style={{ textDecoration: "none", color: "black" }}
       >
         <MenuItem>

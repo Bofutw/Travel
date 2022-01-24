@@ -6,6 +6,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import ProfileData from "./ProfileData";
 import { getmemberallinfo } from "./getmemberinfo";
 import BorderColorSharpIcon from "@mui/icons-material/BorderColorSharp";
+import { getcityid } from "../Login/LoginConditional";
 // TODO :  City ID
 
 export default function Profile3() {
@@ -28,20 +29,30 @@ export default function Profile3() {
   const [currentbirth, setCurrentBirth] = useState("");
   //性別
   const [curgender, setCurGender] = useState("");
+  //城市ID
+  const [cityid, setCityId] = useState("");
 
   useEffect(() => {
     const gdata = async () => {
       const axiosmemberinfo = await getmemberallinfo(
         localStorage.getItem("email")
       );
+      const axioscityid = await getcityid(axiosmemberinfo.memberid);
+      //console.log(currentcityid);
+
       if (axiosmemberinfo.memberbirth != null) {
         let memberbirth2 = await axiosmemberinfo.memberbirth;
         memberbirth2 = memberbirth2.toString().slice(0, 10);
         setCurrentBirth(() => memberbirth2);
       }
-      setMemberInfo(axiosmemberinfo);
+      //設定當前用戶所有資訊
+      const finalaxiosmemberinfo = Object.assign(axiosmemberinfo, { membercityid: axioscityid });
+      //console.log(finalaxiosmemberinfo);
 
-      return axiosmemberinfo;
+      setMemberInfo(finalaxiosmemberinfo);
+      setCityId(() => (finalaxiosmemberinfo.membercityid).toString())
+
+      return finalaxiosmemberinfo;
     };
     gdata();
   }, []);
@@ -118,6 +129,7 @@ export default function Profile3() {
     };
     conditionconstellation();
   }, [birthdayref.current.value]);
+
 
   return (
     <div
@@ -255,8 +267,7 @@ export default function Profile3() {
               <label>性別：</label>
             </div>
             <div style={{ marginLeft: "230px", marginTop: "-40px" }}>
-              {console.log(memberinfo.membergender===1)}
-              {console.log(curgender)}
+
 
               <input
                 disabled={edit ? null : "disabled"}
@@ -283,13 +294,13 @@ export default function Profile3() {
               <label for="r2">
                 <span>女生</span>
               </label>
-              
+
             </div>
-            {memberinfo.membergender != null? <>當前性別：<span style={{marginLeft:'120px'}}>{(memberinfo.membergender) ===1?"男生":"女生"}</span></> : ""}
-            {console.log(memberinfo.membergender)}
+            {memberinfo.membergender != null ? <>當前性別：<span style={{ marginLeft: '120px' }}>{(memberinfo.membergender) === 1 ? "男生" : "女生"}</span></> : ""}
+
           </div>
           <div>
-         
+
           </div>
           <div className="profile3-row">
             <div className="col-25">
@@ -316,11 +327,13 @@ export default function Profile3() {
               </label>
             </div>
             <div className="col-75">
+              {console.log(typeof `${memberinfo.membercityid}`)}
               <select
                 id="area"
                 name="country"
                 ref={arearef}
-                defaultValue={memberinfo.membercityid}
+                value={edit ? null : cityid}
+                //defaultValue={edit ? null : cityid}
                 disabled={edit ? null : "disabled"}
               >
                 <optgroup label="北">

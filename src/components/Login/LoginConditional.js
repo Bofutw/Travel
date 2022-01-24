@@ -88,6 +88,14 @@ export async function existenceemaillpassword(currentemail, currentpassword) {
 
 }
 
+export async function getcityid(memberid) {
+    const axiosdata = await axios.get(`http://localhost:8080/city/memberid=${memberid}`);
+
+    const axiosresult = await axiosdata.data;
+
+    return axiosresult
+
+}
 
 
 

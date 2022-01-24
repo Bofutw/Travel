@@ -23,13 +23,13 @@ export default function ProfileData({
 }) {
   const [loading, setLoading] = useState(false);
   const [agree, setAgree] = useState(false);
-  
+
   let memberid = localStorage.getItem("memberid");
   let email = emailref.current.value;
   let nickname = nicknameref.current.value;
   let birthday = birthdayref.current.value;
   let gender = curgender;
-  let area = parseInt(arearef.current.value);
+  let area = `cityid=${parseInt(arearef.current.value)}`;
   let sign = signref.current.value;
   let realname = realnameref.current.value;
   // realname, email, profileURL, nickname, birthday, area, sign
@@ -41,7 +41,6 @@ export default function ProfileData({
     membernickname: nickname,
     memberbirth: birthday,
     membergender: gender,
-    membercityid: area,
     memberintro: sign,
   };
   console.log(memberid);
@@ -64,7 +63,7 @@ export default function ProfileData({
       try {
         setLoading(true);
         const axiospost = await axios.put(
-          "http://localhost:8080/member/",
+          `http://localhost:8080/member/${area}`,
           profiledata
         );
 

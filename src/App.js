@@ -11,7 +11,6 @@ import Footer from "./components/Footer/Footer";
 import ScrollTop from "./components/Homepage/ScrollTop";
 import Favorite from "./components/Favorite/Favorite";
 
-import PageNF from "./PageNF";
 import Login from "./components/Login/Login";
 
 import NavbarGuest from "./components/Navbar/NavbarGuest";
@@ -76,7 +75,9 @@ function App() {
   const adminlogin = localStorage.getItem("adminloginpage");
   console.log("adminloginpage", adminlogin);
 
-
+  //
+  const [guest, setGuest] = useState(false);
+  console.log();
 
 
   //console.log("App",isadmin);
@@ -90,7 +91,7 @@ function App() {
 
         <Routes>
           {/* need write route */}
-          <Route path="*" element={< PageNotFound/>} />
+          <Route path="*" element={< PageNotFound />} />
 
           <Route path="/" element={<HomePage user={user} />} />
           <Route path="/login" element={<Login />} />
@@ -108,7 +109,9 @@ function App() {
           <Route path="/blogeditor" element={<Blogeditor />} />
           {user && <Route path="/profile" element={<Profile3 />} />}
           {user && <Route path="/favorite" element={<Favorite />} />}
-          <Route path={user?"/journeyplanhome":"/login"} element={user ? <JourneyHome openMap={openMap} setOpenMap={setOpenMap} /> : <Login />} />
+
+          <Route path={"/journeyplanhome"} element={localStorage.getItem("email") != null ? <JourneyHome openMap={openMap} setOpenMap={setOpenMap} /> : <Login />} />
+
           {user && <Route path="/map" element={<Map />} />}
           <Route path="/dashboardlogin/*" element={<DashBoardLogin isadmin={isadmin} setIsAdmin={setIsAdmin} />} />
           {isadmin === "true" && <Route path="/dashboard" element={<Dashboard />} />}
