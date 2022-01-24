@@ -27,6 +27,33 @@
  
 }
 
+.leftcolumn::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background-image: -webkit-gradient(linear,
+					   left bottom,
+					   left top,
+					   color-stop(0.44, rgb(136, 136, 136)),
+					   color-stop(0.72, rgb(170, 170, 170)),
+					   color-stop(0.86, rgb(184, 184, 184)));
+	}
+
+  #blogshowcard-p{
+    resize:none;
+    height:270px;
+    width:615px;
+    overflow:scroll;
+  }
+
+  #blogshowcard-p::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-image: -webkit-gradient(linear,
+               left bottom,
+               left top,
+               color-stop(0.44, rgb(136, 136, 136)),
+               color-stop(0.72, rgb(170, 170, 170)),
+               color-stop(0.86, rgb(184, 184, 184)));
+    }
+
 .rightcolumn {
   float: left;
   width: 85%;

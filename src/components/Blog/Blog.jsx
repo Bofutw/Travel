@@ -161,7 +161,7 @@ function Blog () {
                                 <div class="photo" style={{ backgroundImage: `url(${item.blogdetail.url})` }}></div>
                                 <ul class="details">
                                     <li class="author">John Doe</li>
-                                    <li class="date">Aug. 24, 2015</li>
+                                    <li class="date">{item.blogcreatetime.slice(0,10)}</li>
                                   
                                 </ul>
                             </div>
