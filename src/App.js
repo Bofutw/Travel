@@ -108,7 +108,7 @@ function App() {
           <Route path="/blogeditor" element={<Blogeditor />} />
           {user && <Route path="/profile" element={<Profile3 />} />}
           {user && <Route path="/favorite" element={<Favorite />} />}
-          <Route path="/journeyplanhome" element={user ? <JourneyHome openMap={openMap} setOpenMap={setOpenMap} /> : <Login />} />
+          <Route path={user?"/journeyplanhome":"/login"} element={user ? <JourneyHome openMap={openMap} setOpenMap={setOpenMap} /> : <Login />} />
           {user && <Route path="/map" element={<Map />} />}
           <Route path="/dashboardlogin/*" element={<DashBoardLogin isadmin={isadmin} setIsAdmin={setIsAdmin} />} />
           {isadmin === "true" && <Route path="/dashboard" element={<Dashboard />} />}
