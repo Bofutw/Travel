@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+<<<<<<< HEAD
 import { async } from "@firebase/util";
 import { set } from "date-fns";
+=======
+>>>>>>> origin/feature/googlemap
 function Test3() {
   const [data, setData] = useState();
   const [address, setAddress] = useState([]);
 
+<<<<<<< HEAD
   const [useremail, setUserEmail] = useState("");
   const [showemail, setShowEmail] = useState("");
 
@@ -18,6 +22,8 @@ function Test3() {
     setUserEmail(e.target.value);
   };
 
+=======
+>>>>>>> origin/feature/googlemap
   useEffect(() => {
     // const axiosdata = async () => {
     //   const result = await axios.get(
@@ -28,6 +34,11 @@ function Test3() {
     //   setData(resdata);
     // };
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> origin/feature/googlemap
     // const handleProxy = async () => {
     //   const axiosgoogledata = await axios.get("/maps/api/place/textsearch/json?key=AIzaSyA1A_ajOEo-A7Mpuhm000U4zK-sGAvlTQc&language=zh-TW&query=台中百貨公司");
 
@@ -37,6 +48,7 @@ function Test3() {
 
     //   setAddress(googleaddress)
 
+<<<<<<< HEAD
     // }
     // axiosdata();
     // handleProxy();
@@ -83,6 +95,33 @@ function Test3() {
       <h3>{exist}</h3>
       {/* 請使用map()渲染出你要的畫面 */}
     </div>
+=======
+
+
+    // }
+    // axiosdata();
+    // handleProxy();
+
+
+
+  }, []);
+
+
+
+  return (
+
+    <div style={{ height: '100vh' }}>
+      <h1>AXIOS</h1>
+
+
+      {/* 請使用map()渲染出你要的畫面 */}
+
+
+
+
+    </div>
+
+>>>>>>> origin/feature/googlemap
   );
 }
 

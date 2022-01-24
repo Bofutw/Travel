@@ -44,7 +44,7 @@ export default function HomePage() {
     return (
 
         <main className='main'>
-
+         
             <div style={{ backgroundColor: '#021E39' }}>
                 {data === '' ? <Skeleton variant="rectangular" animation='pulse' width={1500} height={900} sx={{ bgcolor: 'gray' }}></Skeleton> :
                     <img className='mainImg' src={data} alt="randomimg" />

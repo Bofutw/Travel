@@ -136,9 +136,12 @@ function Githubapiall() {
                     Details
                     <hr></hr>
             </Typography>
-
-
-            <Githubstatus1 data={data} data1={data1} data2={data2}></Githubstatus1>
+            
+            
+                 <Githubstatus1 data={data} data1={data1} data2={data2}></Githubstatus1>
+            
+            
+           
            {/*  <Grid container spacing={3}>
                 <Grid item xs={4}>
                 <Githubstatus data={data} align={'center'} branch={'Main'}></Githubstatus>

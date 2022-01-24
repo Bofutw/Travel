@@ -32,6 +32,8 @@ import Citychart from './Citychart'
 import Genderchart from './Genderchart'
 import { logout } from './Dashboard';
 import { Avatar, Button } from '@mui/material';
+import Membertime from './Membertime'
+
 
 
 function Copyright(props) {
@@ -122,30 +124,30 @@ function DashboardContent() {
   };
 
   // DropDownBar
-  /* const [anchorEl, setAnchorEl] = useState(null);
-  const Elopen = Boolean(anchorEl);
-  const handleMenuOpen = (e) => {
-      setAnchorEl(e.currentTarget);
-      console.log(e.currentTarget.style)
-  };
-  const handleMenuClose = () => {
-      setAnchorEl(null);
-  }; */
+/* const [anchorEl, setAnchorEl] = useState(null);
+const Elopen = Boolean(anchorEl);
+const handleMenuOpen = (e) => {
+    setAnchorEl(e.currentTarget);
+    console.log(e.currentTarget.style)
+};
+const handleMenuClose = () => {
+    setAnchorEl(null);
+}; */
 
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
-
+        
         <CssBaseline />
         <AppBar position="absolute" open={open}  >
-
+          
           <Toolbar
-
+          
             sx={{
               pr: '24px', // keep right padding when drawer closed
             }}
           >
-
+            
             <IconButton
               edge="start"
               color="inherit"
@@ -156,9 +158,9 @@ function DashboardContent() {
                 ...(open && { display: 'none' }),
               }}
             >
-
+              
               <MenuIcon />
-
+              
             </IconButton>
             <Typography
               component="h1"
@@ -214,8 +216,8 @@ function DashboardContent() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
+              
+              {/* <Grid item xs={12} md={8} lg={9}>
                 <Paper
                   sx={{
                     p: 2,
@@ -224,10 +226,9 @@ function DashboardContent() {
                     height: 240,
                   }}
                 >
-                  <Chart />
+                  <Membertime></Membertime>
                 </Paper>
               </Grid>
-              {/* Recent Deposits */}
               <Grid item xs={12} md={4} lg={3}>
                 <Paper
                   sx={{
@@ -239,42 +240,53 @@ function DashboardContent() {
                 >
                   <Deposits />
                 </Paper>
-              </Grid>
-              {/* Recent Orders */}
-
-              <Grid container spacing={1}>
-
-              </Grid>
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', marginTop: 2, paddingLeft: 0 }}>
-
-                  <Citychart></Citychart>
-
-                </Paper>
-              </Grid>
-
+              </Grid> */}
+             
+             
+              
             </Grid>
 
-            <Grid container spacing={2}>
-              <Grid item xs={4.5} >
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', marginTop: 2, marginLeft: 0 }}>
-
+            <Grid container spacing={3}>
+            <Grid item xs={3.5} >
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:0 }}>
+            
                   <Areachart></Areachart>
-
+              
                   {/* <Orders /> */}
                 </Paper>
 
+                </Grid>
+              <Grid item xs={3.5} >
+              <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:0 }}>
+          
+                <Genderchart></Genderchart>
+            
+                {/* <Orders /> */}
+              </Paper>
+
               </Grid>
-              <Grid item xs={4.5} >
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', marginTop: 2, marginLeft: 0 }}>
 
-                  <Genderchart></Genderchart>
+              <Grid item xs={5} >
+              <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:0 }}>
+          
+              <Agechart></Agechart>
+            
+                {/* <Orders /> */}
+              </Paper>
 
-                  {/* <Orders /> */}
+              </Grid>
+
+              <Grid container spacing={1}>
+              
+              </Grid>
+              <Grid item xs={12}>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2,paddingLeft:0}}>
+                
+                  <Citychart></Citychart>
+              
                 </Paper>
-
-              </Grid>
-
+              </Grid>      
+                
 
             </Grid>
             <Copyright sx={{ pt: 4 }} />

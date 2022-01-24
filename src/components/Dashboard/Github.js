@@ -127,17 +127,17 @@ function DashboardContent() {
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
-
+        
         <CssBaseline />
         <AppBar position="absolute" open={open}  >
-
+          
           <Toolbar
-
+          
             sx={{
               pr: '24px', // keep right padding when drawer closed
             }}
           >
-
+            
             <IconButton
               edge="start"
               color="inherit"
@@ -148,9 +148,9 @@ function DashboardContent() {
                 ...(open && { display: 'none' }),
               }}
             >
-
+              
               <MenuIcon />
-
+              
             </IconButton>
             <Typography
               component="h1"
@@ -207,7 +207,7 @@ function DashboardContent() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} md={4} lg={3}>
+            <Grid item xs={12} md={4} lg={3}>
                 <Paper
                   sx={{
                     p: 2,
@@ -234,29 +234,29 @@ function DashboardContent() {
                 </Paper>
               </Grid>
               {/* Recent Deposits */}
-
+              
               {/* Recent Orders */}
-
+             
               <Grid container spacing={2}>
-                <Grid item xs={5} >
-                  <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', marginTop: 2, marginLeft: 2 }}>
-
-                    <Cloneweek></Cloneweek>
-                    {/* <Areachart></Areachart> */}
-
-                    {/* <Orders /> */}
-                  </Paper>
-                </Grid>
-                <Grid item xs={7} >
-                  <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', marginTop: 2, paddingLeft: 0 }}>
-
-                    {/* <Agechart></Agechart> */}
-                    <Githubapiall></Githubapiall>
-                    {/* <Orders /> */}
-                  </Paper>
-                </Grid>
-
+              <Grid item xs={5} >
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:2 }}>
+                  
+                  <Cloneweek></Cloneweek>
+                  {/* <Areachart></Areachart> */}
+              
+                  {/* <Orders /> */}
+                </Paper>
               </Grid>
+              <Grid item xs={7} >
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2,paddingLeft:0}}>
+                
+                  {/* <Agechart></Agechart> */}
+                  <Githubapiall></Githubapiall>
+                  {/* <Orders /> */}
+                </Paper>
+              </Grid>
+
+            </Grid>
             </Grid>
             <Copyright sx={{ pt: 4 }} />
           </Container>

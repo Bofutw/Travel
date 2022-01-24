@@ -62,7 +62,7 @@ export default function Areachart() {
     <PieChart width={400} height={400} margin={{left:-15}}>
       <Pie
         data={data}
-        cx={210}
+        cx={160}
         cy={200}
         labelLine={false}
         label={renderLabel}

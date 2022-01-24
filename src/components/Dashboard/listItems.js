@@ -11,6 +11,7 @@ import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import BadgeIcon from '@mui/icons-material/Badge';
 import { unstable_HistoryRouter } from 'react-router-dom';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 
 export const mainListItems = (
@@ -35,7 +36,7 @@ export const mainListItems = (
     </ListItem> */}
     <ListItem button onClick={() => window.location.href = '/dashboard/github'}>
       <ListItemIcon>
-        <BarChartIcon />
+        <GitHubIcon />
       </ListItemIcon>
       <ListItemText primary="Github" />
     </ListItem>
@@ -50,7 +51,7 @@ export const mainListItems = (
 
 export const secondaryListItems = (
   <div>
-
+    
     <ListSubheader inset>Saved reports</ListSubheader>
     <ListItem button>
       <ListItemIcon>
