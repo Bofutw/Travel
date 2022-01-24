@@ -6,6 +6,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Zoom from '@mui/material/Zoom';
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
+import Box from '@mui/material/Box';
 
 import './favorite.css'
 
@@ -26,6 +28,21 @@ const Favorite = () => {
     
       )
     }
+
+    function test2(e){
+        alert(e.target.id);
+        console.log(e.target.id);
+        fetch("http://localhost:8080/blog/"+(e.target.id))
+        .then((res)=>{           
+            return res.json()
+        })
+        .then((result)=>{
+            window.localStorage.blogdata = JSON.stringify(result)
+            window.location.href = "/Blogshow"
+ 
+        })
+    }
+
     useEffect(fetchData,[]);
     return (
         <div >
@@ -43,9 +60,9 @@ const Favorite = () => {
             </label>
             
             <label for="page-2"  class="book__page book__page--4">
-                <div class="page__content" id='bloglist'>
+                <div class="page__content1" id='bloglist1'>
                 {/* <h1 class="page__content-title">I</h1> */}
-                <ul class='favorite' >
+                <ul class='favorite1' >
                 
 
                 {
@@ -53,21 +70,26 @@ const Favorite = () => {
                         let test = JSON.parse(item.blogdetail).title;
                         return(
                             <>
-                            {/* <li>
+                           {/*  <li>
                                 <a href='#'><h3>{test}</h3></a>
                                 
                                 {JSON.parse(item.blogdetail).decrption}
                                 <br></br> <br></br>
                             </li> */}
-                             <Zoom in='true' timeout={(index+6)*1000}>
-                             <Card sx={{ maxWidth: 345 , marginBottom: 3}}>
+                             <Zoom in='true' timeout={(index+5)*1000}>
+                             <Card  sx={{ maxWidth:700 /* 345 */ , marginBottom: 3 ,display:'flex'}}>
                              <CardMedia
                                component="img"
                                alt=""
+                               /* width="200" */
                                height="140"
-                               image= {JSON.parse(item.blogdetail).url}
+                               sx={{ width: 150 }}
+                               image= {JSON.parse(item.blogdetail).url}     
                              />
-                             <CardContent>
+                              <Box sx={{ display: 'flex' , flexDirection: 'column' }}>
+                             <CardContent
+                                width="100"
+                             >
                                <Typography gutterBottom variant="h5" component="div">
                                {test}
                                </Typography>
@@ -76,9 +98,9 @@ const Favorite = () => {
                                </Typography>
                              </CardContent>
                              <CardActions>
-                               <Button size="small">Share</Button>
-                               <Button size="small">Learn More</Button>
+                               <Button sx={{marginLeft:'55%'}} size="smail" id={item.blogid} onClick={test2} startIcon={<DriveFileRenameOutlineIcon></DriveFileRenameOutlineIcon>}>瀏覽Blog</Button>
                              </CardActions>
+                             </Box>
                            </Card>
                            </Zoom>
                            </>   
