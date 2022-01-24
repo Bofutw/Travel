@@ -28,11 +28,11 @@ export default function BlogShow() {
                             list.push(<div class="card"style={{display: 'grid',gridTemplateColumns:'65% 35%'}}>
                             <div >
                                 <h3><i class="fa fa-map-marker" aria-hidden="true"></i>  {item.eachplace[i].subTitle}</h3>
-                                <p> {item.eachplace[i].text}</p>
+                                <p style={{resize:'none',height:"270px",width:'615px',overflow:"scroll"}}> {item.eachplace[i].text}</p>
                                 
                             </div>
                             <div>
-                            <img src={item.eachplace[i].pic} style={{width:'350px',height:'250px'}}></img>
+                            <img src={item.eachplace[i].pic} style={{width:'350px',height:'300px'}}></img>
                            
                             
                             </div>
@@ -68,11 +68,11 @@ export default function BlogShow() {
                 </div>
                 <div class="card1">
                 <h3>更多熱門文章....</h3>
-                <img src='\images\P_20200213_120535.jpg'style={{height:"200px"}}/>
+                <img src='\images\P_20200213_120535.jpg'style={{height:"200px",marginBottom:'20px'}}/>
                 <br/>
-                <img src='\images\P_20200213_120535.jpg'style={{height:"200px"}}/>
+                <img src='\images\P_20200213_120535.jpg'style={{height:"200px",marginBottom:'20px'}}/>
                 <br/>
-                <img src='\images\P_20200213_120535.jpg'style={{height:"200px"}}/>
+                <img src='\images\P_20200213_120535.jpg'style={{height:"200px",marginBottom:'20px'}}/>
                 </div>
                 </div>
             </div>

@@ -56,7 +56,7 @@ export default function Navbar({ user }) {
             </div>
             <div className="rightSide">
                 <input type="search" name="" id="" placeholder='Search...' ref={searchRef} />
-                <button onClick={handleClickSearch}><SearchIcon /></button>
+                <button onClick={handleClickSearch}><SearchIcon /><a href='/searchpage'>se</a></button>
 
 
 
