@@ -18,6 +18,8 @@ export default function Profile3() {
   const arearef = useRef("");
   const signref = useRef("");
 
+
+
   //星座
   const [constellation, setConstellation] = useState("");
 

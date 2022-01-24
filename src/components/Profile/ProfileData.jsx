@@ -9,6 +9,7 @@ import { useState } from "react";
 import axios from "axios";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { getmemberid } from "../Login/LoginFn";
+import ProfileMessage from "./ProfileMessage";
 export default function ProfileData({
   profilesend,
   setProfileSend,
@@ -45,6 +46,11 @@ export default function ProfileData({
   };
   console.log(memberid);
 
+  //系統提示訊息
+  const [suopen, setSuOpen] = useState(false);
+  const [sumessage, setSuMessage] = useState("");
+
+
   // const handleClickOpen = () => {
   //   setOpen(true);
   //   setProfileSend(true);
@@ -58,7 +64,9 @@ export default function ProfileData({
 
   const handleAgree = async (e) => {
     e.preventDefault();
+
     setLoading(true);
+
     setTimeout(async () => {
       try {
         setLoading(true);
@@ -69,23 +77,32 @@ export default function ProfileData({
 
         const axiosresult = await axiospost.data;
 
-        console.log("successs", axiosresult);
-        window.location.reload();
 
-        setProfileSend(false);
+        console.log("successs", axiosresult);
+        setSuOpen(true);
+        const str = "修改成功"
+        setSuMessage(() => str);
+        console.log(str);
+        // window.location.reload();
+
+
+
+        setTimeout(() => {
+          setProfileSend(false);
+        }, 2300);
+
       } catch (error) {
         console.log(error);
       }
     }, 2000);
-
-    // axios.post("url...",profiledata)
-    // .then((res)=>console.log(res))
-    // .catch((error)=>console.log(error));
     console.log(profiledata);
+
+
   };
 
   return (
     <div>
+      {suopen && <ProfileMessage suopen={suopen} setSuOpen={setSuOpen} sumessage={sumessage} />}
       {/* <Button variant="outlined" onClick={handleClickOpen}>
         開啟對話窗
       </Button> */}
@@ -111,6 +128,8 @@ export default function ProfileData({
               loading={loading}
               variant="outlined"
               disabled
+
+
             >
               等待中
             </LoadingButton>
