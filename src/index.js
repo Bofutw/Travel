@@ -6,6 +6,14 @@ import App from "./App";
 import FirebaseTest1 from "./Test/FirebaseDatabase/FirebaseTest1";
 import Test4 from "./Test/Test4";
 
+import Profile from './components/Profile/Profile';
+import Profile3 from './components/Profile/Profile3';
+import Search from './Test/Search';
+import Test from './Test/Test';
+
+
+
+
 
 ReactDOM.render(
   <React.StrictMode>

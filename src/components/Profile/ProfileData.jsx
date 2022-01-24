@@ -77,12 +77,11 @@ export default function ProfileData({
       } catch (error) {
         console.log(error);
       }
-    }, 3000);
+    }, 2000);
 
     // axios.post("url...",profiledata)
     // .then((res)=>console.log(res))
     // .catch((error)=>console.log(error));
-
     console.log(profiledata);
   };
 
@@ -91,7 +90,6 @@ export default function ProfileData({
       {/* <Button variant="outlined" onClick={handleClickOpen}>
         開啟對話窗
       </Button> */}
-
       <Dialog
         open={profilesend}
         onClose={handleClose}

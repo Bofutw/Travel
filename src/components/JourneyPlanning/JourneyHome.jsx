@@ -13,6 +13,11 @@ import { Link,useNavigate } from 'react-router-dom';
 import { Avatar } from '@mui/material';
 import { Data } from '@react-google-maps/api';
 import JourneyDialog from './JourneyDialog';
+import Stack from '@mui/material/Stack';
+import Grow from '@mui/material/Grow';
+
+import MovingIcon from '@mui/icons-material/Moving';
+import WrongLocationIcon from '@mui/icons-material/WrongLocation';
 
 
 
@@ -58,26 +63,37 @@ function deleteButton(e){
       });
 }
   useEffect(fetchData,[]);
+
+  
   return (
     <>
-    <div style={{ width: '100%', height: '100vh' ,backgroundColor:'#e8eaf6'}}>
-      <div className='journey-home-title'>
-        <h1>行程規劃</h1>
+  
 
-        <Button disabled></Button>
-        <Fab title='開始規劃' onClick={() => { setJourneyOpen(true); setOpen(true); setOpenMap(false); }} sx={{ backgroundColor: 'goldenrod' }}><AddIcon></AddIcon></Fab>
+    <div style={{ width: '100%', height: '100vh' ,backgroundColor:'#e8eaf6',overflow:'scroll'}}>
+      <div className='journey-home-title'>
+      <Typography fontFamily="'RocknRoll One', sans-serif" sx={{marginX:'50px'}} textAlign="left" gutterBottom variant="h3" component="div">
+           規劃專屬行程
+           <Button disabled></Button>
+          <Fab title='開始規劃' onClick={() => { setJourneyOpen(true); setOpen(true); setOpenMap(false); }} sx={{ backgroundColor: 'goldenrod' }}><AddIcon></AddIcon></Fab>
+          </Typography>
+       
         {/* <Link to="/map" ><Fab title='開始規劃' onClick={() => setJourneyOpen(true)} sx={{ backgroundColor: 'goldenrod' }}><AddIcon></AddIcon></Fab></Link> */}
       </div>
 
-      <br /><br />
+    
+
+       <Box /* sx={{ display: 'flex' }} */>
       <div className='journey-home-container' >
+      
       {data.map((item,id)=>{
-        let temp = `./img/img${id+1}.jpg`
+        let temp = `./img/img${id%7+1}.jpg`
         let beginDate = JSON.parse(item.journeydetail).beginDate
         let date = new Date(beginDate)
         date.setDate(date.getDate()+JSON.parse(item.journeydetail).daysNum-1)
         let endDate = date.toISOString().slice(0,10)
-        return (<Card sx={{ maxWidth: 345 }} variant="outlined" >
+        return (
+          <Grow in='true' timeout={(id+1)*1000}>
+        <Card sx={{ width: 250 }} variant="outlined" >
         <CardMedia
           component="img"
           alt="green iguana"
@@ -85,7 +101,7 @@ function deleteButton(e){
           image={temp}
         />
         <CardContent>
-          <Typography textAlign="left" gutterBottom variant="h5" component="div">
+          <Typography  textAlign="center" gutterBottom variant="h5" component="div">
             {JSON.parse(item.journeydetail).title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
@@ -93,13 +109,20 @@ function deleteButton(e){
           </Typography>
         </CardContent>
         <CardActions>
-
-          <Button size="small" id={item.journeyid} onClick={continuteButton}>繼續旅程</Button>
-          <Button size="small" id={"del"+item.journeyid} onClick={deleteButton}>旅程掰掰</Button>
-
+             {/*  <Stack direction="row" justifyContent="center"
+        alignItems="center"
+        spacing={2} > */}
+        
+          <Button color='primary' variant="outlined" endIcon={<MovingIcon/>} sx={{marginX:'10px'}} size="small" id={item.journeyid} onClick={continuteButton}>繼續旅程</Button>
+          <Button color='warning' variant="outlined" endIcon={<WrongLocationIcon  />} size="small" id={"del"+item.journeyid} onClick={deleteButton}>旅程掰掰</Button>
+          
+         {/* </Stack> */}
         </CardActions>
-      </Card>)})}
+      </Card>
+      </Grow>
+      )})}
       </div>
+      </Box>
     </div>
     {open ? <JourneyDialog open={open} setOpen={setOpen} openMap={openMap} setOpenMap={setOpenMap} /> : ""}
     </>
