@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import Zoom from '@mui/material/Zoom';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import Box from '@mui/material/Box';
+import SendIcon from '@mui/icons-material/Send';
 
 import './favorite.css'
 
@@ -98,7 +99,7 @@ const Favorite = () => {
                                </Typography>
                              </CardContent>
                              <CardActions>
-                               <Button sx={{marginLeft:'55%'}} size="smail" id={item.blogid} onClick={test2} startIcon={<DriveFileRenameOutlineIcon></DriveFileRenameOutlineIcon>}>瀏覽Blog</Button>
+                               <Button sx={{marginLeft:'55%'}} size="smail" id={item.blogid} onClick={test2} endIcon={<SendIcon/>}>瀏覽Blog</Button>
                              </CardActions>
                              </Box>
                            </Card>
