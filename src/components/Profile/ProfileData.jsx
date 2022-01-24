@@ -8,7 +8,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useState } from "react";
 import axios from "axios";
 import LoadingButton from "@mui/lab/LoadingButton";
-import { getmemberid } from "../Login/LoginConditional";
+import { getmemberid } from "../Login/LoginFn";
 export default function ProfileData({
   profilesend,
   setProfileSend,

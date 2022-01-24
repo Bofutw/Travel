@@ -89,19 +89,21 @@ const Dropdownbar = () => {
       {/* <MenuItem>
                         <ListItemIcon>
                             <Settings fontSize="medium" />
-                        </ListItemIcon>
-                        Settings
-                    </MenuItem> */}
+                            </ListItemIcon>
+                            Settings
+                          </MenuItem> */}
 
-      <MenuItem className="logout">
-        <ListItemIcon sx={{ color: "black" }}>
-          <Logout fontSize="medium" />
-        </ListItemIcon>
-        <li onClick={logout} style={{ fontWeight: "bolder" }}>
-          登出
+      <Link to="/" style={{ textDecoration: "none", color: "black" }} onClick={logout}>
+        <MenuItem className="logout">
+          <ListItemIcon sx={{ color: "black" }}>
+            <Logout fontSize="medium" />
+          </ListItemIcon>
+          <li style={{ fontWeight: "bolder" }}>
+            登出
 
-        </li>
-      </MenuItem>
+          </li>
+        </MenuItem>
+      </Link>
     </nav>
   );
 };

@@ -19,7 +19,7 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       {/* <MainContext /> */}
-      <Test4 />
+      <App />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

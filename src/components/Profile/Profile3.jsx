@@ -6,7 +6,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import ProfileData from "./ProfileData";
 import { getmemberallinfo } from "./getmemberinfo";
 import BorderColorSharpIcon from "@mui/icons-material/BorderColorSharp";
-import { getcityid } from "../Login/LoginConditional";
+import { getcityid } from "../Login/LoginFn";
 // TODO :  City ID
 
 export default function Profile3() {

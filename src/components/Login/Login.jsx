@@ -11,10 +11,10 @@ import {
 
 import React, { useEffect, useRef, useState } from "react";
 import { auth } from "../../Firebase/firebase-config";
-import { createnewuser, existenceemaillpassword, getmemberid, getmemberimgurl, getuseremail, setregmemberid } from "./LoginConditional";
+import { createnewuser, existenceemaillpassword, getmemberid, getmemberimgurl, getuseremail, setregmemberid } from "./LoginFn";
 import "./login.css";
 import { useNavigate } from "react-router-dom";
-import LoginMessage from "./LoginErrorMessage";
+import LoginMessage from "./LoginMessage";
 
 
 const Login = () => {
@@ -66,19 +66,33 @@ const Login = () => {
 
       setRegisterEmail("")
       setRegisterPassword("")
-      navigate("/")
+
+      setSuOpen(true);
+      const sumessage2 = `${user.user.email}歡迎您`
+      setSuMessage(() => sumessage2);
+
+      setTimeout(() => {
+        navigate("/loginsuccess");
+
+      }, 1300);
 
 
     } catch (error) {
       const findreguseremail = await getuseremail(registerEmail);
-      console.log("loginInfo", findreguseremail);
+      console.log("loginInfo", findreguseremail, registerEmail);
       if (findreguseremail === "false") {
         const geterrormessage = await existenceemaillpassword(registerEmail, registerPassword);
         console.log("47", geterrormessage);
         setOpen(true)
         setErrorMessage(() => geterrormessage.message)
 
-      } else if (findreguseremail === registerEmail) {
+      } else if (!!registerEmail === !!null) {
+        setOpen(true);
+        const errmes = "請卻是填寫郵件地址與密碼欄位!!!";
+        setErrorMessage(() => errmes);
+      }
+
+      else if (findreguseremail === registerEmail) {
         setOpen(true);
         const errmes = "帳號已經註冊過囉!!!";
         setErrorMessage(() => errmes);
@@ -116,21 +130,31 @@ const Login = () => {
         console.log('user', user);
       })
 
-
       localStorage.setItem("email", user.user.email);
       localStorage.setItem("name", user.user.displayName);
       localStorage.setItem("profileURL", memberurl)
       localStorage.setItem("memberid", memberid);
+
       setLoginEmail("")
       setLoginPassword("")
 
-      navigate("/");
+      setSuOpen(true);
+      const sumessage2 = `${user.user.email}歡迎您`
+      setSuMessage(() => sumessage2);
+
+      setTimeout(() => {
+        navigate("/loginsuccess");
+
+      }, 1300);
+
+
 
     } catch (error) {
       const loginer = "請檢查您的信箱地址與密碼!!!"
       setOpen(true)
       setErrorMessage(() => loginer)
       console.log("loginfn,errormessage", error);
+
     }
   };
 
@@ -168,7 +192,15 @@ const Login = () => {
         localStorage.setItem("profileURL", res.user.photoURL);
         localStorage.setItem("memberid", memberid);
         //console.log(window.localStorage.memberid);
-        window.location.href = "/";
+
+        setSuOpen(true);
+        const sumessage2 = `${res.user.email}歡迎您`
+        setSuMessage(() => sumessage2);
+
+        setTimeout(() => {
+          navigate("/loginsuccess");
+
+        }, 1300);
       })
       .catch((error) => {
         console.log("login-error:", error);
@@ -292,7 +324,7 @@ const Login = () => {
         </div>
 
       </div>)}
-      {open && <LoginMessage open={open} setOpen={setOpen} errormessage={errormessage} sumessage={sumessage} suopen={suopen} setSuOpen={setSuOpen} />}
+      {(open || suopen) && <LoginMessage open={open} setOpen={setOpen} errormessage={errormessage} sumessage={sumessage} suopen={suopen} setSuOpen={setSuOpen} />}
 
     </div>
 

@@ -38,6 +38,7 @@ import Github from "./components/Dashboard/Github";
 import Member from './components/Dashboard/Member'
 import { getadminloginpage, getisadmin, setisadmin } from "./components/DashBoardLogin/DBoardLoginInfo";
 import PageNotFound from "./components/PageNF/PageNotFound";
+import LoginSuccessPage from "./components/Login/LoginSuccessPage";
 
 
 
@@ -95,6 +96,7 @@ function App() {
 
           <Route path="/" element={<HomePage user={user} />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/loginsuccess" element={<LoginSuccessPage />} />
 
           <Route path="/about" element={<About />} />
           <Route path="/qa" element={<QuestionAnswer />} />
