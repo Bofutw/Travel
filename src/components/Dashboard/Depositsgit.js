@@ -54,7 +54,7 @@ export default function Deposits() {
   }, [])
   return (
     <React.Fragment>
-      <Title>Git Commit Count</Title>
+      <Title>Git 提交次數</Title>
       <Typography component="p" variant="h4">
       <Depositsnum num={data.total} duration={1000}></Depositsnum>
       </Typography>
@@ -70,7 +70,7 @@ export default function Deposits() {
       </Typography>
       <div>
         <Link color="primary" href="https://github.com/EEIT36-Travel/Brian_Web_Demo" /* onClick={preventDefault} */>
-          View Github Details
+          Github 詳細資訊
         </Link>
       </div>
       

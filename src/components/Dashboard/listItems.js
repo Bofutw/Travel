@@ -11,7 +11,7 @@ import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import BadgeIcon from '@mui/icons-material/Badge';
 import { unstable_HistoryRouter } from 'react-router-dom';
-
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 export const mainListItems = (
   <div>
@@ -19,13 +19,13 @@ export const mainListItems = (
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary="Dashboard" />
+      <ListItemText primary="後台首頁" />
     </ListItem>
     <ListItem button onClick={()=>window.location.href='/member'}>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="Members" />
+      <ListItemText primary="會員資訊" />
     </ListItem>
    {/*  <ListItem button>
       <ListItemIcon>
@@ -35,9 +35,9 @@ export const mainListItems = (
     </ListItem> */}
     <ListItem button onClick={()=>window.location.href='/github'}>
       <ListItemIcon>
-        <BarChartIcon />
+        <GitHubIcon />
       </ListItemIcon>
-      <ListItemText primary="Github" />
+      <ListItemText primary="版控狀態" />
     </ListItem>
    {/*  <ListItem button onClick={()=>window.location.href='/employee'}>
       <ListItemIcon>
@@ -51,7 +51,7 @@ export const mainListItems = (
 export const secondaryListItems = (
   <div>
     
-    <ListSubheader inset>Saved reports</ListSubheader>
+    {/* <ListSubheader inset>Saved reports</ListSubheader>
     <ListItem button>
       <ListItemIcon>
         <AssignmentIcon />
@@ -69,6 +69,6 @@ export const secondaryListItems = (
         <AssignmentIcon />
       </ListItemIcon>
       <ListItemText primary="Year-end sale" />
-    </ListItem>
+    </ListItem> */}
   </div>
 );
