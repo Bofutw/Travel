@@ -38,6 +38,7 @@ import DashBoardLogin from './components/DashBoardLogin/DashBoardLogin';
 import Github from "./components/Dashboard/Github";
 import Member from './components/Dashboard/Member'
 import { getadminloginpage, getisadmin, setisadmin } from "./components/DashBoardLogin/DBoardLoginInfo";
+import PageNotFound from "./components/PageNF/PageNotFound";
 
 
 
@@ -89,7 +90,8 @@ function App() {
 
         <Routes>
           {/* need write route */}
-          <Route path="*" element={<PageNF />} />
+          <Route path="*" element={< PageNotFound/>} />
+
           <Route path="/" element={<HomePage user={user} />} />
           <Route path="/login" element={<Login />} />
 
