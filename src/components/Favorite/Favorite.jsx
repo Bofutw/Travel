@@ -31,8 +31,7 @@ const Favorite = () => {
     }
 
     function test2(e){
-        alert(e.target.id);
-        console.log(e.target.id);
+        
         fetch("http://localhost:8080/blog/"+(e.target.id))
         .then((res)=>{           
             return res.json()
