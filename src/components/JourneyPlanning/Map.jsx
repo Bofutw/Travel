@@ -13,11 +13,6 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import PlanTable from './PlanTable';
-<<<<<<< HEAD
-
-=======
-import PlanTableTest from './PlanTableTest';
->>>>>>> origin/feature/dashboard
 import './map.css'
 import { ButtonBase } from '@mui/material';
 import PlanTableTest from './PlanTableTest';
@@ -97,11 +92,7 @@ function MyComponent() {
      
       
       <div className='maps'>
-<<<<<<< HEAD
         <div className='plan'><PlanTableTest setResault={setResault} detail={placedetail} place={place} setOpen ={setOpen}/*把方法丟給table給他取用*//></div>
-=======
-        <div className='plan'><PlanTable setResault={setResault} detail={placedetail} place={place}/*把方法丟給table給他取用*//></div>
->>>>>>> origin/feature/dashboard
         <div>
           {/* {  <LoadScript
         googleMapsApiKey="AIzaSyAyzMJTILn9Et7hkWpxfA3jyOdILF7zCig"
