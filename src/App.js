@@ -34,6 +34,7 @@ import BlogShow3 from "./components/Blog-show/BlogShow3";
 import BlogShow4 from "./components/Blog-show/BlogShow4";
 import BlogShow5 from "./components/Blog-show/BlogShow5";
 import Blogeditor from "./components/Blogeditor/Blogeditor";
+import SearchPage from "./components/SearchPage/SearchPage";
 
 function App() {
   const [user, setUser] = useState({});
@@ -75,6 +76,7 @@ function App() {
             <Route path="/blogshow4" element={<BlogShow4 />} />
             <Route path="/blogshow5" element={<BlogShow5 />} />
             <Route path="/blogeditor" element={<Blogeditor />} />
+            <Route path="/searchpage" element={<SearchPage />} />
           </Routes>
           <Footer />
         </BrowserRouter>

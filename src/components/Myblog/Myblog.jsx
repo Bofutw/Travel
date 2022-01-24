@@ -88,6 +88,7 @@ export default function BlogShow() {
                 </h2>
 
                 <div class="popup" id="popup">
+                <a class="popup__close" href="#" style={{}}>X</a>
                     <div class="popup-inner">
                         <div style={{ marginTop: '30px' }}>
                             <h2>—撰寫遊程—</h2>
@@ -101,10 +102,10 @@ export default function BlogShow() {
                             return <div><input type='radio' id={`popcard-${id}`} name='popcard' style={{display:"none"}} value={"journeyid"+item.journeyid}/>
                             <div class="popCard" id={`element-${id}`} onClick={popcard}>
                                 <div id={`element-${id}`} class="" >
-                                    <img id={`element-${id}`} src="\blogimg\b1\44879896482_720c553daa_c.jpg" class="img-fluid" alt="" style={{}} />
+                                    <img id={`element-${id}`} src="\blogimg\b1\44879896482_720c553daa_c.jpg" class="img-fluid" alt="" style={{height:'100px',width:'150px'}} />
                                 </div>
                                 <div id={`element-${id}`} class="myblog-content" style={{ padding: '10px' }}>
-                                    <h5 id={`element-${id}`}>{item.journeydetail.title}</h5>
+                                    <h5 style={{overflow:'hidden',textOverflow:'ellipsis',display:'-webkit-box',fontWeight:'bold'}} id={`element-${id}`}>{item.journeydetail.title}</h5>
                                     <div id={`element-${id}`}>{`(${item.journeydetail.beginDate})`}</div>
                                 </div>
                             </div></div>
@@ -113,7 +114,7 @@ export default function BlogShow() {
 
 
                         </div>
-                        <a class="popup__close" href="#">X</a>
+                        
                     </div>
                 </div>
                 <div class="mainCard">
@@ -125,12 +126,12 @@ export default function BlogShow() {
                             //item.blogdetail = JSON.parse(item.blogdetail);
                             return <div class="miniCard">
                             <div class="myblog-imgbox" >
-                                <img src={item.blogdetail.url} class="img-fluid" alt="" style={{}} />
+                                <img src={item.blogdetail.url} class="img-fluid" alt="" style={{height:'105px',width:'186px'}} />
                             </div>
                             <div class="myblog-content" style={{ padding: '10px' }}>
-                                <h5>{item.blogdetail.title}</h5>
-                                <p>{item.blogdetail.decrption}</p>
-                                <a onClick={editExistBlog} id={`blogid${item.blogid}`} class="btn btn-primary" style={{ marginLeft: '100px', marginTop: '-60px', fontSize: '12px' }}>編輯 <i class="fa fa-angle-right"></i></a>
+                                <h5 id="myblog-cardtitle" >{item.blogdetail.title}</h5>
+                                <p id="myblog-descript" >{item.blogdetail.decrption}</p>
+                                <a onClick={editExistBlog} id={`blogid${item.blogid}`} class="btn btn-primary" style={{ marginLeft: '100px',  fontSize: '12px' }}>編輯 <i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>
 

@@ -95,8 +95,8 @@ function Blog () {
                                                             <img src={populardata[i].blogdetail.url} class="img-fluid" alt="" />
                                                         </div>
                                                         <div class="thumb-content">
-                                                            <h4>{populardata[i].blogdetail.title}</h4>
-                                                            <p>{populardata[i].blogdetail.decrption}</p>
+                                                            <h4 style={{width:'180px',height:'58px'}}>{populardata[i].blogdetail.title}</h4>
+                                                            <p style={{width:'175px',height:'39px'}}>{populardata[i].blogdetail.decrption}</p>
                                                             <a onClick={test} class="btn btn-primary" id={`blogid${populardata[i].blogid}`}>More <i class="fa fa-angle-right"></i></a>
                                                         </div>
                                                     </div>
@@ -120,8 +120,8 @@ function Blog () {
                                                             <img src={populardata[i].blogdetail.url} class="img-fluid" alt="" />
                                                         </div>
                                                         <div class="thumb-content">
-                                                            <h4>{populardata[i].blogdetail.title}</h4>
-                                                            <p>{populardata[i].blogdetail.decrption}</p>
+                                                            <h4 style={{width:'180px',height:'58px'}}>{populardata[i].blogdetail.title}</h4>
+                                                            <p style={{width:'175px',height:'39px'}}>{populardata[i].blogdetail.decrption}</p>
                                                             <a onClick={test} class="btn btn-primary" id={`blogid${populardata[i].blogid}`}>More <i class="fa fa-angle-right"></i></a>
                                                         </div>
                                                     </div>
@@ -160,22 +160,15 @@ function Blog () {
                             <div class="meta">
                                 <div class="photo" style={{ backgroundImage: `url(${item.blogdetail.url})` }}></div>
                                 <ul class="details">
-                                    <li class="author"><a href="#">John Doe</a></li>
+                                    <li class="author">John Doe</li>
                                     <li class="date">Aug. 24, 2015</li>
-                                    <li class="tags">
-                                        <ul>
-                                            <li><a href="#">Learn</a></li>
-                                            <li><a href="#">Code</a></li>
-                                            <li><a href="#">HTML</a></li>
-                                            <li><a href="#">CSS</a></li>
-                                        </ul>
-                                    </li>
+                                  
                                 </ul>
                             </div>
                             <div class="description">
-                                <h1>{item.blogdetail.title}</h1>
-                                <h2>Opening a door to the future</h2>
-                                <p> {item.blogdetail.decrption}</p>
+                                <h1 style={{width:'388px',height:'60px'}}>{item.blogdetail.title}</h1>
+                                
+                                <p style={{width:'388px',height:'40px'}}> {item.blogdetail.decrption}</p>
                                 <p class="read-more">
                                     <a onClick={test} id={`blogid${item.blogid}`}>Read More</a>
                                 </p>

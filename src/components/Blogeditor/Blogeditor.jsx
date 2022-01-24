@@ -149,13 +149,13 @@ export default function BlogShow() {
                             list.push(<div class="card"style={{display: 'grid',gridTemplateColumns:'65% 35%'}}>
                             <div >
                                 <h3><i class="fa fa-map-marker" aria-hidden="true"></i>  {item.eachplace[i].subTitle}</h3>                             
-                                <textarea onChange={changeText} id={`index${idex}${i}`} type="text" style={{resize:'none',height:"200px",overflow:"scroll"}}>{item.eachplace[i].text}</textarea>
+                                <textarea onChange={changeText} id={`index${idex}${i}`} type="text" style={{resize:'none',height:"270px",width:'615px',overflow:"scroll"}}>{item.eachplace[i].text}</textarea>
                                
                                 
                             </div>
                             <div>
                             <input id={`img${idex}${i}input`} type={"file"} onChange={imgchange}></input>
-                            <img id={`img${idex}${i}`} src={item.eachplace[i].pic} style={{width: '100%',height: '100%',objectFit:'cover'}}></img>
+                            <img id={`img${idex}${i}`} src={item.eachplace[i].pic} style={{width: '350px',height: '295px',objectFit:'cover'}}></img>
  
                             
                             </div>
