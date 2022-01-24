@@ -59,14 +59,14 @@ export default function Deposits() {
       <Depositsnum num={data.total} duration={1000}></Depositsnum>
       </Typography>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
-      <Depositsnum num={new Date().getMonth()+1} duration={1000}></Depositsnum> / <Depositsnum num={new Date().getDate()-6} duration={1000}></Depositsnum> ~ <Depositsnum num={new Date().getMonth()+1} duration={1000}></Depositsnum> / <Depositsnum num={new Date().getDate()} duration={1000}></Depositsnum>
+      <Depositsnum num={new Date().getMonth()+1} duration={1000}></Depositsnum> / <Depositsnum num={new Date().getDate()-new Date().getDay()+1} duration={1000}></Depositsnum> ~ <Depositsnum num={new Date().getMonth()+1} duration={1000}></Depositsnum> / <Depositsnum num={new Date().getDate()-new Date().getDay()+7} duration={1000}></Depositsnum>
       </Typography>
 
       <Typography component="p" variant="h4">
       <Depositsnum num={data1.total} duration={1000}></Depositsnum>
       </Typography>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
-      <Depositsnum num={new Date().getMonth()+1} duration={1000}></Depositsnum> / <Depositsnum num={new Date().getDate()-13} duration={1000}></Depositsnum> ~ <Depositsnum num={new Date().getMonth()+1} duration={1000}></Depositsnum> / <Depositsnum num={new Date().getDate()-7} duration={1000}></Depositsnum>
+      <Depositsnum num={new Date().getMonth()+1} duration={1000}></Depositsnum> / <Depositsnum num={new Date().getDate()-new Date().getDay()-6} duration={1000}></Depositsnum> ~ <Depositsnum num={new Date().getMonth()+1} duration={1000}></Depositsnum> / <Depositsnum num={new Date().getDate()-new Date().getDay()} duration={1000}></Depositsnum>
       </Typography>
       <div>
         <Link color="primary" href="https://github.com/EEIT36-Travel/Brian_Web_Demo" /* onClick={preventDefault} */>
