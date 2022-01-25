@@ -33,6 +33,7 @@ import Depositsgit from './Depositsgit'
 import Githubapiall from './Githubapiall';
 import Cloneweek from './Cloneweek'
 import Crudmember from './Crudmember'
+import Crudmem from './Crudmem'
 
 function Copyright(props) {
   return (
@@ -207,40 +208,13 @@ function DashboardContent() {
                     p: 2,
                     display: 'flex',
                     flexDirection: 'column',
-                    height: 750,
+                    height: 700,
                   }}
                 >
-                  {<Crudmember></Crudmember>}
+                 {/*  {<Crudmember></Crudmember>} */}
+                  {<Crudmem></Crudmem>}
                 </Paper>
               </Grid>
-       {/*        <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <Clone />
-                </Paper>
-              </Grid> */}
-             
-            {/*   <Grid container spacing={2}>
-              <Grid item xs={5} >
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:2 }}>
-                  
-                  <Cloneweek></Cloneweek>
-                </Paper>
-              </Grid>
-              <Grid item xs={7} >
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2,paddingLeft:0}}>
-                
-                  <Githubapiall></Githubapiall>
-                </Paper>
-              </Grid>
-
-            </Grid> */}
             </Grid>
             <Copyright sx={{ pt: 4 }} />
           </Container>
