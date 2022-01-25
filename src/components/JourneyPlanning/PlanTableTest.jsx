@@ -23,6 +23,7 @@ import * as React from 'react';
 import { Toast } from 'react-bootstrap';
 import Slide from '@mui/material/Slide';
 import Typography from '@mui/material/Typography';
+import { proxy_pass } from '../../Proxy/proxy-pass';
 
 
 
@@ -154,7 +155,7 @@ function PlanTableTest({setResault,place,setOpen}) {
     }
     async function FetchDistance(startID, endId, temp) {
         //計算距離
-        return await fetch(`/maps/api/distancematrix/json?origins=place_id:${startID}&destinations=place_id:${endId}&key=AIzaSyAyzMJTILn9Et7hkWpxfA3jyOdILF7zCig`)
+        return await fetch(`${proxy_pass}https://maps.googleapis.com/maps/api/distancematrix/json?origins=place_id:${startID}&destinations=place_id:${endId}&key=AIzaSyAyzMJTILn9Et7hkWpxfA3jyOdILF7zCig`)
             .then((res) => {
                 return res.json();
             }).then((jsondata) => {
