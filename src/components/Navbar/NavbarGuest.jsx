@@ -29,8 +29,7 @@ export default function NavbarGuest({setSearch}) {
         if(!!searchRef.current.value !== !!null){
             setSearch(searchRef.current.value);
             navigate("/searchpage");
-            // window.location.href="/searchpage";
-            
+            // window.location.href="/searchpage";            
         } 
         
         console.log(searchRef.current.value);

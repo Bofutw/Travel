@@ -49,7 +49,7 @@ function Blog () {
         })
    
     }
-    function test(e){
+    function toBlogPage(e){
         fetch("http://localhost:8080/blog/"+(e.target.id).slice(6,8))
         .then((res)=>{           
             return res.json()
@@ -97,7 +97,7 @@ function Blog () {
                                                         <div class="thumb-content">
                                                             <h4 style={{width:'180px',height:'58px'}}>{populardata[i].blogdetail.title}</h4>
                                                             <p style={{width:'175px',height:'39px'}}>{populardata[i].blogdetail.decrption}</p>
-                                                            <a onClick={test} class="btn btn-primary" id={`blogid${populardata[i].blogid}`}>More <i class="fa fa-angle-right"></i></a>
+                                                            <a onClick={toBlogPage} class="btn btn-primary" id={`blogid${populardata[i].blogid}`}>More <i class="fa fa-angle-right"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>)
@@ -122,7 +122,7 @@ function Blog () {
                                                         <div class="thumb-content">
                                                             <h4 style={{width:'180px',height:'58px'}}>{populardata[i].blogdetail.title}</h4>
                                                             <p style={{width:'175px',height:'39px'}}>{populardata[i].blogdetail.decrption}</p>
-                                                            <a onClick={test} class="btn btn-primary" id={`blogid${populardata[i].blogid}`}>More <i class="fa fa-angle-right"></i></a>
+                                                            <a onClick={toBlogPage} class="btn btn-primary" id={`blogid${populardata[i].blogid}`}>More <i class="fa fa-angle-right"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>)
@@ -170,7 +170,7 @@ function Blog () {
                                 
                                 <p style={{width:'388px',height:'40px'}}> {item.blogdetail.decrption}</p>
                                 <p class="read-more">
-                                    <a onClick={test} id={`blogid${item.blogid}`}>Read More</a>
+                                    <a onClick={toBlogPage} id={`blogid${item.blogid}`}>Read More</a>
                                 </p>
                             </div>
                         </div>
