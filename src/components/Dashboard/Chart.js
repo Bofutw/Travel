@@ -36,14 +36,14 @@ let month = date.getMonth();
 
 switch (month) {
   case 0:
-    month = 'January'
+    month = '一月API使用次數'
     break;
 
   case 1:
-    month = 'February' 
+    month = '二月API使用次數' 
   
   default:
-    month = ''
+    month = 'API使用次數'
     break;
 }
 
@@ -82,7 +82,7 @@ export default function Chart() {
                 ...theme.typography.body1,
               }}
             >
-              API Call
+              使用次數
             </Label>
           </YAxis>
           <Line

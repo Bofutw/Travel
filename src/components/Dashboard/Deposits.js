@@ -38,7 +38,7 @@ export default function Deposits() {
   
   return (
     <React.Fragment>
-      <Title>Members Count Now</Title>
+      <Title>會員即時人數</Title>
       <Typography component="p" variant="h4">
         
       
@@ -48,8 +48,8 @@ export default function Deposits() {
       <Depositsnum num={new Date().getFullYear()}  duration={500}></Depositsnum> / <Depositsnum num={new Date().getMonth()+1}  duration={1000}></Depositsnum> / <Depositsnum num={new Date().getDate()}  duration={1500}></Depositsnum>
       </Typography>
       <div>
-        <Link color="primary" href="#" onClick={preventDefault}>
-          View Member Details
+        <Link color="primary" href="./member" /* onClick={preventDefault} */>
+          會員詳細資訊
         </Link>
       </div>
       

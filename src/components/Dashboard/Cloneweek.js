@@ -19,31 +19,31 @@ let temp = null;
 const url = 'https://api.github.com/repos/EEIT36-Travel/Brian_Web_Demo/stats/commit_activity'
 let clones = [
 {
-  days: "Sun",
+  days: "日",
   points: 0,
 },
 {
-  days: "Mon",
+  days: "一",
   points: 0,
 },
 {
-  days: "Tue",
+  days: "二",
   points: 0,
 },
 {
-  days: "Wed",
+  days: "三",
   points: 0,
 },
 {
-  days: "Thu",
+  days: "四",
   points: 0,
 },
 {
-  days: "Fri",
+  days: "五",
   points: 0,
 },
 {
-  days: "Sat",
+  days: "六",
   points: 0,
 },
 
@@ -153,7 +153,7 @@ export default function Cloneweek() {
     align="center"
     sx={{ flexGrow: 1 }}
   >
-  Git Commit count (This Week)
+  本週Github 提交狀況
   </Typography>
     <RadarChart
       cx={200}

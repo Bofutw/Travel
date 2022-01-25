@@ -66,7 +66,7 @@ export default function Chart() {
 
   return (
     <React.Fragment>
-      <Title>Travel Repo Clones</Title>
+      <Title>旅遊專案Clone次數</Title>
       <ResponsiveContainer>
         <LineChart
           data={data}
@@ -95,7 +95,7 @@ export default function Chart() {
                 ...theme.typography.body1,
               }}
             >
-              Clone Counts
+              Clone 次數
             </Label>
           </YAxis>
           <Tooltip />

@@ -131,9 +131,9 @@ function Githubapiall() {
                 align="center"
                 sx={{ flexGrow: 1 }}
             >
+                    
                     Github
-                    Status
-                    Details
+                    即時提交情形
                     <hr></hr>
             </Typography>
             

@@ -80,8 +80,8 @@ function Githubapi() {
                 sx={{ flexGrow: 1 }}
             >
                     Github
-                    Status
-                    Detail
+                    即時提交情形
+                    
                     <hr></hr>
             </Typography>
 
