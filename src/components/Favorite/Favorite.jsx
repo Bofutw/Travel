@@ -1,7 +1,49 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Zoom from '@mui/material/Zoom';
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
+import Box from '@mui/material/Box';
+import SendIcon from '@mui/icons-material/Send';
+
 import './favorite.css'
 
+let memberid =window.localStorage.memberid
 const Favorite = () => {
+
+    const [data, setData] = useState([]);
+
+    function fetchData(){
+        fetch("http://localhost:8080/blog/memberid="+memberid)
+        .then((res)=>{
+          return res.json();
+        })
+        .then((result)=>{
+          console.log(result)
+          setData(result)
+      }
+    
+      )
+    }
+
+    function test2(e){
+        
+        fetch("http://localhost:8080/blog/"+(e.target.id))
+        .then((res)=>{           
+            return res.json()
+        })
+        .then((result)=>{
+            window.localStorage.blogdata = JSON.stringify(result)
+            window.location.href = "/Blogshow"
+ 
+        })
+    }
+
+    useEffect(fetchData,[]);
     return (
         <div >
         {/* <div>
@@ -18,43 +60,60 @@ const Favorite = () => {
             </label>
             
             <label for="page-2"  class="book__page book__page--4">
-                <div class="page__content" id='bloglist'>
+                <div class="page__content1" id='bloglist1'>
                 {/* <h1 class="page__content-title">I</h1> */}
-                <ul class='favorite' >
-                    <li><a href='https://github.com/EEIT36-Travel'>星期一二三</a></li>
+                <ul class='favorite1' >
+                
+
+                {
+                    data.map((item,index)=>{
+                        let test = JSON.parse(item.blogdetail).title;
+                        return(
+                            <>
+                           {/*  <li>
+                                <a href='#'><h3>{test}</h3></a>
+                                
+                                {JSON.parse(item.blogdetail).decrption}
+                                <br></br> <br></br>
+                            </li> */}
+                             <Zoom in='true' timeout={(index+5)*1000}>
+                             <Card  sx={{ maxWidth:700 /* 345 */ , marginBottom: 3 ,display:'flex'}}>
+                             <CardMedia
+                               component="img"
+                               alt=""
+                               /* width="200" */
+                               height="140"
+                               sx={{ width: 150 }}
+                               image= {JSON.parse(item.blogdetail).url}     
+                             />
+                              <Box sx={{ display: 'flex' , flexDirection: 'column' }}>
+                             <CardContent
+                                width="100"
+                             >
+                               <Typography gutterBottom variant="h5" component="div">
+                               {test}
+                               </Typography>
+                               <Typography variant="body2" color="text.secondary">
+                               {JSON.parse(item.blogdetail).decrption}
+                               </Typography>
+                             </CardContent>
+                             <CardActions>
+                               <Button sx={{marginLeft:'55%'}} size="smail" id={item.blogid} onClick={test2} endIcon={<SendIcon/>}>瀏覽Blog</Button>
+                             </CardActions>
+                             </Box>
+                           </Card>
+                           </Zoom>
+                           </>   
+                        )
+                    })
+                }
+                  {/*   <li><a href='https://github.com/EEIT36-Travel'>星期一二三</a></li>
                     <li>星期二三四五六</li>
                     <li>星期一四五</li>
-                    <li>星期二</li>
-                    <li>星期一</li>
-                    <li>星期二</li>
-                    <li>星期一</li>
-                    <li>星期二</li>
-                    <li>星期一</li>
-                    <li>星期二</li>
-                    <li>星期一</li>
-                    <li>星期二</li>
-                    <li>星期二</li>
-                    <li>星期一</li>
-                    <li>星期二</li>
-                    <li>星期一</li>
-                    <li>星期二</li>
-                    <li>星期一</li>
-                    <li>星期二</li>
-                    <li>星期一</li>
-                    <li>星期二</li>
-                    <li>星期一</li>
-                    <li>星期二</li>
-                    <li>星期二</li>
-                    <li>星期一</li>
-                    <li>星期二</li>
-                    <li>星期一</li>
-                    <li>星期二</li>
-                    <li>星期一</li>
-                    <li>星期二</li>
-                    <li>星期一</li>
-                    <li>星期二</li>
-                    <li>星期一</li>
-                    <li>星期二</li>
+                    <li>星期二</li> */}
+              
+                 
+                    
                     
                 </ul>
                 {/* <div class="page__content-blockquote">

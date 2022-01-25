@@ -24,7 +24,8 @@ export default function DatePicker() {
 
      const d1 = new Date(`${startdate.slice(0,4)}-${startdate.slice(5,7)}-${startdate.slice(8,10)}`);
      const d2 = new Date(`${enddate.slice(0,4)}-${enddate.slice(5,7)}-${enddate.slice(8,10)}`);
-    console.log("startdate",d1);
+    
+     console.log("startdate",d1);
 
     console.log("enddate",d2);
     let daynum = (Math.abs(d2-d1)/(3600000 * 24)) +1

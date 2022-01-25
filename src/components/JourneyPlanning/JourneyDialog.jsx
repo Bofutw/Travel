@@ -14,17 +14,25 @@ import TextField from '@mui/material/TextField';
 import './journeyhome.css'
 
 export default function JourneyDialog({ open, setOpen, openMap, setOpenMap }) {
-    // const [open, setOpen] = useState(false);
+    const [sentfail, setSentfail] = useState(false);
     let nagative = useNavigate()
     const handleClickOpen = () => {
         setOpen(true);
     };
 
     const handlestart = () => {
-        window.localStorage.title = document.getElementById ("inputtitle").value
-        window.location.reload();
-        setOpen(false);
-        window.location.href = "/map"
+        if (document.getElementById ("inputtitle").value==''||null) {
+            console.log(document.getElementById ("inputtitle").value);
+            setSentfail(true)
+            
+        } else {
+            console.log(document.getElementById ("inputtitle").value);
+            window.localStorage.title = document.getElementById ("inputtitle").value
+            window.location.reload();
+            setOpen(false);
+            window.location.href = "/map"
+        }
+        
         
     }
 
@@ -62,16 +70,50 @@ export default function JourneyDialog({ open, setOpen, openMap, setOpenMap }) {
                 </DialogContent>
                 
                     {/* <label>為您的旅程取個名字</label><input id = "inputtitle" /> */}
+
+                {sentfail==false?
                 <TextField
+                   
                     /* autoFocus */
+                    
+                    /* error
+                    label="Error"
+                    helperText="Incorrect entry."
+                    required="true" */
+
+
                     margin="dense"
+                    
                     id="inputtitle"
                     label="為您的旅程取個名字"
                     type="text"
                     sx={{width:'400px',marginX:'40px'}}
                     /* fullWidth */
+                    
+                    variant="standard"
+                />:
+                <TextField
+                   
+                    /* autoFocus */
+                    
+                    error
+                    label="Error"
+                    helperText="請輸入旅遊名稱."
+
+                   /*  required="true" */
+
+
+                    margin="dense"
+                    
+                    id="inputtitle"
+                    label="為您的旅程取個名字"
+                    type="text"
+                    sx={{width:'400px',marginX:'40px'}}
+                    /* fullWidth */
+                    
                     variant="standard"
                 />
+                } 
                 <DialogActions>
                     <LoadingButton
 
