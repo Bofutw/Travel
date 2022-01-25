@@ -15,6 +15,7 @@ import Test from './components/Practice/Bootstrap';
 import Dashboard from './components/Dashboard/Dashboard';
 import Github from './components/Dashboard/Github';
 import Member from './components/Dashboard/Member';
+import Crud from './components/Dashboard/Crud'
 
 function App() {
   const location=useLocation()
@@ -37,6 +38,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/github" element={<Github />} />
           <Route path="/member" element={<Member />} />
+          <Route path="/crud" element={<Crud/>} />
         </Routes>
        
         {!isdashboardRendering && <Footer />}
