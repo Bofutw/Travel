@@ -22,6 +22,9 @@ const Login = () => {
   const [registerPassword, setRegisterPassword] = useState("");
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+
+  const emailref = useRef("");
+  const passwordref = useRef("");
   //錯誤訊息和開關
   const [open, setOpen] = useState(false)
   const [errormessage, setErrorMessage] = useState("");
@@ -217,7 +220,7 @@ const Login = () => {
         <div className="login-div">
           <div className="login-logo"></div>
           <div className="login-title">
-            <p className="login-p" onClick={() => handlePageChange(2)}>
+            <p className="login-p" onClick={() => {handlePageChange(2);emailref.current.value="";passwordref.current.value="";}}>
               登入&emsp;
             </p>{" "}
             | <p style={{ color: 'darkblue', transition: 'all 1s' }} className="login-p" onClick={() => handlePageChange(1)}>&emsp;註冊</p>
@@ -232,7 +235,8 @@ const Login = () => {
                 type="text"
                 className="login-user-input"
                 placeholder="輸入信箱..."
-
+                defaultValue={""}
+                ref={emailref}
                 required
                 onChange={(event) => {
                   setRegisterEmail(event.target.value);
@@ -246,8 +250,9 @@ const Login = () => {
               <input
                 type="password"
                 className="login-pass-input"
-
+                defaultValue={""}
                 placeholder="輸入密碼..."
+                ref={passwordref}
 
                 onChange={(event) => {
                   setRegisterPassword(event.target.value);
@@ -275,10 +280,10 @@ const Login = () => {
         <div className="login-div">
           <div className="login-logo"></div>
           <div className="login-title">
-            <p style={{ color: 'darkblue', transition: 'all 1s' }} className="login-p" onClick={() => handlePageChange(2)}>
+            <p style={{ color: 'darkblue', transition: 'all 1s' }} className="login-p" onClick={() => {handlePageChange(2);emailref.current.value="";passwordref.current.value="";}}>
               登入&emsp;
             </p>{" "}
-            | <p className="login-p" onClick={() => handlePageChange(1)}>&emsp;註冊</p>
+            | <p className="login-p" onClick={() => {handlePageChange(1);emailref.current.value="";passwordref.current.value="";}}>&emsp;註冊</p>
           </div>
           <div className="sub-title">Join Us</div>
           <div className="login-fields">
@@ -289,9 +294,11 @@ const Login = () => {
               </svg>
               <input type="email"
                 required
+                ref={emailref}
+                defaultValue={""}
                 className='login-user-input'
                 placeholder='輸入信箱...'
-                value={loginEmail}
+                //value={loginEmail}
                 onChange={(event) => {
                   setLoginEmail(event.target.value);
                 }} />
@@ -303,10 +310,12 @@ const Login = () => {
               </svg>
               <input
                 type="password"
+                ref={passwordref}
+                defaultValue={""}
                 required
                 className='login-pass-input'
                 placeholder='輸入密碼...'
-                value={loginPassword}
+                //value={loginPassword}
                 onChange={(event) => {
                   setLoginPassword(event.target.value);
                 }} />
