@@ -29,7 +29,7 @@ import Agechart from './Agechart'
 import { height, margin, padding } from '@mui/system';
 import Githubapi from './Githubapi';
 import Membertime from './Membertime'
-
+import {zhTW} from '@mui/material/locale';
 
 function Copyright(props) {
   return (
@@ -107,7 +107,7 @@ const mdTheme = createTheme({
     usewhite: {
       main: green[50]
     }
-  },
+  }
 });
 
 

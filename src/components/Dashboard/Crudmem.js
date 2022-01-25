@@ -31,32 +31,13 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
+import {zhTW} from '@mui/material/locale';
+/* import { zhTW } from '@material-ui/core/locale'; */
+import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 
-function createData(name, calories, fat, carbs, protein) {
-  return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-  };
-}
-
-const rowsss = [
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Donut', 452, 25.0, 51, 4.9),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Honeycomb', 408, 3.2, 87, 6.5),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Jelly Bean', 375, 0.0, 94, 0.0),
-  createData('KitKat', 518, 26.0, 65, 7.0),
-  createData('Lollipop', 392, 0.2, 98, 0.0),
-  createData('Marshmallow', 318, 0, 81, 2.0),
-  createData('Nougat', 360, 19.0, 9, 37.0),
-  createData('Oreo', 437, 18.0, 63, 4.0),
-];
+const mdTheme = createTheme({
+  
+},zhTW);
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -127,9 +108,6 @@ function EnhancedTableHead(props) {
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
-
-
-
   return (
     <TableHead>
       <TableRow>
@@ -178,14 +156,9 @@ EnhancedTableHead.propTypes = {
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
 };
-
-
 // Tool bar old home
 
-
 //
-
-
 export default function EnhancedTable() {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -202,19 +175,21 @@ export default function EnhancedTable() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = data2.map((n) => n.name);
+      const newSelecteds = data2.map((n) => n.id);
       setSelected(newSelecteds);
+      console.log(newSelecteds);
+      
       return;
     }
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
+  const handleClick = (event, id) => {
+    const selectedIndex = selected.indexOf(id);
     let newSelected = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
+      newSelected = newSelected.concat(selected, id);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -243,7 +218,7 @@ export default function EnhancedTable() {
     setDense(event.target.checked);
   };
 
-  const isSelected = (name) => selected.indexOf(name) !== -1;
+  const isSelected = (id) => selected.indexOf(id) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
  
@@ -254,7 +229,7 @@ let rows2 = [];
 const url = 'http://localhost:8080/member/'
 const [data1, setData1] = useState([]);
 const [data2, setData2] = useState([]);
-const [data3, setData3] = useState([]);
+const [data3, setData3] = useState('');
 const [open, setOpen] = React.useState(false);
 
 useEffect(() => {
@@ -271,11 +246,10 @@ useEffect(() => {
 
 useEffect(() => {
   data1.map((yo, index) => {
-    console.log(data1)
-    console.log('birth:' + yo.memberbirth);
+    
     rows[index] = { id: yo.memberid, name: yo.membername, gender: yo.membergender, birth: yo.memberbirth, time: yo.memberregistertime }
     setData2(rows)
-    console.log(data2);
+   
   })
 }, [data1])
 
@@ -284,7 +258,7 @@ const emptyRows =
 
     // Tool Bar moved
     const EnhancedTableToolbar = (props) => {
-      const { numSelected, selected } = props;
+      const { numSelected, selected,newSelecteds } = props;
     
       return (
         <Toolbar
@@ -342,65 +316,34 @@ const emptyRows =
     };
 
     const deletedata = () => {
-      console.log(selected);
-      data2.map((d)=>{
-        console.log(d.indexOf(selected));
+      selected.map((e)=>{
+        console.log(e);
+        //
+        async function fetchapidelete() {
+          try {
+            const res = await axios.delete('http://localhost:8080/member/'+e);
+          } catch (error) {
+            console.log(error);
+          }
+        }
+        fetchapidelete();
+
         
       })
+      window.location.reload();
+     /*  useEffect(() => {
+        
+      }, []) */
+      
+      
     };
     function testyo(){
       console.log(selected);
-      /* alert('您確定要刪除'+selected+'的資料嗎') */
       setOpen(true);
-      
-     
-      
     }
 
-    // delete alert
-    const dialogcheck = ()=>{
-    
-
-  /*   const handleClickOpen = () => {
-      setOpen(true);
-    };
-  
-    const handleClose = () => {
-      setOpen(false);
-    }; */
-  
-    return (
-      <div>
-        <Dialog
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogTitle id="alert-dialog-title">
-            {"刪除的資料就像變心的女朋友"}
-          </DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              請問您確定要刪除 {selected} 的資料嗎 ？
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>取消</Button>
-            <Button onClick={handleClose} autoFocus>
-              確定
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
-    );
-  }
-
-
-
-
-    //
   return (
+    <ThemeProvider theme={mdTheme}>
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
@@ -424,17 +367,17 @@ const emptyRows =
               {stableSort(data2, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
+                  const isItemSelected = isSelected(row.id);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.name)}
+                      onClick={(event) => handleClick(event, row.id)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.id}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
@@ -485,7 +428,7 @@ const emptyRows =
       </Paper>
       <FormControlLabel
         control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
+        label="緊密排列"
       />
       <div>
         <Dialog
@@ -499,18 +442,21 @@ const emptyRows =
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              請問您確定要刪除 {selected} 的資料嗎 ？
+              <Typography>
+              請問您確定要刪除編號：{selected.join(',')} 的會員資料嗎 ？
+              </Typography>
+             
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={()=>{handleClose();deletedata();}}>取消</Button>
-            <Button onClick={handleClose} autoFocus>
+            <Button onClick={handleClose}>取消</Button>
+            <Button onClick={()=>{handleClose();deletedata();}} autoFocus>
               確定
             </Button>
           </DialogActions>
         </Dialog>
       </div>
     </Box>
-    
+    </ThemeProvider>
   );
 }
