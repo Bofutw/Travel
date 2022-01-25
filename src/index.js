@@ -19,7 +19,7 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       {/* <MainContext /> */}
-      <App />
+      <FirebaseTest1 />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
