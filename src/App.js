@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar/Navbar";
 import React, { Component, createContext, useContext } from 'react';
 import Prac from "./components/Practice/Prac";
 import Student from "./components/Practice/Student";
-import Profile from "./components/Profile/Profile";
+
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import HomePage from "./components/Homepage/HomePage";
 import Footer from "./components/Footer/Footer";

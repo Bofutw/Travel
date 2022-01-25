@@ -1,13 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-
 import App from "./App";
 import FirebaseTest1 from "./Test/FirebaseDatabase/FirebaseTest1";
 import Test4 from "./Test/Test4";
-
-import Profile from './components/Profile/Profile';
-import Profile3 from './components/Profile/Profile3';
 import Search from './Test/Search';
 import Test from './Test/Test';
 
@@ -19,7 +15,7 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       {/* <MainContext /> */}
-      <FirebaseTest1 />
+      <App />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

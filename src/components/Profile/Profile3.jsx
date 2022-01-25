@@ -1,12 +1,15 @@
 import React from "react";
 import { useRef, useState, useEffect } from "react";
 import "./profile3.css";
-import { Avatar, Button, Divider, Fab } from "@mui/material";
+import { Avatar, Button, Divider } from "@mui/material";
+import Fab from '@mui/material/Fab'
 import EditIcon from "@mui/icons-material/Edit";
 import ProfileData from "./ProfileData";
 import { getmemberallinfo } from "./getmemberinfo";
 import BorderColorSharpIcon from "@mui/icons-material/BorderColorSharp";
 import { getcityid } from "../Login/LoginFn";
+import AddIcon from "@mui/icons-material/Add";
+import ProfileUploadImg from "./ProfileUploadImg";
 // TODO :  City ID
 
 export default function Profile3() {
@@ -18,13 +21,18 @@ export default function Profile3() {
   const arearef = useRef("");
   const signref = useRef("");
 
-
-
+  //上傳圖片對話窗
+  const [open, setOpen] = useState(false)
+  //修改照片
+  const [showava, setShowAva] = useState(false);
+  const [avasrc, setAvaSrc] = useState("")
+  const [editfile, setEditFile] = useState("");
   //星座
   const [constellation, setConstellation] = useState("");
 
   //用戶照片URL
   let profileURL = localStorage.getItem("profileURL");
+
   //當前用戶所有資訊
   const [memberinfo, setMemberInfo] = useState({});
   //當前用戶生日
@@ -155,6 +163,7 @@ export default function Profile3() {
             arearef={arearef}
             signref={signref}
             profileURL={profileURL}
+            editfile={editfile}
           />
         )}
 
@@ -169,7 +178,23 @@ export default function Profile3() {
             </div>
 
             <div className="profile3-img">
-              <img className="avatarimg" src={profileURL} alt="" />
+              <img className="avatarimg" src={edit ? (showava ? avasrc : profileURL) : profileURL} alt="" />
+              <Fab
+                aria-label="add"
+                sx={{
+
+                  backgroundColor: '#7c5b41',
+                  textShadow: ' 4px 4px 3px rgba(77, 77, 77, 0.5)',
+                  cursor: 'pointer',
+                  '&:hover': { backgroundColor: '#332a1a' },
+                  '&:active': { backgroundColor: 'black', color: 'ActiveBorder' }
+                }}
+                disabled={edit ? "" : "disabled"}
+                onClick={() => setOpen(true)}
+              >
+                <AddIcon style={{ color: 'whitesmoke' }} />
+              </Fab>
+              {open && <ProfileUploadImg open={open} setOpen={setOpen} setShowAva={setShowAva} setAvaSrc={setAvaSrc} setEditFile={setEditFile} />}
             </div>
           </div>
           <div className="profile-editbtn">

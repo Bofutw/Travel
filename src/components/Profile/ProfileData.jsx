@@ -10,6 +10,7 @@ import axios from "axios";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { getmemberid } from "../Login/LoginFn";
 import ProfileMessage from "./ProfileMessage";
+import { uploadtofirebase } from "../../Firebase/firebasefn";
 export default function ProfileData({
   profilesend,
   setProfileSend,
@@ -21,6 +22,7 @@ export default function ProfileData({
   profileURL,
   arearef,
   signref,
+  editfile
 }) {
   const [loading, setLoading] = useState(false);
   const [agree, setAgree] = useState(false);
@@ -74,11 +76,14 @@ export default function ProfileData({
           `http://localhost:8080/member/${area}`,
           profiledata
         );
-
+        // console.log("this is editfile",editfile);
+        // uploadtofirebase(editfile);
         const axiosresult = await axiospost.data;
-
-
         console.log("successs", axiosresult);
+
+
+
+        //success alert
         setSuOpen(true);
         const str = "修改成功"
         setSuMessage(() => str);

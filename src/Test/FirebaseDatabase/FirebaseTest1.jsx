@@ -1,9 +1,10 @@
 import React, { useRef, useState } from "react";
 
-import { database, storage } from "../../Firebase/firebase-config";
 import firebase from "firebase/compat/app";
 import { UploadFileSharp } from "@mui/icons-material";
-import { getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
+import { storage } from "../../Firebase/firebase-config";
+
 function FirebaseTest1() {
   const emailref = useRef("");
   // const dbRef = sRef(getDatabase());
@@ -31,39 +32,43 @@ function FirebaseTest1() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const file = e.target[0].files[0];
     const src2 = URL.createObjectURL(file);
-    uploadFiles(file);
-    setSrc(src2);
-    console.log(src2);
+    const storageRef = ref(storage, `files/5${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
 
 
-  };
 
-  const uploadFiles = (file) => {
-    //
-    if (!file) return;
-    const uploadTask = storage.ref(`files/7${file.name}5`).put(file);
-    uploadTask.on(
-      "state_changed",
+
+    uploadTask.on('state_changed',
       (snapshot) => {
-        //
-        const prog = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        setProgress(prog);
+        // Observe state change events such as progress, pause, and resume
+        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log('Upload is ' + progress + '% done');
+        // switch (snapshot.state) {
+        //   case 'paused':
+        //     console.log('Upload is paused');
+        //     break;
+        //   case 'running':
+        //     console.log('Upload is running');
+        //     break;
+        // }
       },
-      (error) => console.log(error),
+      (error) => {
+        console.log(error.message);
+        // Handle unsuccessful uploads
+      },
       () => {
-        storage
-          .ref("files")
-          .child(file.name)
-          .getDownloadURL()
-          .then((url) => {
-            console.log(url);
-          });
+
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setSrc(downloadURL);
+          console.log('File available at', downloadURL);
+        });
       }
     );
+
   };
 
 
@@ -82,8 +87,10 @@ function FirebaseTest1() {
       <button onClick={handleClick}>送出</button> */}
 
       <form onSubmit={handleSubmit}>
-        <input type="file" name="" id="" />
+        <input type="file" name="" id="" onChange={(e) => setSrc(URL.createObjectURL(e.target.files[0]))} />
+        {console.log(src)}
         <button type="submit">Send</button>
+
       </form>
       <img src={src} alt="" />
     </div>
