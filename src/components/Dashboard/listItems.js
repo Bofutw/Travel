@@ -12,6 +12,7 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import BadgeIcon from '@mui/icons-material/Badge';
 import { unstable_HistoryRouter } from 'react-router-dom';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople';
 
 export const mainListItems = (
   <div>
@@ -38,6 +39,13 @@ export const mainListItems = (
         <GitHubIcon />
       </ListItemIcon>
       <ListItemText primary="版控狀態" />
+    </ListItem>
+
+    <ListItem button onClick={()=>window.location.href='/crud'}>
+      <ListItemIcon>
+        <EmojiPeopleIcon />
+      </ListItemIcon>
+      <ListItemText primary="會員管理" />
     </ListItem>
    {/*  <ListItem button onClick={()=>window.location.href='/employee'}>
       <ListItemIcon>

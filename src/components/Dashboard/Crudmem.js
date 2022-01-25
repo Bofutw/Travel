@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect,useState } from 'react';
 import PropTypes from 'prop-types';
 import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -21,6 +22,9 @@ import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
+import axios from 'axios';
+;
+
 
 function createData(name, calories, fat, carbs, protein) {
   return {
@@ -32,7 +36,7 @@ function createData(name, calories, fat, carbs, protein) {
   };
 }
 
-const rows = [
+const rowsss = [
   createData('Cupcake', 305, 3.7, 67, 4.3),
   createData('Donut', 452, 25.0, 51, 4.9),
   createData('Eclair', 262, 16.0, 24, 6.0),
@@ -83,31 +87,31 @@ const headCells = [
     id: 'name',
     numeric: false,
     disablePadding: true,
-    label: 'Dessert (100g serving)',
+    label: '編號',
   },
   {
     id: 'calories',
     numeric: true,
     disablePadding: false,
-    label: 'Calories',
+    label: '姓名',
   },
   {
     id: 'fat',
     numeric: true,
     disablePadding: false,
-    label: 'Fat (g)',
+    label: '性別',
   },
   {
     id: 'carbs',
     numeric: true,
     disablePadding: false,
-    label: 'Carbs (g)',
+    label: '生日',
   },
   {
     id: 'protein',
     numeric: true,
     disablePadding: false,
-    label: 'Protein (g)',
+    label: '註冊',
   },
 ];
 
@@ -197,7 +201,7 @@ const EnhancedTableToolbar = (props) => {
           id="tableTitle"
           component="div"
         >
-          Nutrition
+          會員資料列表
         </Typography>
       )}
 
@@ -238,7 +242,7 @@ export default function EnhancedTable() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.name);
+      const newSelecteds = data2.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -281,16 +285,49 @@ export default function EnhancedTable() {
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+ 
+  
+//
+let rows = [];
+let rows2 = [];
+const url = 'http://localhost:8080/member/'
+const [data1, setData1] = useState([]);
+const [data2, setData2] = useState([]);
+const [data3, setData3] = useState([]);
 
+useEffect(() => {
+  async function fetchapi() {
+    try {
+      const res = await (await axios.get(url)).data;
+      setData1(res);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  fetchapi();
+}, [])
+
+useEffect(() => {
+  data1.map((yo, index) => {
+    console.log(data1)
+    console.log('birth:' + yo.memberbirth);
+    rows[index] = { id: yo.memberid, name: yo.membername, gender: yo.membergender, birth: yo.memberbirth, time: yo.memberregistertime }
+    setData2(rows)
+    console.log(data2);
+  })
+}, [data1])
+
+const emptyRows =
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data2.length) : 0;
+
+//
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
           <Table
-            sx={{ minWidth: 750 }}
+            sx={{ minWidth: 750 ,height:'auto'}}
             aria-labelledby="tableTitle"
             size={dense ? 'small' : 'medium'}
           >
@@ -300,12 +337,12 @@ export default function EnhancedTable() {
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={data2.length}
             />
             <TableBody>
               {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                  rows.slice().sort(getComparator(order, orderBy)) */}
-              {stableSort(rows, getComparator(order, orderBy))
+              {stableSort(data2, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);
@@ -336,12 +373,12 @@ export default function EnhancedTable() {
                         scope="row"
                         padding="none"
                       >
-                        {row.name}
+                        {row.id}
                       </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
+                      <TableCell align="right">{row.name}</TableCell>
+                      <TableCell align="right">{row.gender}</TableCell>
+                      <TableCell align="right">{row.birth.substr(0,10)}</TableCell>
+                      <TableCell align="right">{row.time.substr(0,10)}</TableCell>
                     </TableRow>
                   );
                 })}
@@ -360,7 +397,7 @@ export default function EnhancedTable() {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={rows.length}
+          count={data2.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

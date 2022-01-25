@@ -29,30 +29,20 @@ export default function BasicTable() {
   let rows = [];
   let rows2 = [];
   const url = 'http://localhost:8080/member/'
-  const [data1, setData1] = useState([])
-  const [data2, setData2] = useState([])
+  const [data1, setData1] = useState([]);
+  const [data2, setData2] = useState([]);
   const [data3, setData3] = useState([]);
 
 
-  useEffect(() => {
-    async function fetchapi() {
-      try {
-        const res = await (await axios.get(url)).data;
-        setData1(res);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    fetchapi();
-  }, [])
 
-  useEffect(async() => {
+
+ /*  useEffect(async() => {
     const test2 = async () => {
       const axiosdata = await (await axios.get(url)).data;
       setData3(axiosdata);
     }
     test2();
-  }, []);
+  }, []); */
 
   
   /* const testbofu = () => {
@@ -65,6 +55,18 @@ export default function BasicTable() {
     
   }
   testbofu(); */
+
+  useEffect(() => {
+    async function fetchapi() {
+      try {
+        const res = await (await axios.get(url)).data;
+        setData1(res);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchapi();
+  }, [])
   
   useEffect(() => {
     data1.map((yo, index) => {

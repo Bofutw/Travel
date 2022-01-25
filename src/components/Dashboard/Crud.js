@@ -158,7 +158,7 @@ function DashboardContent() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-            不可以色色の後台
+            不可以色色の後台一會員管理
             </Typography>
             <IconButton color="usewhite" >
               {/* Content可以塞data state */}
@@ -208,7 +208,7 @@ function DashboardContent() {
                     p: 2,
                     display: 'flex',
                     flexDirection: 'column',
-                    height: 700,
+                    
                   }}
                 >
                  {/*  {<Crudmember></Crudmember>} */}
@@ -216,10 +216,11 @@ function DashboardContent() {
                 </Paper>
               </Grid>
             </Grid>
-            <Copyright sx={{ pt: 4 }} />
+           
           </Container>
         </Box>
       </Box>
+      <Copyright sx={{ pt: 4 }} />
     </ThemeProvider>
   );
 }
