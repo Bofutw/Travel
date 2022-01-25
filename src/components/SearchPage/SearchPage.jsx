@@ -7,182 +7,293 @@ import './SearchPage.css'
 
 
 function Blog() {
-    let temp = 0
-    const [populardata, setPopulardata] = useState([])
-    const [newblogdata, setNewblogdata] = useState([])
-    useEffect((() => {
-        getPopularData()
-        getNewblogData()
-    }),
-        [])
-    function getPopularData() {
-        fetch("http://localhost:8080/blog/topblog")
-            .then((res) => {
+    // let temp = 0
+    // const [populardata, setPopulardata] = useState([])
+    // const [newblogdata, setNewblogdata] = useState([])
+    // useEffect((() => {
+    //     getPopularData()
+    //     getNewblogData()
+    // }),
+    //     [])
+    // function getPopularData() {
+    //     fetch("http://localhost:8080/blog/topblog")
+    //         .then((res) => {
 
-                return res.json()
-            })
-            .then((result) => {
+    //             return res.json()
+    //         })
+    //         .then((result) => {
 
-                for (let i = 0; i < result.length; i++) {
-                    console.log(result[i].blogdetail)
-                    result[i].blogdetail = JSON.parse(result[i].blogdetail)
-                }
-                console.log(result)
-                setPopulardata(result)
-            })
+    //             for (let i = 0; i < result.length; i++) {
+    //                 console.log(result[i].blogdetail)
+    //                 result[i].blogdetail = JSON.parse(result[i].blogdetail)
+    //             }
+    //             console.log(result)
+    //             setPopulardata(result)
+    //         })
 
-    }
-    function getNewblogData() {
-        fetch("http://localhost:8080/blog/newblog")
-            .then((res) => {
+    // }
+    // function getNewblogData() {
+    //     fetch("http://localhost:8080/blog/newblog")
+    //         .then((res) => {
 
-                return res.json()
-            })
-            .then((result) => {
+    //             return res.json()
+    //         })
+    //         .then((result) => {
 
-                for (let i = 0; i < result.length; i++) {
-                    console.log(result[i].blogdetail)
-                    result[i].blogdetail = JSON.parse(result[i].blogdetail)
-                }
-                console.log(result)
-                setNewblogdata(result)
-            })
+    //             for (let i = 0; i < result.length; i++) {
+    //                 console.log(result[i].blogdetail)
+    //                 result[i].blogdetail = JSON.parse(result[i].blogdetail)
+    //             }
+    //             console.log(result)
+    //             setNewblogdata(result)
+    //         })
 
-    }
-    function test(e) {
-        fetch("http://localhost:8080/blog/" + (e.target.id).slice(6, 8))
-            .then((res) => {
-                return res.json()
-            })
-            .then((result) => {
-                window.localStorage.blogdata = JSON.stringify(result)
-                window.location.href = "/Blogshow"
+    // }
+    // function test(e) {
+    //     fetch("http://localhost:8080/blog/" + (e.target.id).slice(6, 8))
+    //         .then((res) => {
+    //             return res.json()
+    //         })
+    //         .then((result) => {
+    //             window.localStorage.blogdata = JSON.stringify(result)
+    //             window.location.href = "/Blogshow"
 
-            })
-    }
+    //         })
+    // }
     return (
-        <div style={{ backgroundImage: 'url("/images/AnyConv.com__E_US5SHVQAIuSbE.jpg")', backgroundSize: '100% 100%' }}>
-            <div style={{ paddingTop: '60px', marginBottom: '-35px', marginLeft: '250px', width: '200px', zIndex: '3' }}>
-                <h1 style={{ fontWeight: 'bold' }}>熱門文章</h1>
-                {/* <img src='\img\未命名-1.jpg' style={{width:'180px',height:'45px',marginBottom:'15px'}}></img> */}
-            </div>
-            <div class="container-xl" style={{ zIndex: '-1', border: 'solid', borderWidth: '3px', borderRadius: '15px', borderColor: 'rgba(255,255,255,0.1)', backgroundColor: 'rgba(255,255,255,0.4)', Filter: 'blur(20px)' }}>
-                <div class="row">
-                    <div class="col-md-10 mx-auto">
-                        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
-                            {/* <!-- Carousel indicators --> */}
-                            <ol class="carousel-indicators">
+        <div style={{ backgroundImage: 'url("/images/AnyConv.com__E_US5SHVQAIuSbE.jpg")', backgroundSize: '100% 100%', height: '1400px' }}>
+            <div style={{ display: 'grid', gridTemplateRows: '20% 80% ' }}>
+                <div style={{ marginTop: '160px', marginLeft: '340px', zIndex: '3' }}>
+                    <h1 style={{ fontWeight: 'bold' }}><i class="fa fa-search" aria-hidden="true"></i>    搜尋：台中</h1>
+                    <h3>包含 " 台中 " 的相關結果：</h3>
 
-                                {populardata.map((item, id) => {
-                                    if (id % 3 == 0) {
-                                        temp++;
-                                        return <li data-target="#myCarousel" ></li>
-
-                                    }
-                                })}
-
-                            </ol>
-
-                            <div class="carousel-inner">
-                                {populardata.map((item, index) => {
-                                    if (index == 0) {
-                                        let lists = [];
-                                        for (let i = index; i <= (index + 2); i++) {
-                                            if (populardata[i]) {
-                                                lists.push(<div class="col-sm-4">
-                                                    <div class="thumb-wrapper">
-                                                        <div class="img-box">
-                                                            <img src={populardata[i].blogdetail.url} class="img-fluid" alt="" />
-                                                        </div>
-                                                        <div class="thumb-content">
-                                                            <h4 style={{ width: '180px', height: '58px' }}>{populardata[i].blogdetail.title}</h4>
-                                                            <p style={{ width: '175px', height: '39px' }}>{populardata[i].blogdetail.decrption}</p>
-                                                            <a onClick={test} class="btn btn-primary" id={`blogid${populardata[i].blogid}`}>More <i class="fa fa-angle-right"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>)
-                                            }
-                                        }
-                                        return <div class="carousel-item active">
-                                            <div class="row">
-                                                {lists}
-                                            </div>
-                                        </div>
-
-                                    }
-                                    if (index % 3 == 0 && index != 0) {
-                                        let lists = [];
-                                        for (let i = index; i <= (index + 2); i++) {
-                                            if (populardata[i]) {
-                                                lists.push(<div class="col-sm-4">
-                                                    <div class="thumb-wrapper">
-                                                        <div class="img-box">
-                                                            <img src={populardata[i].blogdetail.url} class="img-fluid" alt="" />
-                                                        </div>
-                                                        <div class="thumb-content">
-                                                            <h4 style={{ width: '180px', height: '58px' }}>{populardata[i].blogdetail.title}</h4>
-                                                            <p style={{ width: '175px', height: '39px' }}>{populardata[i].blogdetail.decrption}</p>
-                                                            <a onClick={test} class="btn btn-primary" id={`blogid${populardata[i].blogid}`}>More <i class="fa fa-angle-right"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>)
-                                            }
-                                        }
-                                        return <div class="carousel-item">
-                                            <div class="row">
-                                                {lists}
-                                            </div>
-                                        </div>
-                                    }
-                                })}
-
-                            </div>
-                            {/* <!-- Carousel controls --> */}
-                            <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
-                            <a class="carousel-control-next" href="#myCarousel" data-slide="next">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </div>
-                    </div>
                 </div>
-            </div>
-            <div style={{ marginTop: '50px', marginBottom: '10px', marginLeft: '250px' }}>
-                <h1 style={{ fontWeight: 'bold' }}>最新文章</h1>
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '5% 60% 30% 5%', backgroundImage: 'url("")', backgroundSize: '100% 100%' }}>
-                <div></div>
-                <div style={{ paddingBottom: '10px' }}>
-
-
-                    {newblogdata.map((item) => {
-                        return <div class="blog-card">
+                <div style={{ display: 'grid', gridTemplateColumns: '75% 25% ', backgroundImage: 'url("")', backgroundSize: '100% 100%' }}>
+                    {/* <div></div> */}
+                    <div style={{ paddingBottom: '10px',overflow:'scroll',resize:'none',height:'1040px' }}>
+                        <div class="blog-card">
                             <div class="meta">
-                                <div class="photo" style={{ backgroundImage: `url(${item.blogdetail.url})` }}></div>
+                                <div class="photo" style={{ backgroundImage: 'url(/images/P_20200213_161933.jpg)' }}></div>
+                                {/* `url(${item.blogdetail.url})` */}
                                 <ul class="details">
                                     <li class="author">John Doe</li>
-                                    <li class="date">Aug. 24, 2015</li>
+                                    <li class="date">2022 / 1 / 24</li>
 
                                 </ul>
                             </div>
                             <div class="description">
-                                <h1 style={{ width: '388px', height: '60px' }}>{item.blogdetail.title}</h1>
-
-                                <p style={{ width: '388px', height: '40px' }}> {item.blogdetail.decrption}</p>
+                                <h1 style={{ width: '388px', height: '60px' }}>九份三天兩夜</h1>
+                                {/* {item.blogdetail.title} / {item.blogdetail.decrption} / <a onClick={test} id={`blogid${item.blogid}`}>Read More</a> */}
+                                <p style={{ width: '388px', height: '40px' }}> 平溪放天燈</p>
                                 <p class="read-more">
-                                    <a onClick={test} id={`blogid${item.blogid}`}>Read More</a>
+                                    <a >Read More</a>
                                 </p>
                             </div>
+
                         </div>
-                    })}
+                        <div class="blog-card">
+                            <div class="meta">
+                                <div class="photo" style={{ backgroundImage: 'url(/images/P_20200213_161933.jpg)' }}></div>
+                                {/* `url(${item.blogdetail.url})` */}
+                                <ul class="details">
+                                    <li class="author">John Doe</li>
+                                    <li class="date">2022 / 1 / 24</li>
 
+                                </ul>
+                            </div>
+                            <div class="description">
+                                <h1 style={{ width: '388px', height: '60px' }}>九份三天兩夜</h1>
+                                {/* {item.blogdetail.title} / {item.blogdetail.decrption} / <a onClick={test} id={`blogid${item.blogid}`}>Read More</a> */}
+                                <p style={{ width: '388px', height: '40px' }}> 平溪放天燈</p>
+                                <p class="read-more">
+                                    <a >Read More</a>
+                                </p>
+                            </div>
 
+                        </div>
+                        <div class="blog-card">
+                            <div class="meta">
+                                <div class="photo" style={{ backgroundImage: 'url(/images/P_20200213_161933.jpg)' }}></div>
+                                {/* `url(${item.blogdetail.url})` */}
+                                <ul class="details">
+                                    <li class="author">John Doe</li>
+                                    <li class="date">2022 / 1 / 24</li>
+
+                                </ul>
+                            </div>
+                            <div class="description">
+                                <h1 style={{ width: '388px', height: '60px' }}>九份三天兩夜</h1>
+                                {/* {item.blogdetail.title} / {item.blogdetail.decrption} / <a onClick={test} id={`blogid${item.blogid}`}>Read More</a> */}
+                                <p style={{ width: '388px', height: '40px' }}> 平溪放天燈</p>
+                                <p class="read-more">
+                                    <a >Read More</a>
+                                </p>
+                            </div>
+
+                        </div>
+                        <div class="blog-card">
+                            <div class="meta">
+                                <div class="photo" style={{ backgroundImage: 'url(/images/P_20200213_161933.jpg)' }}></div>
+                                {/* `url(${item.blogdetail.url})` */}
+                                <ul class="details">
+                                    <li class="author">John Doe</li>
+                                    <li class="date">2022 / 1 / 24</li>
+
+                                </ul>
+                            </div>
+                            <div class="description">
+                                <h1 style={{ width: '388px', height: '60px' }}>九份三天兩夜</h1>
+                                {/* {item.blogdetail.title} / {item.blogdetail.decrption} / <a onClick={test} id={`blogid${item.blogid}`}>Read More</a> */}
+                                <p style={{ width: '388px', height: '40px' }}> 平溪放天燈</p>
+                                <p class="read-more">
+                                    <a >Read More</a>
+                                </p>
+                            </div>
+
+                        </div>
+                        <div class="blog-card">
+                            <div class="meta">
+                                <div class="photo" style={{ backgroundImage: 'url(/images/P_20200213_161933.jpg)' }}></div>
+                                {/* `url(${item.blogdetail.url})` */}
+                                <ul class="details">
+                                    <li class="author">John Doe</li>
+                                    <li class="date">2022 / 1 / 24</li>
+
+                                </ul>
+                            </div>
+                            <div class="description">
+                                <h1 style={{ width: '388px', height: '60px' }}>九份三天兩夜</h1>
+                                {/* {item.blogdetail.title} / {item.blogdetail.decrption} / <a onClick={test} id={`blogid${item.blogid}`}>Read More</a> */}
+                                <p style={{ width: '388px', height: '40px' }}> 平溪放天燈</p>
+                                <p class="read-more">
+                                    <a >Read More</a>
+                                </p>
+                            </div>
+
+                        </div>
+                        <div class="blog-card">
+                            <div class="meta">
+                                <div class="photo" style={{ backgroundImage: 'url(/images/P_20200213_161933.jpg)' }}></div>
+                                {/* `url(${item.blogdetail.url})` */}
+                                <ul class="details">
+                                    <li class="author">John Doe</li>
+                                    <li class="date">2022 / 1 / 24</li>
+
+                                </ul>
+                            </div>
+                            <div class="description">
+                                <h1 style={{ width: '388px', height: '60px' }}>九份三天兩夜</h1>
+                                {/* {item.blogdetail.title} / {item.blogdetail.decrption} / <a onClick={test} id={`blogid${item.blogid}`}>Read More</a> */}
+                                <p style={{ width: '388px', height: '40px' }}> 平溪放天燈</p>
+                                <p class="read-more">
+                                    <a >Read More</a>
+                                </p>
+                            </div>
+
+                        </div>
+                        <div class="blog-card">
+                            <div class="meta">
+                                <div class="photo" style={{ backgroundImage: 'url(/images/P_20200213_161933.jpg)' }}></div>
+                                {/* `url(${item.blogdetail.url})` */}
+                                <ul class="details">
+                                    <li class="author">John Doe</li>
+                                    <li class="date">2022 / 1 / 24</li>
+
+                                </ul>
+                            </div>
+                            <div class="description">
+                                <h1 style={{ width: '388px', height: '60px' }}>九份三天兩夜</h1>
+                                {/* {item.blogdetail.title} / {item.blogdetail.decrption} / <a onClick={test} id={`blogid${item.blogid}`}>Read More</a> */}
+                                <p style={{ width: '388px', height: '40px' }}> 平溪放天燈</p>
+                                <p class="read-more">
+                                    <a >Read More</a>
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div>
+                        <div >
+                            <div style={{ width: '300px', height: '340px', backgroundColor: 'rgba(0,0,0,0.6)', borderRadius: '5px', marginTop: '15px' }}>
+                                <div style={{ paddingTop: "15px", color: 'white', paddingLeft: '35px', marginBottom: '20px' }}>
+                                    <h4><i class="fa fa-address-book-o" aria-hidden="true" style={{ marginRight: '15px' }}></i>熱門作家</h4>
+                                </div>
+                                <ul class="details">
+                                    <li class="" style={{ height: '90px' }}><img src='\img\ProfilePictureMaker.png' style={{ width: '60px', height: '60px', marginLeft: '20px' }} />
+                                        <ul style={{ marginLeft: '100px', marginTop: '-63px', marginRight: '20px' }}>
+                                            <li style={{ color: 'white', fontWeight: 'bold', fontSize: "18px" }}>Raven</li>
+                                            <li id='detail-member-intro' >個人資料的話個人資料的話個人資料的話個人資料的話個人資料的話</li>
+                                        </ul>
+                                    </li>
+                                    <li class="" style={{ height: '90px' }}><img src='\img\ProfilePictureMaker (3).png' style={{ width: '60px', height: '60px', marginLeft: '20px' }} />
+                                        <ul style={{ marginLeft: '100px', marginTop: '-60px' }}>
+                                            <li style={{ color: 'white', fontWeight: 'bold', fontSize: "18px" }}>Bofu</li>
+                                            <li style={{ color: 'white' }}>個人資料的話</li>
+                                        </ul>
+                                    </li>
+                                    <li class="" style={{ height: '90px' }}><img src='\img\ProfilePictureMaker (4).png' style={{ width: '60px', height: '60px', marginLeft: '20px' }} />
+                                        <ul style={{ marginLeft: '100px', marginTop: '-60px' }}>
+                                            <li style={{ color: 'white', fontWeight: 'bold', fontSize: "18px" }}>Mike</li>
+                                            <li style={{ color: 'white' }}>個人資料的話</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                        <div >
+                            <div style={{ width: '300px', height: '650px', backgroundColor: 'rgba(0,0,0,0.6)', borderRadius: '5px', marginTop: '15px' }}>
+                                <div style={{ paddingTop: "15px", color: 'white', paddingLeft: '35px', marginBottom: '30px' }}>
+                                    <h4><i class="fa fa-star" aria-hidden="true" style={{ marginRight: '15px' }}></i>熱門文章</h4>
+                                </div>
+                                <ul class="details">
+                                    <li class="" style={{ height: '110px',marginBottom:'70px' }}>
+                                        <div class="blog-card"style={{height: '160px',width:'260px'}}>
+                                            <div class="meta">
+                                                <div class="photo" style={{ backgroundImage: 'url(/images/P_20200213_161933.jpg)',height: '160px',width:'260px' }}></div>
+                                                {/* `url(${item.blogdetail.url})` */}
+                                                <ul class="details" style={{height: '160px',width:'105px'}}>
+                                                    <li class="author">Raven</li>
+                                                    <li class="date">2022 / 1 / 24</li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="" style={{ height: '110px',marginBottom:'70px' }}>
+                                        <div class="blog-card"style={{height: '160px',width:'260px'}}>
+                                            <div class="meta">
+                                                <div class="photo" style={{ backgroundImage: 'url(/images/P_20200213_161933.jpg)',height: '160px',width:'260px' }}></div>
+                                                {/* `url(${item.blogdetail.url})` */}
+                                                <ul class="details" style={{height: '160px',width:'105px'}}>
+                                                    <li class="author">Raven</li>
+                                                    <li class="date">2022 / 1 / 24</li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="" style={{ height: '110px',marginBottom:'70px' }}>
+                                        <div class="blog-card"style={{height: '160px',width:'260px'}}>
+                                            <div class="meta">
+                                                <div class="photo" style={{ backgroundImage: 'url(/images/P_20200213_161933.jpg)',height: '160px',width:'260px' }}></div>
+                                                {/* `url(${item.blogdetail.url})` */}
+                                                <ul class="details" style={{height: '160px',width:'105px'}}>
+                                                    <li class="author">Raven</li>
+                                                    <li class="date">2022 / 1 / 24</li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div></div>
             </div>
         </div>
-
     );
 
 }
@@ -196,7 +307,7 @@ export default Blog;
             <h4><i class="fa fa-map-marker" aria-hidden="true"></i>     地區 </h4>
         </div>
         <div class="center">
-            <select name="sources" id="sources" class="custom-select sources" placeholder="Source Type" style={{ width: '255px', marginLeft: '170px', marginTop: '-70px' }}>
+            <select name="sources" id="sources" class="custom-select sources" placeholder="Source Type" style={{ width: '255px', marginLeft: '180px', marginTop: '-80px' }}>
                 <option value="profile">Profile</option>
                 <option value="word">Word</option>
                 <option value="hashtag">Hashtag</option>
@@ -207,7 +318,7 @@ export default Blog;
             <h4><i class="fa fa-map-o" aria-hidden="true"></i>     類型 </h4>
         </div>
         <div class="center">
-            <select name="sources" id="sources" class="custom-select sources" placeholder="Source Type" style={{ width: '255px', marginLeft: '170px', marginTop: '-70px' }}>
+            <select name="sources" id="sources" class="custom-select sources" placeholder="Source Type" style={{ width: '255px', marginLeft: '180px', marginTop: '-80px' }}>
                 <option value="profile">Profile</option>
                 <option value="word">Word</option>
                 <option value="hashtag">Hashtag</option>
