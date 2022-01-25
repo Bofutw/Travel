@@ -23,7 +23,13 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import axios from 'axios';
-;
+
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 
 function createData(name, calories, fat, carbs, protein) {
@@ -122,6 +128,8 @@ function EnhancedTableHead(props) {
     onRequestSort(event, property);
   };
 
+
+
   return (
     <TableHead>
       <TableRow>
@@ -171,60 +179,12 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-const EnhancedTableToolbar = (props) => {
-  const { numSelected } = props;
 
-  return (
-    <Toolbar
-      sx={{
-        pl: { sm: 2 },
-        pr: { xs: 1, sm: 1 },
-        ...(numSelected > 0 && {
-          bgcolor: (theme) =>
-            alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
-        }),
-      }}
-    >
-      {numSelected > 0 ? (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          color="inherit"
-          variant="subtitle1"
-          component="div"
-        >
-          {numSelected} selected
-        </Typography>
-      ) : (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          variant="h6"
-          id="tableTitle"
-          component="div"
-        >
-          會員資料列表
-        </Typography>
-      )}
+// Tool bar old home
 
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton>
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <IconButton>
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
-      )}
-    </Toolbar>
-  );
-};
 
-EnhancedTableToolbar.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-};
+//
+
 
 export default function EnhancedTable() {
   const [order, setOrder] = React.useState('asc');
@@ -267,6 +227,7 @@ export default function EnhancedTable() {
     }
 
     setSelected(newSelected);
+    
   };
 
   const handleChangePage = (event, newPage) => {
@@ -294,6 +255,7 @@ const url = 'http://localhost:8080/member/'
 const [data1, setData1] = useState([]);
 const [data2, setData2] = useState([]);
 const [data3, setData3] = useState([]);
+const [open, setOpen] = React.useState(false);
 
 useEffect(() => {
   async function fetchapi() {
@@ -320,7 +282,124 @@ useEffect(() => {
 const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data2.length) : 0;
 
-//
+    // Tool Bar moved
+    const EnhancedTableToolbar = (props) => {
+      const { numSelected, selected } = props;
+    
+      return (
+        <Toolbar
+          sx={{
+            pl: { sm: 2 },
+            pr: { xs: 1, sm: 1 },
+            ...(numSelected > 0 && {
+              bgcolor: (theme) =>
+                alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
+            }),
+          }}
+        >
+          {numSelected > 0 ? (
+            <Typography
+              sx={{ flex: '1 1 100%' }}
+              color="inherit"
+              variant="subtitle1"
+              component="div"
+            >
+              {numSelected} selected
+            </Typography>
+          ) : (
+            <Typography
+              sx={{ flex: '1 1 100%' }}
+              variant="h6"
+              id="tableTitle"
+              component="div"
+            >
+              會員資料列表
+            </Typography>
+          )}
+    
+          {numSelected > 0 ? (
+            <Tooltip title="Delete">
+              <IconButton >
+                <DeleteIcon onClick={testyo}/>
+              </IconButton>
+            </Tooltip>
+          ) : (
+            <Tooltip title="Filter list">
+              <IconButton>
+                <FilterListIcon />
+              </IconButton>
+            </Tooltip>
+          )}
+        </Toolbar>
+      );
+    };
+    EnhancedTableToolbar.propTypes = {
+      numSelected: PropTypes.number.isRequired,
+    };
+
+    const handleClose = () => {
+      setOpen(false);
+    };
+
+    const deletedata = () => {
+      console.log(selected);
+      data2.map((d)=>{
+        console.log(d.indexOf(selected));
+        
+      })
+    };
+    function testyo(){
+      console.log(selected);
+      /* alert('您確定要刪除'+selected+'的資料嗎') */
+      setOpen(true);
+      
+     
+      
+    }
+
+    // delete alert
+    const dialogcheck = ()=>{
+    
+
+  /*   const handleClickOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    }; */
+  
+    return (
+      <div>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"刪除的資料就像變心的女朋友"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              請問您確定要刪除 {selected} 的資料嗎 ？
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>取消</Button>
+            <Button onClick={handleClose} autoFocus>
+              確定
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    );
+  }
+
+
+
+
+    //
   return (
     <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
@@ -408,6 +487,30 @@ const emptyRows =
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
       />
+      <div>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"刪除的資料就像變心的女朋友"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              請問您確定要刪除 {selected} 的資料嗎 ？
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={()=>{handleClose();deletedata();}}>取消</Button>
+            <Button onClick={handleClose} autoFocus>
+              確定
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
     </Box>
+    
   );
 }
