@@ -44,7 +44,10 @@ function App() {
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
   });
+  //用戶搜尋值
+  const [search,setSearch]=useState("");
 
+  console.log("App用戶搜尋值",search);
   return (
     <>
       <div className="App">
@@ -53,7 +56,7 @@ function App() {
         <BrowserRouter>
           <ScrollTop />
 
-          {user ? <Navbar user={user} /> : <NavbarGuest user={user} />}
+          {user ? <Navbar user={user} setSearch={setSearch}/> : <NavbarGuest user={user} setSearch={setSearch} />}
 
           <Routes>
             {/* need write route */}
@@ -76,7 +79,7 @@ function App() {
             <Route path="/blogshow4" element={<BlogShow4 />} />
             <Route path="/blogshow5" element={<BlogShow5 />} />
             <Route path="/blogeditor" element={<Blogeditor />} />
-            <Route path="/searchpage" element={<SearchPage />} />
+            <Route path="/searchpage" element={<SearchPage search={search}/>} />
           </Routes>
           <Footer />
         </BrowserRouter>

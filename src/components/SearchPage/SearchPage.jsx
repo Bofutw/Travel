@@ -6,7 +6,18 @@ import './SearchPage.css'
 
 
 
-function Blog() {
+function Blog({ search }) {
+    //拿取搜尋值
+    const [searchvalue, setSearchValue] = useState("")
+
+    useEffect(() => {
+        const getsearchvalue = () => {
+            setSearchValue(search);
+        };
+        getsearchvalue();
+
+    }, [search])
+
     // let temp = 0
     // const [populardata, setPopulardata] = useState([])
     // const [newblogdata, setNewblogdata] = useState([])
@@ -64,13 +75,13 @@ function Blog() {
         <div style={{ backgroundImage: 'url("/images/AnyConv.com__E_US5SHVQAIuSbE.jpg")', backgroundSize: '100% 100%', height: '1400px' }}>
             <div style={{ display: 'grid', gridTemplateRows: '20% 80% ' }}>
                 <div style={{ marginTop: '160px', marginLeft: '340px', zIndex: '3' }}>
-                    <h1 style={{ fontWeight: 'bold' }}><i class="fa fa-search" aria-hidden="true"></i>    搜尋：台中</h1>
-                    <h3>包含 " 台中 " 的相關結果：</h3>
+                    <h1 style={{ fontWeight: 'bold' }}><i class="fa fa-search" aria-hidden="true"></i>    搜尋：{searchvalue}</h1>
+                    <h3>包含 " {searchvalue} " 的相關結果：</h3>
 
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: '75% 25% ', backgroundImage: 'url("")', backgroundSize: '100% 100%' }}>
                     {/* <div></div> */}
-                    <div style={{ paddingBottom: '10px',overflow:'scroll',resize:'none',height:'1040px' }}>
+                    <div style={{ paddingBottom: '10px', overflow: 'scroll', resize: 'none', height: '1040px' }}>
                         <div class="blog-card">
                             <div class="meta">
                                 <div class="photo" style={{ backgroundImage: 'url(/images/P_20200213_161933.jpg)' }}></div>
@@ -247,12 +258,12 @@ function Blog() {
                                     <h4><i class="fa fa-star" aria-hidden="true" style={{ marginRight: '15px' }}></i>熱門文章</h4>
                                 </div>
                                 <ul class="details">
-                                    <li class="" style={{ height: '110px',marginBottom:'70px' }}>
-                                        <div class="blog-card"style={{height: '160px',width:'260px'}}>
+                                    <li class="" style={{ height: '110px', marginBottom: '70px' }}>
+                                        <div class="blog-card" style={{ height: '160px', width: '260px' }}>
                                             <div class="meta">
-                                                <div class="photo" style={{ backgroundImage: 'url(/images/P_20200213_161933.jpg)',height: '160px',width:'260px' }}></div>
+                                                <div class="photo" style={{ backgroundImage: 'url(/images/P_20200213_161933.jpg)', height: '160px', width: '260px' }}></div>
                                                 {/* `url(${item.blogdetail.url})` */}
-                                                <ul class="details" style={{height: '160px',width:'105px'}}>
+                                                <ul class="details" style={{ height: '160px', width: '105px' }}>
                                                     <li class="author">Raven</li>
                                                     <li class="date">2022 / 1 / 24</li>
 
@@ -260,12 +271,12 @@ function Blog() {
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="" style={{ height: '110px',marginBottom:'70px' }}>
-                                        <div class="blog-card"style={{height: '160px',width:'260px'}}>
+                                    <li class="" style={{ height: '110px', marginBottom: '70px' }}>
+                                        <div class="blog-card" style={{ height: '160px', width: '260px' }}>
                                             <div class="meta">
-                                                <div class="photo" style={{ backgroundImage: 'url(/images/P_20200213_161933.jpg)',height: '160px',width:'260px' }}></div>
+                                                <div class="photo" style={{ backgroundImage: 'url(/images/P_20200213_161933.jpg)', height: '160px', width: '260px' }}></div>
                                                 {/* `url(${item.blogdetail.url})` */}
-                                                <ul class="details" style={{height: '160px',width:'105px'}}>
+                                                <ul class="details" style={{ height: '160px', width: '105px' }}>
                                                     <li class="author">Raven</li>
                                                     <li class="date">2022 / 1 / 24</li>
 
@@ -273,12 +284,12 @@ function Blog() {
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="" style={{ height: '110px',marginBottom:'70px' }}>
-                                        <div class="blog-card"style={{height: '160px',width:'260px'}}>
+                                    <li class="" style={{ height: '110px', marginBottom: '70px' }}>
+                                        <div class="blog-card" style={{ height: '160px', width: '260px' }}>
                                             <div class="meta">
-                                                <div class="photo" style={{ backgroundImage: 'url(/images/P_20200213_161933.jpg)',height: '160px',width:'260px' }}></div>
+                                                <div class="photo" style={{ backgroundImage: 'url(/images/P_20200213_161933.jpg)', height: '160px', width: '260px' }}></div>
                                                 {/* `url(${item.blogdetail.url})` */}
-                                                <ul class="details" style={{height: '160px',width:'105px'}}>
+                                                <ul class="details" style={{ height: '160px', width: '105px' }}>
                                                     <li class="author">Raven</li>
                                                     <li class="date">2022 / 1 / 24</li>
 
