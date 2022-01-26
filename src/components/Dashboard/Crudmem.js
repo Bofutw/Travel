@@ -248,6 +248,13 @@ useEffect(() => {
   data1.map((yo, index) => {
     
     rows[index] = { id: yo.memberid, name: yo.membername, gender: yo.membergender, birth: yo.memberbirth, time: yo.memberregistertime }
+    if(rows[index].gender==null){
+      rows[index].gender = '未填寫'
+    } else if (rows[index].gender==0){
+      rows[index].gender = '男'
+    } else {
+      rows[index].gender = '女'
+    }
     setData2(rows)
    
   })
@@ -278,7 +285,7 @@ const emptyRows =
               variant="subtitle1"
               component="div"
             >
-              {numSelected} selected
+              {numSelected} 已選擇
             </Typography>
           ) : (
             <Typography
@@ -398,8 +405,8 @@ const emptyRows =
                         {row.id}
                       </TableCell>
                       <TableCell align="right">{row.name}</TableCell>
-                      <TableCell align="right">{row.gender}</TableCell>
-                      <TableCell align="right">{row.birth.substr(0,10)}</TableCell>
+                      <TableCell align="right">{row.gender/* ==0?'男':'女' */}</TableCell>
+                      <TableCell align="right">{row.birth==null?'未填寫':row.birth.substr(0,10)}</TableCell>
                       <TableCell align="right">{row.time.substr(0,10)}</TableCell>
                     </TableRow>
                   );
