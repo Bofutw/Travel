@@ -1,4 +1,4 @@
-import React ,{useEffect} from 'react'
+import React ,{useEffect,useState} from 'react'
 import './blogshow.css'
 
 
@@ -8,6 +8,80 @@ export default function BlogShow() {
     
      blogdata = JSON.parse(window.localStorage.blogdata);
      blogdata.blogdetail = JSON.parse(blogdata.blogdetail);
+     const [populardata,setPopulardata] = useState([]);
+     const [collectstatus,setCollectstatus] = useState([]);
+     const [collectid,setCollectid] = useState();
+    useEffect(()=>{
+        getPopularData();
+        collectStatusCheck();
+    },[]);
+     function getPopularData(){
+        fetch("http://localhost:8080/blog/topblog")
+        .then((res)=>{
+            
+            return res.json()
+        })
+        .then((result)=>{
+            
+            for(let i =0;i<result.length;i++){
+                console.log(result[i].blogdetail)
+                result[i].blogdetail = JSON.parse(result[i].blogdetail)
+            }
+            console.log(result)
+            setPopulardata(result)
+        })
+    }
+    function toBlogPage(e){
+       
+        fetch("http://localhost:8080/blog/"+(e.target.id).slice(6,8))
+        .then((res)=>{           
+            return res.json()
+        })
+        .then((result)=>{
+            window.localStorage.blogdata = JSON.stringify(result)
+            window.location.href = "/Blogshow"
+ 
+        })
+    }
+    function collectStatusCheck(){
+        fetch(`http://localhost:8080/collect/status/memberid=${window.localStorage.memberid}&blogid=${JSON.parse(window.localStorage.blogdata).blogid}`)
+        .then((res)=>{
+            return res.json()
+        })
+        .then((result)=>{
+            
+            window.localStorage.collectid = result[1];
+            setCollectstatus(result[0]) ;
+        })
+
+    }
+    function insertCollect(){
+        fetch(`http://localhost:8080/collect/memberid=${window.localStorage.memberid}&blogid=${JSON.parse(window.localStorage.blogdata).blogid}`,
+        {
+            method:"POST"
+
+        })
+        .then((res)=>{
+            
+            return res.json();
+            
+        }).then((result)=>{
+           
+            window.localStorage.collectid = result.collectid
+            window.location.reload();
+        })
+        
+    } 
+    function deleteCollect(){
+        fetch(`http://localhost:8080/collect/${window.localStorage.collectid}`,{
+            method:"DELETE"
+        })
+        .then((res)=>{
+            window.location.reload();
+
+        })
+
+    }
     return (
         
         <div style={{display: 'grid',gridTemplateColumns:'70% 30%'}}>
@@ -19,6 +93,7 @@ export default function BlogShow() {
                     <h1>{blogdata.blogdetail.title}</h1>
                     <h5>{blogdata.blogdetail.decrption}</h5>
                 </div>
+                <button style={{marginLeft:'100px', marginTop:"-50px",marginBottom:'60px'}} onClick={collectstatus?deleteCollect:insertCollect}>{collectstatus?"取消收藏":"收藏"}</button>
                 <div >
                     <div class="leftcolumn"style={{backgroundColor:'',overflow: 'auto',height:'1000px'}}>
                         
@@ -52,8 +127,9 @@ export default function BlogShow() {
             <div class="rightcolumn">
                 <div class="card1">
                 
-                <div class="" ><img src='\img\ProfilePictureMaker.png'style={{height:"100px",width:'100px'}}/>作者:Raven</div>
-                <p>個人資料的特別的話</p>
+                <div class="" ><img alt="Avatar" src={blogdata.membericon}style={{height:"100px",width:'100px',"border-radius": "50%"}}/>{` 作者:${blogdata.membernickname}`}</div>
+                <br/>
+                <p>{blogdata.memberintro}</p>
                 </div>
                 <div class="card1">
                 <h3>旅遊目錄</h3>
@@ -67,12 +143,33 @@ export default function BlogShow() {
                 </nav>
                 </div>
                 <div class="card1">
-                <h3>更多熱門文章....</h3>
-                <img src='\images\P_20200213_120535.jpg'style={{height:"200px",marginBottom:'20px'}}/>
-                <br/>
-                <img src='\images\P_20200213_120535.jpg'style={{height:"200px",marginBottom:'20px'}}/>
-                <br/>
-                <img src='\images\P_20200213_120535.jpg'style={{height:"200px",marginBottom:'20px'}}/>
+                <div style={{ width: '300px', height: '650px', backgroundColor: 'rgba(161,228,241,0.6)', borderRadius: '5px', marginTop: '15px' }}>
+                                <div style={{ paddingTop: "15px", color: 'black', paddingLeft: '35px', marginBottom: '30px' }}>
+                                    <h4><i class="fa fa-star" aria-hidden="true" style={{ marginRight: '15px' }}></i>熱門文章</h4>
+                                </div>
+                                <ul class="details">
+                                    {populardata.map((item,id)=>{
+                                        if(id<3){
+                                            return <li onClick={toBlogPage}class="" style={{ height: '110px', marginBottom: '70px' }} >
+                                            <div class="blog-card" style={{ height: '160px', width: '260px' }}>
+                                                <div class="meta">
+                                                    <div id={`blogid${item.blogid}`} class="photo" style={{ backgroundImage: `url(${item.blogdetail.url})`, height: '160px', width: '260px' }}></div>
+                                                    {/* `url(${item.blogdetail.url})` */}
+                                                    <ul id={`blogid${item.blogid}`} class="details" style={{ height: '160px', width: '105px' }}>
+                                                        <li class="fa fa-pencil" id={`blogid${item.blogid}`}>     {item.blogdetail.title}</li>
+                                                        <li class="date" id={`blogid${item.blogid}`}>{item.blogcreatetime.slice(0,10)}</li>
+    
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        }
+
+                                    })}
+
+                                </ul>
+
+                            </div>
                 </div>
                 </div>
             </div>

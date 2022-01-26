@@ -1,6 +1,7 @@
 import { WindowOutlined } from '@mui/icons-material'
 import React from 'react'
 import './blogeditor.css'
+import { useEffect } from 'react'
 
 
 
@@ -23,6 +24,7 @@ export default function BlogShow() {
             journeytoblog();
         }
     }
+    useEffect(getMemberNickName,[])
     function journeytoblog(){
         data = JSON.parse(window.localStorage.journeyforblog);
         data.journeydetail = JSON.parse(data.journeydetail);
@@ -70,6 +72,7 @@ export default function BlogShow() {
     }
     function save(){
         let blogdata = blog
+        blogdata.blogdetail.bloger =  window.localStorage.nickName;
         blogdata.blogdetail = JSON.stringify(blogdata.blogdetail);
         if(blogdata.blogid){
             fetch(`http://localhost:8080/blog/`,{
@@ -125,6 +128,15 @@ export default function BlogShow() {
             blog.blogdetail.eachDay[index1].eachplace[index2].pic = `https://storage.googleapis.com/travelproject/${logicname}.png`
         } 
         imagesave(e.target.files[0],logicname)
+     }
+     function getMemberNickName(){
+         fetch("http://localhost:8080/member/"+window.localStorage.memberid)
+         .then((res)=>{
+            return res.json();
+         })
+         .then((resault)=>{
+            window.localStorage.nickName = resault.membernickname;
+         })
      }
      initblog();
     return (

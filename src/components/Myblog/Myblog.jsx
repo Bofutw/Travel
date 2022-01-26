@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import './myblog.css'
 
@@ -77,6 +78,16 @@ export default function BlogShow() {
          })
         
     }
+    function deleteBlog(e){
+        
+         fetch(`http://localhost:8080/blog/${e.target.id.slice(6,10)}`,{
+             method:"DELETE"
+         })
+         .then((res)=>{
+             window.location.reload();
+         })
+        
+    }
     return (
 
         <div >
@@ -131,7 +142,8 @@ export default function BlogShow() {
                             <div class="myblog-content" style={{ padding: '10px' }}>
                                 <h5 id="myblog-cardtitle" >{item.blogdetail.title}</h5>
                                 <p id="myblog-descript" >{item.blogdetail.decrption}</p>
-                                <a onClick={editExistBlog} id={`blogid${item.blogid}`} class="btn btn-primary" style={{ marginLeft: '100px',  fontSize: '12px' }}>編輯 <i class="fa fa-angle-right"></i></a>
+                                <button onClick={deleteBlog} id={`blogid${item.blogid}`} class="btn btn-primary" style={{fontSize: '12px' }}>刪除 <i class="fa fa-angle-right"></i></button>
+                                <button onClick={editExistBlog} id={`blogid${item.blogid}`} class="btn btn-primary" style={{ fontSize: '12px' }}>編輯 <i class="fa fa-angle-right"></i></button>
                             </div>
                         </div>
 
