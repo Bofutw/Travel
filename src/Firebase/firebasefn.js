@@ -1,5 +1,8 @@
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "./firebase-config";
+import {auth} from './firebase-config'
+import { onAuthStateChanged, updateProfile } from 'firebase/auth';
+
 
 
 export function uploadtofirebase(file, b) {
@@ -37,4 +40,21 @@ export function uploadtofirebase(file, b) {
             });
         }
     );
+}
+
+export function updatefireprofile(changename, changephotourl) {
+
+    updateProfile(auth.currentUser, {
+        displayName: changename,
+        photoURL: changephotourl
+    }).then(() => {
+
+        console.log("profile3修改成功");
+        // Profile updated!
+        // ...
+    }).catch((error) => {
+        console.log(error.message);
+        // An error occurred
+        // ...
+    });
 }

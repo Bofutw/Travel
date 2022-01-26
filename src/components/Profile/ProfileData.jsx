@@ -76,8 +76,8 @@ export default function ProfileData({
           `http://localhost:8080/member/${area}`,
           profiledata
         );
-        // console.log("this is editfile",editfile);
-        // uploadtofirebase(editfile);
+        console.log("this is editfile",editfile);
+        uploadtofirebase(editfile);
         const axiosresult = await axiospost.data;
         console.log("successs", axiosresult);
 

@@ -43,6 +43,8 @@ export default function Profile3() {
   const [cityid, setCityId] = useState("");
 
   useEffect(() => {
+    console.log("this is avasrc",avasrc);
+    
     const gdata = async () => {
       const axiosmemberinfo = await getmemberallinfo(
         localStorage.getItem("email")
@@ -162,7 +164,7 @@ export default function Profile3() {
             birthdayref={birthdayref}
             arearef={arearef}
             signref={signref}
-            profileURL={profileURL}
+            profileURL={avasrc}
             editfile={editfile}
           />
         )}

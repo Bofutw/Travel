@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { logEvent } from 'firebase/analytics';
+import { onAuthStateChanged, updateProfile } from 'firebase/auth';
 import { getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import React, { useEffect, useState } from 'react';
-import { analytics } from '../Firebase/firebase-config';
+import { analytics, auth } from '../Firebase/firebase-config';
 
 
 function Test4() {
@@ -27,6 +28,42 @@ function Test4() {
         setShow(!show);
     }
 
+    const handleUpdateUser = (e) => {
+        e.preventDefault();
+        const changename = "bntt 5533";
+        const changephotourl = "https://previews.123rf.com/images/pandavector/pandavector1605/pandavector160500618/56794127-icono-de-ni%C3%B1o-avatar-de-ilustraci%C3%B3n-vectorial-para-dise%C3%B1o-web-y-m%C3%B3vil.jpg"
+        const changephotourl2 = "https://lh3.googleusercontent.com/a/AATXAJy7phPYZQ_u-doPHut4LjlSHUeq90r_6D6KCBs=s96-c"
+        test5(changename,changephotourl2);
+        
+    }
+    const test5 = (changename,changephotourl) => {
+        updateProfile(auth.currentUser, {
+            displayName: changename, photoURL: changephotourl
+          }).then(() => {
+
+            console.log("修改成功");
+            // Profile updated!
+            // ...
+          }).catch((error) => {
+              console.log(error.message);
+            // An error occurred
+            // ...
+          });
+    };
+
+    useEffect(()=>{
+        onAuthStateChanged(auth,(currentUser)=>{
+            if(currentUser != null){
+                console.log(currentUser);
+                console.log(currentUser.providerId);
+
+            }
+            
+        })
+
+
+    },[])
+
 
     useEffect(() => {
         const test2 = async () => {
@@ -43,6 +80,7 @@ function Test4() {
     return <div>
         <button onClick={handleClick}>Click</button>
         <button onClick={handleShow}>Show</button>
+        <button onClick={handleUpdateUser}>Updateuser</button>
         {/* {JSON.stringify(data2)} */}
         {/* {console.log(data2)} */}
         <div style={{ width: '80%', height: '80vh', overFlow: 'scroll' }}>

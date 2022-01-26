@@ -39,6 +39,7 @@ import Member from './components/Dashboard/Member'
 import { getadminloginpage, getisadmin, setisadmin } from "./components/DashBoardLogin/DBoardLoginInfo";
 import PageNotFound from "./components/PageNF/PageNotFound";
 import LoginSuccessPage from "./components/Login/LoginSuccessPage";
+import Test4 from "./Test/Test4";
 
 
 
@@ -100,6 +101,7 @@ function App() {
 
           <Route path="/about" element={<About />} />
           <Route path="/qa" element={<QuestionAnswer />} />
+          <Route path="/test4" element={<Test4 />} />
 
           <Route path="/blog" element={<Blog />} />
           <Route path="/myblog" element={<Myblog />} />
@@ -121,7 +123,7 @@ function App() {
           {isadmin === "true" && <Route path="/dashboard/member" element={<Member />} />}
           <Route path="/dashboard/*" element={<BackendLoading />} />
         </Routes>
-        {(adminlogin === "false" && !ismap) && <Footer />}
+        {/* {(adminlogin === "false" && !ismap) && <Footer />} */}
 
 
 
