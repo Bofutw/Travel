@@ -62,8 +62,8 @@ function Blog () {
     }
         return (
             <div style={{ backgroundImage: 'url("/images/AnyConv.com__E_US5SHVQAIuSbE.jpg")', backgroundSize: '100% 100%' }}>
-                <div style={{ paddingTop: '60px', marginBottom: '-35px', marginLeft: '250px', width: '200px', zIndex: '3' }}>
-                    <h1 style={{ fontWeight: 'bold' }}>熱門文章</h1>
+                <div style={{ paddingTop: '60px', marginBottom: '-35px', marginLeft: '230px', width: '400px', zIndex: '3' }}>
+                    <h1 style={{ fontWeight: 'bold' }}><i class="fa fa-tags" aria-hidden="true" style={{marginRight:'10px'}}></i>熱門文章</h1>
                     {/* <img src='\img\未命名-1.jpg' style={{width:'180px',height:'45px',marginBottom:'15px'}}></img> */}
                 </div>
                 <div class="container-xl" style={{ zIndex: '-1', border: 'solid', borderWidth: '3px', borderRadius: '15px', borderColor: 'rgba(255,255,255,0.1)', backgroundColor: 'rgba(255,255,255,0.4)', Filter: 'blur(20px)' }}>
@@ -147,8 +147,8 @@ function Blog () {
                         </div>
                     </div>
                 </div>
-                <div style={{ marginTop: '50px', marginBottom: '10px', marginLeft: '250px' }}>
-                    <h1 style={{ fontWeight: 'bold' }}>最新文章</h1>
+                <div style={{ marginTop: '50px', marginBottom: '10px', marginLeft: '230px' }}>
+                    <h1 style={{ fontWeight: 'bold' }}><i class="fa fa-tags" aria-hidden="true" style={{marginRight:'10px'}}></i>最新文章</h1>
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: '5% 60% 30% 5%', backgroundImage: 'url("")', backgroundSize: '100% 100%' }}>
                     <div></div>

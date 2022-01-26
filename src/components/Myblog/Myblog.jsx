@@ -80,9 +80,9 @@ export default function BlogShow() {
     return (
 
         <div >
-            <div class="demo" style={{ backgroundImage: 'url("/images/563231_l.jpg")', backgroundSize: 'cover', paddingRight: '100px', height: '900px', backgroundPosition: 'center' }}>
-                <h2 class="penName">我的遊記
-                    <button class="button" style={{ marginLeft: '290px' }}>
+            <div class="demo" style={{ backgroundImage: 'url("/images/563231_l.jpg")', backgroundSize: 'cover', paddingRight: '100px', backgroundPosition: 'center',paddingBottom:'100px' }}>
+                <h2 class="penName">我的遊記<i class="fa fa-paper-plane" aria-hidden="true" style={{marginLeft:'10px'}}></i>
+                    <button class="button" style={{ marginLeft: '280px' }}>
                         <a href="#popup" style={{ color: "black" }}><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                     </button>
                 </h2>
