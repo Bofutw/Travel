@@ -173,7 +173,7 @@ function Blog({ search }) {
                             <h1 style={{width:'388px',height:'60px'}}>{item.blogdetail.title}</h1>
                             
                             <p style={{width:'388px',height:'40px'}}> {item.blogdetail.decrption}</p>
-                            <p class="read-more">
+                            <p class="read-more" style={{cursor: 'pointer'}}>
                                 <a onClick={toBlogPage} id={`blogid${item.blogid}`}>Read More</a>
                             </p>
                         </div>
@@ -190,7 +190,7 @@ function Blog({ search }) {
                                 <ul class="details">
                                     {popularbloger.map((item,id)=>{
                                         if(id<3){
-                                            return <li onClick={blogerClick}  class="" style={{ height: '90px' }}><img alt="Avatar" id={`bloger${item.membernickname}`} src={item.membericon} style={{ width: '60px', height: '60px', marginLeft: '20px',"border-radius": "50%" }} />
+                                            return <li onClick={blogerClick}  class="" style={{ height: '90px',cursor: 'pointer' }}><img alt="Avatar" id={`bloger${item.membernickname}`} src={item.membericon} style={{ width: '60px', height: '60px', marginLeft: '20px',"border-radius": "50%" }} />
                                             <ul style={{ marginLeft: '100px', marginTop: '-63px', marginRight: '20px' }}>
                                                 <li id={`bloger${item.membernickname}`} style={{ color: 'white', fontWeight: 'bold', fontSize: "18px" }}>{item.membernickname}</li>
                                                 <li id={`bloger${item.membernickname}`} className='detail-member-intro' >{item.memberintro}</li>
@@ -213,7 +213,7 @@ function Blog({ search }) {
                                 <ul class="details">
                                     {populardata.map((item,id)=>{
                                         if(id<3){
-                                            return <li onClick={toBlogPage}class="" style={{ height: '110px', marginBottom: '70px' }} >
+                                            return <li onClick={toBlogPage}class="" style={{ height: '110px', marginBottom: '70px',cursor: 'pointer' }} >
                                             <div class="blog-card" style={{ height: '160px', width: '260px' }}>
                                                 <div class="meta">
                                                     <div id={`blogid${item.blogid}`} class="photo" style={{ backgroundImage: `url(${item.blogdetail.url})`, height: '160px', width: '260px' }}></div>

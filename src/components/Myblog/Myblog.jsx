@@ -143,7 +143,7 @@ export default function BlogShow() {
                                 <h5 id="myblog-cardtitle" >{item.blogdetail.title}</h5>
                                 <p id="myblog-descript" >{item.blogdetail.decrption}</p>
                                 <button onClick={deleteBlog} id={`blogid${item.blogid}`} class="btn btn-primary" style={{fontSize: '12px' }}>刪除 <i class="fa fa-angle-right"></i></button>
-                                <button onClick={editExistBlog} id={`blogid${item.blogid}`} class="btn btn-primary" style={{ fontSize: '12px' }}>編輯 <i class="fa fa-angle-right"></i></button>
+                                <button onClick={editExistBlog} id={`blogid${item.blogid}`} class="btn btn-primary" style={{ fontSize: '12px',marginLeft:'15px' }}>編輯 <i class="fa fa-angle-right"></i></button>
                             </div>
                         </div>
 

@@ -150,7 +150,7 @@ export default function BlogShow() {
                                 <ul class="details">
                                     {populardata.map((item,id)=>{
                                         if(id<3){
-                                            return <li onClick={toBlogPage}class="" style={{ height: '110px', marginBottom: '70px' }} >
+                                            return <li onClick={toBlogPage}class="" style={{ height: '110px', marginBottom: '70px',cursor: 'pointer' }} >
                                             <div class="blog-card" style={{ height: '160px', width: '260px' }}>
                                                 <div class="meta">
                                                     <div id={`blogid${item.blogid}`} class="photo" style={{ backgroundImage: `url(${item.blogdetail.url})`, height: '160px', width: '260px' }}></div>
