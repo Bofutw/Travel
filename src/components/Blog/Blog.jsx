@@ -1,5 +1,6 @@
 import { width } from '@mui/system';
 import React, { useEffect, useState } from 'react';
+import {  useNavigate } from 'react-router-dom';
 import './blog.css'
 
 
@@ -10,9 +11,12 @@ function Blog () {
     let temp = 0
     const [populardata,setPopulardata] = useState([])
     const [newblogdata,setNewblogdata] = useState([])
+    const [popularbloger,setPopularbloger] = useState([]);
+    const navigate = useNavigate;
     useEffect((()=>{
         getPopularData()
         getNewblogData()
+        getPopularBloger()
     }),
     [])
     function getPopularData(){
@@ -59,6 +63,26 @@ function Blog () {
             window.location.href = "/Blogshow"
  
         })
+    }
+    function blogerClick(e){
+        // fetchData(search)
+        window.localStorage.seachbloger = e.target.id.slice(6);
+        window.location.href="/searchpage"
+       
+    }
+    function getPopularBloger(){
+        fetch("http://localhost:8080/member/popularbloger")
+        .then((res)=>{
+            
+            return res.json()
+        })
+        .then((result)=>{
+
+            console.log(result)
+            setPopularbloger(result)
+        })
+
+        
     }
         return (
             <div style={{ backgroundImage: 'url("/images/AnyConv.com__E_US5SHVQAIuSbE.jpg")', backgroundSize: '100% 100%' }}>
@@ -178,7 +202,23 @@ function Blog () {
  
                         
                     </div>                  
-                    <div></div>
+                    <div>   
+                         <div style={{ width: '300px', height: '700px', backgroundColor: 'rgba(0,0,0,0.6)', borderRadius: '5px', marginTop: '15px' }}>
+                                <div style={{ paddingTop: "15px", color: 'white', paddingLeft: '35px', marginBottom: '20px' }}>
+                                    <h4><i class="fa fa-address-book-o" aria-hidden="true" style={{ marginRight: '15px' }}></i>熱門作家</h4>
+                                </div>
+                                <ul class="details">
+                                    {popularbloger.map((item)=>{
+                                        return <li onClick={blogerClick}  class="" style={{ height: '90px' }}><img alt="Avatar" id={`bloger${item.membernickname}`} src={item.membericon} style={{ width: '60px', height: '60px', marginLeft: '20px',"border-radius": "50%" }} />
+                                        <ul style={{ marginLeft: '100px', marginTop: '-63px', marginRight: '20px' }}>
+                                            <li id={`bloger${item.membernickname}`} style={{ color: 'white', fontWeight: 'bold', fontSize: "18px" }}>{item.membernickname}</li>
+                                            <li id={`bloger${item.membernickname}`} className='detail-member-intro' >{item.memberintro}</li>
+                                        </ul>
+                                    </li>
+                                    })}                                                                      
+                                </ul>
+                            </div>
+                        </div>
                 </div>
             </div>
 

@@ -13,20 +13,31 @@ function Blog({ search }) {
     const [populardata,setPopulardata] = useState([]);
     const [popularbloger,setPopularbloger] = useState([]);
     useEffect(()=>{
-        if(!search){           
+        if(!search&&!window.localStorage.seachbloger){        
+             
             fetchData("")           
             getPopularData(); 
             getPopularBloger();
-        } 
+        } else if(window.localStorage.seachbloger){           
+            fetchData(window.localStorage.seachbloger)
+            
+            //window.localStorage.removeItem("seachbloger");         
+            getPopularData(); 
+            getPopularBloger();
+        }
     },[]) 
                                       
     useEffect(() => {
-  
-        fetchData(search)
-        getPopularData(); 
-        getPopularBloger();
+        if(search){
+            fetchData(search)
+            getPopularData(); 
+            getPopularBloger();
+        }
+
     }, [search])
     function fetchData(keyword){
+        
+        //alert("key:"+keyword)
         fetch(`http://localhost:8080/blog/keyword=${keyword}`)
         .then((res)=>{
             return res.json()
@@ -177,13 +188,16 @@ function Blog({ search }) {
                                     <h4><i class="fa fa-address-book-o" aria-hidden="true" style={{ marginRight: '15px' }}></i>熱門作家</h4>
                                 </div>
                                 <ul class="details">
-                                    {popularbloger.map((item)=>{
-                                        return <li onClick={blogerClick}  class="" style={{ height: '90px' }}><img alt="Avatar" id={`bloger${item.membernickname}`} src={item.membericon} style={{ width: '60px', height: '60px', marginLeft: '20px',"border-radius": "50%" }} />
-                                        <ul style={{ marginLeft: '100px', marginTop: '-63px', marginRight: '20px' }}>
-                                            <li id={`bloger${item.membernickname}`} style={{ color: 'white', fontWeight: 'bold', fontSize: "18px" }}>{item.membernickname}</li>
-                                            <li id={`bloger${item.membernickname}`} className='detail-member-intro' >{item.memberintro}</li>
-                                        </ul>
-                                    </li>
+                                    {popularbloger.map((item,id)=>{
+                                        if(id<3){
+                                            return <li onClick={blogerClick}  class="" style={{ height: '90px' }}><img alt="Avatar" id={`bloger${item.membernickname}`} src={item.membericon} style={{ width: '60px', height: '60px', marginLeft: '20px',"border-radius": "50%" }} />
+                                            <ul style={{ marginLeft: '100px', marginTop: '-63px', marginRight: '20px' }}>
+                                                <li id={`bloger${item.membernickname}`} style={{ color: 'white', fontWeight: 'bold', fontSize: "18px" }}>{item.membernickname}</li>
+                                                <li id={`bloger${item.membernickname}`} className='detail-member-intro' >{item.memberintro}</li>
+                                            </ul>
+                                        </li>
+                                        }
+                                        
                                     })}
                                     
                                    
