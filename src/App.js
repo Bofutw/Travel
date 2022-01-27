@@ -121,7 +121,7 @@ function App() {
           {isadmin === "true" && <Route path="/dashboard" element={<Dashboard />} />}
           {isadmin === "true" && <Route path="/dashboard/github" element={<Github />} />}
           {isadmin === "true" && <Route path="/dashboard/member" element={<Member />} />}
-          {isadmin === "true" && <Route path="/dashboard//crud" element={<Crud />} />}
+          {isadmin === "true" && <Route path="/dashboard/crud" element={<Crud />} />}
           <Route path="/dashboard/*" element={<BackendLoading />} />
         </Routes>
         {/* {(adminlogin === "false" && !ismap) && <Footer />} */}
