@@ -5,16 +5,15 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
-  signOut,
+
 } from "firebase/auth";
-
-
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { auth } from "../../Firebase/firebase-config";
-import { createnewuser, existenceemaillpassword, getmemberid, getmemberimgurl, getuseremail, setregmemberid } from "./LoginFn";
+import { createnewuser, existenceemaillpassword, getmemberid, getmemberimgurl, getmemberrigtime, getuseremail, setregmemberid } from "./LoginFn";
 import "./login.css";
 import { useNavigate } from "react-router-dom";
 import LoginMessage from "./LoginMessage";
+import { format } from "date-fns/esm";
 
 
 const Login = () => {
@@ -41,72 +40,71 @@ const Login = () => {
   //   setUser(currentUser);
   //   console.log('user', user);
   // })
-  //set true false condition listen user state 
+
   //用戶註冊事件
   const register = async () => {
-    try {
-      const reguserdata = await createUserWithEmailAndPassword(
-        auth,
-        registerEmail,
-        registerPassword
-      );
-      console.log(reguserdata);
-      //0122 to do  memberid
-      const newuserimgurl = `https://static.vecteezy.com/system/resources/previews/002/002/332/large_2x/ablack-man-avatar-character-isolated-icon-free-vector.jpg`;
-      const newfrmemberid = await setregmemberid();
-      await createnewuser(registerEmail, `NewMember${newfrmemberid}`, newuserimgurl);
-      const newmemberid = await getmemberid(registerEmail);
-
-      onAuthStateChanged(auth, (currentUser) => {
-        setUser(currentUser);
-        console.log('user', user);
-      })
-
-      localStorage.setItem("email", reguserdata.user.email);
-      localStorage.setItem("name", `user${newmemberid}`);
-      localStorage.setItem("profileURL", newuserimgurl);
-      localStorage.setItem("memberid", newmemberid);
-
-      setRegisterEmail("")
-      setRegisterPassword("")
-
-      setSuOpen(true);
-      const sumessage2 = `${user.user.email}歡迎您`
-      setSuMessage(() => sumessage2);
-
-      setTimeout(() => {
-        navigate("/loginsuccess");
-
-      }, 1300);
-
-
-    } catch (error) {
-      const findreguseremail = await getuseremail(registerEmail);
-      console.log("loginInfo", findreguseremail, registerEmail);
-      if (findreguseremail === "false") {
-        const geterrormessage = await existenceemaillpassword(registerEmail, registerPassword);
-        console.log("47", geterrormessage);
-        setOpen(true)
-        setErrorMessage(() => geterrormessage.message)
-
-      } else if (!!registerEmail === !!null) {
-        setOpen(true);
-        const errmes = "請卻是填寫郵件地址與密碼欄位!!!";
-        setErrorMessage(() => errmes);
-      }
-
-      else if (findreguseremail === registerEmail) {
-        setOpen(true);
-        const errmes = "帳號已經註冊過囉!!!";
-        setErrorMessage(() => errmes);
-      } else {
-        setOpen(true);
-        const errmes = "您的郵件地址與密碼格式有誤!!!";
-        setErrorMessage(() => errmes);
-      }
-      // alert(error.message)
-      console.log(error.message);
+    const findreguseremail = await getuseremail(registerEmail);
+    const geterrormessage = await existenceemaillpassword(registerEmail, registerPassword);
+    console.log("loginInfo", findreguseremail, registerEmail);
+    if (findreguseremail === registerEmail) {
+      const str = "此帳號已註冊";
+      setOpen(true)
+      setErrorMessage(() => str)
     }
+    else if (findreguseremail === false) {
+      console.log("47", geterrormessage);
+      setOpen(geterrormessage.open)
+      setErrorMessage(() => geterrormessage.message)
+      if (geterrormessage.open === false) {
+        const reguserdata = await createUserWithEmailAndPassword(
+          auth,
+          registerEmail,
+          registerPassword
+        );
+        console.log(reguserdata);
+        //0122 to do  memberid
+        const newuserimgurl = `https://static.vecteezy.com/system/resources/previews/002/002/332/large_2x/ablack-man-avatar-character-isolated-icon-free-vector.jpg`;
+        const newfrmemberid = await setregmemberid();
+        await createnewuser(registerEmail, `NewMember${newfrmemberid}`, newuserimgurl);
+        const newmemberid = await getmemberid(registerEmail);
+
+        onAuthStateChanged(auth, (currentUser) => {
+          setUser(currentUser);
+          console.log('user', user);
+        })
+
+        let curdate = format(new Date(), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
+
+        console.log(reguserdata.user.email);
+        localStorage.setItem("email", reguserdata.user.email);
+        localStorage.setItem("name", `user${newmemberid}`);
+        localStorage.setItem("profileURL", newuserimgurl);
+        localStorage.setItem("memberid", newmemberid);
+        localStorage.setItem("memberregistertime", curdate);
+
+        setRegisterEmail("")
+        setRegisterPassword("")
+
+        setSuOpen(true);
+        const sumessage2 = `${reguserdata.user.email}歡迎您`
+        setSuMessage(() => sumessage2);
+
+        if (sumessage2) {
+          setTimeout(() => {
+            navigate("/loginsuccess");
+          }, 1300);
+        }
+        // if (suopen === true) {
+        //   setTimeout(() => {
+        //     navigate("/loginsuccess");
+
+        //   }, 1300);
+        // };
+
+
+      }
+    }
+
   };
   //用戶登入事件
   const login = async (e) => {
@@ -120,6 +118,7 @@ const Login = () => {
       }
       const memberid = await getmemberid(loginEmail);
       const memberurl = await getmemberimgurl(memberid);
+      const membercurtime = await getmemberrigtime(loginEmail);
       console.log(memberurl);
 
       const user = await signInWithEmailAndPassword(
@@ -137,6 +136,7 @@ const Login = () => {
       localStorage.setItem("name", user.user.displayName);
       localStorage.setItem("profileURL", memberurl)
       localStorage.setItem("memberid", memberid);
+      localStorage.setItem("memberregistertime", membercurtime)
 
       setLoginEmail("")
       setLoginPassword("")
@@ -175,6 +175,7 @@ const Login = () => {
         const currentuseremail = res.user.email;
         const currentusername = res.user.displayName;
         const currentuserprofileURL = res.user.photoURL;
+
         const existenceemail = await getuseremail(currentuseremail)
         // console.log(currentuseremail);
         // console.log(existenceemail);
@@ -190,10 +191,12 @@ const Login = () => {
         })
 
         const memberid = await getmemberid(currentuseremail);
+        let curdate = format(new Date(), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
         localStorage.setItem("email", res.user.email);
         localStorage.setItem("name", res.user.displayName);
         localStorage.setItem("profileURL", res.user.photoURL);
         localStorage.setItem("memberid", memberid);
+        localStorage.setItem("memberregistertime", curdate);
         //console.log(window.localStorage.memberid);
 
         setSuOpen(true);
@@ -220,7 +223,7 @@ const Login = () => {
         <div className="login-div">
           <div className="login-logo"></div>
           <div className="login-title">
-            <p className="login-p" onClick={() => {handlePageChange(2);emailref.current.value="";passwordref.current.value="";}}>
+            <p className="login-p" onClick={() => { handlePageChange(2); emailref.current.value = ""; passwordref.current.value = ""; }}>
               登入&emsp;
             </p>{" "}
             | <p style={{ color: 'darkblue', transition: 'all 1s' }} className="login-p" onClick={() => handlePageChange(1)}>&emsp;註冊</p>
@@ -280,10 +283,10 @@ const Login = () => {
         <div className="login-div">
           <div className="login-logo"></div>
           <div className="login-title">
-            <p style={{ color: 'darkblue', transition: 'all 1s' }} className="login-p" onClick={() => {handlePageChange(2);emailref.current.value="";passwordref.current.value="";}}>
+            <p style={{ color: 'darkblue', transition: 'all 1s' }} className="login-p" onClick={() => { handlePageChange(2); emailref.current.value = ""; passwordref.current.value = ""; }}>
               登入&emsp;
             </p>{" "}
-            | <p className="login-p" onClick={() => {handlePageChange(1);emailref.current.value="";passwordref.current.value="";}}>&emsp;註冊</p>
+            | <p className="login-p" onClick={() => { handlePageChange(1); emailref.current.value = ""; passwordref.current.value = ""; }}>&emsp;註冊</p>
           </div>
           <div className="sub-title">Join Us</div>
           <div className="login-fields">

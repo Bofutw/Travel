@@ -94,9 +94,7 @@ export default function ProfileUploadImg({ open, setOpen, setShowAva, setAvaSrc,
     }
 
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+
     const handleClose = () => {
         setShowAva(true);
         setOpen(false);

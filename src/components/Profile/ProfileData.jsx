@@ -32,6 +32,7 @@ export default function ProfileData({
 }) {
   const [loading, setLoading] = useState(false);
   const [agree, setAgree] = useState(false);
+  const [frimgupdate, setFrImgUpdate] = useState(true);
 
   const [durl, setDurl] = useState("");
 
@@ -43,18 +44,22 @@ export default function ProfileData({
   let area = `cityid=${parseInt(arearef.current.value)}`;
   let sign = signref.current.value;
   let realname = realnameref.current.value;
+  let initialprofileURL = localStorage.getItem("profileURL");
+  let memberrgitime = localStorage.getItem("memberregistertime");
   // realname, email, profileURL, nickname, birthday, area, sign
   let profiledata = {
     memberid: memberid,
     membername: realname,
     memberemail: email,
-    membericon: profileURL,
+    membericon: initialprofileURL,
     membernickname: nickname,
     memberbirth: birthday,
     membergender: gender,
     memberintro: sign,
+    memberregistertime: memberrgitime,
+
   };
-  console.log("this is memberid", memberid);
+  console.log("this is memberid", localStorage.getItem("memberregistertime"));
 
   //系統提示訊息
   const [suopen, setSuOpen] = useState(false);
@@ -75,44 +80,44 @@ export default function ProfileData({
 
   const handleAgree = async (e) => {
     e.preventDefault();
-
     setLoading(true);
 
     if (!!editfile !== !!null) {
 
-      await uploadtofirebase(editfile, setDurl);
-
+      await uploadtofirebase(editfile, setDurl, setFrImgUpdate);
     }
     //firebase userprofile
     await updateProfile(auth.currentUser, {
       displayName: profiledata.membername
     });
-
     await senddatatosql(profiledata, area);
-    localStorage.setItem("name",profiledata.membername);
+    console.log("this membericon", profiledata.membericon);
+    localStorage.setItem("name", profiledata.membername);
 
     await msgfn();
-
-
     //console.log("this is durl", durl);
-
   };
-  const msgfn = async () => {
-
-    setLoading(false);
-    setSuOpen(true);
-    
-    const str = "修改成功";
-    setSuMessage(() => str);
-    console.log("修改成功");
-
-    if (loading == false) {
+  useEffect(() => {
+    if (frimgupdate === false) {
       setTimeout(() => {
-
-        setProfileSend(false);
         window.location.reload();
-      }, 1300);
+
+      }, 1000);
     }
+
+  }, [frimgupdate])
+  const msgfn = async () => {
+    setTimeout(() => {
+
+      setLoading(false);
+      setSuOpen(true);
+
+      const str = "修改成功";
+      setSuMessage(() => str);
+      console.log("修改成功");
+      window.location.reload();
+    }, 1000);
+
   };
 
   //設定用戶圖片到網頁
@@ -120,12 +125,14 @@ export default function ProfileData({
     if (!!durl !== !!null) {
       profiledata.membericon = durl;
       senddatatosql(profiledata, area);
+      console.log("this is area", area);
+      console.log("this is durl", durl);
       //console.log("durl not null!!", !!durl !== !!null);
       localStorage.setItem("profileURL", durl);
-      
+
     }
-  }, [durl])
-  
+  }, [durl, area, profiledata])
+
   return (
     <div>
       {suopen && <ProfileMessage suopen={suopen} setSuOpen={setSuOpen} sumessage={sumessage} />}

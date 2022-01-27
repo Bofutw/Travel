@@ -27,7 +27,7 @@ const SuccessMessage = ({ sumessage, suopen, setSuOpen }) => {
     }
     return <>
         {suopen && <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'center' }} open={suopen} autoHideDuration={6000} onClose={handleClose2}>
-            <Alert variant="filled" onClose={handleClose2} severity="success" sx={{ width: '100%', '&:hover': { boxShadow: ' 3px 7px #78002e' } }}>
+            <Alert variant="filled" onClose={handleClose2} severity="success" sx={{ width: '100%', '&:hover': { boxShadow: ' 3px 7px darkgreen' } }}>
                 <AlertTitle>系統成功訊息提示：</AlertTitle>
 
                 {sumessage}

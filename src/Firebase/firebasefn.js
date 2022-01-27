@@ -5,8 +5,9 @@ import { onAuthStateChanged, updateProfile } from 'firebase/auth';
 
 
 
-export async function uploadtofirebase(file, setDurl) {
-    const storageRef = ref(storage, `files/5${file.name}`);
+export async function uploadtofirebase(file, setDurl, setFrImgUpdate) {
+    const memberid = localStorage.getItem("memberid");
+    const storageRef = ref(storage, `${memberid}files/${memberid}${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
 
@@ -36,6 +37,7 @@ export async function uploadtofirebase(file, setDurl) {
                 updateProfile(auth.currentUser, { photoURL: downloadURL }).then(() =>
                     console.log("圖片以上傳到firebase", downloadURL)
                 )
+                setFrImgUpdate(false);
                 setDurl(downloadURL)
                 //return downloadURL;
 

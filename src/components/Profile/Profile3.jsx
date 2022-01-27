@@ -20,10 +20,10 @@ export default function Profile3() {
   const birthdayref = useRef("");
   const arearef = useRef("");
   const signref = useRef("");
-  
+
 
   //生日更改即時資訊
-  const [curbirth,setCurBirth]=useState("");
+  const [curbirth, setCurBirth] = useState("");
 
   //上傳圖片對話窗
   const [open, setOpen] = useState(false)
@@ -67,7 +67,9 @@ export default function Profile3() {
       const finalaxiosmemberinfo = Object.assign(axiosmemberinfo, { membercityid: axioscityid });
       // console.log("當前用戶所有資訊",finalaxiosmemberinfo);
       console.log("當前頁面生日資訊", birthdayref.current.value)
-
+      //設置性別
+      //setCurGender(finalaxiosmemberinfo.membergender);
+      localStorage.setItem("testgendervalue", finalaxiosmemberinfo.membergender);
       setMemberInfo(finalaxiosmemberinfo);
       setCityId(() => (finalaxiosmemberinfo.membercityid).toString())
 
@@ -90,11 +92,11 @@ export default function Profile3() {
 
   const submitClick = async (e) => {
     e.preventDefault();
-     setProfileSend(!profilesend);
+    setProfileSend(!profilesend);
   };
 
   //判斷星座
-  const testRef = useRef("");
+
 
 
   useEffect(() => {
@@ -155,7 +157,7 @@ export default function Profile3() {
     //設置用戶星座
     //console.log("及時生日資訊2",currentbirth);
     //console.log("及時星座資訊：",constellation);
-  }, [curbirth,currentbirth]);
+  }, [curbirth, currentbirth]);
 
 
   return (
@@ -302,7 +304,7 @@ export default function Profile3() {
                 className="profile-date"
                 type="date"
                 ref={birthdayref}
-                onChange={(e)=>setCurBirth(e.target.value)}
+                onChange={(e) => setCurBirth(e.target.value)}
                 id="birthday"
                 name="lastname"
                 placeholder="Your last name.."
@@ -311,21 +313,26 @@ export default function Profile3() {
           </div>
           <div>
             <div>
-              <label>性別：</label>
+              <label style={{ display: edit ? "" : "none" }}>性別：</label>
             </div>
-            <div style={{ marginLeft: "230px", marginTop: "-40px" }}>
+            <div className="profile3-editcurusergender" style={{ marginLeft: "230px", marginTop: "-40px", display: (edit ? "" : "none") }}>
 
-
+              {console.log("this is membergender", curgender === 1)}
               <input
                 disabled={edit ? null : "disabled"}
-                //defaultChecked={(memberinfo.membergender) !== 2}
-                onChange={(e) => setCurGender(e.target.value)}
+                defaultChecked={localStorage.getItem("testgendervalue") === 1 && true}
+                onChange={(e) => {
+                  setCurGender(e.target.value)
+                  console.log(e.target.value);
+                }}
+
                 type="radio"
                 id="r1"
                 name="gender"
                 value="1"
               />
-              <label for="r1">
+
+              <label htmlFor="r1">
                 <span>男生</span>
               </label>
               <input
@@ -334,16 +341,19 @@ export default function Profile3() {
                 disabled={edit ? null : "disabled"}
                 value="2"
                 id="r2"
+
                 onChange={(e) => setCurGender(e.target.value)}
                 name="gender"
                 style={{ marginLeft: "80px" }}
               />
-              <label for="r2">
+              <label htmlFor="r2">
                 <span>女生</span>
               </label>
 
             </div>
-            {memberinfo.membergender != null ? <>當前性別：<span style={{ marginLeft: '120px' }}>{(memberinfo.membergender) === 1 ? "男生" : "女生"}</span></> : ""}
+            <div className="profile3-curusergender" style={{ display: (edit ? "none" : "") }}>
+              {memberinfo.membergender != null ? <>當前性別：<span style={{ marginLeft: '120px' }}>{(memberinfo.membergender) === 1 ? "男生" : "女生"}</span></> : ""}
+            </div>
 
           </div>
           <div>
@@ -358,7 +368,7 @@ export default function Profile3() {
             <div className="col-75">
               <input
                 value={constellation}
-                
+
                 defaultValue={constellation}
                 disabled="disabled"
                 type="text"

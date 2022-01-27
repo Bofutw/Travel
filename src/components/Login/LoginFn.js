@@ -10,7 +10,7 @@ export async function getuseremail(useremail) {
         //console.log("GetUserInfo", axiosresult.memberemail);
         return axiosresult.memberemail;
     } catch (error) {
-        const c1 = "false"
+        const c1 = false;
         return c1;
     }
 
@@ -38,7 +38,12 @@ export async function getmemberid(currentuseremail) {
     return memberid
 
 }
-
+export async function getmemberrigtime(currentuseremail) {
+    const axiosget = await axios.get(`http://localhost:8080/member/email=${currentuseremail}`);
+    const axiosdata = await axiosget.data;
+    const memberrigtime = await axiosdata.memberregistertime;
+    return memberrigtime
+}
 
 export async function getmemberimgurl(memberid) {
 
@@ -54,7 +59,8 @@ export async function createnewuser(currentuseremail, currentusername, currentus
     const axiospostdata = await axios.post("http://localhost:8080/member/", {
         membername: currentusername,
         memberemail: currentuseremail,
-        membericon: currentuserprofileURL
+        membericon: currentuserprofileURL,
+        // memberregistertime: new Date()
     })
 
     //const axiosres = await axiospostdata.data;   
@@ -66,21 +72,21 @@ export async function createnewuser(currentuseremail, currentusername, currentus
 
 export async function existenceemaillpassword(currentemail, currentpassword) {
 
-    let errormessage = { open: 'true', message: 'hey hey 見鬼啦' };
+    let errormessage = { open: true, message: 'hey hey 見鬼啦' };
     //write useremail error message 
 
     if (!currentemail === !null && !!currentpassword === !!null) {
-        errormessage = { open: 'true', message: '請輸入您的信箱或密碼!!!' }
+        errormessage = { open: true, message: '請輸入您的信箱或密碼!!!' }
         return errormessage;
     } else if (!currentemail.includes("@")) {
-        errormessage = { open: 'true', message: '請填寫正確格式的信箱地址!!!' }
+        errormessage = { open: true, message: '請填寫正確格式的信箱地址!!!' }
         return errormessage;
-    } else if (currentpassword.length <= 6) {
-        errormessage = { open: 'true', message: '密碼必須6位數以上!!!' }
+    } else if (currentpassword.length < 6) {
+        errormessage = { open: true, message: '密碼必須6位數以上!!!' }
         return errormessage;
     }
     else {
-        errormessage = { open: 'true', message: '請填寫正確格式的信箱地址和密碼!!!' }
+        errormessage = { open: false, message: '這個其實是正確的訊息hahaha請填寫正確格式的信箱地址和密碼!!!' }
         return errormessage;
     }
 

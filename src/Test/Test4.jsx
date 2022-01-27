@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { addDays, format } from 'date-fns/esm';
 import { logEvent } from 'firebase/analytics';
 import { onAuthStateChanged, updateProfile } from 'firebase/auth';
 import { getStorage, ref, uploadBytesResumable } from 'firebase/storage';
@@ -11,6 +12,7 @@ function Test4() {
     // const dbRef = ref(getDatabase());
     const [data2, setData2] = useState([]);
     const [show, setShow] = useState(false);
+    const [testgender, setTestGender] = useState("");
 
     const handleClick = async () => {
         // const getfirebasebackendinfo = await get(child(dbRef, `currentreg/num`));
@@ -33,36 +35,37 @@ function Test4() {
         const changename = "bntt 5533";
         const changephotourl = "https://previews.123rf.com/images/pandavector/pandavector1605/pandavector160500618/56794127-icono-de-ni%C3%B1o-avatar-de-ilustraci%C3%B3n-vectorial-para-dise%C3%B1o-web-y-m%C3%B3vil.jpg"
         const changephotourl2 = "https://lh3.googleusercontent.com/a/AATXAJy7phPYZQ_u-doPHut4LjlSHUeq90r_6D6KCBs=s96-c"
-        test5(changename,changephotourl2);
-        
+        test5(changename, changephotourl2);
+
     }
-    const test5 = (changename,changephotourl) => {
+    const test5 = (changename, changephotourl) => {
         updateProfile(auth.currentUser, {
             displayName: changename, photoURL: changephotourl
-          }).then(() => {
+        }).then(() => {
 
             console.log("修改成功");
             // Profile updated!
             // ...
-          }).catch((error) => {
-              console.log(error.message);
+        }).catch((error) => {
+            console.log(error.message);
             // An error occurred
             // ...
-          });
+        });
     };
 
-    useEffect(()=>{
-        onAuthStateChanged(auth,(currentUser)=>{
-            if(currentUser != null){
-                console.log(currentUser);
-                console.log(currentUser.providerId);
+    useEffect(() => {
+        // onAuthStateChanged(auth, (currentUser) => {
+        //     if (currentUser != null) {
+        //         console.log(currentUser);
+        //         console.log(currentUser.providerId);
 
-            }
-            
-        })
+        //     }
 
+        // })
+        const today = format(new Date(), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
+        console.log("this is today", today);
 
-    },[])
+    }, [])
 
 
     useEffect(() => {
@@ -92,6 +95,32 @@ function Test4() {
                     </li>
                 </ul>)
                 }
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <input
+                    type="radio"
+                    name="gender2"
+                    id=""
+                    value="boy"
+                    defaultChecked={localStorage.getItem("testgender") === "boy" && true}
+                    onChange={(e) => {
+                        setTestGender(e.target.value)
+                        localStorage.setItem("testgender", e.target.value);
+
+                    }} />男生<br />
+                <input
+                    type="radio"
+                    name="gender2"
+                    id=""
+                    value="girl"
+                    onChange={(e) => {
+                        setTestGender(e.target.value)
+                        localStorage.setItem("testgender", e.target.value);
+
+                    }
+
+                    } />  女生<br />
+                <button onClick={() => console.log(testgender)}>Show Gender</button>
             </div>
         </div>
 

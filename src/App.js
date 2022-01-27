@@ -124,7 +124,7 @@ function App() {
           {isadmin === "true" && <Route path="/dashboard/crud" element={<Crud />} />}
           <Route path="/dashboard/*" element={<BackendLoading />} />
         </Routes>
-        {/* {(adminlogin === "false" && !ismap) && <Footer />} */}
+        {(adminlogin === "false" && !ismap) && <Footer />}
 
 
 
