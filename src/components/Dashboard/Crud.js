@@ -34,6 +34,8 @@ import Githubapiall from './Githubapiall';
 import Cloneweek from './Cloneweek'
 import Crudmember from './Crudmember'
 import Crudmem from './Crudmem'
+import { Avatar, Button } from '@mui/material';
+import { logout } from './Dashboard';
 
 function Copyright(props) {
   return (
@@ -160,12 +162,14 @@ function DashboardContent() {
             >
             不可以色色の後台一會員管理
             </Typography>
+            <Avatar sx={{ marginRight: '10px', transition: 'width 0.15s ,height 0.15s', '&:hover': { cursor: 'pointer', width: 50, height: 50, boxShadow: ' 3px 7px #888888' } }} >B</Avatar>
             <IconButton color="usewhite" >
               {/* Content可以塞data state */}
-              <Badge badgeContent={4} color="neutral">
+              <Badge badgeContent={0} color="neutral">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
+            <Button onClick={logout} sx={{ bgcolor: 'white', color: '#e53e3e', '&:hover': { backgroundColor: 'whitesmoke', color: '#e53e3e', fontWeight: 'bold', boxShadow: ' 3px 7px #888888' }, borderRadius: '10%', width: 90, height: 40 }}>登出</Button>
            
           </Toolbar>
         </AppBar>

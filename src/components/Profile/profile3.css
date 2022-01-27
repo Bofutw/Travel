@@ -51,8 +51,10 @@ textarea {
   /* z-index: 1; */
   display: flex;
   background-color: #f7f5e1;
-  width: 50%;
+  width: 200px;
   height: 200px;
+  /* max-width: 50%;
+  max-height:200px ; */
   position: relative;
   bottom: 30px;
   margin-top: -75px;

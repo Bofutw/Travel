@@ -20,6 +20,10 @@ export default function Profile3() {
   const birthdayref = useRef("");
   const arearef = useRef("");
   const signref = useRef("");
+  
+
+  //生日更改即時資訊
+  const [curbirth,setCurBirth]=useState("");
 
   //上傳圖片對話窗
   const [open, setOpen] = useState(false)
@@ -43,8 +47,8 @@ export default function Profile3() {
   const [cityid, setCityId] = useState("");
 
   useEffect(() => {
-    console.log("this is avasrc",avasrc);
-    
+    //console.log("this is avasrc",avasrc);
+
     const gdata = async () => {
       const axiosmemberinfo = await getmemberallinfo(
         localStorage.getItem("email")
@@ -56,10 +60,13 @@ export default function Profile3() {
         let memberbirth2 = await axiosmemberinfo.memberbirth;
         memberbirth2 = memberbirth2.toString().slice(0, 10);
         setCurrentBirth(() => memberbirth2);
+        console.log("memberbirth", memberbirth2);
+
       }
       //設定當前用戶所有資訊
       const finalaxiosmemberinfo = Object.assign(axiosmemberinfo, { membercityid: axioscityid });
-      //console.log(finalaxiosmemberinfo);
+      // console.log("當前用戶所有資訊",finalaxiosmemberinfo);
+      console.log("當前頁面生日資訊", birthdayref.current.value)
 
       setMemberInfo(finalaxiosmemberinfo);
       setCityId(() => (finalaxiosmemberinfo.membercityid).toString())
@@ -83,14 +90,19 @@ export default function Profile3() {
 
   const submitClick = async (e) => {
     e.preventDefault();
-    await setProfileSend(!profilesend);
+     setProfileSend(!profilesend);
   };
 
   //判斷星座
-  useEffect(() => {
-    const month = parseInt(birthdayref.current.value.substr(5, 2));
-    const day = parseInt(birthdayref.current.value.substr(8, 2));
+  const testRef = useRef("");
 
+
+  useEffect(() => {
+    const month = parseInt((curbirth || currentbirth).substr(5, 2));
+    const day = parseInt((curbirth || currentbirth).substr(8, 2));
+    //console.log("及時生日資訊",curbirth)
+    // console.log("this is month", month);
+    // console.log("this is day", day); 
     //console.log("月：", month);
     //console.log("日期:", date.substr(8, 2));
 
@@ -140,7 +152,10 @@ export default function Profile3() {
       }
     };
     conditionconstellation();
-  }, [birthdayref.current.value]);
+    //設置用戶星座
+    //console.log("及時生日資訊2",currentbirth);
+    //console.log("及時星座資訊：",constellation);
+  }, [curbirth,currentbirth]);
 
 
   return (
@@ -166,6 +181,7 @@ export default function Profile3() {
             signref={signref}
             profileURL={avasrc}
             editfile={editfile}
+            setEdit={setEdit}
           />
         )}
 
@@ -180,7 +196,8 @@ export default function Profile3() {
             </div>
 
             <div className="profile3-img">
-              <img className="avatarimg" src={edit ? (showava ? avasrc : profileURL) : profileURL} alt="" />
+              <img className="avatarimg" src={edit ? (showava ? (!!avasrc === !!null ? profileURL : avasrc) : profileURL) : profileURL} alt="" />
+              {/* {console.log("this is avasrc",!!avasrc === !!null)} */}
               <Fab
                 aria-label="add"
                 sx={{
@@ -285,6 +302,7 @@ export default function Profile3() {
                 className="profile-date"
                 type="date"
                 ref={birthdayref}
+                onChange={(e)=>setCurBirth(e.target.value)}
                 id="birthday"
                 name="lastname"
                 placeholder="Your last name.."
@@ -340,6 +358,8 @@ export default function Profile3() {
             <div className="col-75">
               <input
                 value={constellation}
+                
+                defaultValue={constellation}
                 disabled="disabled"
                 type="text"
                 className="text"
@@ -356,7 +376,7 @@ export default function Profile3() {
               </label>
             </div>
             <div className="col-75">
-              {console.log(typeof `${memberinfo.membercityid}`)}
+
               <select
                 id="area"
                 name="country"

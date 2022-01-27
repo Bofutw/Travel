@@ -1,14 +1,14 @@
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "./firebase-config";
-import {auth} from './firebase-config'
+import { auth } from './firebase-config'
 import { onAuthStateChanged, updateProfile } from 'firebase/auth';
 
 
 
-export function uploadtofirebase(file, b) {
+export async function uploadtofirebase(file, setDurl) {
     const storageRef = ref(storage, `files/5${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
-    let a = "";
+
 
     uploadTask.on('state_changed',
         (snapshot) => {
@@ -32,29 +32,31 @@ export function uploadtofirebase(file, b) {
         () => {
 
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                console.log('File available at', downloadURL);
 
-                b = downloadURL;
-
+                updateProfile(auth.currentUser, { photoURL: downloadURL }).then(() =>
+                    console.log("圖片以上傳到firebase", downloadURL)
+                )
+                setDurl(downloadURL)
+                //return downloadURL;
 
             });
         }
     );
 }
 
-export function updatefireprofile(changename, changephotourl) {
+// export function updatefireprofile(changename, changephotourl) {
 
-    updateProfile(auth.currentUser, {
-        displayName: changename,
-        photoURL: changephotourl
-    }).then(() => {
+//     updateProfile(auth.currentUser, {
+//         displayName: changename,
+//         photoURL: changephotourl
+//     }).then(() => {
 
-        console.log("profile3修改成功");
-        // Profile updated!
-        // ...
-    }).catch((error) => {
-        console.log(error.message);
-        // An error occurred
-        // ...
-    });
-}
+//         console.log("profile3修改成功");
+//         // Profile updated!
+//         // ...
+//     }).catch((error) => {
+//         console.log(error.message);
+//         // An error occurred
+//         // ...
+//     });
+// }

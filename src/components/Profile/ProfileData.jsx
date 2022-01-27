@@ -11,6 +11,11 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import { getmemberid } from "../Login/LoginFn";
 import ProfileMessage from "./ProfileMessage";
 import { uploadtofirebase } from "../../Firebase/firebasefn";
+import { senddatatosql } from "./sendprofile";
+import { async } from "@firebase/util";
+import { auth } from "../../Firebase/firebase-config";
+import { updateProfile } from "firebase/auth";
+import { getmemberallinfo } from './getmemberinfo';
 export default function ProfileData({
   profilesend,
   setProfileSend,
@@ -22,10 +27,13 @@ export default function ProfileData({
   profileURL,
   arearef,
   signref,
-  editfile
+  editfile,
+  setEdit
 }) {
   const [loading, setLoading] = useState(false);
   const [agree, setAgree] = useState(false);
+
+  const [durl, setDurl] = useState("");
 
   let memberid = localStorage.getItem("memberid");
   let email = emailref.current.value;
@@ -46,7 +54,7 @@ export default function ProfileData({
     membergender: gender,
     memberintro: sign,
   };
-  console.log(memberid);
+  console.log("this is memberid", memberid);
 
   //系統提示訊息
   const [suopen, setSuOpen] = useState(false);
@@ -61,6 +69,7 @@ export default function ProfileData({
 
   const handleClose = () => {
     setProfileSend(false);
+    setEdit(false);
     setAgree(false);
   };
 
@@ -69,42 +78,54 @@ export default function ProfileData({
 
     setLoading(true);
 
-    setTimeout(async () => {
-      try {
-        setLoading(true);
-        const axiospost = await axios.put(
-          `http://localhost:8080/member/${area}`,
-          profiledata
-        );
-        console.log("this is editfile",editfile);
-        uploadtofirebase(editfile);
-        const axiosresult = await axiospost.data;
-        console.log("successs", axiosresult);
+    if (!!editfile !== !!null) {
+
+      await uploadtofirebase(editfile, setDurl);
+
+    }
+    //firebase userprofile
+    await updateProfile(auth.currentUser, {
+      displayName: profiledata.membername
+    });
+
+    await senddatatosql(profiledata, area);
+    localStorage.setItem("name",profiledata.membername);
+
+    await msgfn();
 
 
-
-        //success alert
-        setSuOpen(true);
-        const str = "修改成功"
-        setSuMessage(() => str);
-        console.log(str);
-        // window.location.reload();
-
-
-
-        setTimeout(() => {
-          setProfileSend(false);
-        }, 2300);
-
-      } catch (error) {
-        console.log(error);
-      }
-    }, 2000);
-    console.log(profiledata);
-
+    //console.log("this is durl", durl);
 
   };
+  const msgfn = async () => {
 
+    setLoading(false);
+    setSuOpen(true);
+    
+    const str = "修改成功";
+    setSuMessage(() => str);
+    console.log("修改成功");
+
+    if (loading == false) {
+      setTimeout(() => {
+
+        setProfileSend(false);
+        window.location.reload();
+      }, 1300);
+    }
+  };
+
+  //設定用戶圖片到網頁
+  useEffect(() => {
+    if (!!durl !== !!null) {
+      profiledata.membericon = durl;
+      senddatatosql(profiledata, area);
+      //console.log("durl not null!!", !!durl !== !!null);
+      localStorage.setItem("profileURL", durl);
+      
+    }
+  }, [durl])
+  
   return (
     <div>
       {suopen && <ProfileMessage suopen={suopen} setSuOpen={setSuOpen} sumessage={sumessage} />}

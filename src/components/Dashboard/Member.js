@@ -180,7 +180,7 @@ const handleMenuClose = () => {
               </Badge>
             </IconButton>
 
-            <Button onClick={logout} sx={{ bgcolor: 'white', color: '#4fc3f7', '&:hover': { backgroundColor: 'whitesmoke', color: 'black', fontWeight: 'bold', boxShadow: ' 3px 7px #888888' }, borderRadius: '10%', width: 90, height: 40 }}>登出</Button>
+            <Button onClick={logout} sx={{ bgcolor: 'white', color: '#4fc3f7', '&:hover': { backgroundColor: 'whitesmoke', color: '#4fc3f7', fontWeight: 'bold', boxShadow: ' 3px 7px #888888' }, borderRadius: '10%', width: 90, height: 40 }}>登出</Button>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
