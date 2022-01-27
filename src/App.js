@@ -40,7 +40,7 @@ import { getadminloginpage, getisadmin, setisadmin } from "./components/DashBoar
 import PageNotFound from "./components/PageNF/PageNotFound";
 import LoginSuccessPage from "./components/Login/LoginSuccessPage";
 import Test4 from "./Test/Test4";
-
+import Crud from './components/Dashboard/Crud'
 
 
 export const AppContext = createContext();
@@ -121,6 +121,7 @@ function App() {
           {isadmin === "true" && <Route path="/dashboard" element={<Dashboard />} />}
           {isadmin === "true" && <Route path="/dashboard/github" element={<Github />} />}
           {isadmin === "true" && <Route path="/dashboard/member" element={<Member />} />}
+          {isadmin === "true" && <Route path="/dashboard//crud" element={<Crud />} />}
           <Route path="/dashboard/*" element={<BackendLoading />} />
         </Routes>
         {/* {(adminlogin === "false" && !ismap) && <Footer />} */}

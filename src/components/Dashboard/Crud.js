@@ -28,12 +28,12 @@ import Areachart from './Areachart';
 import Agechart from './Agechart'
 import { height, margin, padding } from '@mui/system';
 import Githubapi from './Githubapi';
-import { Avatar, Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { setfradminloginpage, setisadmin } from '../DashBoardLogin/DBoardLoginInfo';
-import Membertime from './Membertime'
-import {zhTW} from '@mui/material/locale';
-
+import Clone from './Clone';
+import Depositsgit from './Depositsgit'
+import Githubapiall from './Githubapiall';
+import Cloneweek from './Cloneweek'
+import Crudmember from './Crudmember'
+import Crudmem from './Crudmem'
 
 function Copyright(props) {
   return (
@@ -101,7 +101,7 @@ const mdTheme = createTheme({
   },
   palette: {
     primary: {
-      main: '#81c784',
+      main: '#f06292',
       darker: '#053e85',
     },
     neutral: {
@@ -111,36 +111,17 @@ const mdTheme = createTheme({
     usewhite: {
       main: green[50]
     }
-  }
+  },
 });
 
-export const logout = async () => {
-
-  localStorage.setItem("adminloginpage", "false")
-  window.location.href = "/";
-  setisadmin();
-
-}
 
 
 function DashboardContent() {
-
-
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
-  // DropDownBar
-/* const [anchorEl, setAnchorEl] = useState(null);
-const Elopen = Boolean(anchorEl);
-const handleMenuOpen = (e) => {
-    setAnchorEl(e.currentTarget);
-    console.log(e.currentTarget.style)
-};
-const handleMenuClose = () => {
-    setAnchorEl(null);
-}; */
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -177,18 +158,15 @@ const handleMenuClose = () => {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-
-              不可以色色の後台
+            不可以色色の後台一會員管理
             </Typography>
-            <Avatar sx={{ marginRight: '10px', transition: 'width 0.15s ,height 0.15s', '&:hover': { cursor: 'pointer', width: 50, height: 50, boxShadow: ' 3px 7px #888888' } }} >B</Avatar>
             <IconButton color="usewhite" >
               {/* Content可以塞data state */}
-              <Badge badgeContent={0} color="neutral" >
+              <Badge badgeContent={4} color="neutral">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            <Button onClick={logout} sx={{ bgcolor: 'white', color: '#a5d6a7', '&:hover': { backgroundColor: 'whitesmoke', color: 'black', fontWeight: 'bold', boxShadow: ' 3px 7px #888888' }, borderRadius: '10%', width: 90, height: 40 }}>登出</Button>
-
+           
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -223,70 +201,30 @@ const handleMenuClose = () => {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
-              {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
+            <Grid container spacing={1}>
+            <Grid item xs={12} md={12} lg={12}>
                 <Paper
                   sx={{
                     p: 2,
                     display: 'flex',
                     flexDirection: 'column',
-                    height: 240,
+                    
                   }}
                 >
-                  <Membertime></Membertime>
-                  
+                 {/*  {<Crudmember></Crudmember>} */}
+                  {<Crudmem></Crudmem>}
                 </Paper>
               </Grid>
-              {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <Deposits />
-                </Paper>
-              </Grid>
-              {/* Recent Orders */}
-             
-              <Grid container spacing={2}>
-             <Grid item xs={9} >
-                <Paper sx={{ height: 400, p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:3 }}>
-                <Chart />
-                
-              
-                </Paper>
-              </Grid>
-             { /* <Grid item xs={5}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2,paddingLeft:0}}>
-                
-                  <Agechart></Agechart>
-              
-                </Paper>
-              </Grid> */}
-
-              <Grid item xs={3}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:1}}>
-                
-                  <Githubapi></Githubapi>
-              
-                </Paper>
-              </Grid>
-              
             </Grid>
-            </Grid>
-            <Copyright sx={{ pt: 4 }} />
+           
           </Container>
         </Box>
       </Box>
+      <Copyright sx={{ pt: 4 }} />
     </ThemeProvider>
   );
 }
 
-export default function Dashboard() {
+export default function Github() {
   return <DashboardContent />;
 }
