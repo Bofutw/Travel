@@ -317,19 +317,19 @@ export default function Profile3() {
             </div>
             <div className="profile3-editcurusergender" style={{ marginLeft: "230px", marginTop: "-40px", display: (edit ? "" : "none") }}>
 
-              {console.log("this is membergender", curgender === 1)}
+              {console.log("this is membergender", curgender === 0)}
               <input
                 disabled={edit ? null : "disabled"}
-                defaultChecked={localStorage.getItem("testgendervalue") === 1 && true}
+                defaultChecked={localStorage.getItem("testgendervalue") === 0 && true}
                 onChange={(e) => {
                   setCurGender(e.target.value)
                   console.log(e.target.value);
                 }}
 
                 type="radio"
-                id="r1"
+                id="r0"
                 name="gender"
-                value="1"
+                value="0"
               />
 
               <label htmlFor="r1">
@@ -339,8 +339,8 @@ export default function Profile3() {
                 type="radio"
                 //defaultChecked={(memberinfo.membergender) ===1}
                 disabled={edit ? null : "disabled"}
-                value="2"
-                id="r2"
+                value="1"
+                id="r1"
 
                 onChange={(e) => setCurGender(e.target.value)}
                 name="gender"

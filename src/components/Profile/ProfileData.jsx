@@ -102,7 +102,7 @@ export default function ProfileData({
       setTimeout(() => {
         window.location.reload();
 
-      }, 1000);
+      }, 2300);
     }
 
   }, [frimgupdate])
@@ -116,7 +116,7 @@ export default function ProfileData({
       setSuMessage(() => str);
       console.log("修改成功");
       window.location.reload();
-    }, 1000);
+    }, 2300);
 
   };
 
