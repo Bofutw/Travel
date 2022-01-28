@@ -4,11 +4,10 @@ import './qa.css'
 class QuestionAnswer extends Component {
  render() {
   return (
-        <div style={{backgroundImage: 'url("/img/275F99A6-8432-4DDB-B936-0D619CC4E238.jpeg")',backgroundSize:'100% 100%'}}>
-            
-            <div class="qa-container" >
-                
-                <div class="qacard" style={{float:'left',marginRight:'20px'}}>
+        <div style={{backgroundImage: 'url("/images/563231_l.jpg")',backgroundSize:'100% 100%'}}>
+            <h2 style={{color:'white',fontSize:'48px',fontWeight:'bold',paddingTop:'30px',marginLeft:'650px'}}>常見問題<i class="fa fa-question-circle" aria-hidden="true" style={{marginLeft:'20px'}}></i></h2>
+            <div class="qa-container" >                
+                <div class="qacard" style={{float:'left',marginRight:'20px',marginTop:'100px'}}>
                     <div class="slide slide1">
                         <div class="qa-text">
                             <div class="icon">
@@ -25,7 +24,7 @@ class QuestionAnswer extends Component {
                         </div>
                     </div>
                 </div>
-                <div class="qacard" style={{float:'left',marginRight:'20px'}}>
+                <div class="qacard" style={{float:'left',marginRight:'20px',marginTop:'100px'}}>
                     <div class="slide slide1">
                         <div class="qa-text">
                             <div class="icon">
@@ -42,7 +41,7 @@ class QuestionAnswer extends Component {
                         </div>
                     </div>
                 </div>
-                <div class="qacard" style={{float:'left',marginRight:'20px'}}>
+                <div class="qacard" style={{float:'left',marginRight:'20px',marginTop:'100px'}}>
                     <div class="slide slide1">
                         <div class="qa-text">
                             <div class="icon">
@@ -59,7 +58,7 @@ class QuestionAnswer extends Component {
                         </div>
                     </div>
                 </div>
-                <div class="qacard" style={{float:'left',marginRight:'20px'}}>
+                <div class="qacard" style={{float:'left',marginRight:'20px',marginTop:'-80px'}}>
                     <div class="slide slide1">
                         <div class="qa-text">
                             <div class="icon">
@@ -76,7 +75,7 @@ class QuestionAnswer extends Component {
                         </div>
                     </div>
                 </div>
-                <div class="qacard" style={{float:'left',marginRight:'20px'}}>
+                <div class="qacard" style={{float:'left',marginRight:'20px',marginTop:'-80px'}}>
                     <div class="slide slide1">
                         <div class="qa-text">
                             <div class="icon">
@@ -93,7 +92,7 @@ class QuestionAnswer extends Component {
                         </div>
                     </div>
                 </div>
-                <div class="qacard" style={{float:'left',marginRight:'20px'}}>
+                <div class="qacard" style={{float:'left',marginRight:'20px',marginTop:'-80px'}}>
                     <div class="slide slide1">
                         <div class="qa-text">
                             <div class="icon">

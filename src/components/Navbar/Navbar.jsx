@@ -1,6 +1,6 @@
 import { Avatar, Menu } from '@mui/material'
 import React, { useRef, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
 import './navbar.css'
 import ReorderIcon from '@mui/icons-material/Reorder';
 import SearchIcon from '@mui/icons-material/Search';
@@ -14,15 +14,21 @@ import ScrollTop from '../Homepage/ScrollTop';
 
 
 
-export default function Navbar({ user }) {
-
+export default function Navbar({ setSearch }) {
+    let navigate = useNavigate();
     // RWDMenu
     const [showLinks, setShowLinks] = useState(false);
-
+    
     // Search...
     const searchRef = useRef(null);
     const handleClickSearch = () => {
         searchRef.current.focus();
+        if(!!searchRef.current.value !== !!null){
+            setSearch(searchRef.current.value);
+            navigate("/searchpage");
+            // window.location.href="/searchpage";            
+        } 
+        
         console.log(searchRef.current.value);
     };
 
@@ -60,6 +66,7 @@ export default function Navbar({ user }) {
 
 
 
+<<<<<<< HEAD
                 <Tooltip title='個人資訊' sx={{ ml: 2, outline: 'none', textDecoration: 'none', border: 'none', width: '20px' }} >
                     <IconButton onClick={handleMenuOpen}
                         size="small"
@@ -68,6 +75,16 @@ export default function Navbar({ user }) {
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : false}>
 
+=======
+                <Tooltip title='個人資訊'sx={{ ml: 2 ,outline:'none',textDecoration:'none',border:'none',width:'20px'}} >
+                    <IconButton onClick={handleMenuOpen}
+                        size="small"
+                        sx={{ ml: 2 ,outline:'none',textDecoration:'none',border:'none',width:'20px'}}
+                        aria-controls={open ? 'account-menu' : false}
+                        aria-haspopup="true"
+                        aria-expanded={open ? 'true' : false}>
+                            
+>>>>>>> feature/blog-mergetest0128
                         {/* memberImage */}
                         <Avatar src={profileURL} className='memberImg' />
                     </IconButton>

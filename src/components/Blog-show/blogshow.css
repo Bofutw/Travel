@@ -27,6 +27,37 @@
  
 }
 
+<<<<<<< HEAD
+=======
+.leftcolumn::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background-image: -webkit-gradient(linear,
+					   left bottom,
+					   left top,
+					   color-stop(0.44, rgb(136, 136, 136)),
+					   color-stop(0.72, rgb(170, 170, 170)),
+					   color-stop(0.86, rgb(184, 184, 184)));
+	}
+
+  #blogshowcard-p{
+    resize:none;
+    height:270px;
+    width:auto;
+    overflow:scroll;
+    
+  }
+
+  #blogshowcard-p::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-image: -webkit-gradient(linear,
+               left bottom,
+               left top,
+               color-stop(0.44, rgb(136, 136, 136)),
+               color-stop(0.72, rgb(170, 170, 170)),
+               color-stop(0.86, rgb(184, 184, 184)));
+    }
+
+>>>>>>> feature/blog-mergetest0128
 .rightcolumn {
   float: left;
   width: 85%;
@@ -51,11 +82,26 @@
    height:300px;
 }
 
+<<<<<<< HEAD
 .card1 {
+=======
+/* .card1 {
+>>>>>>> feature/blog-mergetest0128
   background-color: white;
   padding: 20px;
   margin-top: 20px;
   
+<<<<<<< HEAD
+=======
+} */
+#blogshow-day{
+  text-decoration:none; 
+  font-size: 20px;
+  color:white
+}
+#blogshow-day:link{
+  color:white;
+>>>>>>> feature/blog-mergetest0128
 }
 
 .row:after {

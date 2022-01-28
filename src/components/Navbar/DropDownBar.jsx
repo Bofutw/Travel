@@ -61,6 +61,7 @@ const Dropdownbar = () => {
         </MenuItem>
       </Link>
 
+<<<<<<< HEAD
       <Link to="/myblog" style={{ textDecoration: "none", color: "black" }} >
         <MenuItem>
           <ListItemIcon>
@@ -78,6 +79,25 @@ const Dropdownbar = () => {
           <li style={{ fontWeight: "bolder" }}>開始撰寫文章</li>
         </MenuItem>
       </Link>
+=======
+      <Link to="/myblog"style={{ textDecoration: "none", color: "black" }} >
+      <MenuItem>
+        <ListItemIcon>
+          <ArticleIcon sx={{ color: "grey" }} fontSize="medium" />
+        </ListItemIcon>
+        <li style={{ fontWeight: "bolder" }}>我的遊記</li>
+      </MenuItem>
+      </Link>
+
+      {/* <Link to="/blogeditor"style={{ textDecoration: "none", color: "black" }} >
+      <MenuItem>
+        <ListItemIcon>
+          <EditTwoToneIcon sx={{ color: "black" }} fontSize="medium" />
+        </ListItemIcon>
+        <li style={{ fontWeight: "bolder" }}>開始撰寫文章</li>
+      </MenuItem>
+      </Link> */}
+>>>>>>> feature/blog-mergetest0128
       <Link to="/favorite" style={{ textDecoration: "none", color: "black" }}>
         <MenuItem>
           <ListItemIcon>

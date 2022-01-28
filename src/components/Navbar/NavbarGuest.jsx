@@ -1,6 +1,6 @@
 import { Avatar, Menu } from '@mui/material'
 import React, { useRef, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './navbar.css'
 import ReorderIcon from '@mui/icons-material/Reorder';
 import SearchIcon from '@mui/icons-material/Search';
@@ -8,13 +8,17 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Dropdownbar from './DropDownBar';
 import ScrollTop from '../Homepage/ScrollTop';
+import { WindowRounded } from '@mui/icons-material';
 
 
 
 
 
 
-export default function NavbarGuest() {
+export default function NavbarGuest({setSearch}) {
+    //navigate
+    let navigate = useNavigate();
+    
     // RWDMenu
     const [showLinks, setShowLinks] = useState(false);
 
@@ -22,6 +26,12 @@ export default function NavbarGuest() {
     const searchRef = useRef(null);
     const handleClickSearch = () => {
         searchRef.current.focus();
+        if(!!searchRef.current.value !== !!null){
+            setSearch(searchRef.current.value);
+            navigate("/searchpage");
+            // window.location.href="/searchpage";            
+        } 
+        
         console.log(searchRef.current.value);
     };
 
