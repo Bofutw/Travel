@@ -91,7 +91,7 @@ function App() {
       <div className="App">
 
         {(isadmin === "false" && adminlogin === "false") && <ScrollTop />}
-        {/* isadmin === "false" &&  */}{(adminlogin === "false") && (user ? <Navbar user={user} /> : <NavbarGuest user={user} />)}
+        {/* isadmin === "false" &&  */}{(adminlogin === "false") && (user ? <Navbar user={user} setSearch={setSearch}/> : <NavbarGuest user={user} setSearch={setSearch}/>)}
 
 
   <Routes>
