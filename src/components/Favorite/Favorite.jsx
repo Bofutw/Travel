@@ -18,7 +18,7 @@ const Favorite = () => {
     const [data, setData] = useState([]);
 
     function fetchData(){
-        fetch("http://localhost:8080/blog/memberid="+memberid)
+        fetch("http://localhost:8080/collect/memberid="+memberid)
         .then((res)=>{
           return res.json();
         })
