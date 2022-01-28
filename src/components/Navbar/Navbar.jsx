@@ -66,16 +66,6 @@ export default function Navbar({ setSearch }) {
 
 
 
-<<<<<<< HEAD
-                <Tooltip title='個人資訊' sx={{ ml: 2, outline: 'none', textDecoration: 'none', border: 'none', width: '20px' }} >
-                    <IconButton onClick={handleMenuOpen}
-                        size="small"
-                        sx={{ ml: 2, outline: 'none', textDecoration: 'none', border: 'none', width: '20px' }}
-                        aria-controls={open ? 'account-menu' : false}
-                        aria-haspopup="true"
-                        aria-expanded={open ? 'true' : false}>
-
-=======
                 <Tooltip title='個人資訊'sx={{ ml: 2 ,outline:'none',textDecoration:'none',border:'none',width:'20px'}} >
                     <IconButton onClick={handleMenuOpen}
                         size="small"
@@ -84,7 +74,6 @@ export default function Navbar({ setSearch }) {
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : false}>
                             
->>>>>>> feature/blog-mergetest0128
                         {/* memberImage */}
                         <Avatar src={profileURL} className='memberImg' />
                     </IconButton>

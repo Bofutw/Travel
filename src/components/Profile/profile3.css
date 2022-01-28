@@ -39,13 +39,8 @@ textarea {
 
 .profile3-backgroundimg {
   width: 100%;
-<<<<<<< HEAD
 
   max-height: none;
-=======
- 
-max-height: none;
->>>>>>> feature/blog-mergetest0128
   display: flex;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -57,15 +52,10 @@ max-height: none;
   /* z-index: 1; */
   display: flex;
   background-color: #f7f5e1;
-<<<<<<< HEAD
   width: 200px;
   height: 200px;
   /* max-width: 50%;
   max-height:200px ; */
-=======
-  width: 50%;
-  height:200px;
->>>>>>> feature/blog-mergetest0128
   position: relative;
   bottom: 30px;
   margin-top: -75px;
@@ -148,11 +138,6 @@ max-height: none;
   box-shadow: 13px 13px 20px rgb(199, 165, 107), -13px -13px 20px rgb(199, 165, 107);
   border-radius: 10px;
   box-shadow: inset 10px black;
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> feature/blog-mergetest0128
 }
 
 .col-25 {

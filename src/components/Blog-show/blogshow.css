@@ -27,8 +27,6 @@
  
 }
 
-<<<<<<< HEAD
-=======
 .leftcolumn::-webkit-scrollbar-thumb {
 	border-radius: 10px;
 	background-image: -webkit-gradient(linear,
@@ -57,7 +55,6 @@
                color-stop(0.86, rgb(184, 184, 184)));
     }
 
->>>>>>> feature/blog-mergetest0128
 .rightcolumn {
   float: left;
   width: 85%;
@@ -82,17 +79,11 @@
    height:300px;
 }
 
-<<<<<<< HEAD
-.card1 {
-=======
 /* .card1 {
->>>>>>> feature/blog-mergetest0128
   background-color: white;
   padding: 20px;
   margin-top: 20px;
   
-<<<<<<< HEAD
-=======
 } */
 #blogshow-day{
   text-decoration:none; 
@@ -101,7 +92,6 @@
 }
 #blogshow-day:link{
   color:white;
->>>>>>> feature/blog-mergetest0128
 }
 
 .row:after {

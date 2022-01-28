@@ -1,10 +1,6 @@
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
-<<<<<<< HEAD
 import React, { Component, createContext, useContext } from 'react';
-=======
-import React, { Component }  from 'react';
->>>>>>> feature/blog-mergetest0128
 import Prac from "./components/Practice/Prac";
 import Student from "./components/Practice/Student";
 
@@ -35,7 +31,6 @@ import BlogShow3 from "./components/Blog-show/BlogShow3";
 import BlogShow4 from "./components/Blog-show/BlogShow4";
 import BlogShow5 from "./components/Blog-show/BlogShow5";
 import Blogeditor from "./components/Blogeditor/Blogeditor";
-<<<<<<< HEAD
 import Dashboard from './components/Dashboard/Dashboard';
 import QuestionAnswer from './components/QA/QuestionAnswer';
 import DashBoardLogin from './components/DashBoardLogin/DashBoardLogin';
@@ -46,13 +41,11 @@ import PageNotFound from "./components/PageNF/PageNotFound";
 import LoginSuccessPage from "./components/Login/LoginSuccessPage";
 import Test4 from "./Test/Test4";
 import Crud from './components/Dashboard/Crud'
+import SearchPage from "./components/SearchPage/SearchPage";
 
 
 export const AppContext = createContext();
 
-=======
-import SearchPage from "./components/SearchPage/SearchPage";
->>>>>>> feature/blog-mergetest0128
 
 function App() {
   const [user, setUser] = useState({});
@@ -62,7 +55,6 @@ function App() {
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
   });
-<<<<<<< HEAD
   //判斷地圖進入
   const [openMap, setOpenMap] = useState(false);
 
@@ -89,15 +81,11 @@ function App() {
   //
   const [guest, setGuest] = useState(false);
   console.log();
-
+  //用戶搜尋值
+  const [search, setSearch] = useState("");
 
   //console.log("App",isadmin);
-=======
-  //用戶搜尋值
-  const [search,setSearch]=useState("");
-
-  console.log("App用戶搜尋值",search);
->>>>>>> feature/blog-mergetest0128
+  console.log("App用戶搜尋值", search);
   return (
     <AppContext.Provider value={{ user, isadmin, setIsAdmin }}>
       <div className="App">
@@ -106,75 +94,45 @@ function App() {
         {/* isadmin === "false" &&  */}{(adminlogin === "false") && (user ? <Navbar user={user} /> : <NavbarGuest user={user} />)}
 
 
-<<<<<<< HEAD
-        <Routes>
-          {/* need write route */}
-          <Route path="*" element={< PageNotFound />} />
+  <Routes>
+    {/* need write route */}
+    <Route path="*" element={< PageNotFound />} />
 
-          <Route path="/" element={<HomePage user={user} />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/loginsuccess" element={<LoginSuccessPage />} />
+    <Route path="/" element={<HomePage user={user} />} />
+    <Route path="/login" element={<Login />} />
+    <Route path="/loginsuccess" element={<LoginSuccessPage />} />
 
-          <Route path="/about" element={<About />} />
-          <Route path="/qa" element={<QuestionAnswer />} />
-          <Route path="/test4" element={<Test4 />} />
+    <Route path="/about" element={<About />} />
+    <Route path="/qa" element={<QuestionAnswer />} />
+    <Route path="/test4" element={<Test4 />} />
+    <Route path="/searchpage" element={<SearchPage search={search} />} />
 
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/myblog" element={<Myblog />} />
-          <Route path="/blogshow" element={<BlogShow />} />
-          <Route path="/blogshow2" element={<BlogShow2 />} />
-          <Route path="/blogshow3" element={<BlogShow3 />} />
-          <Route path="/blogshow4" element={<BlogShow4 />} />
-          <Route path="/blogshow5" element={<BlogShow5 />} />
-          <Route path="/blogeditor" element={<Blogeditor />} />
-          {user && <Route path="/profile" element={<Profile3 />} />}
-          {user && <Route path="/favorite" element={<Favorite />} />}
+    <Route path="/blog" element={<Blog />} />
+    <Route path="/myblog" element={<Myblog />} />
+    <Route path="/blogshow" element={<BlogShow />} />
+    <Route path="/blogshow2" element={<BlogShow2 />} />
+    <Route path="/blogshow3" element={<BlogShow3 />} />
+    <Route path="/blogshow4" element={<BlogShow4 />} />
+    <Route path="/blogshow5" element={<BlogShow5 />} />
+    <Route path="/blogeditor" element={<Blogeditor />} />    {user && <Route path="/profile" element={<Profile3 />} />}
+    {user && <Route path="/favorite" element={<Favorite />} />}
 
-          <Route path={"/journeyplanhome"} element={localStorage.getItem("email") != null ? <JourneyHome openMap={openMap} setOpenMap={setOpenMap} /> : <Login />} />
+    <Route path={"/journeyplanhome"} element={localStorage.getItem("email") != null ? <JourneyHome openMap={openMap} setOpenMap={setOpenMap} /> : <Login />} />
 
-          {user && <Route path="/map" element={<Map />} />}
-          <Route path="/dashboardlogin/*" element={<DashBoardLogin isadmin={isadmin} setIsAdmin={setIsAdmin} />} />
-          {isadmin === "true" && <Route path="/dashboard" element={<Dashboard />} />}
-          {isadmin === "true" && <Route path="/dashboard/github" element={<Github />} />}
-          {isadmin === "true" && <Route path="/dashboard/member" element={<Member />} />}
-          {isadmin === "true" && <Route path="/dashboard/crud" element={<Crud />} />}
-          <Route path="/dashboard/*" element={<BackendLoading />} />
-        </Routes>
-        {(adminlogin === "false" && !ismap) && <Footer />}
+    {user && <Route path="/map" element={<Map />} />}
+    <Route path="/dashboardlogin/*" element={<DashBoardLogin isadmin={isadmin} setIsAdmin={setIsAdmin} />} />
+    {isadmin === "true" && <Route path="/dashboard" element={<Dashboard />} />}
+    {isadmin === "true" && <Route path="/dashboard/github" element={<Github />} />}
+    {isadmin === "true" && <Route path="/dashboard/member" element={<Member />} />}
+    {isadmin === "true" && <Route path="/dashboard/crud" element={<Crud />} />}
+    <Route path="/dashboard/*" element={<BackendLoading />} />
+  </Routes>
+  { (adminlogin === "false" && !ismap) && <Footer /> }
 
 
-=======
-          {user ? <Navbar user={user} setSearch={setSearch}/> : <NavbarGuest user={user} setSearch={setSearch} />}
 
-          <Routes>
-            {/* need write route */}
-            <Route path="*" element={<PageNF />} />
-            <Route path="/" element={<HomePage user={user} />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/test" element={<Test />} />
-            <Route path="/about" element={<About/>} />
-            <Route path="/qa" element={<QuestionAnswer/>} /> 
-          
-            <Route path="/blog" element={<Blog/>} />
-            <Route path="/myblog" element={<Myblog/>} />
-            <Route path="/profile" element={<Profile3 />} />
-            <Route path="/favorite" element={<Favorite />} />
-            <Route path="/journeyplanhome" element={<JourneyHome />} />
-            <Route path="/map" element={<Map />} />
-            <Route path="/blogshow" element={<BlogShow />} />
-            <Route path="/blogshow2" element={<BlogShow2 />} />
-            <Route path="/blogshow3" element={<BlogShow3 />} />
-            <Route path="/blogshow4" element={<BlogShow4 />} />
-            <Route path="/blogshow5" element={<BlogShow5 />} />
-            <Route path="/blogeditor" element={<Blogeditor />} />
-            <Route path="/searchpage" element={<SearchPage search={search}/>} />
-          </Routes>
-          <Footer />
-        </BrowserRouter>
->>>>>>> feature/blog-mergetest0128
-
-      </div>
-    </AppContext.Provider>
+      </div >
+    </AppContext.Provider >
   );
 }
 {
