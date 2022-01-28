@@ -21,7 +21,7 @@ function Githubstatus({data,data1,data2,align,branch}) {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="center" ><h3>分支</h3></TableCell>
+            <TableCell align="center" ><h6>分支</h6></TableCell>
             <TableCell align="center">Main</TableCell>
             <TableCell align="center">BackendAPI</TableCell>
             <TableCell align="center">Googlemap</TableCell>
@@ -38,7 +38,7 @@ function Githubstatus({data,data1,data2,align,branch}) {
                       whiteSpace: "nowrap"
                       /* wordWrap: "break-word" */
                     }}>
-                <h3>維護人員</h3>
+                <h6>維護人員</h6>
               </TableCell>
               <TableCell align="center" >{data.author}</TableCell>
               <TableCell align="center">{data1.author}</TableCell>
@@ -50,7 +50,7 @@ function Githubstatus({data,data1,data2,align,branch}) {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-              <h3>人員信箱</h3>
+              <h6>人員信箱</h6>
               </TableCell>
               <TableCell align="center">{data.email}</TableCell>
               <TableCell align="center">{data1.email}</TableCell>
@@ -62,7 +62,7 @@ function Githubstatus({data,data1,data2,align,branch}) {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                <h3>更新時間</h3>
+                <h6>更新時間</h6>
               </TableCell>
               <TableCell align="center">{data.time}</TableCell>
               <TableCell align="center">{data1.time}</TableCell>
@@ -74,7 +74,7 @@ function Githubstatus({data,data1,data2,align,branch}) {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                <h3>提交內容</h3>
+                <h6>提交內容</h6>
               </TableCell>
               <TableCell align="center">{data.message}</TableCell>
               <TableCell align="center">{data1.message}</TableCell>
