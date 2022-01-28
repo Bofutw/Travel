@@ -2,8 +2,13 @@ import React, { useEffect, useState } from 'react'
 import './blogshow.css'
 
 
+import Button from '@mui/material/Button';
+import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove';
+import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
+
 
 export default function BlogShow() {
+<<<<<<< HEAD
     let blogdata;
 
     blogdata = JSON.parse(window.localStorage.blogdata);
@@ -12,6 +17,19 @@ export default function BlogShow() {
     const [collectstatus, setCollectstatus] = useState([]);
     const [collectid, setCollectid] = useState();
     useEffect(() => {
+=======
+    let blogdata ;
+    
+     blogdata = JSON.parse(window.localStorage.blogdata);
+     blogdata.blogdetail = JSON.parse(blogdata.blogdetail);
+     const [populardata,setPopulardata] = useState([]);
+     const [collectstatus,setCollectstatus] = useState([]);
+     const [collectid,setCollectid] = useState();
+     
+    
+
+    useEffect(()=>{
+>>>>>>> 2ceae6bf07dd0b0309ef901ae8443dde657e412f
         getPopularData();
         collectStatusCheck();
     }, []);
@@ -31,6 +49,7 @@ export default function BlogShow() {
                 setPopulardata(result)
             })
     }
+<<<<<<< HEAD
     function toBlogPage(e) {
 
         fetch("http://localhost:8080/blog/" + (e.target.id).slice(6, 8))
@@ -42,6 +61,20 @@ export default function BlogShow() {
                 window.location.href = "/Blogshow"
 
             })
+=======
+    function toBlogPage(e){
+       
+        fetch("http://localhost:8080/blog/"+(e.target.id).slice(6,8))
+        .then((res)=>{          
+           
+            return res.json()
+        })
+        .then((result)=>{
+            window.localStorage.blogdata = JSON.stringify(result)
+            window.location.href = "/Blogshow"
+ 
+        })
+>>>>>>> 2ceae6bf07dd0b0309ef901ae8443dde657e412f
     }
     function collectStatusCheck() {
         fetch(`http://localhost:8080/collect/status/memberid=${window.localStorage.memberid}&blogid=${JSON.parse(window.localStorage.blogdata).blogid}`)
@@ -91,8 +124,9 @@ export default function BlogShow() {
                 </div>
                 <div style={{ marginLeft: '100px', marginTop: "-50px", marginBottom: '60px', width: '900px' }}>
                     <h1>{blogdata.blogdetail.title}</h1>
-                    <h5>{blogdata.blogdetail.decrption}</h5>
+                    <h5 style={{overflow:'clip'}}>{blogdata.blogdetail.decrption}</h5>
                 </div>
+<<<<<<< HEAD
                 <button style={{ marginLeft: '100px', marginTop: "-50px", marginBottom: '60px' }} onClick={collectstatus ? deleteCollect : insertCollect}>{collectstatus ? "取消收藏" : "收藏"}</button>
                 <div >
                     <div class="leftcolumn" style={{ backgroundColor: '', overflow: 'auto', height: '1000px' }}>
@@ -114,6 +148,45 @@ export default function BlogShow() {
                                 </div>)
                             }
                             return <><h2 id={idex} style={{ boxShadow: '0 2px', paddingBottom: '10px', width: '400px', marginTop: '60px' }}><i class="fa fa-map-o" aria-hidden="true"></i>  第{idex + 1}天</h2>{list}</>
+=======
+                <Button color={collectstatus?'warning':'success'} sx={{marginLeft:'100px', marginTop:"-50px",marginBottom:'60px'}} onClick={collectstatus?deleteCollect:insertCollect} variant="outlined" startIcon={collectstatus?<BookmarkRemoveIcon/> : <BookmarkAddIcon />}>
+                {collectstatus?"取消收藏":"收藏"}
+                </Button>
+                {/* { <button style={{marginLeft:'100px', marginTop:"-50px",marginBottom:'60px'}} onClick={collectstatus?deleteCollect:insertCollect}>{collectstatus?"取消收藏":"收藏"}</button> } */}
+               
+                <div >
+                    <div class="leftcolumn"style={{backgroundColor:'',overflow: 'auto',height:'1000px'}}>
+                        
+                    {blogdata.blogdetail.eachDay.map((item,idex)=>{
+                        let list=[];
+                        for(let i = 0;i<item.eachplace.length;i++){
+                            if(i%2==0){
+                            list.push(<div class="card"style={{display: 'grid',gridTemplateColumns:'65% 35%'}}>
+                            <div >
+                                <h3><i class="fa fa-map-marker" aria-hidden="true"></i>  {item.eachplace[i].subTitle}</h3>
+                                <p id='blogshowcard-p'> {item.eachplace[i].text}</p>
+                                
+                            </div>
+                            <div>
+                            <img src={item.eachplace[i].pic} style={{width:'300px',height:'300px'}}></img>
+                            </div>
+                        </div>)
+                        }else{
+                            list.push(<div class="card"style={{display: 'grid',gridTemplateColumns:'35% 65%'}}>
+                             <div>
+                            <img src={item.eachplace[i].pic} style={{width:'300px',height:'300px',justifyItems:'end'}}></img>
+                            </div>
+                            <div >
+                                <h3><i class="fa fa-map-marker" aria-hidden="true"></i>  {item.eachplace[i].subTitle}</h3>
+                                <p id='blogshowcard-p'> {item.eachplace[i].text}</p>
+                            </div>
+                           
+                        </div>)
+                        }
+                        }
+                        return <><h2 id={idex} style={{boxShadow:'0 2px',paddingBottom:'10px',width:'400px',marginTop:'60px'}}><i class="fa fa-map-o" aria-hidden="true"></i>  第{idex+1}天</h2>{list}</>
+                        
+>>>>>>> 2ceae6bf07dd0b0309ef901ae8443dde657e412f
 
 
 

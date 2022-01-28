@@ -40,8 +40,9 @@
   #blogshowcard-p{
     resize:none;
     height:270px;
-    width:615px;
+    width:auto;
     overflow:scroll;
+    
   }
 
   #blogshowcard-p::-webkit-scrollbar-thumb {
