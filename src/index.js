@@ -4,8 +4,9 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import FirebaseTest1 from "./Test/FirebaseDatabase/FirebaseTest1";
 import Test4 from "./Test/Test4";
-import Search from './Test/Search';
-import Test from './Test/Test';
+
+
+import Homeloading from "./components/Homepage/HomeLoading";
 
 
 

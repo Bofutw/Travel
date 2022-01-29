@@ -5,9 +5,12 @@ import ScrollTop from './ScrollTop'
 import axios from 'axios'
 import Skeleton from '@mui/material/Skeleton';
 import { Typography } from '@mui/material'
+import { LoadingButton } from '@mui/lab'
+import Homeloading from './HomeLoading'
 
 export default function HomePage() {
     const [data, setData] = useState('')
+    const [loading, setLoading] = useState(true);
     console.log({ data });
     async function getpic() {
         try {
@@ -15,18 +18,17 @@ export default function HomePage() {
             const res = await axios.get('https://api.unsplash.com/photos/random?client_id=k-qvIjBpFwU9A_1HhaVakxTJhwLbUEaksJU4XqM_zus', {
                 //URL参數放在params屬性裏面
                 params: {
-                    query: 'travel',
-                    w: 1980,
-                    h: 1080
+                    query: 'taiwan',
 
                 },
 
 
             })
-            const pic = await res.data.urls.full + "&w=1920&h=1080"
+            const pic = await res.data.urls.raw + "&fit=fillmax&fill=blur&w=1920&h=1080"
 
             console.log(pic);
             setData(pic)
+
         } catch (error) {
             console.log(error);
         }
@@ -44,16 +46,35 @@ export default function HomePage() {
     return (
 
         <main className='main'>
-         
+
             <div style={{ backgroundColor: '#021E39' }}>
-                {data === '' ? <Skeleton variant="rectangular" animation='pulse' width={1500} height={900} sx={{ bgcolor: 'gray' }}></Skeleton> :
+                {loading ?
+                    <>
+                        <Homeloading />
+                        {setTimeout(() => {
+                            setLoading(false);
+
+                        }, 3000)}
+                    </>
+                    :
                     <img className='mainImg' src={data} alt="randomimg" />
+
                 }
 
-                {/*   <h2 style={{margin:'50px 50px 50px 50px'}}>yoyoyoy</h2> */}
+
             </div>
-            {/*  <div><Skeleton variant="rectangular" animation='pulse' width={1500} height={900}  sx={{ bgcolor: 'gray' }}/></div> */}
-            {/* <Skeleton variant="rectangular" animation="wave" width={1200} height={900} /> */}
+
+            {loading === false && <HomeSection />}
+
+
+        </main>
+
+    )
+}
+
+const HomeSection = () => {
+    return (
+        <>
             <section className="sec-01">
                 <div className="container">
                     <h2 className="main-title">最新消息</h2>
@@ -124,9 +145,7 @@ export default function HomePage() {
                     </div>
                 </div>
             </section>
-
-
-        </main>
-
+        </>
     )
+
 }
