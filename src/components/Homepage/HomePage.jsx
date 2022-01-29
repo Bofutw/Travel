@@ -11,7 +11,7 @@ import Homeloading from './HomeLoading'
 export default function HomePage() {
     const [data, setData] = useState('')
     const [loading, setLoading] = useState(true);
-    console.log({ data });
+    // console.log({ data });
     async function getpic() {
         try {
 
@@ -60,6 +60,8 @@ export default function HomePage() {
                     <img className='mainImg' src={data} alt="randomimg" />
 
                 }
+
+
 
 
             </div>
