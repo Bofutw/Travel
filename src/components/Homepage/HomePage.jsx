@@ -54,7 +54,7 @@ export default function HomePage() {
                         {setTimeout(() => {
                             setLoading(false);
 
-                        }, 3000)}
+                        }, 2000)}
                     </>
                     :
                     <img className='mainImg' src={data} alt="randomimg" />
