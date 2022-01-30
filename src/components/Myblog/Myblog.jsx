@@ -1,7 +1,7 @@
-import { Button } from '@mui/material';
+import Button from '@mui/material/Button';
 import React, { useEffect, useState } from 'react'
 import './myblog.css'
-
+import MovingIcon from '@mui/icons-material/Moving';
 
 
 export default function BlogShow() {
@@ -17,7 +17,10 @@ export default function BlogShow() {
     function popcard(e) {
         journeyid = document.getElementById(`popcard-${e.target.id.slice(8,11)}`).value.slice(9,13)  
         document.getElementById("journeyname").innerHTML  = `為 <b>${document.getElementById("popcard-"+e.target.id.slice(8,11)).closest('div').querySelector('h5').innerText}</b> 寫下一些回憶`
-        document.getElementById("buttonForNewBlog").setAttribute("style","")
+        document.getElementById("buttonForNewBlog").style.display = "block";
+
+        /* document.getElementById("buttonForNewBlog").setAttribute('endIcon','<MovingIcon/>') */
+        console.log(document.getElementById("buttonForNewBlog"));
         document.getElementById("buttonForNewBlog").innerText = "出發"
     }
     function getmemberblog(id) {
@@ -102,12 +105,13 @@ export default function BlogShow() {
                 <a class="popup__close" href="#" style={{}}>X</a>
                     <div class="popup-inner">
                         <div style={{ marginTop: '30px' }}>
-                            <h2>—撰寫遊程—</h2>
+                            <h2>—撰寫遊記—</h2>
                             
                             
                         </div>
                         <p id='journeyname'>-選擇想要新增的旅遊紀錄吧-</p>
-                        <button id ={"buttonForNewBlog"}onClick={editExistJourney} style={{ marginLeft: '650px', marginBottom: '13px', display:"none" }}></button>
+                      {/*   <button id ={"buttonForNewBlog"}onClick={editExistJourney} style={{ marginLeft: '650px', marginBottom: '13px', display:"none" }}></button> */}
+                         <Button id={"buttonForNewBlog"} color='success' variant="contained" endIcon={<MovingIcon/>}   sx={{display:'none'}} size="large"  onClick={editExistJourney}></Button>
                         <div class="popup__text">
                         {journey.map((item,id)=>{
                             return <div><input type='radio' id={`popcard-${id}`} name='popcard' style={{display:"none"}} value={"journeyid"+item.journeyid}/>
