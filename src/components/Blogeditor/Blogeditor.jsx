@@ -6,8 +6,9 @@ import { useEffect } from 'react'
 import TextField from '@mui/material/TextField';
 import { DropzoneArea } from 'material-ui-dropzone';
 import { Button } from '@mui/material';
-
-
+import { MuiThemeProvider,createTheme, ThemeProvider, styled } from '@mui/material/styles';
+import { green } from '@mui/material/colors';
+import SaveIcon from '@mui/icons-material/Save';
 
 // "{\"beginDate\":\"2022-01-19\",\"daysNum\":4,\"eachDays\":[{\"eachPlaces\":[{\"placeName\":\"南屯國小\",\"AttractionsId\":\"ChIJ0ZMoF8k9aTQRuCDDop7t6kc\"},{\"placeName\":\"北屯國小\",\"AttractionsId\":\"ChIJHQYfVeAXaTQRnAVJXNo3vIE\"}]},{\"eachPlaces\":[{\"placeName\":\"北區醫院\",\"AttractionsId\":\"ChIJC5WkxxX2AzQRfGB1A1MRrh8\"}]},{\"eachPlaces\":[{\"placeName\":\"西屯國小\",\"AttractionsId\":\"ChIJUyVn5BgWaTQR9DFV9fYc0BY\"}]}]}"
 // {"blogid":13,"blogdetail":"{\r\n    \"title\":\"集中營3日遊\",\r\n    \"decrption\":\"decrption\",\r\n    \"eachDay\":[\r\n        {\r\n            \"eachplace\":[\r\n                {\r\n                    \"subTitle\":\"集中營\",\r\n                    \"text\":\"真猶你的\",\r\n                    \"pic\":[\"\",\"\"],\r\n                    \"AttractionsId\":\"123\"\r\n                },\r\n                {\r\n                    \"subTitle\":\"毒氣室\",\r\n                    \"text\":\"..........\",\r\n                    \"pic\":[\"\",\"\"],\r\n                    \"AttractionsId\":\"7777777\"\r\n                },\r\n                {\r\n                    \"subTitle\":\"這裡超好玩\",\r\n                    \"text\":\"內文blablablablabal..........\",\r\n                    \"pic\":[\"\",\"\"],\r\n                    \"AttractionsId\":\"3\"\r\n                }\r\n            \r\n            ]                \r\n        },\r\n        {\r\n            \"eachplace\":[\r\n                {\r\n                    \"subTitle\":\"古色古香的咖啡廳\",\r\n                    \"text\":\"1111111..........\",\r\n                    \"pic\":[\"\",\"\"],\r\n                    \"AttractionsId\":\"123\"\r\n                },\r\n                {\r\n                    \"subTitle\":\"24小時營業的而且還賣滷味的家具店\",\r\n                    \"text\":\"內文blablablablabal..........\",\r\n                    \"pic\":[\"\",\"\"],\r\n                    \"AttractionsId\":\"7777777\"\r\n                },\r\n                {\r\n                    \"subTitle\":\"這裡超好玩\",\r\n                    \"text\":\"內文blablablablabal..........\",\r\n                    \"pic\":[\"\",\"\"],\r\n                    \"AttractionsId\":\"3\"\r\n                }\r\n            \r\n            ]                \r\n        },\r\n            {\r\n                \"eachplace\":[\r\n                    {\r\n                        \"subTitle\":\"古色古香的咖啡廳\",\r\n                        \"text\":\"1111111..........\",\r\n                        \"pic\":[\"\",\"\"],\r\n                        \"AttractionsId\":\"123\"\r\n                    },\r\n                    {\r\n                        \"subTitle\":\"24小時營業的而且還賣滷味的家具店\",\r\n                        \"text\":\"內文blablablablabal..........\",\r\n                        \"pic\":[\"\",\"\"],\r\n                        \"AttractionsId\":\"7777777\"\r\n                    },\r\n                    {\r\n                        \"subTitle\":\"這裡超好玩\",\r\n                        \"text\":\"內文blablablablabal..........\",\r\n                        \"pic\":[\"\",\"\"],\r\n                        \"AttractionsId\":\"3\"\r\n                    }               \r\n                ]                \r\n            }\r\n    ]\r\n}","blogauthority":0,"blogcreatetime":"2022-01-16T16:48:34.000+00:00","blogupdatetime":null,"blogpopular":7}
@@ -120,9 +121,7 @@ export default function BlogShow() {
             })
     }
     function imgchange(e) {
-        console.log(e.target.files[0]);
-        console.log(e.target.id);
-        console.log(e.target.files);
+        
         let url = URL.createObjectURL(e.target.files[0])
         document.getElementById((e.target.id).substr(0, e.target.id.length - 5)).setAttribute("src", url)
 
@@ -138,7 +137,7 @@ export default function BlogShow() {
         }
         imagesave(e.target.files[0], logicname)
     }
-    //
+    //update
     function imgchange2(files) {
        
        if(files[0]!=undefined){
@@ -155,6 +154,7 @@ export default function BlogShow() {
           
        }
     }
+
     //
     function getMemberNickName() {
         fetch("http://localhost:8080/member/" + window.localStorage.memberid)
@@ -165,11 +165,12 @@ export default function BlogShow() {
                 window.localStorage.nickName = resault.membernickname;
             })
     }
+    
     initblog();
 
     
     return (
-
+        
         <div style={{ display: 'grid', gridTemplateColumns: '80% 20%' }}>
 
             <div>
@@ -185,8 +186,10 @@ export default function BlogShow() {
                 dropzoneText={"請將封面圖片拖曳至此 或透過點擊增加"}
                 onChange={imgchange2}
                 filesLimit='1'
+                onAlert={(message, variant) => console.log(`${variant}: ${message}`)}
                 fullWidth
                 />
+               
                 }
                 <img id='topimg2' hidden='true' src={blog.blogdetail.url} style={{ width: '100%', height: '100%', objectFit: 'cover' }}></img>
                 
@@ -225,7 +228,8 @@ export default function BlogShow() {
                 </div>
                 <div >
                     <div class="leftcolumn" style={{ backgroundColor: '', overflow: 'auto', height: '1000px' }}>
-                        <button onClick={save}>save</button>
+                        {/* <button onClick={save}>save</button> */}
+                       
                         {blog.blogdetail.eachDay.map((item, idex) => {
                             let list = [];
                             for (let i = 0; i < item.eachplace.length; i++) {
@@ -245,8 +249,10 @@ export default function BlogShow() {
                                     </div>
                                 </div>)
                             }
+                            
                             return <><h2 id={idex} style={{ boxShadow: '0 2px', paddingBottom: '10px', width: '400px', marginTop: '60px' }}><i class="fa fa-map-o" aria-hidden="true"></i>  第{idex + 1}天</h2>{list}</>
                         })}
+                         <Button sx={{left:'900px',top:'20px' /* position: 'absolute', right:'0px' */}} onClick={save} color='success' size='large' variant='contained' startIcon={<SaveIcon></SaveIcon>}>儲存編輯內容</Button>
                     </div>
                 </div>
             </div>
@@ -266,5 +272,7 @@ export default function BlogShow() {
             </div>
 
         </div>
+        
     )
+    
 }

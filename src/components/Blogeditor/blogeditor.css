@@ -153,6 +153,6 @@
     margin-bottom:30px;
   }
   
-  
-  
-  
+  .MuiDropzoneArea-root {
+    background-color: lightgray !important; 
+  }
