@@ -18,7 +18,7 @@ export default function BlogShow() {
         journeyid = document.getElementById(`popcard-${e.target.id.slice(8,11)}`).value.slice(9,13)  
         document.getElementById("journeyname").innerHTML  = `為 <b>${document.getElementById("popcard-"+e.target.id.slice(8,11)).closest('div').querySelector('h5').innerText}</b> 寫下一些回憶`
         document.getElementById("buttonForNewBlog").setAttribute("style","")
-        document.getElementById("buttonForNewBlog").innerText = "出發"
+        document.getElementById("buttonForNewBlog").innerText = "出發 ➢"
     }
     function getmemberblog(id) {
         fetch(`http://localhost:8080/blog/memberid=${id}`)
@@ -102,11 +102,11 @@ export default function BlogShow() {
                 <a class="popup__close" href="#" style={{}}>X</a>
                     <div class="popup-inner">
                         <div style={{ marginTop: '30px' }}>
-                            <h2>—撰寫遊程—</h2>
+                            <h2 style={{fontWeight: 'bold'}}>—撰寫遊程—</h2>
                             
                             
                         </div>
-                        <p id='journeyname'>-選擇想要新增的旅遊紀錄吧-</p>
+                        <p id='journeyname'style={{fontWeight: 'bold'}}>-選擇想要新增的旅遊紀錄吧-</p>
                         <button id ={"buttonForNewBlog"}onClick={editExistJourney} style={{ marginLeft: '650px', marginBottom: '13px', display:"none" }}></button>
                         <div class="popup__text">
                         {journey.map((item,id)=>{
@@ -142,8 +142,8 @@ export default function BlogShow() {
                             <div class="myblog-content" style={{ padding: '10px' }}>
                                 <h5 id="myblog-cardtitle" >{item.blogdetail.title}</h5>
                                 <p id="myblog-descript" >{item.blogdetail.decrption}</p>
-                                <button onClick={deleteBlog} id={`blogid${item.blogid}`} class="btn btn-primary" style={{fontSize: '12px' }}>刪除 <i class="fa fa-angle-right"></i></button>
-                                <button onClick={editExistBlog} id={`blogid${item.blogid}`} class="btn btn-primary" style={{ fontSize: '12px',marginLeft:'15px' }}>編輯 <i class="fa fa-angle-right"></i></button>
+                                <button onClick={deleteBlog} id={`blogid${item.blogid}`} class="btn btn-secondary" style={{fontSize: '12px',marginLeft:'40px' }}>刪除 <i class="fa fa-angle-right"></i></button>
+                                <button onClick={editExistBlog} id={`blogid${item.blogid}`} class="btn btn-secondary" style={{ fontSize: '12px',marginLeft:'10px' }}>編輯 <i class="fa fa-angle-right"></i></button>
                             </div>
                         </div>
 

@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap');
+
+
 .carousel {
 	margin: 30px auto 60px;
 	padding: 0 80px;
@@ -119,6 +122,11 @@ display: -webkit-box;
     background: #f1f1f1;
     margin: 2rem;
 } */
+
+#newblogtitle{
+  font-family: 'RocknRoll One', sans-serif;
+}
+
 .blog-card {
     display: flex;
     flex-direction: column;

@@ -8,8 +8,8 @@ class About extends Component {
             <div>
                 <section class="animation active" style={{ backgroundColor: 'transparent',position:'absolute',zIndex:'4' }}>
                     <div class="container3" style={{marginLeft:'100px'}}>
-                        <div class="heading1" style={{ paddingBottom: '50px' }}>
-                            <h1 class="heading__title">關於我們<i class="fa fa-commenting" aria-hidden="true" style={{ marginLeft: '10px' }}></i></h1>
+                        <div class="heading1" style={{ paddingBottom: '40px',marginLeft:'20px'}}>
+                            <h1 class="about-title-1">關於我們<i class="fa fa-commenting" aria-hidden="true" style={{ marginLeft: '10px' }}></i></h1>
                         </div>
                         <div class="content">
                             <div class="image-1">

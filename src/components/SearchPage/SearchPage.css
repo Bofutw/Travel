@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap');
 
 * {
     box-sizing: border-box;
@@ -45,6 +45,9 @@
     transition: transform 0.2s;
 }
 
+#searchtitle{
+    font-family: 'RocknRoll One', sans-serif;
+}
 
 .blog-card .details, .blog-card .details ul {
     margin: auto;

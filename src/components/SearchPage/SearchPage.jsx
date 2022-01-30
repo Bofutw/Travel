@@ -151,9 +151,9 @@ function Blog({ search }) {
     return (
         <div style={{ backgroundImage: 'url("/images/AnyConv.com__E_US5SHVQAIuSbE.jpg")', backgroundSize: '100% 100%', height: '1400px' }}>
             <div style={{ display: 'grid', gridTemplateRows: '20% 80% ' }}>
-                <div style={{ marginTop: '160px', marginLeft: '340px', zIndex: '3' }}>
-                    <h1 style={{ fontWeight: 'bold' }}><i class="fa fa-search" aria-hidden="true"></i>    搜尋：{search}</h1>
-                    <h3>包含 " {searchinput} " 的相關結果：</h3>
+                <div style={{ marginTop: '160px', marginLeft: '240px', zIndex: '3' }}>
+                    <h1 id='searchtitle' ><i class="fa fa-search" aria-hidden="true"></i>    搜尋：{search}</h1>
+                    <h3 id='searchtitle' >包含 " {searchinput} " 的相關結果：</h3>
 
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: '75% 25% ', backgroundImage: 'url("")', backgroundSize: '100% 100%' }}>
