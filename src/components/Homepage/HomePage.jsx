@@ -37,7 +37,7 @@ export default function HomePage() {
     useEffect(() => {
         /* setTimeout(getpic,5000) */
         localStorage.setItem("adminloginpage", "false")
-        //getpic();
+        getpic();
 
     }, [])
 
