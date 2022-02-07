@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import FirebaseTest1 from "./Test/FirebaseDatabase/FirebaseTest1";
-import Test4 from "./Test/Test4";
+
 
 
 import Homeloading from "./components/Homepage/HomeLoading";
@@ -15,7 +15,7 @@ import Homeloading from "./components/Homepage/HomeLoading";
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      {/* <MainContext /> */}
+
       <App />
     </BrowserRouter>
   </React.StrictMode>,

@@ -36,6 +36,7 @@ import Crudmember from './Crudmember'
 import Crudmem from './Crudmem'
 import { Avatar, Button } from '@mui/material';
 import { logout } from './Dashboard';
+import { gettestadminname } from '../DashBoardLogin/DBoardLoginInfo';
 
 function Copyright(props) {
   return (
@@ -118,7 +119,7 @@ const mdTheme = createTheme({
 
 
 
-function DashboardContent() {
+function DashboardContent({ name }) {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -128,17 +129,17 @@ function DashboardContent() {
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
-        
+
         <CssBaseline />
         <AppBar position="absolute" open={open}  >
-          
+
           <Toolbar
-          
+
             sx={{
               pr: '24px', // keep right padding when drawer closed
             }}
           >
-            
+
             <IconButton
               edge="start"
               color="inherit"
@@ -149,9 +150,9 @@ function DashboardContent() {
                 ...(open && { display: 'none' }),
               }}
             >
-              
+
               <MenuIcon />
-              
+
             </IconButton>
             <Typography
               component="h1"
@@ -160,9 +161,9 @@ function DashboardContent() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-            不可以色色の後台一會員管理
+              不可以色色の後台一會員管理
             </Typography>
-            <Avatar sx={{ marginRight: '10px', transition: 'width 0.15s ,height 0.15s', '&:hover': { cursor: 'pointer', width: 50, height: 50, boxShadow: ' 3px 7px #888888' } }} >B</Avatar>
+            <Avatar sx={{ marginRight: '10px', transition: 'width 0.15s ,height 0.15s', '&:hover': { cursor: 'pointer', width: 50, height: 50, boxShadow: ' 3px 7px #888888' } }} >{name.substring(0, 1)}</Avatar>
             <IconButton color="usewhite" >
               {/* Content可以塞data state */}
               <Badge badgeContent={0} color="neutral">
@@ -170,7 +171,7 @@ function DashboardContent() {
               </Badge>
             </IconButton>
             <Button onClick={logout} sx={{ bgcolor: 'white', color: '#e53e3e', '&:hover': { backgroundColor: 'whitesmoke', color: '#e53e3e', fontWeight: 'bold', boxShadow: ' 3px 7px #888888' }, borderRadius: '10%', width: 90, height: 40 }}>登出</Button>
-           
+
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -206,21 +207,21 @@ function DashboardContent() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={1}>
-            <Grid item xs={12} md={12} lg={12}>
+              <Grid item xs={12} md={12} lg={12}>
                 <Paper
                   sx={{
                     p: 2,
                     display: 'flex',
                     flexDirection: 'column',
-                    
+
                   }}
                 >
-                 {/*  {<Crudmember></Crudmember>} */}
+                  {/*  {<Crudmember></Crudmember>} */}
                   {<Crudmem></Crudmem>}
                 </Paper>
               </Grid>
             </Grid>
-           
+
           </Container>
         </Box>
       </Box>
@@ -230,5 +231,14 @@ function DashboardContent() {
 }
 
 export default function Github() {
-  return <DashboardContent />;
+  const [name, setName] = useState("");
+  React.useEffect(() => {
+    const test6 = async () => {
+
+      setName(await gettestadminname());
+    };
+    test6();
+  }, []);
+
+  return <DashboardContent name={name} />;
 }

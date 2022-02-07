@@ -59,7 +59,7 @@ export default function ScrollTop(props) {
         <Box style={{}}>
 
 
-            <Toolbar style={{ zIndex: 1, marginTop: '-100px', padding: '0px 10px', backgroundColor: '#021E39' }} id="back-to-top-anchor" />
+            <Toolbar style={{ zIndex: 0, marginTop: '-100px', padding: '0px 10px', backgroundColor: '#021E39' }} id="back-to-top-anchor" />
 
             <ScrollTop2 {...props}>
                 <Fab style={{ backgroundColor: '#e91e63', color: 'white' }} size='medium' aria-label="scroll back to top">

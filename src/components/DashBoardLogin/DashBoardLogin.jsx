@@ -18,8 +18,12 @@ import { useNavigate } from "react-router-dom";
 import { getDatabase, ref, child, get, set } from "firebase/database";
 import firebase from "firebase/compat/app"
 
-import { getadminloginpage, getfirebaseinfo } from "./DBoardLoginInfo";
+import { crew, getadminid, getadminloginpage, getfirebaseinfo } from "./DBoardLoginInfo";
 import Dashboard from "../Dashboard/Dashboard";
+import FormControl from '@mui/material/FormControl'
+import FormLabel from '@mui/material/FormLabel'
+import FormHelperText from '@mui/material/FormHelperText'
+import { InputLabel, Select, MenuItem } from "@mui/material";
 
 function Copyright(props) {
   return (
@@ -41,7 +45,8 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function DashBoardLogin({ isadmin, setIsAdmin, setAdminLoginPage, adminloginpage }) {
+
+export default function DashBoardLogin({ isadmin, setIsAdmin }) {
 
 
 
@@ -49,15 +54,38 @@ export default function DashBoardLogin({ isadmin, setIsAdmin, setAdminLoginPage,
 
 
   let navigate = useNavigate();
+  const [adminemail, setAdminEmail] = useState("");
+  const [adminpsw, setAdminPsw] = useState("");
+  const [adminname, setAdminName] = useState("");
+  let adminAname = [];
+  const crewmenulist = () => {
 
+
+    return (
+      crew.map((name, index) => {
+        adminAname.push({ id: index + 1, name: name });
+
+        return (
+          <MenuItem key={index} value={name}>{name}</MenuItem>
+        )
+      })
+
+    )
+  }
 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const cnoditiontofirebse = await getfirebaseinfo(data.get("email"), data.get("password"));
-    console.log(cnoditiontofirebse);
-    setIsAdmin(cnoditiontofirebse)
+    if (!!adminname !== !! null) {
+      console.log("this is testid", adminname);
+      const data = new FormData(event.currentTarget);
+
+      const curradmininfo = await getadminid(adminAname, adminname);
+      const cnoditiontofirebse = await getfirebaseinfo(data.get("email"), data.get("password"), curradmininfo);
+      console.log(cnoditiontofirebse);
+      setIsAdmin(cnoditiontofirebse)
+
+    }
     //console.log(JSON.stringify(getdatabaseemailpassword) === JSON.stringify({ email: data.get("email"), password: data.get("password") }));
 
     // console.log({
@@ -85,7 +113,7 @@ export default function DashBoardLogin({ isadmin, setIsAdmin, setAdminLoginPage,
       if (isadmin === "true") {
         localStorage.setItem("isadmin", true);
         navigate("/dashboard");
-        window.location.reload();
+        //window.location.reload();
       } else {
         return false;
       }
@@ -118,6 +146,23 @@ export default function DashBoardLogin({ isadmin, setIsAdmin, setAdminLoginPage,
           <Typography component="h1" variant="h5">
             後台系統
           </Typography>
+
+          <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel id="demo-simple-select-helper-label">人員</InputLabel>
+            <Select
+              labelId="demo-simple-select-helper-label"
+              id="demo-simple-select-helper"
+              label="Age"
+              value={adminname}
+              error={!!adminname === !!null && true}
+              required={true}
+              onChange={(e) => setAdminName(e.target.value)}
+            >
+              {crewmenulist()}
+            </Select>
+
+          </FormControl>
+
           <Box
             component="form"
             onSubmit={handleSubmit}
@@ -126,8 +171,8 @@ export default function DashBoardLogin({ isadmin, setIsAdmin, setAdminLoginPage,
           >
             <TextField
               margin="normal"
-
-              error={false}
+              onChange={(e) => setAdminEmail(e.target.value)}
+              error={!!adminemail === !!null && true}
               required={true}
               fullWidth
 
@@ -140,7 +185,8 @@ export default function DashBoardLogin({ isadmin, setIsAdmin, setAdminLoginPage,
             <TextField
               margin="normal"
               required={true}
-
+              error={!!adminpsw === !!null && true}
+              onChange={(e) => setAdminPsw(e.target.value)}
               fullWidth
               name="password"
               label="密碼"

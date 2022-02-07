@@ -30,9 +30,9 @@ import { height, margin, padding } from '@mui/system';
 import Githubapi from './Githubapi';
 import { Avatar, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { setfradminloginpage, setisadmin } from '../DashBoardLogin/DBoardLoginInfo';
+import { gettestadminname, setfradminloginpage, setisadmin } from '../DashBoardLogin/DBoardLoginInfo';
 import Membertime from './Membertime'
-import {zhTW} from '@mui/material/locale';
+import { zhTW } from '@mui/material/locale';
 
 
 function Copyright(props) {
@@ -123,7 +123,7 @@ export const logout = async () => {
 }
 
 
-function DashboardContent() {
+function DashboardContent({ name }) {
 
 
   const [open, setOpen] = React.useState(true);
@@ -132,30 +132,30 @@ function DashboardContent() {
   };
 
   // DropDownBar
-/* const [anchorEl, setAnchorEl] = useState(null);
-const Elopen = Boolean(anchorEl);
-const handleMenuOpen = (e) => {
-    setAnchorEl(e.currentTarget);
-    console.log(e.currentTarget.style)
-};
-const handleMenuClose = () => {
-    setAnchorEl(null);
-}; */
+  /* const [anchorEl, setAnchorEl] = useState(null);
+  const Elopen = Boolean(anchorEl);
+  const handleMenuOpen = (e) => {
+      setAnchorEl(e.currentTarget);
+      console.log(e.currentTarget.style)
+  };
+  const handleMenuClose = () => {
+      setAnchorEl(null);
+  }; */
 
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
-        
+
         <CssBaseline />
         <AppBar position="absolute" open={open}  >
-          
+
           <Toolbar
-          
+
             sx={{
               pr: '24px', // keep right padding when drawer closed
             }}
           >
-            
+
             <IconButton
               edge="start"
               color="inherit"
@@ -166,9 +166,9 @@ const handleMenuClose = () => {
                 ...(open && { display: 'none' }),
               }}
             >
-              
+
               <MenuIcon />
-              
+
             </IconButton>
             <Typography
               component="h1"
@@ -180,7 +180,7 @@ const handleMenuClose = () => {
 
               不可以色色の後台
             </Typography>
-            <Avatar sx={{ marginRight: '10px', transition: 'width 0.15s ,height 0.15s', '&:hover': { cursor: 'pointer', width: 50, height: 50, boxShadow: ' 3px 7px #888888' } }} >B</Avatar>
+            <Avatar sx={{ marginRight: '10px', transition: 'width 0.15s ,height 0.15s', '&:hover': { cursor: 'pointer', width: 50, height: 50, boxShadow: ' 3px 7px #888888' } }} >{name.substring(0, 1)}</Avatar>
             <IconButton color="usewhite" >
               {/* Content可以塞data state */}
               <Badge badgeContent={0} color="neutral" >
@@ -235,7 +235,7 @@ const handleMenuClose = () => {
                   }}
                 >
                   <Membertime></Membertime>
-                  
+
                 </Paper>
               </Grid>
               {/* Recent Deposits */}
@@ -252,16 +252,16 @@ const handleMenuClose = () => {
                 </Paper>
               </Grid>
               {/* Recent Orders */}
-             
+
               <Grid container spacing={2}>
-             <Grid item xs={9} >
-                <Paper sx={{ height: 400, p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:3 }}>
-                <Chart />
-                
-              
-                </Paper>
-              </Grid>
-             { /* <Grid item xs={5}>
+                <Grid item xs={9} >
+                  <Paper sx={{ height: 400, p: 2, display: 'flex', flexDirection: 'column', marginTop: 2, marginLeft: 3 }}>
+                    <Chart />
+
+
+                  </Paper>
+                </Grid>
+                { /* <Grid item xs={5}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2,paddingLeft:0}}>
                 
                   <Agechart></Agechart>
@@ -269,15 +269,15 @@ const handleMenuClose = () => {
                 </Paper>
               </Grid> */}
 
-              <Grid item xs={3}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:1}}>
-                
-                  <Githubapi></Githubapi>
-              
-                </Paper>
+                <Grid item xs={3}>
+                  <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', marginTop: 2, marginLeft: 1 }}>
+
+                    <Githubapi></Githubapi>
+
+                  </Paper>
+                </Grid>
+
               </Grid>
-              
-            </Grid>
             </Grid>
             <Copyright sx={{ pt: 4 }} />
           </Container>
@@ -288,5 +288,15 @@ const handleMenuClose = () => {
 }
 
 export default function Dashboard() {
-  return <DashboardContent />;
+  const [name, setName] = useState("");
+  React.useEffect(() => {
+    const test6 = async () => {
+
+      setName(await gettestadminname());
+    };
+    test6();
+  }, []);
+
+
+  return <DashboardContent name={name} />;
 }

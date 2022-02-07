@@ -33,6 +33,7 @@ import Genderchart from './Genderchart'
 import { logout } from './Dashboard';
 import { Avatar, Button } from '@mui/material';
 import Membertime from './Membertime'
+import { gettestadminname } from '../DashBoardLogin/DBoardLoginInfo';
 
 
 
@@ -117,37 +118,37 @@ const mdTheme = createTheme({
 
 
 
-function DashboardContent() {
+function DashboardContent({ name }) {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
   // DropDownBar
-/* const [anchorEl, setAnchorEl] = useState(null);
-const Elopen = Boolean(anchorEl);
-const handleMenuOpen = (e) => {
-    setAnchorEl(e.currentTarget);
-    console.log(e.currentTarget.style)
-};
-const handleMenuClose = () => {
-    setAnchorEl(null);
-}; */
+  /* const [anchorEl, setAnchorEl] = useState(null);
+  const Elopen = Boolean(anchorEl);
+  const handleMenuOpen = (e) => {
+      setAnchorEl(e.currentTarget);
+      console.log(e.currentTarget.style)
+  };
+  const handleMenuClose = () => {
+      setAnchorEl(null);
+  }; */
 
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
-        
+
         <CssBaseline />
         <AppBar position="absolute" open={open}  >
-          
+
           <Toolbar
-          
+
             sx={{
               pr: '24px', // keep right padding when drawer closed
             }}
           >
-            
+
             <IconButton
               edge="start"
               color="inherit"
@@ -158,9 +159,9 @@ const handleMenuClose = () => {
                 ...(open && { display: 'none' }),
               }}
             >
-              
+
               <MenuIcon />
-              
+
             </IconButton>
             <Typography
               component="h1"
@@ -172,7 +173,7 @@ const handleMenuClose = () => {
               不可以色色の後台一會員資料
             </Typography>
 
-            <Avatar sx={{ marginRight: '10px', transition: 'width 0.15s ,height 0.15s', '&:hover': { cursor: 'pointer', width: 50, height: 50, boxShadow: ' 3px 7px #888888' } }} >B</Avatar>
+            <Avatar sx={{ marginRight: '10px', transition: 'width 0.15s ,height 0.15s', '&:hover': { cursor: 'pointer', width: 50, height: 50, boxShadow: ' 3px 7px #888888' } }} >{name.substring(0, 1)}</Avatar>
             <IconButton color="usewhite" >
               {/* Content可以塞data state */}
               <Badge badgeContent={0} color="neutral">
@@ -216,7 +217,7 @@ const handleMenuClose = () => {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              
+
               {/* <Grid item xs={12} md={8} lg={9}>
                 <Paper
                   sx={{
@@ -241,52 +242,52 @@ const handleMenuClose = () => {
                   <Deposits />
                 </Paper>
               </Grid> */}
-             
-             
-              
+
+
+
             </Grid>
 
             <Grid container spacing={3}>
-            <Grid item xs={3.5} >
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:0 }}>
-            
+              <Grid item xs={3.5} >
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', marginTop: 2, marginLeft: 0 }}>
+
                   <Areachart></Areachart>
-              
+
                   {/* <Orders /> */}
                 </Paper>
 
-                </Grid>
+              </Grid>
               <Grid item xs={3.5} >
-              <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:0 }}>
-          
-                <Genderchart></Genderchart>
-            
-                {/* <Orders /> */}
-              </Paper>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', marginTop: 2, marginLeft: 0 }}>
+
+                  <Genderchart></Genderchart>
+
+                  {/* <Orders /> */}
+                </Paper>
 
               </Grid>
 
               <Grid item xs={5} >
-              <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2, marginLeft:0 }}>
-          
-              <Agechart></Agechart>
-            
-                {/* <Orders /> */}
-              </Paper>
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', marginTop: 2, marginLeft: 0 }}>
+
+                  <Agechart></Agechart>
+
+                  {/* <Orders /> */}
+                </Paper>
 
               </Grid>
 
               <Grid container spacing={1}>
-              
+
               </Grid>
               <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' ,marginTop:2,paddingLeft:0}}>
-                
+                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', marginTop: 2, paddingLeft: 0 }}>
+
                   <Citychart></Citychart>
-              
+
                 </Paper>
-              </Grid>      
-                
+              </Grid>
+
 
             </Grid>
             <Copyright sx={{ pt: 4 }} />
@@ -298,5 +299,13 @@ const handleMenuClose = () => {
 }
 
 export default function Member() {
-  return <DashboardContent />;
+  const [name, setName] = useState("");
+  React.useEffect(() => {
+    const test6 = async () => {
+
+      setName(await gettestadminname());
+    };
+    test6();
+  }, []);
+  return <DashboardContent name={name} />;
 }
