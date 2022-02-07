@@ -126,13 +126,17 @@ function App() {
 
           {user && <Route path="/map" element={<Map />} />}
           <Route path="/dashboardlogin/*" element={<DashBoardLogin isadmin={isadmin} setIsAdmin={setIsAdmin} setAdName={setAdName} />} />
-          {isadmin === "true" && <Route path="/dashboard" element={<Dashboard />} />}
-          {isadmin === "true" && <Route path="/dashboard/github" element={<Github />} />}
-          {isadmin === "true" && <Route path="/dashboard/member" element={<Member />} />}
-          {isadmin === "true" && <Route path="/dashboard/crud" element={<Crud />} />}
+          {isadmin === "true" &&
+            <>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/dashboard/github" element={<Github />} />
+              <Route path="/dashboard/member" element={<Member />} />
+              <Route path="/dashboard/crud" element={<Crud />} />
+            </>
+          }
           <Route path="/dashboard/*" element={<BackendLoading />} />
         </Routes>
-        {/* {(adminlogin === "false" && !ismap) && <Footer />} */}
+        {(adminlogin === "false" && !ismap) && <Footer />}
 
 
 
