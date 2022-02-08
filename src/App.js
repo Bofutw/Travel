@@ -129,7 +129,7 @@ function App() {
           }
           <Route path="/dashboard/*" element={<BackendLoading />} />
         </Routes>
-        {/* {(adminlogin === "false" && !ismap) && <Footer />} */}
+        {(adminlogin === "false" && !ismap) && <Footer />}
 
 
 
