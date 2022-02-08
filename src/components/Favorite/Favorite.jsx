@@ -13,44 +13,7 @@ import SendIcon from '@mui/icons-material/Send';
 import './favorite.css'
 
 
-export const testdata = [
-    {
-        memberbirth: "2000-05-11T16:00:00.000+00:00",
-        memberemail: "bntt5533@gmail.com",
-        membergender: 0,
-        membericon: "https://firebasestorage.googleapis.com/v0/b/my-project-01-334308.appspot.com/o/8files%2F82.jpg?alt=media&token=92704bba-b91c-4e49-84de-b88cab9db551",
-        memberid: 8,
-        memberintro: "盆栽好好看",
-        membername: "哈哈是我啦",
-        membernickname: "bnt 戰士",
-        memberregistertime: "2022-02-07T14:40:09.000+00:00"
-    },
 
-    {
-        memberbirth: "2000-05-11T16:00:00.000+00:00",
-        memberemail: "bntt5533@gmail.com",
-        membergender: 0,
-        membericon: "https://firebasestorage.googleapis.com/v0/b/my-project-01-334308.appspot.com/o/8files%2F82.jpg?alt=media&token=92704bba-b91c-4e49-84de-b88cab9db551",
-        memberid: 8,
-        memberintro: "盆栽好好看",
-        membername: "哈哈是我啦",
-        membernickname: "bnt 戰士",
-        memberregistertime: "2022-02-07T14:40:09.000+00:00"
-    },
-    {
-        memberbirth: "2000-05-11T16:00:00.000+00:00",
-        memberemail: "bntt5533@gmail.com",
-        membergender: 0,
-        membericon: "https://firebasestorage.googleapis.com/v0/b/my-project-01-334308.appspot.com/o/8files%2F82.jpg?alt=media&token=92704bba-b91c-4e49-84de-b88cab9db551",
-        memberid: 8,
-        memberintro: "盆栽好好看",
-        membername: "哈哈是我啦",
-        membernickname: "bnt 戰士",
-        memberregistertime: "2022-02-07T14:40:09.000+00:00"
-    }
-
-
-];
 
 
 
