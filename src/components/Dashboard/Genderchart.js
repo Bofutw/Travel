@@ -13,7 +13,14 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 const url = 'http://localhost:8080/backstage/membergenderdata'
 
-
+let renderLabel = function(data) {
+  console.log(data.name);
+  if(data.name=='male'){
+    return "男性："+data.count + " 位 " ;
+  }else{
+    return "女性："+data.count + " 位 ";
+  }
+}
 export default function Areachart() {
 
   async function fetchapi(){
@@ -37,14 +44,7 @@ export default function Areachart() {
     
   }, [])
 
-  let renderLabel = function(data) {
-    console.log(data.name);
-    if(data.name=='male'){
-      return "男性："+data.count + " 位 " ;
-    }else{
-      return "女性："+data.count + " 位 ";
-    }
-  }
+
 
   return (
       <>
