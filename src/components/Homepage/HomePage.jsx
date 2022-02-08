@@ -4,9 +4,11 @@ import './homepage.css'
 import ScrollTop from './ScrollTop'
 import axios from 'axios'
 import Skeleton from '@mui/material/Skeleton';
-import { Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 import Homeloading from './HomeLoading'
+import { MotionPhotosAuto } from '@mui/icons-material'
+import { motion } from 'framer-motion';
 
 export default function HomePage() {
     const [data, setData] = useState('')
@@ -77,7 +79,13 @@ export default function HomePage() {
 const HomeSection = () => {
     return (
         <>
+            <Box className='test-body'>
+                <Example />
+
+            </Box>
+
             <section className="sec-01">
+
                 <div className="container">
                     <h2 className="main-title">最新消息</h2>
                     <div className="content">
@@ -151,3 +159,39 @@ const HomeSection = () => {
     )
 
 }
+
+const container = {
+    hidden: { opacity: 1, scale: 0 },
+    visible: {
+        opacity: 1,
+        scale: 1,
+        transition: {
+            delayChildren: 0.3,
+            staggerChildren: 0.2
+        }
+    }
+};
+
+const item = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+        y: 0,
+        opacity: 1
+    }
+};
+
+
+
+export const Example = () => (
+
+    <motion.ul
+        className="test-container"
+        variants={container}
+        initial="hidden"
+        animate="visible"
+    >
+        {[0, 1, 2, 3].map((index) => (
+            <motion.li key={index} className="test-item" variants={item} />
+        ))}
+    </motion.ul>
+);
