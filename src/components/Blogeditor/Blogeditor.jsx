@@ -9,7 +9,7 @@ import { Button } from '@mui/material';
 import { MuiThemeProvider, createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import { green } from '@mui/material/colors';
 import SaveIcon from '@mui/icons-material/Save';
-
+import { format } from "date-fns/esm";
 // "{\"beginDate\":\"2022-01-19\",\"daysNum\":4,\"eachDays\":[{\"eachPlaces\":[{\"placeName\":\"南屯國小\",\"AttractionsId\":\"ChIJ0ZMoF8k9aTQRuCDDop7t6kc\"},{\"placeName\":\"北屯國小\",\"AttractionsId\":\"ChIJHQYfVeAXaTQRnAVJXNo3vIE\"}]},{\"eachPlaces\":[{\"placeName\":\"北區醫院\",\"AttractionsId\":\"ChIJC5WkxxX2AzQRfGB1A1MRrh8\"}]},{\"eachPlaces\":[{\"placeName\":\"西屯國小\",\"AttractionsId\":\"ChIJUyVn5BgWaTQR9DFV9fYc0BY\"}]}]}"
 // {"blogid":13,"blogdetail":"{\r\n    \"title\":\"集中營3日遊\",\r\n    \"decrption\":\"decrption\",\r\n    \"eachDay\":[\r\n        {\r\n            \"eachplace\":[\r\n                {\r\n                    \"subTitle\":\"集中營\",\r\n                    \"text\":\"真猶你的\",\r\n                    \"pic\":[\"\",\"\"],\r\n                    \"AttractionsId\":\"123\"\r\n                },\r\n                {\r\n                    \"subTitle\":\"毒氣室\",\r\n                    \"text\":\"..........\",\r\n                    \"pic\":[\"\",\"\"],\r\n                    \"AttractionsId\":\"7777777\"\r\n                },\r\n                {\r\n                    \"subTitle\":\"這裡超好玩\",\r\n                    \"text\":\"內文blablablablabal..........\",\r\n                    \"pic\":[\"\",\"\"],\r\n                    \"AttractionsId\":\"3\"\r\n                }\r\n            \r\n            ]                \r\n        },\r\n        {\r\n            \"eachplace\":[\r\n                {\r\n                    \"subTitle\":\"古色古香的咖啡廳\",\r\n                    \"text\":\"1111111..........\",\r\n                    \"pic\":[\"\",\"\"],\r\n                    \"AttractionsId\":\"123\"\r\n                },\r\n                {\r\n                    \"subTitle\":\"24小時營業的而且還賣滷味的家具店\",\r\n                    \"text\":\"內文blablablablabal..........\",\r\n                    \"pic\":[\"\",\"\"],\r\n                    \"AttractionsId\":\"7777777\"\r\n                },\r\n                {\r\n                    \"subTitle\":\"這裡超好玩\",\r\n                    \"text\":\"內文blablablablabal..........\",\r\n                    \"pic\":[\"\",\"\"],\r\n                    \"AttractionsId\":\"3\"\r\n                }\r\n            \r\n            ]                \r\n        },\r\n            {\r\n                \"eachplace\":[\r\n                    {\r\n                        \"subTitle\":\"古色古香的咖啡廳\",\r\n                        \"text\":\"1111111..........\",\r\n                        \"pic\":[\"\",\"\"],\r\n                        \"AttractionsId\":\"123\"\r\n                    },\r\n                    {\r\n                        \"subTitle\":\"24小時營業的而且還賣滷味的家具店\",\r\n                        \"text\":\"內文blablablablabal..........\",\r\n                        \"pic\":[\"\",\"\"],\r\n                        \"AttractionsId\":\"7777777\"\r\n                    },\r\n                    {\r\n                        \"subTitle\":\"這裡超好玩\",\r\n                        \"text\":\"內文blablablablabal..........\",\r\n                        \"pic\":[\"\",\"\"],\r\n                        \"AttractionsId\":\"3\"\r\n                    }               \r\n                ]                \r\n            }\r\n    ]\r\n}","blogauthority":0,"blogcreatetime":"2022-01-16T16:48:34.000+00:00","blogupdatetime":null,"blogpopular":7}
 export default function BlogShow() {
@@ -17,6 +17,7 @@ export default function BlogShow() {
     let blog;
     let data;
     function initblog() {
+
         blog = {};
         blog.blogauthority = 0
         blog.blogdetail = {};
@@ -24,6 +25,10 @@ export default function BlogShow() {
         blog.blogdetail.decrption = "";
         blog.blogdetail.eachDay = [];
         blog.blogdetail.url = ""
+        if (window.localStorage.journeyforblog) {
+            data = JSON.parse(window.localStorage.journeyforblog);
+            data.journeydetail = JSON.parse(data.journeydetail);
+        }
         if (window.localStorage.blog) {
             existblog();
         } else {
@@ -32,8 +37,6 @@ export default function BlogShow() {
     }
     useEffect(getMemberNickName, [])
     function journeytoblog() {
-        data = JSON.parse(window.localStorage.journeyforblog);
-        data.journeydetail = JSON.parse(data.journeydetail);
         for (let i = 0; i < data.journeydetail.eachDays.length; i++) {
             let tempdata = {};
             tempdata.eachplace = [];
@@ -52,8 +55,18 @@ export default function BlogShow() {
         //blogdata = blog;
     }
     function existblog() {
+
         blog = JSON.parse(window.localStorage.blog);
+
         blog.blogdetail = JSON.parse(blog.blogdetail);
+
+
+        if (blog.blogcreatetime) {
+            blog.blogcreatetime = format(new Date(blog.blogcreatetime), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
+        }
+        if (blog.blogupdatetime) {
+            blog.blogupdatetime = format(new Date(blog.blogupdatetime), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
+        }
     }
     function changeText(e) {
         if ((e.target.id + "").includes("area")) {
@@ -64,7 +77,7 @@ export default function BlogShow() {
             blog.blogdetail.eachDay[index1].eachplace[index2].text = e.target.value
         }
     }
-    function imagesave(blob, logicname) {
+    function imagesave(blob, logicname, topimg) {
         fetch(`https://storage.googleapis.com/upload/storage/v1/b/travelproject/o?uploadType=media&name=${logicname}.png`, {
             method: "post",
             body: blob,
@@ -74,14 +87,19 @@ export default function BlogShow() {
         })
             .then((res) => {
                 console.log(res)
+                if (topimg) {
+                    setOpload(true);
+                }
 
             })
     }
     function save() {
+        console.log("save" + JSON.stringify(blog))
         let blogdata = blog
-        blogdata.blogdetail.bloger = window.localStorage.nickName;
+        //blogdata.blogdetail.bloger = window.localStorage.nickName;
         blogdata.blogdetail = JSON.stringify(blogdata.blogdetail);
         if (blogdata.blogid) {
+
             fetch(`http://localhost:8080/blog/`, {
                 method: "put",
                 body: JSON.stringify(blogdata),
@@ -91,7 +109,7 @@ export default function BlogShow() {
             }).then((res) => {
                 return res.json();
             }).then((result) => {
-                window.localStorage.blog = JSON.stringify(result);
+                fetchdata(blogdata.blogid)
             })
         } else {
             fetch(`http://localhost:8080/blog/member=${window.localStorage.memberid}&journey=${data.journeyid}`, {
@@ -142,7 +160,6 @@ export default function BlogShow() {
 
         if (files[0] != undefined) {
 
-            setOpload(true);
 
             let url = URL.createObjectURL(files[0])
             document.getElementById('topimg2').hidden = false
@@ -150,7 +167,11 @@ export default function BlogShow() {
             let date = new Date();
             let logicname = files[0].name + date.toISOString();
             blog.blogdetail.url = `https://storage.googleapis.com/travelproject/${logicname}.png`
-            imagesave(files[0], logicname)
+
+            imagesave(files[0], logicname, true)
+            blog.blogdetail = JSON.stringify(blog.blogdetail)
+            window.localStorage.blog = JSON.stringify(blog)
+
 
         }
     }
@@ -191,7 +212,7 @@ export default function BlogShow() {
                         />
 
                     }
-                    <img id='topimg2' hidden='true' src={blog.blogdetail.url} style={{ width: '80%', height: '80%', objectFit: 'cover' }}></img>
+                    <img id='topimg2' hidden={blog.blogdetail.url ? false : true} src={blog.blogdetail.url} style={{ width: '100%', height: '100%', objectFit: 'cover' }}></img>
 
 
                     <br></br><br></br>
@@ -199,12 +220,13 @@ export default function BlogShow() {
                     <TextField
                         id="titlearea"
                         label="標題"
-                        placeholder={(blog.blogdetail.title) ? blog.blogdetail.title : "為您的旅程設下一個標題...."}
+                        placeholder="為您的旅程設下一個標題...."
                         /*  variant="standard" */
                         color="success"
                         focused
                         fullWidth
                         onChange={changeText}
+                        defaultValue={blog.blogdetail.title}
                     />
                     <br></br>
                     <br></br>
@@ -212,7 +234,7 @@ export default function BlogShow() {
 
                         id="decrptionarea"
                         label="內文"
-                        placeholder={(blog.blogdetail.decrption) ? blog.blogdetail.decrption : "為您的旅程增加一些描述...."}
+                        placeholder="為您的旅程增加一些描述...."
                         /*  variant="standard" */
                         color="info"
                         focused
@@ -220,6 +242,7 @@ export default function BlogShow() {
                         multiline='true'
                         minRows='4'
                         onChange={changeText}
+                        defaultValue={blog.blogdetail.decrption}
 
                     />
                     {/*   <textarea onChange={changeText} id="titlearea">{(blog.blogdetail.title) ? blog.blogdetail.title : "為您的旅程設下一個標題...."}</textarea>

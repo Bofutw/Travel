@@ -5,6 +5,7 @@ import './blogshow.css'
 import Button from '@mui/material/Button';
 import BookmarkRemoveIcon from '@mui/icons-material/BookmarkRemove';
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
+import { width } from '@mui/system';
 
 
 export default function BlogShow({ user }) {
@@ -92,10 +93,10 @@ export default function BlogShow({ user }) {
     }
     return (
 
-        <div style={{ display: 'grid', gridTemplateColumns: '70% 30%' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '75% 25%' }}>
             <div>
                 <div class="bls" style={{ width: '1000px', height: '350px', margin: '70px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <img src={blogdata.blogdetail.url} style={{ width: '100%', height: '100%', objectFit: 'cover' }}></img>
+                    <img src={blogdata.blogdetail.url} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '10px' }}></img>
                 </div>
                 <div style={{ marginLeft: '100px', marginTop: "-50px", marginBottom: '60px', width: '900px' }}>
                     <h1>{blogdata.blogdetail.title}</h1>
