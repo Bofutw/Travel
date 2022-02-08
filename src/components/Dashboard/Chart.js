@@ -10,26 +10,30 @@ function createData(time, amount) {
 
 const data = [
   
-createData('12-27',5),
-createData('12-28',19),
-createData('12-30',7),
-createData('01-01',12),
-createData('01-04',29),
-createData('01-05',4),
-createData('01-06',130),
-createData('01-08',9),
-createData('01-09',422),
-createData('01-10',885),
-createData('01-11',1768),
-createData('01-12',1418),
-createData('01-13',2170),
-createData('01-14',974),
-createData('01-15',298),
-createData('01-16',2261),
-createData('01-17',1164),
-createData('01-18',1333),
-createData('01-19',1203),
-createData('01-20',1024)
+ 
+  createData('01-11',1768),
+  createData('01-12',1418),
+  createData('01-13',2170),
+  createData('01-14',974),
+  createData('01-15',298),
+  createData('01-16',2261),
+  createData('01-17',1164),
+  createData('01-18',1333),
+  createData('01-19',1203),
+  createData('01-20',1024),
+  createData('01-21',383),
+  createData('01-22',941),
+  createData('01-23',148),
+  createData('01-24',580),
+  createData('01-25',160),
+  createData('01-26',51),
+  createData('01-27',74),
+  createData('01-28',662),
+  createData('01-29',167),
+  createData('01-30',91),
+  createData('01-31',35),
+  createData('02-01',33),
+  createData('02-02',539)
 ];
 let date = new Date();
 let month = date.getMonth();

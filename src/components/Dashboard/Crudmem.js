@@ -445,7 +445,7 @@ const emptyRows =
           aria-describedby="alert-dialog-description"
         >
           <DialogTitle id="alert-dialog-title">
-            {"刪除的資料就像變心的女朋友"}
+            {"警告：刪除資料將無法恢復"}
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">

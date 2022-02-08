@@ -52,6 +52,7 @@ export default function Deposits() {
     fetchapi();
       
   }, [])
+  
   return (
     <React.Fragment>
       <Title>Git 提交次數</Title>
@@ -66,7 +67,9 @@ export default function Deposits() {
       <Depositsnum num={data1.total} duration={1000}></Depositsnum>
       </Typography>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
-      <Depositsnum num={new Date().getMonth()+1} duration={1000}></Depositsnum> / <Depositsnum num={new Date().getDate()-new Date().getDay()-6} duration={1000}></Depositsnum> ~ <Depositsnum num={new Date().getMonth()+1} duration={1000}></Depositsnum> / <Depositsnum num={new Date().getDate()-new Date().getDay()} duration={1000}></Depositsnum>
+      <Depositsnum num={new Date().getMonth()+1} duration={1000}></Depositsnum> / <Depositsnum num={(new Date().getDate()-new Date().getDay()-6)==0?1:new Date().getDate()-new Date().getDay()-6} duration={1000}></Depositsnum> ~ <Depositsnum num={new Date().getMonth()+1} duration={1000}></Depositsnum> / <Depositsnum num={new Date().getDate()-new Date().getDay()} duration={1000}></Depositsnum>
+      {/* <Depositsnum num={new Date().getMonth()+1} duration={1000}></Depositsnum> / <Depositsnum num={new Date().getDate()-new Date().getDay()-6} duration={1000}></Depositsnum> ~ <Depositsnum num={new Date().getMonth()+1} duration={1000}></Depositsnum> / <Depositsnum num={new Date().getDate()-new Date().getDay()} duration={1000}></Depositsnum>
+       */}
       </Typography>
       <div>
         <Link color="primary" href="https://github.com/EEIT36-Travel/Brian_Web_Demo" /* onClick={preventDefault} */>

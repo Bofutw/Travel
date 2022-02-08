@@ -38,13 +38,13 @@ export default function Deposits() {
   
   return (
     <React.Fragment>
-      <Title>會員即時人數</Title>
-      <Typography component="p" variant="h4">
+      <Title>即時會員總數</Title>
+      <Typography component="p" variant="h2">
         
       
       <Depositsnum num={data}  duration={1500}></Depositsnum>
       </Typography>
-      <Typography color="text.secondary" sx={{ flex: 1 }}>
+      <Typography color="text.secondary" sx={{ flex: 1 }} variant="h5">
       <Depositsnum num={new Date().getFullYear()}  duration={500}></Depositsnum> / <Depositsnum num={new Date().getMonth()+1}  duration={1000}></Depositsnum> / <Depositsnum num={new Date().getDate()}  duration={1500}></Depositsnum>
       </Typography>
       <div>

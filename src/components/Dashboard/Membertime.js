@@ -18,9 +18,15 @@ export default function Chart() {
       method: 'get',
       url: url,
     });
-   
+
+    clones = res.data
+    clones.map((e)=>{
+      e.name = e.name.substr(5,4);
+    })
+    setData(clones);
+    /* 
     setData(res.data)
-    
+     */
     } catch (error) {
         console.log(error);
     }
@@ -29,6 +35,7 @@ export default function Chart() {
   const [data, setData] = useState([])
   useEffect(() => {
     fetchapi();
+    
   }, [])
 
   return (

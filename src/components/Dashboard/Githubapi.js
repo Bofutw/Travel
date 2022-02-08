@@ -94,7 +94,7 @@ function Githubapi() {
                 align="center"
                 sx={{ flexGrow: 10 }}
             >
-                <br></br>
+               
         
 
                 更新時間：<br></br>

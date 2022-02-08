@@ -43,7 +43,7 @@ function Copyright(props) {
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="http://localhost:3000/">
-        <b>EEIT36 不只是色色</b>
+        <b>EEIT36 Travel Maker</b>
       </Link>{' '}
       {'Since 2021 - '}
       {new Date().getFullYear()}
@@ -161,7 +161,7 @@ function DashboardContent({ name }) {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              不可以色色の後台一會員管理
+              旅。行 ｜ 會員管理
             </Typography>
             <Avatar sx={{ marginRight: '10px', transition: 'width 0.15s ,height 0.15s', '&:hover': { cursor: 'pointer', width: 50, height: 50, boxShadow: ' 3px 7px #888888' } }} >{name.substring(0, 1)}</Avatar>
             <IconButton color="usewhite" >
