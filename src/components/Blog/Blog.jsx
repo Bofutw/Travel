@@ -117,12 +117,12 @@ function Blog() {
                                                 lists.push(<div class="col-sm-4">
                                                     <div class="thumb-wrapper">
                                                         <div class="img-box">
-                                                            <img src={populardata[i].blogdetail.url} class="img-fluid" alt="" />
+                                                            <img src={populardata[i].blogdetail.url} class="img-fluid" style={{ objectFit: 'scale-down', objectPosition: '50% 50%' }} alt="" />
                                                         </div>
                                                         <div class="thumb-content">
                                                             <h4 style={{ width: '180px', height: '58px' }}>{populardata[i].blogdetail.title}</h4>
                                                             <p style={{ width: '175px', height: '39px' }}>{populardata[i].blogdetail.decrption}</p>
-                                                            <a onClick={toBlogPage} class="btn btn-primary" id={`blogid${populardata[i].blogid}`}>More <i class="fa fa-angle-right"></i></a>
+                                                            <a onClick={toBlogPage} class="btn btn-primary" id={`blogid${populardata[i].blogid}`}>更多 <i class="fa fa-angle-right"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>)
@@ -135,7 +135,7 @@ function Blog() {
                                         </div>
 
                                     }
-                                    if (index % 3 == 0 && index != 0) {
+                                    if (index % 3 === 0 && index !== 0) {
                                         let lists = [];
                                         for (let i = index; i <= (index + 2); i++) {
                                             if (populardata[i]) {
@@ -147,7 +147,7 @@ function Blog() {
                                                         <div class="thumb-content">
                                                             <h4 style={{ width: '180px', height: '58px' }}>{populardata[i].blogdetail.title}</h4>
                                                             <p style={{ width: '175px', height: '39px' }}>{populardata[i].blogdetail.decrption}</p>
-                                                            <a onClick={toBlogPage} class="btn btn-primary" id={`blogid${populardata[i].blogid}`}>More <i class="fa fa-angle-right"></i></a>
+                                                            <a onClick={toBlogPage} class="btn btn-primary" id={`blogid${populardata[i].blogid}`}>更多 <i class="fa fa-angle-right"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>)
@@ -176,7 +176,7 @@ function Blog() {
             <div style={{ marginTop: '50px', marginBottom: '10px', marginLeft: '230px' }}>
                 <h1 style={{ fontWeight: 'bold' }}><i class="fa fa-tags" aria-hidden="true" style={{ marginRight: '10px' }}></i>最新文章</h1>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '5% 60% 35% ', backgroundImage: 'url("")', backgroundSize: '100% 100%',marginLeft:'10px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '5% 60% 35% ', backgroundImage: 'url("")', backgroundSize: '100% 100%', marginLeft: '10px' }}>
                 <div></div>
                 <div style={{ paddingBottom: '10px' }}>
 
@@ -195,8 +195,8 @@ function Blog() {
                                 <h1 style={{ width: '388px', height: '60px' }}>{item.blogdetail.title}</h1>
 
                                 <p style={{ width: '388px', height: '40px' }}> {item.blogdetail.decrption}</p>
-                                <p class="read-more" style={{cursor: 'pointer'}}>
-                                    <a onClick={toBlogPage} id={`blogid${item.blogid}`}>Read More</a>
+                                <p class="read-more" style={{ cursor: 'pointer' }}>
+                                    <a onClick={toBlogPage} id={`blogid${item.blogid}`}>{"...更多"}</a>
                                 </p>
                             </div>
                         </div>
@@ -205,13 +205,13 @@ function Blog() {
 
                 </div>
                 <div>
-                    <div style={{ width: '300px', height: `${(popularbloger.length)*130+20}px`, backgroundColor: 'rgba(0,0,0,0.6)', borderRadius: '5px', marginTop: '15px' ,marginLeft:'40px'}}>
+                    <div style={{ width: '300px', height: `${(popularbloger.length) * 130 + 20}px`, backgroundColor: 'rgba(0,0,0,0.6)', borderRadius: '5px', marginTop: '15px', marginLeft: '40px' }}>
                         <div style={{ paddingTop: "15px", color: 'white', paddingLeft: '35px', marginBottom: '20px' }}>
                             <h4><i class="fa fa-address-book-o" aria-hidden="true" style={{ marginRight: '15px' }}></i>熱門作家</h4>
                         </div>
                         <ul class="details">
                             {popularbloger.map((item) => {
-                                return <li onClick={blogerClick} class="" style={{ height: '90px' ,cursor: 'pointer' }}><img alt="Avatar" id={`bloger${item.membernickname}`} src={item.membericon} style={{ width: '60px', height: '60px', marginLeft: '20px', "border-radius": "50%" }} />
+                                return <li onClick={blogerClick} class="" style={{ height: '90px', cursor: 'pointer' }}><img alt="Avatar" id={`bloger${item.membernickname}`} src={item.membericon} style={{ width: '60px', height: '60px', marginLeft: '20px', "border-radius": "50%" }} />
                                     <ul style={{ marginLeft: '100px', marginTop: '-63px', marginRight: '20px' }}>
                                         <li id={`bloger${item.membernickname}`} style={{ color: 'white', fontWeight: 'bold', fontSize: "18px" }}>{item.membernickname}</li>
                                         <li id={`bloger${item.membernickname}`} className='detail-member-intro' >{item.memberintro}</li>

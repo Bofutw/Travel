@@ -138,7 +138,7 @@ export default function BlogShow() {
                             //item.blogdetail = JSON.parse(item.blogdetail);
                             return <div class="miniCard">
                                 <div class="myblog-imgbox" >
-                                    <img src={item.blogdetail.url} class="img-fluid" alt="" style={{ height: '105px', width: '186px', objectFit: 'contain' }} />
+                                    <img src={item.blogdetail.url} class="img-fluid" alt="" style={{ height: '105px', width: '186px', objectFit: 'scale-down', objectPosition: '50% 50%' }} />
                                 </div>
                                 <div class="myblog-content" style={{ padding: '10px' }}>
                                     <h5 id="myblog-cardtitle" >{item.blogdetail.title}</h5>
