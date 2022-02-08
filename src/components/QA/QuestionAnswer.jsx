@@ -5,7 +5,7 @@ class QuestionAnswer extends Component {
  render() {
   return (
         <div style={{backgroundImage: 'url("/images/563231_l.jpg")',backgroundSize:'100% 100%'}}>
-            <h2 style={{color:'white',fontSize:'48px',fontWeight:'bold',paddingTop:'30px',marginLeft:'650px'}}>常見問題<i class="fa fa-question-circle" aria-hidden="true" style={{marginLeft:'20px'}}></i></h2>
+            <h2 id='qatitle' style={{color:'white',fontSize:'48px',paddingTop:'30px',marginLeft:'650px'}}>常見問題<i class="fa fa-question-circle" aria-hidden="true" style={{marginLeft:'20px'}}></i></h2>
             <div class="qa-container" >                
                 <div class="qacard" style={{float:'left',marginRight:'20px',marginTop:'100px'}}>
                     <div class="slide slide1">

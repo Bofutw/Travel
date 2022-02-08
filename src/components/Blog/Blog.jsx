@@ -229,3 +229,8 @@ function Blog() {
 }
 
 export default Blog;
+
+/* font-family: 'DotGothic16', sans-serif;
+
+font-family: 'RocknRoll One', sans-serif;
+font-family: 'Stick', sans-serif; */

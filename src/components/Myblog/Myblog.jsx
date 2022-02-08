@@ -18,7 +18,7 @@ export default function BlogShow() {
         journeyid = document.getElementById(`popcard-${e.target.id.slice(8,11)}`).value.slice(9,13)  
         document.getElementById("journeyname").innerHTML  = `為 <b>${document.getElementById("popcard-"+e.target.id.slice(8,11)).closest('div').querySelector('h5').innerText}</b> 寫下一些回憶`
         document.getElementById("buttonForNewBlog").setAttribute("style","")
-        document.getElementById("buttonForNewBlog").innerText = "出發"
+        document.getElementById("buttonForNewBlog").innerText = "出發 ➢"
     }
     function getmemberblog(id) {
         fetch(`http://localhost:8080/blog/memberid=${id}`)
@@ -93,7 +93,7 @@ export default function BlogShow() {
         <div >
             <div class="demo" style={{ backgroundImage: 'url("/images/563231_l.jpg")', backgroundSize: 'cover', paddingRight: '100px', backgroundPosition: 'center',paddingBottom:'100px' }}>
                 <h2 class="penName">我的遊記<i class="fa fa-paper-plane" aria-hidden="true" style={{marginLeft:'10px'}}></i>
-                    <button class="button" style={{ marginLeft: '280px' }}>
+                    <button class="button" onClick={()=>window.location.href="#popup"} style={{ marginLeft: '280px' }}>
                         <a href="#popup" style={{ color: "black" }}><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                     </button>
                 </h2>

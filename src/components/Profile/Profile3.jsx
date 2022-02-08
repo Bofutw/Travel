@@ -317,17 +317,17 @@ export default function Profile3() {
             </div>
             <div className="profile3-editcurusergender" style={{ marginLeft: "230px", marginTop: "-40px", display: (edit ? "" : "none") }}>
 
-              {console.log("this is membergender", curgender === 0)}
+              
               <input
                 disabled={edit ? null : "disabled"}
-                defaultChecked={localStorage.getItem("testgendervalue") === 0 && true}
+                // defaultChecked={localStorage.getItem("testgendervalue") === 0 && true}
                 onChange={(e) => {
                   setCurGender(e.target.value)
                   console.log(e.target.value);
                 }}
 
                 type="radio"
-                id="r0"
+                id="r1"
                 name="gender"
                 value="0"
               />
@@ -340,7 +340,7 @@ export default function Profile3() {
                 //defaultChecked={(memberinfo.membergender) ===1}
                 disabled={edit ? null : "disabled"}
                 value="1"
-                id="r1"
+                id="r2"
 
                 onChange={(e) => setCurGender(e.target.value)}
                 name="gender"
@@ -352,9 +352,9 @@ export default function Profile3() {
 
             </div>
             <div className="profile3-curusergender" style={{ display: (edit ? "none" : "") }}>
-              {memberinfo.membergender != null ? <>當前性別：<span style={{ marginLeft: '120px' }}>{(memberinfo.membergender) === 1 ? "男生" : "女生"}</span></> : ""}
+              {memberinfo.membergender != null ? <>當前性別：<span style={{ marginLeft: '120px' }}>{(memberinfo.membergender) === 1 ? "女生" : "男生"}</span></> : ""}
             </div>
-
+            {console.log((memberinfo.membergender === 1 ? "女生" : "男生"))}
           </div>
           <div>
 
@@ -475,6 +475,6 @@ export default function Profile3() {
         <Divider sx={{ color: "black" }} />
       </div>
     </div>
-    
+
   );
 }

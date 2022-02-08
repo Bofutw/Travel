@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=RocknRoll+One&display=swap');
+
 /* body {
   margin: 0;
   padding: 0;
@@ -33,7 +35,9 @@
   transition: all 0.5s;
 }
 
-
+#qatitle{
+  font-family: 'RocknRoll One', sans-serif;
+}
 
 .qa-container {
   display: flex;
