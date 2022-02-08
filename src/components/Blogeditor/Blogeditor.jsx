@@ -17,6 +17,7 @@ export default function BlogShow() {
     let blog;
     let data;
     function initblog() {
+       
         blog = {};
         blog.blogauthority = 0
         blog.blogdetail = {};
@@ -24,6 +25,10 @@ export default function BlogShow() {
         blog.blogdetail.decrption = "";
         blog.blogdetail.eachDay = [];
         blog.blogdetail.url = ""
+        if(window.localStorage.journeyforblog){
+            data = JSON.parse(window.localStorage.journeyforblog);
+            data.journeydetail = JSON.parse(data.journeydetail);
+        }
         if (window.localStorage.blog) {
             existblog();
         } else {
@@ -32,8 +37,7 @@ export default function BlogShow() {
     }
     useEffect(getMemberNickName, [])
     function journeytoblog() {
-        data = JSON.parse(window.localStorage.journeyforblog);
-        data.journeydetail = JSON.parse(data.journeydetail);
+
         for (let i = 0; i < data.journeydetail.eachDays.length; i++) {
             let tempdata = {};
             tempdata.eachplace = [];
@@ -52,13 +56,17 @@ export default function BlogShow() {
         //blogdata = blog;
     }
     function existblog() {
+        
         blog = JSON.parse(window.localStorage.blog);
+        
         blog.blogdetail = JSON.parse(blog.blogdetail);
         
-        blog.blogcreatetime =  format(new Date(blog.blogcreatetime), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
+        
+        if(blog.blogcreatetime){
+            blog.blogcreatetime =  format(new Date(blog.blogcreatetime), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
+        }
         if(blog.blogupdatetime){
             blog.blogupdatetime =  format(new Date(blog.blogupdatetime), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
-
         }
     }
     function changeText(e) {
@@ -70,7 +78,7 @@ export default function BlogShow() {
             blog.blogdetail.eachDay[index1].eachplace[index2].text = e.target.value
         }
     }
-    function imagesave(blob, logicname) {
+    function imagesave(blob, logicname,topimg) {
         fetch(`https://storage.googleapis.com/upload/storage/v1/b/travelproject/o?uploadType=media&name=${logicname}.png`, {
             method: "post",
             body: blob,
@@ -80,14 +88,19 @@ export default function BlogShow() {
         })
             .then((res) => {
                 console.log(res)
+                if(topimg){
+                    setOpload(true);
+                }
 
             })
     }
     function save() {
+        console.log("save"+JSON.stringify(blog))
         let blogdata = blog
-        blogdata.blogdetail.bloger = window.localStorage.nickName;
+        //blogdata.blogdetail.bloger = window.localStorage.nickName;
         blogdata.blogdetail = JSON.stringify(blogdata.blogdetail);
         if (blogdata.blogid) {
+            
             fetch(`http://localhost:8080/blog/`, {
                 method: "put",
                 body: JSON.stringify(blogdata),
@@ -97,7 +110,7 @@ export default function BlogShow() {
             }).then((res) => {
                 return res.json();
             }).then((result) => {
-                window.localStorage.blog = JSON.stringify(result);
+                fetchdata(blogdata.blogid)
             })
         } else {
             fetch(`http://localhost:8080/blog/member=${window.localStorage.memberid}&journey=${data.journeyid}`, {
@@ -110,7 +123,7 @@ export default function BlogShow() {
                 return res.json();
             }).then((result) => {
                 fetchdata(result.blogid)
-
+                
             })
         }
 
@@ -147,8 +160,7 @@ export default function BlogShow() {
     function imgchange2(files) {
        
        if(files[0]!=undefined){
-           
-            setOpload(true);
+
           
             let url = URL.createObjectURL(files[0]) 
             document.getElementById('topimg2').hidden=false
@@ -156,8 +168,12 @@ export default function BlogShow() {
             let date = new Date();
            let logicname = files[0].name + date.toISOString();
            blog.blogdetail.url = `https://storage.googleapis.com/travelproject/${logicname}.png`
-           imagesave(files[0], logicname) 
-          
+           
+           imagesave(files[0], logicname,true) 
+           blog.blogdetail = JSON.stringify(blog.blogdetail)
+           window.localStorage.blog = JSON.stringify(blog)
+ 
+            
        }
     }
 
@@ -197,7 +213,7 @@ export default function BlogShow() {
                 />
                
                 }
-                <img id='topimg2' hidden='true' src={blog.blogdetail.url} style={{ width: '100%', height: '100%', objectFit: 'cover' }}></img>
+                <img id='topimg2' hidden={blog.blogdetail.url?false:true} src={blog.blogdetail.url} style={{ width: '100%', height: '100%', objectFit: 'cover' }}></img>
                 
               
                     <br></br><br></br>
@@ -205,12 +221,13 @@ export default function BlogShow() {
                     <TextField
                         id="titlearea"
                         label="標題"
-                        placeholder={(blog.blogdetail.title) ? blog.blogdetail.title : "為您的旅程設下一個標題...."}
+                        placeholder="為您的旅程設下一個標題...."
                         /*  variant="standard" */
                         color="success"
                         focused
                         fullWidth
                         onChange={changeText}
+                        defaultValue={blog.blogdetail.title}
                     />
                     <br></br>
                     <br></br>
@@ -218,7 +235,7 @@ export default function BlogShow() {
 
                         id="decrptionarea"
                         label="內文"
-                        placeholder={(blog.blogdetail.decrption) ? blog.blogdetail.decrption : "為您的旅程增加一些描述...."}
+                        placeholder= "為您的旅程增加一些描述...."
                         /*  variant="standard" */
                         color="info"
                         focused
@@ -226,8 +243,9 @@ export default function BlogShow() {
                         multiline='true'
                         minRows='4'
                         onChange={changeText}
+                        defaultValue={blog.blogdetail.decrption}
 
-                    />
+                     />
                     {/*   <textarea onChange={changeText} id="titlearea">{(blog.blogdetail.title) ? blog.blogdetail.title : "為您的旅程設下一個標題...."}</textarea>
                     <textarea onChange={changeText} id="decrptionarea">{(blog.blogdetail.decrption) ? blog.blogdetail.decrption : "為您的旅程增加一些描述...."}</textarea>
              */}
