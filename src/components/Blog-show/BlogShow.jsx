@@ -64,7 +64,8 @@ export default function BlogShow({ user }) {
             })
 
     }
-    function insertCollect() {
+    function insertCollect(e) {
+        e.preventDefault();
         fetch(`http://localhost:8080/collect/memberid=${window.localStorage.memberid}&blogid=${JSON.parse(window.localStorage.blogdata).blogid}`,
             {
                 method: "POST"
@@ -81,7 +82,8 @@ export default function BlogShow({ user }) {
             })
 
     }
-    function deleteCollect() {
+    function deleteCollect(e) {
+        e.preventDefault();
         fetch(`http://localhost:8080/collect/${window.localStorage.collectid}`, {
             method: "DELETE"
         })
