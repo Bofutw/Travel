@@ -30,7 +30,8 @@ function FirebaseTest1() {
   //     });
   // };
 useEffect(()=>{
-console.log("這是現在時間",curtime)
+  let curdate = format(new Date(), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
+  console.log("這是現在時間",curdate)
 
 },[])
 
