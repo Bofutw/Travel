@@ -6,14 +6,33 @@
     display: flex;
 }
 
+/* .middleSide-img {
+    background-image: url("mylogo.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 100px;
+} */
+
 .Navbar .middleSide {
-    font-size: 2rem;
-    max-height: 80px;
-    flex: 20%;
+    font-size: 3.3rem;
+    color: #FFFFFF;
+    font-weight: 800;
+    font-style: oblique;
+    flex: 13%;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: whitesmoke;
+    background-image: url("mylogo.png");
+    background-repeat: no-repeat;
+    background-size: 100px, auto, contain;
+    background-position: left;
+
+    /* background-repeat: no-repeat;
+    background-size: contain; */
+
+
+
 
 }
 

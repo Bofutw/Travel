@@ -1,6 +1,6 @@
 import { Avatar, Menu } from '@mui/material'
 import React, { useRef, useState } from 'react'
-import { Link ,useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './navbar.css'
 import ReorderIcon from '@mui/icons-material/Reorder';
 import SearchIcon from '@mui/icons-material/Search';
@@ -18,17 +18,17 @@ export default function Navbar({ setSearch }) {
     let navigate = useNavigate();
     // RWDMenu
     const [showLinks, setShowLinks] = useState(false);
-    
+
     // Search...
     const searchRef = useRef(null);
     const handleClickSearch = () => {
         searchRef.current.focus();
-        if(!!searchRef.current.value !== !!null){
+        if (!!searchRef.current.value !== !!null) {
             setSearch(searchRef.current.value);
             navigate("/searchpage");
             // window.location.href="/searchpage";            
-        } 
-        
+        }
+
         console.log(searchRef.current.value);
     };
 
@@ -58,7 +58,11 @@ export default function Navbar({ setSearch }) {
                 <button onClick={() => setShowLinks(!showLinks)}><ReorderIcon /></button>
             </div>
             <div className="middleSide">
-                MY LOGO
+
+
+                行✈️
+
+
             </div>
             <div className="rightSide">
                 <input type="search" name="" id="" placeholder='Search...' ref={searchRef} />
@@ -66,14 +70,14 @@ export default function Navbar({ setSearch }) {
 
 
 
-                <Tooltip title='個人資訊'sx={{ ml: 2 ,outline:'none',textDecoration:'none',border:'none',width:'20px'}} >
+                <Tooltip title='個人資訊' sx={{ ml: 2, outline: 'none', textDecoration: 'none', border: 'none', width: '20px' }} >
                     <IconButton onClick={handleMenuOpen}
                         size="small"
-                        sx={{ ml: 2 ,outline:'none',textDecoration:'none',border:'none',width:'20px'}}
+                        sx={{ ml: 2, outline: 'none', textDecoration: 'none', border: 'none', width: '20px' }}
                         aria-controls={open ? 'account-menu' : false}
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : false}>
-                            
+
                         {/* memberImage */}
                         <Avatar src={profileURL} className='memberImg' />
                     </IconButton>

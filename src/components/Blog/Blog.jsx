@@ -3,6 +3,44 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './blog.css'
 
+const testdata = [
+    {
+        memberbirth: "2000-05-11T16:00:00.000+00:00",
+        memberemail: "bntt5533@gmail.com",
+        membergender: 0,
+        membericon: "https://firebasestorage.googleapis.com/v0/b/my-project-01-334308.appspot.com/o/8files%2F82.jpg?alt=media&token=92704bba-b91c-4e49-84de-b88cab9db551",
+        memberid: 8,
+        memberintro: "盆栽好好看",
+        membername: "哈哈是我啦",
+        membernickname: "bnt 戰士",
+        memberregistertime: "2022-02-07T14:40:09.000+00:00"
+    },
+
+    {
+        memberbirth: "2000-05-11T16:00:00.000+00:00",
+        memberemail: "bntt5533@gmail.com",
+        membergender: 0,
+        membericon: "https://firebasestorage.googleapis.com/v0/b/my-project-01-334308.appspot.com/o/8files%2F82.jpg?alt=media&token=92704bba-b91c-4e49-84de-b88cab9db551",
+        memberid: 8,
+        memberintro: "盆栽好好看",
+        membername: "哈哈是我啦",
+        membernickname: "bnt 戰士",
+        memberregistertime: "2022-02-07T14:40:09.000+00:00"
+    },
+    {
+        memberbirth: "2000-05-11T16:00:00.000+00:00",
+        memberemail: "bntt5533@gmail.com",
+        membergender: 0,
+        membericon: "https://firebasestorage.googleapis.com/v0/b/my-project-01-334308.appspot.com/o/8files%2F82.jpg?alt=media&token=92704bba-b91c-4e49-84de-b88cab9db551",
+        memberid: 8,
+        memberintro: "盆栽好好看",
+        membername: "哈哈是我啦",
+        membernickname: "bnt 戰士",
+        memberregistertime: "2022-02-07T14:40:09.000+00:00"
+    }
+
+
+];
 
 
 
@@ -79,7 +117,7 @@ function Blog() {
             })
             .then((result) => {
 
-                console.log(result)
+                console.log("this is popular bloger", result)
                 setPopularbloger(result)
             })
 
@@ -205,18 +243,23 @@ function Blog() {
 
                 </div>
                 <div>
-                    <div style={{ width: '300px', height: `${(popularbloger.length) * 130 + 20}px`, backgroundColor: 'rgba(0,0,0,0.6)', borderRadius: '5px', marginTop: '15px', marginLeft: '40px' }}>
+                    <div style={{ width: '300px', height: `${(testdata.length) * 130 + 20}px`, backgroundColor: 'rgba(0,0,0,0.6)', borderRadius: '5px', marginTop: '15px', marginLeft: '40px' }}>
                         <div style={{ paddingTop: "15px", color: 'white', paddingLeft: '35px', marginBottom: '20px' }}>
                             <h4><i class="fa fa-address-book-o" aria-hidden="true" style={{ marginRight: '15px' }}></i>熱門作家</h4>
                         </div>
                         <ul class="details">
-                            {popularbloger.map((item) => {
-                                return <li onClick={blogerClick} class="" style={{ height: '90px', cursor: 'pointer' }}><img alt="Avatar" id={`bloger${item.membernickname}`} src={item.membericon} style={{ width: '60px', height: '60px', marginLeft: '20px', "border-radius": "50%" }} />
-                                    <ul style={{ marginLeft: '100px', marginTop: '-63px', marginRight: '20px' }}>
-                                        <li id={`bloger${item.membernickname}`} style={{ color: 'white', fontWeight: 'bold', fontSize: "18px" }}>{item.membernickname}</li>
-                                        <li id={`bloger${item.membernickname}`} className='detail-member-intro' >{item.memberintro}</li>
-                                    </ul>
-                                </li>
+                            {/* popularbloger.map */}
+                            {testdata.map((item, index) => {
+                                return <>
+                                    <li style={{ marginLeft: '20px', marginTop: '20px', position: 'absolute', fontSize: '1.5rem', color: 'white', fontWeight: 'bold' }}>{index + 1}.</li>
+                                    <li onClick={blogerClick} class="" style={{ marginLeft: '40px', marginBottom: '20px', height: '90px', cursor: 'pointer' }}>
+                                        <img alt="Avatar" id={`bloger${item.membernickname}`} src={item.membericon} style={{ width: '60px', height: '60px', marginLeft: '20px', "border-radius": "50%" }} />
+                                        <ul style={{ marginLeft: '100px', marginTop: '-63px', marginRight: '20px' }}>
+                                            <li id={`bloger${item.membernickname}`} style={{ color: 'white', fontWeight: 'bold', fontSize: "18px" }}>{item.membernickname}</li>
+                                            <li id={`bloger${item.membernickname}`} className='detail-member-intro' >{item.memberintro}</li>
+                                        </ul>
+                                    </li>
+                                </>
                             })}
                         </ul>
                     </div>

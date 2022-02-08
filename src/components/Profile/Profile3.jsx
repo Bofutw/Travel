@@ -46,6 +46,12 @@ export default function Profile3() {
   //城市ID
   const [cityid, setCityId] = useState("");
 
+  //gendername
+  const [gendername, setGenderName] = useState("");
+
+
+
+
   useEffect(() => {
     //console.log("this is avasrc",avasrc);
 
@@ -55,6 +61,16 @@ export default function Profile3() {
       );
       const axioscityid = await getcityid(axiosmemberinfo.memberid);
       //console.log(currentcityid);
+      console.log("axiosmemberinfo", axiosmemberinfo.membergender);
+      if (axiosmemberinfo.membergender === 0) {
+        console.log("this is test membergender 0:boy,1:girl", true);
+        setGenderName("男生");
+      }
+      else if (axiosmemberinfo.membergender === 1) {
+        console.log("this is test membergender", false);
+        setGenderName("女生");
+      }
+
 
       if (axiosmemberinfo.memberbirth != null) {
         let memberbirth2 = await axiosmemberinfo.memberbirth;
@@ -63,6 +79,8 @@ export default function Profile3() {
         console.log("memberbirth", memberbirth2);
 
       }
+      //
+
       //設定當前用戶所有資訊
       const finalaxiosmemberinfo = Object.assign(axiosmemberinfo, { membercityid: axioscityid });
       // console.log("當前用戶所有資訊",finalaxiosmemberinfo);
@@ -75,18 +93,26 @@ export default function Profile3() {
 
       return finalaxiosmemberinfo;
     };
+
     gdata();
   }, []);
+
   //  var d1 = new Date(memberinfo.memberbirth);
   //    let memberbirth2 = d1.toISOString().slice(0,10)
   //   console.log((memberinfo.memberbirth).toString().slice(0,10));
 
   //能否修改
   const [edit, setEdit] = useState(false);
+
   const handleEdit = (e) => {
     e.preventDefault();
     setEdit(!edit);
+
+
   };
+
+
+
 
   const [profilesend, setProfileSend] = useState(false);
 
@@ -317,7 +343,7 @@ export default function Profile3() {
             </div>
             <div className="profile3-editcurusergender" style={{ marginLeft: "230px", marginTop: "-40px", display: (edit ? "" : "none") }}>
 
-              
+
               <input
                 disabled={edit ? null : "disabled"}
                 // defaultChecked={localStorage.getItem("testgendervalue") === 0 && true}
@@ -325,11 +351,13 @@ export default function Profile3() {
                   setCurGender(e.target.value)
                   console.log(e.target.value);
                 }}
+                {...(gendername === "男生" && { defaultChecked: true, value: "0" })}
 
                 type="radio"
                 id="r1"
                 name="gender"
                 value="0"
+
               />
 
               <label htmlFor="r1">
@@ -340,8 +368,9 @@ export default function Profile3() {
                 //defaultChecked={(memberinfo.membergender) ===1}
                 disabled={edit ? null : "disabled"}
                 value="1"
-                id="r2"
 
+                id="r2"
+                {...(gendername === "女生" && { defaultChecked: true, value: "1" })}
                 onChange={(e) => setCurGender(e.target.value)}
                 name="gender"
                 style={{ marginLeft: "80px" }}

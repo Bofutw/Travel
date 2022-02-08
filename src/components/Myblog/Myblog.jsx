@@ -108,7 +108,7 @@ export default function BlogShow() {
                         </div>
                         <p id='journeyname'>-選擇想要新增的旅遊紀錄吧-</p>
                         {/*   <button id ={"buttonForNewBlog"}onClick={editExistJourney} style={{ marginLeft: '650px', marginBottom: '13px', display:"none" }}></button> */}
-                        <Button id={"buttonForNewBlog"} color='success' variant="contained" endIcon={<MovingIcon />} sx={{ display: 'none' }} size="large" onClick={editExistJourney}></Button>
+                        <button id={"buttonForNewBlog"} color='success' variant="contained" style={{ display: 'none' }} size="large" onClick={editExistJourney}>出發 ➢</button>
                         <div class="popup__text">
                             {journey.map((item, id) => {
                                 return <div><input type='radio' id={`popcard-${id}`} name='popcard' style={{ display: "none" }} value={"journeyid" + item.journeyid} />
