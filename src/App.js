@@ -42,6 +42,7 @@ import LoginSuccessPage from "./components/Login/LoginSuccessPage";
 import Test4 from "./Test/Test4";
 import Crud from './components/Dashboard/Crud'
 import SearchPage from "./components/SearchPage/SearchPage";
+import FirebaseTest1 from "./Test/FirebaseDatabase/FirebaseTest1";
 
 
 
@@ -89,7 +90,7 @@ function App() {
   const [search, setSearch] = useState("");
 
   //console.log("App",isadmin);
-  console.log("App用戶搜尋值", search);
+  //console.log("App用戶搜尋值", search);
   return (
     <AppContext.Provider value={{ user, isadmin, setIsAdmin }}>
       <div className="App">
@@ -101,29 +102,21 @@ function App() {
         <Routes>
           {/* need write route */}
           <Route path="*" element={< PageNotFound />} />
-
           <Route path="/" element={<HomePage user={user} />} />
           <Route path="/login" element={<Login />} />
           <Route path="/loginsuccess" element={<LoginSuccessPage />} />
-
           <Route path="/about" element={<About />} />
           <Route path="/qa" element={<QuestionAnswer />} />
           {/* <Route path="/test5" element={<Test5 />} /> */}
           <Route path="/searchpage" element={<SearchPage search={search} />} />
-
           <Route path="/blog" element={<Blog />} />
           <Route path="/myblog" element={<Myblog />} />
           <Route path="/blogshow" element={<BlogShow user={user} />} />
-          <Route path="/blogshow2" element={<BlogShow2 />} />
-          <Route path="/blogshow3" element={<BlogShow3 />} />
-          <Route path="/blogshow4" element={<BlogShow4 />} />
-          <Route path="/blogshow5" element={<BlogShow5 />} />
+          <Route path="/test" element={<FirebaseTest1/>}/>
           <Route path="/blogeditor" element={<Blogeditor />} />
           {user && <Route path="/profile" element={<Profile3 />} />}
           {user && <Route path="/favorite" element={<Favorite />} />}
-
           <Route path={"/journeyplanhome"} element={localStorage.getItem("email") != null ? <JourneyHome openMap={openMap} setOpenMap={setOpenMap} /> : <Login />} />
-
           {user && <Route path="/map" element={<Map />} />}
           <Route path="/dashboardlogin/*" element={<DashBoardLogin isadmin={isadmin} setIsAdmin={setIsAdmin} setAdName={setAdName} />} />
           {isadmin === "true" &&
@@ -136,7 +129,7 @@ function App() {
           }
           <Route path="/dashboard/*" element={<BackendLoading />} />
         </Routes>
-        {(adminlogin === "false" && !ismap) && <Footer />}
+        {/* {(adminlogin === "false" && !ismap) && <Footer />} */}
 
 
 

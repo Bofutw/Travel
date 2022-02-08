@@ -47,7 +47,7 @@ const BootstrapDialogTitle = (props) => {
 
 
 export default function ProfileUploadImg({ open, setOpen, setShowAva, setAvaSrc, setEditFile }) {
-    let test = "https://firebasestorage.googleapis.com/v0/b/my-project-01-334308.appspot.com/o/files%2F52.jpg?alt=media&token=4e44f7e1-9884-4f35-9691-c0b92bf2e47d"
+    // let test = "https://firebasestorage.googleapis.com/v0/b/my-project-01-334308.appspot.com/o/files%2F52.jpg?alt=media&token=4e44f7e1-9884-4f35-9691-c0b92bf2e47d"
 
     const inpufileRef = useRef(null);
 

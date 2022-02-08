@@ -1,9 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import firebase from "firebase/compat/app";
 import { UploadFileSharp } from "@mui/icons-material";
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
 import { storage } from "../../Firebase/firebase-config";
+import { format } from "date-fns";
 
 function FirebaseTest1() {
   const emailref = useRef("");
@@ -12,6 +13,7 @@ function FirebaseTest1() {
   const [data, setData] = useState("");
   const [progress, setProgress] = useState(0);
   const [src, setSrc] = useState("");
+  const curtime = format(new Date(),' mmss');
 
   // const handleClick = (e) => {
   //   e.preventDefault();
@@ -27,7 +29,10 @@ function FirebaseTest1() {
   //       console.error(error);
   //     });
   // };
+useEffect(()=>{
+console.log("這是現在時間",curtime)
 
+},[])
 
 
   const handleSubmit = (e) => {
@@ -35,7 +40,8 @@ function FirebaseTest1() {
 
     const file = e.target[0].files[0];
     const src2 = URL.createObjectURL(file);
-    const storageRef = ref(storage, `files/5${file.name}`);
+    const curtime = format(new Date(),'yyyy-MM-dd HH:mm:ss');
+    const storageRef = ref(storage, `files/5${curtime}${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
 
@@ -87,12 +93,12 @@ function FirebaseTest1() {
       <button onClick={handleClick}>送出</button> */}
 
       <form onSubmit={handleSubmit}>
-        <input type="file" name="" id="" onChange={(e) => setSrc(URL.createObjectURL(e.target.files[0]))} />
-        {console.log(src)}
+        <input type="file" name="" id="" onClick={()=>console.log("this is curtime",)} onChange={(e) => setSrc(URL.createObjectURL(e.target.files[0]))} />
+        {console.log("this is src",src)}
         <button type="submit">Send</button>
 
       </form>
-      <img src={src} alt="" />
+      <img src={src} style={{width:'300px',height:'300px' ,display:(!!src === !!null && 'none')}} alt="" />
     </div>
   );
 }
