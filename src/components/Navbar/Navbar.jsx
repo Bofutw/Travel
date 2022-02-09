@@ -57,7 +57,7 @@ export default function Navbar({ setSearch }) {
                 </div>
                 <button onClick={() => setShowLinks(!showLinks)}><ReorderIcon /></button>
             </div>
-            <div className="middleSide" style={{marginLeft:'20px'}}>
+            <div className="middleSide" style={{marginLeft:'100px'}}>
 
 
                 

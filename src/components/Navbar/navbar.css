@@ -15,7 +15,9 @@
 } */
 
 .Navbar .middleSide {
-    font-size: 3.3rem;
+    font-size: 5rem;
+    width: 350px;
+    height: 90px;
     color: #FFFFFF;
     font-weight: 800;
     font-style: oblique;
@@ -23,7 +25,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("mylogo.png");
+    background-image: url("work.png");
     background-repeat: no-repeat;
     background-size: 100px, auto, contain;
     background-position: left;
