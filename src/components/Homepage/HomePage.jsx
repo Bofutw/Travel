@@ -78,7 +78,7 @@ const HomeSection = () => {
     return (
         <>
             <section className="sec-01">
-                <div className="container">
+                <div className="container-01">
                     <h2 className="main-title">最新消息</h2>
                     <div className="content">
                         <div className="image">
@@ -103,10 +103,10 @@ const HomeSection = () => {
                 </div>
             </section>
             <section className="sec-02">
-                <div className="container">
+                <div className="container-02">
                     <h3 className="section-title">熱門景點</h3>
-                    <div className="content">
-                        <div className="image">
+                    <div className="content02">
+                        <div className="image02">
                             <img src="./img/img2.jpg" alt="" />
                         </div>
                         <div className="info">
@@ -122,12 +122,12 @@ const HomeSection = () => {
                 </div>
             </section>
             <section className="sec-03">
-                <div className="container">
+                <div className="container-03">
                     <h3 className="section-title">晚上也閒不下來嗎?</h3>
-                    <div className="content">
+                    <div className="content03">
                         <div className="media-info">
 
-                            <div className="text-box">
+                            <div className="text-box03">
                                 <h3>西門町</h3>
                                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis inventore iure expedita nulla, cupiditate error.</p>
                                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis inventore iure expedita nulla, cupiditate error.</p>
@@ -141,7 +141,7 @@ const HomeSection = () => {
                             <li><a href="#"><i ></i> Youtube</a></li>
                             <li><a href="#"><i ></i> Linkedin</a></li> */}
                         </div>
-                        <div className="image">
+                        <div className="image03">
                             <img src="./img/img3.jpg" alt="" />
                         </div>
                     </div>
