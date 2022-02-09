@@ -68,7 +68,7 @@ function Blog() {
     }
     function blogerClick(e) {
         // fetchData(search)
-        window.localStorage.seachbloger = e.target.id.slice(6);
+        window.localStorage.searchbloger = e.target.id;
         window.location.href = "/searchpage"
 
     }
@@ -216,10 +216,10 @@ function Blog() {
                                 return <>
                                     <li style={{ marginLeft: '30px', marginTop: '10px', position: 'absolute', fontSize: '1.5rem', color: 'white', fontWeight: 'bold' }}>{index + 1}.</li>
                                     <li onClick={blogerClick} class="" style={{ marginLeft: '40px', marginBottom: '20px', height: '90px', cursor: 'pointer' }}>
-                                        <img alt="Avatar" id={`bloger${item.membernickname}`} src={item.membericon} style={{ width: '60px', height: '60px', marginLeft: '20px', "border-radius": "50%" }} />
+                                        <img alt="Avatar" id={item.memberid +","+ item.membernickname} src={item.membericon} style={{ width: '60px', height: '60px', marginLeft: '20px', "border-radius": "50%" }} />
                                         <ul style={{ marginLeft: '100px', marginTop: '-63px', marginRight: '20px' }}>
-                                            <li id={`bloger${item.membernickname}`} style={{ color: 'white', fontWeight: 'bold', fontSize: "18px" }}>{item.membernickname}</li>
-                                            <li id={`bloger${item.membernickname}`} className='detail-member-intro' >{item.memberintro}</li>
+                                            <li id={item.memberid +","+ item.membernickname} style={{ color: 'white', fontWeight: 'bold', fontSize: "18px" }}>{item.membernickname}</li>
+                                            <li id={item.memberid +","+ item.membernickname} className='detail-member-intro' >{item.memberintro}</li>
                                         </ul>
                                     </li>
                                 </>

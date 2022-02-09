@@ -10,18 +10,20 @@ function Blog({ search }) {
     //拿取搜尋值
     const [data,setData] = useState([]);
     const [searchinput,setSearchinput] = useState([]);
+    const [searchtext,setSearchtext] = useState([]);
     const [populardata,setPopulardata] = useState([]);
     const [popularbloger,setPopularbloger] = useState([]);
     useEffect(()=>{
-        if(!search&&!window.localStorage.seachbloger){        
+        if(!search&&!window.localStorage.searchbloger){        
              
             fetchData("")           
             getPopularData(); 
             getPopularBloger();
-        } else if(window.localStorage.seachbloger){           
-            fetchData(window.localStorage.seachbloger)
-            
-            //window.localStorage.removeItem("seachbloger");         
+        } else if(window.localStorage.searchbloger){           
+            let temp = window.localStorage.searchbloger.split(",")
+            //setSearchinput(temp[0])
+            fetchDataBybloger(temp[0],temp[1])
+            window.localStorage.removeItem("searchbloger");         
             getPopularData(); 
             getPopularBloger();
         }
@@ -35,6 +37,25 @@ function Blog({ search }) {
         }
 
     }, [search])
+
+
+    function fetchDataBybloger(memberid,nickname){
+        
+        //alert("key:"+keyword)
+        fetch(`http://localhost:8080/blog/memberid=${memberid}`)
+        .then((res)=>{
+            return res.json()
+        } )
+        .then((result)=>{
+            for(let i =0;i<result.length;i++){
+                result[i].blogdetail = JSON.parse(result[i].blogdetail)
+            }
+            console.log(result)
+            setData(result)
+            setSearchtext(nickname)
+        })
+    }
+
     function fetchData(keyword){
         
         //alert("key:"+keyword)
@@ -49,6 +70,7 @@ function Blog({ search }) {
             console.log(result)
             setData(result)
             setSearchinput(keyword?keyword:"全部")
+            setSearchtext(keyword?keyword:"全部")
         })
     }
      function getPopularData(){
@@ -92,8 +114,9 @@ function Blog({ search }) {
         })
     }
     function blogerClick(e){
-        search = e.target.id.slice(6);
-        fetchData(search)
+        search = e.target.id.split(",")[0];
+        window.localStorage.searchbloger = e.target.id;
+        window.location.reload()
     }
     // let temp = 0
     // const [populardata, setPopulardata] = useState([])
@@ -153,7 +176,7 @@ function Blog({ search }) {
             <div style={{ display: 'grid', gridTemplateRows: '20% 80% ' }}>
                 <div style={{ marginTop: '160px', marginLeft: '340px', zIndex: '3' }}>
                     <h1 id='searchtitle' ><i class="fa fa-search" aria-hidden="true"></i>    搜尋：{search}</h1>
-                    <h3 id='searchtitle' >包含 " {searchinput} " 的相關結果：</h3>
+                    <h3 id='searchtitle' >包含 " {searchtext} " 的相關結果：</h3>
 
                 </div>
                 <div style={{ display: 'grid', gridTemplateColumns: '75% 25% ', backgroundImage: 'url("")', backgroundSize: '100% 100%' }}>
@@ -164,7 +187,6 @@ function Blog({ search }) {
                         <div class="meta">
                             <div class="photo" style={{ backgroundImage: `url(${item.blogdetail.url})` }}></div>
                             <ul class="details">
-                                <li class="author">John Doe</li>
                                 <li class="date">{item.blogcreatetime.slice(0,10)}</li>
                               
                             </ul>
@@ -190,10 +212,10 @@ function Blog({ search }) {
                                 <ul class="details">
                                     {popularbloger.map((item,id)=>{
                                         if(id<3){
-                                            return <li onClick={blogerClick}  class="" style={{ height: '90px',cursor: 'pointer' }}><img alt="Avatar" id={`bloger${item.membernickname}`} src={item.membericon} style={{ width: '60px', height: '60px', marginLeft: '20px',"border-radius": "50%" }} />
+                                            return <li onClick={blogerClick}  class="" style={{ height: '90px',cursor: 'pointer' }}><img alt="Avatar" id={item.memberid +","+ item.membernickname} src={item.membericon} style={{ width: '60px', height: '60px', marginLeft: '20px',"border-radius": "50%" }} />
                                             <ul style={{ marginLeft: '100px', marginTop: '-63px', marginRight: '20px' }}>
-                                                <li id={`bloger${item.membernickname}`} style={{ color: 'white', fontWeight: 'bold', fontSize: "18px" }}>{item.membernickname}</li>
-                                                <li id={`bloger${item.membernickname}`} className='detail-member-intro' >{item.memberintro}</li>
+                                                <li id={item.memberid +","+ item.membernickname} style={{ color: 'white', fontWeight: 'bold', fontSize: "18px" }}>{item.membernickname}</li>
+                                                <li id={item.memberid +","+ item.membernickname} className='detail-member-intro' >{item.memberintro}</li>
                                             </ul>
                                         </li>
                                         }
