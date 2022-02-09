@@ -57,15 +57,15 @@ export default function Navbar({ setSearch }) {
                 </div>
                 <button onClick={() => setShowLinks(!showLinks)}><ReorderIcon /></button>
             </div>
-            <div className="middleSide" style={{marginLeft:'100px'}}>
+            <div className="middleSide" style={{ marginLeft: '100px' }}>
 
 
-                
+
 
 
             </div>
             <div className="rightSide">
-                <input type="search" name="" id="" placeholder='Search...' ref={searchRef} />
+                <input type="search" name="" id="" placeholder='Search...' onKeyDown={(e) => { return e.key.valueOf() === "Enter" && handleClickSearch() }} ref={searchRef} />
                 <button onClick={handleClickSearch}><SearchIcon /></button>
 
 

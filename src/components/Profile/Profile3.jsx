@@ -10,6 +10,7 @@ import BorderColorSharpIcon from "@mui/icons-material/BorderColorSharp";
 import { getcityid } from "../Login/LoginFn";
 import AddIcon from "@mui/icons-material/Add";
 import ProfileUploadImg from "./ProfileUploadImg";
+import { format, parseISO } from "date-fns";
 // TODO :  City ID
 
 export default function Profile3() {
@@ -63,7 +64,7 @@ export default function Profile3() {
       //console.log(currentcityid);
       console.log("axiosmemberinfo", axiosmemberinfo.membergender);
       if (axiosmemberinfo.membergender === 0) {
-        console.log("this is test membergender 0:boy,1:girl", true);
+        // console.log("this is test membergender 0:boy,1:girl", true);
         setGenderName("男生");
       }
       else if (axiosmemberinfo.membergender === 1) {
@@ -73,18 +74,23 @@ export default function Profile3() {
 
 
       if (axiosmemberinfo.memberbirth != null) {
-        let memberbirth2 = await axiosmemberinfo.memberbirth;
-        memberbirth2 = memberbirth2.toString().slice(0, 10);
-        setCurrentBirth(() => memberbirth2);
-        console.log("memberbirth", memberbirth2);
+
+        const testbirth4 = await axiosmemberinfo.memberbirth;
+        const testbirth5 = parseISO((testbirth4), "yyyy-MM-dd");
+        const memberbirth2 = format(testbirth5, "yyyy-MM-dd");
+        //console.log("this is testbirth5", testbirth5);
+
+
+        setCurrentBirth(memberbirth2);
 
       }
       //
 
+
       //設定當前用戶所有資訊
       const finalaxiosmemberinfo = Object.assign(axiosmemberinfo, { membercityid: axioscityid });
-      // console.log("當前用戶所有資訊",finalaxiosmemberinfo);
-      console.log("當前頁面生日資訊", birthdayref.current.value)
+      console.log("當前用戶所有資訊", finalaxiosmemberinfo);
+      //console.log("當前頁面生日資訊", birthdayref.current.value)
       //設置性別
       //setCurGender(finalaxiosmemberinfo.membergender);
       localStorage.setItem("testgendervalue", finalaxiosmemberinfo.membergender);
@@ -154,10 +160,10 @@ export default function Profile3() {
           setConstellation(day < 22 ? `♉金牛座` : `♊雙子座`);
           break;
         case 6:
-          setConstellation(day < 22 ? `♊雙子座` : `♋巨蠍座`);
+          setConstellation(day < 22 ? `♊雙子座` : `♋巨蟹座`);
           break;
         case 7:
-          setConstellation(day < 23 ? `♋巨蠍座` : `♌獅子座🦁`);
+          setConstellation(day < 23 ? `♋巨蟹座` : `♌獅子座🦁`);
           break;
         case 8:
           setConstellation(day < 24 ? `♌獅子座🦁` : `♍處女座`);

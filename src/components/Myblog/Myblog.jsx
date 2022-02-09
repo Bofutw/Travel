@@ -9,12 +9,16 @@ export default function BlogShow() {
     let journeyid;
     const [blog, setBlog] = useState([]);
     const [journey, setJourney] = useState([]);
+    const [show, setShow] = useState(false);
+
     useEffect(() => {
         memberid = window.localStorage.memberid;
         getmemberblog(memberid)
         getmemberjourney(memberid)
     }, [])
     function popcard(e) {
+        e.preventDefault();
+        setShow(true);
         journeyid = document.getElementById(`popcard-${e.target.id.slice(8, 11)}`).value.slice(9, 13)
         document.getElementById("journeyname").innerHTML = `為 <b>${document.getElementById("popcard-" + e.target.id.slice(8, 11)).closest('div').querySelector('h5').innerText}</b> 寫下一些回憶`
         document.getElementById("buttonForNewBlog").setAttribute("style", "")
@@ -88,6 +92,59 @@ export default function BlogShow() {
             })
 
     }
+
+    function getmemberjourney(id) {
+        fetch(`http://localhost:8080/journey/memberid=${id}`)
+            .then((res) => {
+                console.log(res)
+                return res.json();
+            })
+            .then((result) => {
+                console.log(result)
+
+                for (let i = 0; i < result.length; i++) {
+                    console.log(result[i].blogdetail)
+                    result[i].journeydetail = JSON.parse(result[i].journeydetail)
+                }
+                setJourney(result)
+            })
+
+    }
+    function editExistBlog(e) {
+        fetch(`http://localhost:8080/blog/${e.target.id.slice(6, 10)}`)
+            .then((res) => {
+                return res.json();
+            })
+            .then((result) => {
+                window.localStorage.blog = JSON.stringify(result)
+                window.localStorage.removeItem("journeyforblog")
+                window.location.href = "/Blogeditor";
+            })
+
+    }
+    function editExistJourney() {
+
+        fetch(`http://localhost:8080/journey/${journeyid}`)
+            .then((res) => {
+                return res.json();
+            })
+            .then((result) => {
+                window.localStorage.journeyforblog = JSON.stringify(result)
+                window.localStorage.removeItem("blog")
+                window.location.href = "/Blogeditor";
+            })
+
+    }
+    function deleteBlog(e) {
+
+        fetch(`http://localhost:8080/blog/${e.target.id.slice(6, 10)}`, {
+            method: "DELETE"
+        })
+            .then((res) => {
+                window.location.reload();
+            })
+
+    }
     return (
 
         <div >
@@ -99,7 +156,7 @@ export default function BlogShow() {
                 </h2>
 
                 <div class="popup" id="popup">
-                    <a class="popup__close" href="#" style={{}}>X</a>
+                    <a class="popup__close" href="#" style={{}} onClick={() => setShow(false)}>X</a>
                     <div class="popup-inner">
                         <div style={{ marginTop: '30px' }}>
                             <h2>—撰寫遊記—</h2>
@@ -108,7 +165,7 @@ export default function BlogShow() {
                         </div>
                         <p id='journeyname'>-選擇想要新增的旅遊紀錄吧-</p>
                         {/*   <button id ={"buttonForNewBlog"}onClick={editExistJourney} style={{ marginLeft: '650px', marginBottom: '13px', display:"none" }}></button> */}
-                        <button id={"buttonForNewBlog"} color='success' variant="contained" style={{ display: 'none' }} size="large" onClick={editExistJourney}>出發 ➢</button>
+                        <button id={"buttonForNewBlog"} color='success' variant="contained" style={{ display: (show ? "" : "none") }} size="large" onClick={editExistJourney}>出發 ➢</button>
                         <div class="popup__text">
                             {journey.map((item, id) => {
                                 return <div><input type='radio' id={`popcard-${id}`} name='popcard' style={{ display: "none" }} value={"journeyid" + item.journeyid} />
@@ -117,7 +174,7 @@ export default function BlogShow() {
                                             <img id={`element-${id}`} src="\blogimg\b1\44879896482_720c553daa_c.jpg" class="img-fluid" alt="" style={{ height: '100px', width: '150px' }} />
                                         </div>
                                         <div id={`element-${id}`} class="myblog-content" style={{ padding: '10px' }}>
-                                            <h5 style={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', fontWeight: 'bold' ,WebkitLineClamp:'1',WebkitBoxOrient: 'vertical'}} id={`element-${id}`}>{item.journeydetail.title}</h5>
+                                            <h5 style={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', fontWeight: 'bold' }} id={`element-${id}`}>{item.journeydetail.title}</h5>
                                             <div id={`element-${id}`}>{`(${item.journeydetail.beginDate})`}</div>
                                         </div>
                                     </div></div>
@@ -138,13 +195,13 @@ export default function BlogShow() {
                             //item.blogdetail = JSON.parse(item.blogdetail);
                             return <div class="miniCard">
                                 <div class="myblog-imgbox" >
-                                    <img src={item.blogdetail.url} class="img-fluid" alt="" style={{ height: '105px', width: '186px', objectFit: 'cover', objectPosition: '50% 50%' }} />
+                                    <img src={item.blogdetail.url} class="img-fluid" alt="" style={{ height: '105px', width: '186px', objectFit: 'cover' }} />
                                 </div>
                                 <div class="myblog-content" style={{ padding: '10px' }}>
                                     <h5 id="myblog-cardtitle" >{item.blogdetail.title}</h5>
                                     <p id="myblog-descript" >{item.blogdetail.decrption}</p>
-                                    <button onClick={deleteBlog} id={`blogid${item.blogid}`} class="btn btn-secondary" style={{ fontSize: '12px',marginLeft:'40px'  }}>刪除 <i class="fa fa-angle-right"></i></button>
-                                    <button onClick={editExistBlog} id={`blogid${item.blogid}`} class="btn btn-secondary" style={{ fontSize: '12px', marginLeft: '10px' }}>編輯 <i class="fa fa-angle-right"></i></button>
+                                    <button onClick={deleteBlog} id={`blogid${item.blogid}`} class="btn btn-primary" style={{ fontSize: '12px' }}>刪除 <i class="fa fa-angle-right"></i></button>
+                                    <button onClick={editExistBlog} id={`blogid${item.blogid}`} class="btn btn-primary" style={{ fontSize: '12px', marginLeft: '15px' }}>編輯 <i class="fa fa-angle-right"></i></button>
                                 </div>
                             </div>
 

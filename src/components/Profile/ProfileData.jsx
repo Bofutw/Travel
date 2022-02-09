@@ -16,6 +16,19 @@ import { async } from "@firebase/util";
 import { auth } from "../../Firebase/firebase-config";
 import { updateProfile } from "firebase/auth";
 import { getmemberallinfo } from './getmemberinfo';
+import { addDays, format } from "date-fns";
+
+
+Date.prototype.addDays = function (birthdate, days) {
+  var date = new Date(birthdate);
+  date.setDate(date.getDate() + days);
+  return date
+};
+
+
+
+
+
 export default function ProfileData({
   profilesend,
   setProfileSend,
@@ -59,7 +72,10 @@ export default function ProfileData({
     memberregistertime: memberrgitime,
 
   };
-  console.log("this is memberid", localStorage.getItem("memberregistertime"));
+
+
+
+  //console.log("this is memberid", localStorage.getItem("memberregistertime"));
 
   //系統提示訊息
   const [suopen, setSuOpen] = useState(false);
