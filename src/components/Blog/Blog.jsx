@@ -89,7 +89,7 @@ function Blog() {
     return (
         <div style={{ backgroundImage: 'url("/images/AnyConv.com__E_US5SHVQAIuSbE.jpg")', backgroundSize: '100% 100%' }}>
             <div style={{ paddingTop: '60px', marginLeft: '230px', width: '400px', zIndex: '3' }}>
-                <h1 style={{ fontWeight: 'bold' }}><i class="fa fa-tags" aria-hidden="true" style={{ marginRight: '10px' }}></i>熱門文章</h1>
+                <h1 id='blogtitlestyle' ><i class="fa fa-tags" aria-hidden="true" style={{ marginRight: '10px' }}></i>熱門文章</h1>
                 {/* <img src='\img\未命名-1.jpg' style={{width:'180px',height:'45px',marginBottom:'15px'}}></img> */}
             </div>
             <div class="container-xl" style={{ zIndex: '-1', border: 'solid', borderWidth: '3px', borderRadius: '15px', borderColor: 'rgba(255,255,255,0.1)', backgroundColor: 'rgba(0,0,0,0.5)', Filter: 'blur(20px)' }}>
@@ -118,7 +118,7 @@ function Blog() {
                                                 lists.push(<div class="col-sm-4">
                                                     <div class="thumb-wrapper">
                                                         <div class="img-box">
-                                                            <img src={populardata[i].blogdetail.url} class="img-fluid" style={{ objectFit: 'scale-down', objectPosition: '50% 50%' }} alt="" />
+                                                            <img src={populardata[i].blogdetail.url} class="img-fluid" style={{ objectFit: 'cover', objectPosition: '50% 50%' }} alt="" />
                                                         </div>
                                                         <div class="thumb-content">
                                                             <h4 style={{ width: '180px', height: '58px' }}>{populardata[i].blogdetail.title}</h4>
@@ -175,7 +175,7 @@ function Blog() {
                 </div>
             </div>
             <div style={{ marginTop: '50px', marginBottom: '10px', marginLeft: '230px' }}>
-                <h1 style={{ fontWeight: 'bold' }}><i class="fa fa-tags" aria-hidden="true" style={{ marginRight: '10px' }}></i>最新文章</h1>
+                <h1 id='blogtitlestyle'><i class="fa fa-tags" aria-hidden="true" style={{ marginRight: '10px' }}></i>最新文章</h1>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '5% 60% 35% ', backgroundImage: 'url("")', backgroundSize: '100% 100%', marginLeft: '10px' }}>
                 <div></div>
@@ -187,7 +187,7 @@ function Blog() {
                             <div class="meta">
                                 <div class="photo" style={{ backgroundImage: `url(${item.blogdetail.url})` }}></div>
                                 <ul class="details">
-                                    <li class="author">John Doe</li>
+                                    
                                     <li class="date">{item.blogcreatetime.slice(0, 10)}</li>
 
                                 </ul>
@@ -207,14 +207,14 @@ function Blog() {
                 </div>
                 <div>
                     <div style={{ width: '300px', height: `${(popularbloger.length) * 130 + 20}px`, backgroundColor: 'rgba(0,0,0,0.6)', borderRadius: '5px', marginTop: '15px', marginLeft: '40px' }}>
-                        <div style={{ paddingTop: "15px", color: 'white', paddingLeft: '35px', marginBottom: '20px' }}>
+                        <div style={{ paddingTop: "15px", color: 'white', paddingLeft: '25px', marginBottom: '20px' }}>
                             <h4><i class="fa fa-address-book-o" aria-hidden="true" style={{ marginRight: '15px' }}></i>熱門作家</h4>
                         </div>
                         <ul class="details">
                             {/* popularbloger.map */}
                             {popularbloger.map((item, index) => {
                                 return <>
-                                    <li style={{ marginLeft: '20px', marginTop: '20px', position: 'absolute', fontSize: '1.5rem', color: 'white', fontWeight: 'bold' }}>{index + 1}.</li>
+                                    <li style={{ marginLeft: '30px', marginTop: '10px', position: 'absolute', fontSize: '1.5rem', color: 'white', fontWeight: 'bold' }}>{index + 1}.</li>
                                     <li onClick={blogerClick} class="" style={{ marginLeft: '40px', marginBottom: '20px', height: '90px', cursor: 'pointer' }}>
                                         <img alt="Avatar" id={`bloger${item.membernickname}`} src={item.membericon} style={{ width: '60px', height: '60px', marginLeft: '20px', "border-radius": "50%" }} />
                                         <ul style={{ marginLeft: '100px', marginTop: '-63px', marginRight: '20px' }}>

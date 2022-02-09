@@ -65,7 +65,7 @@ const Favorite = () => {
                         </label>
 
                         <label for="page-2" class="book__page book__page--4">
-                            <div class="page__content1" id='bloglist1'>
+                            <div class="page__content1" id='bloglist1'style={{overflow: 'auto'}}>
                                 {/* <h1 class="page__content-title">I</h1> */}
                                 <ul class='favorite1' >
 
@@ -74,41 +74,43 @@ const Favorite = () => {
                                         data.map((item, index) => {
                                             let test = JSON.parse(item.blogdetail).title;
                                             return (
-                                                <>
+                                                <div >
                                                     {/*  <li>
                                 <a href='#'><h3>{test}</h3></a>
                                 
                                 {JSON.parse(item.blogdetail).decrption}
                                 <br></br> <br></br>
                             </li> */}
-                                                    <Zoom in='true' timeout={(index + 5) * 1000}>
+                                                    <Zoom in='true' timeout={(index + 5) * 1000} id='bloglist'>
                                                         <Card sx={{ maxWidth: 700 /* 345 */, marginBottom: 3, display: 'flex' }}>
                                                             <CardMedia
                                                                 component="img"
                                                                 alt=""
                                                                 /* width="200" */
+                                                                
                                                                 height="140"
-                                                                sx={{ width: 150 }}
+                                                                sx={{ width: 150,objectFit: 'cover' }}
                                                                 image={JSON.parse(item.blogdetail).url}
+                                                                
                                                             />
                                                             <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                                                                 <CardContent
                                                                     width="100"
                                                                 >
-                                                                    <Typography gutterBottom variant="h5" component="div">
+                                                                    <Typography gutterBottom variant="h5" component="div" id='favoriteCardTitle'>
                                                                         {test}
                                                                     </Typography>
-                                                                    <Typography variant="body2" color="text.secondary">
+                                                                    <Typography variant="body2" color="text.secondary" id='favoriteCardScript'>
                                                                         {JSON.parse(item.blogdetail).decrption}
                                                                     </Typography>
                                                                 </CardContent>
-                                                                <CardActions>
-                                                                    <Button sx={{ marginLeft: '55%' }} size="smail" id={item.blogid} onClick={test2} endIcon={<SendIcon />}>瀏覽Blog</Button>
+                                                                <CardActions sx={{paddingBottom:'0px' }}>
+                                                                    <Button sx={{ marginLeft: '55%' }} size="smail" id={item.blogid} onClick={test2} endIcon={<SendIcon />} >瀏覽Blog</Button>
                                                                 </CardActions>
                                                             </Box>
                                                         </Card>
                                                     </Zoom>
-                                                </>
+                                                </div>
                                             )
                                         })
                                     }

@@ -6,9 +6,9 @@ class About extends Component {
         return (
 
             <div>
-                <section class="animation active" style={{ backgroundColor: 'transparent',position:'absolute',zIndex:'4' }}>
-                    <div class="container3" style={{marginLeft:'100px'}}>
-                        <div class="heading1" style={{ paddingBottom: '40px',marginLeft:'20px'}}>
+                <section class="animation active" style={{ backgroundColor: 'transparent', position: 'absolute', zIndex: '4' }}>
+                    <div class="container3" style={{ marginLeft: '100px' }}>
+                        <div class="heading1" style={{ paddingBottom: '40px', marginLeft: '20px' }}>
                             <h1 class="about-title-1">關於我們<i class="fa fa-commenting" aria-hidden="true" style={{ marginLeft: '10px' }}></i></h1>
                         </div>
                         <div class="content">
@@ -16,8 +16,9 @@ class About extends Component {
                                 <img src="./images/AnyConv.com__FDvbbL5agAESgxk-p-2000.jpeg" alt="" />
                             </div>
                             <div class="about-text-1">
-                                <h3>XXXXXX</h3>
-                                <p>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>
+                                <h4 style={{ marginLeft: '20px' }}>–設計專屬的旅程與回憶–</h4>
+                                <p style={{ fontSize: '18px' }}>每一段旅途都是人生的一段故事，或許其中有溫暖也有苦澀，但在未來回顧時也都將成為心中一處深刻的風景。
+                                    <br />我們希望利用此網站和用戶一起留下這些回憶，共同譜寫更多的旅遊故事。</p>
                             </div>
                         </div>
                     </div>
@@ -37,7 +38,7 @@ class About extends Component {
                         <div class="square"></div>
                         <div class="square"></div>
                         <div class="square"></div>
-                        
+
                     </div>
                 </div>
                 <div class="grey"></div>
@@ -63,9 +64,9 @@ class About extends Component {
                     </div>
                 </div>
                 <section class="about-1" style=
-                    {{ backgroundColor: 'transparent', paddingBottom: '200px', backgroundSize: 'cover' ,position:'absolute',zIndex:'3'}}>
-                    <div class="about-container" style={{marginLeft:'150px'}}>
-                    
+                    {{ backgroundColor: 'transparent', paddingBottom: '200px', backgroundSize: 'cover', position: 'absolute', zIndex: '3' }}>
+                    <div class="about-container" style={{ marginLeft: '150px' }}>
+
                         <h3 class="about-title-2"  ><i class="fa fa-id-card-o" aria-hidden="true" style={{ marginRight: '10px' }}></i>團隊成員</h3>
 
                         <div class="member">
@@ -76,8 +77,8 @@ class About extends Component {
                                 <div class="contentBx">
                                     <h2>陳宇勛</h2>
                                     <div class="size">
-                                        <h3>?? :</h3>
-                                        <span>???????</span>
+                                        {/* <h3>主要 :</h3> */}
+                                        <span>CSS&Animation、Bootstrap、Logo</span>
                                     </div>
                                 </div>
                             </div>
@@ -90,8 +91,8 @@ class About extends Component {
                                 <div class="contentBx">
                                     <h2>沈宗成</h2>
                                     <div class="size">
-                                        <h3>?? :</h3>
-                                        <span>???????</span>
+                                        {/* <h3>主要 :</h3> */}
+                                        <span>Spring Boot、RESTful API、SQL</span>
                                     </div>
                                 </div>
                             </div>
@@ -104,8 +105,8 @@ class About extends Component {
                                 <div class="contentBx">
                                     <h2>呂泊諺</h2>
                                     <div class="size">
-                                        <h3>?? :</h3>
-                                        <span>???????</span>
+                                        {/* <h3>主要 :</h3> */}
+                                        <span>Firebase、React、MUI</span>
                                     </div>
                                 </div>
                             </div>
@@ -118,8 +119,8 @@ class About extends Component {
                                 <div class="contentBx">
                                     <h2>陳柏甫</h2>
                                     <div class="size">
-                                        <h3>?? :</h3>
-                                        <span>???????</span>
+                                        {/* <h3>主要 :</h3> */}
+                                        <span>API(Unsplash、Github、 Google Maps、 Cloud Storage)</span>
 
                                     </div>
                                 </div>
@@ -133,8 +134,8 @@ class About extends Component {
                                 <div class="contentBx">
                                     <h2>洪廷宥</h2>
                                     <div class="size">
-                                        <h3>?? :</h3>
-                                        <span>???????</span>
+                                        {/* <h3>主要 :</h3> */}
+                                        <span>Spring Boot、API(Google Maps、Cloud Storage)</span>
                                     </div>
                                 </div>
                             </div>
@@ -156,7 +157,7 @@ class About extends Component {
                         <div class="square"></div>
                         <div class="square"></div>
                         <div class="square"></div>
-                        
+
                     </div>
                 </div>
                 <div class="grey"></div>

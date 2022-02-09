@@ -30,7 +30,9 @@
 
 .content {
     position: relative;
-    width: 1150px;
+    width: 1200px;
+    height: 500px;
+    margin-top: -70px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -92,6 +94,7 @@
     max-width: 400px;
     border: 1px solid rgba(83, 72, 72, 0.1);
     transform: translate(-80px, 50px);
+    margin-top: 70px;
 }
 
 .content .about-text-2 {

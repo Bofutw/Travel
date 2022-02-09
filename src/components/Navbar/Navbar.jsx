@@ -57,10 +57,10 @@ export default function Navbar({ setSearch }) {
                 </div>
                 <button onClick={() => setShowLinks(!showLinks)}><ReorderIcon /></button>
             </div>
-            <div className="middleSide">
+            <div className="middleSide" style={{marginLeft:'20px'}}>
 
 
-                行✈️
+                
 
 
             </div>

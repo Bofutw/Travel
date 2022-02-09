@@ -192,7 +192,7 @@ export default function BlogShow() {
 
     return (
 
-        <div style={{ display: 'grid', gridTemplateColumns: '80% 20%' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '75% 25%' }}>
 
             <div>
                 {/* <div class="bls" style={{ width: '1000px', height: '350px', margin: '70px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -281,15 +281,54 @@ export default function BlogShow() {
             </div>
             <div>
                 <div class="rightcolumn">
+                <div style={{ width: '300px', height: '450px', backgroundColor: 'rgba(0,0,0,0.6)', borderRadius: '5px', marginTop: '15px', marginLeft: '20px' }}>
+                        <div class="card1" style={{ backgroundColor: 'transparent' }}>
+
+                            <div class="" style={{ color: 'white', fontSize: '24px' }}><img alt="Avatar"  style={{ height: "100px", width: '100px', "border-radius": "50%", marginRight: '10px' }} /></div>
+                            <br />
+                            <p style={{ color: 'white' }}></p>
+                        </div>
+                        <div class="card1" style={{ backgroundColor: 'transparent' }}>
+                            <h4 style={{ color: 'white', fontWeight: 'bold' }}><i class="fa fa-newspaper-o" aria-hidden="true" style={{ marginRight: '10px' }}></i>旅遊目錄</h4>
+                            <nav style={{ color: 'white' }}>
+                                {/* <ul>
+                                    {blogdata.blogdetail.eachDay.map((item, idex) => {
+                                        return <li><a href={`#${idex}`} id='blogshow-day' style={{ marginLeft: '37px', resize: 'none', overflow: "scroll" }}>第{idex + 1}天</a></li>
+                                    })}
+
+                                </ul> */}
+                            </nav>
+                        </div>
+                    </div>
                     <div class="card1">
-                        <h3>旅遊目錄</h3>
-                        <nav>
-                            <ul>
-                                {blog.blogdetail.eachDay.map((item, idex) => {
-                                    return <li><a href={`#${idex}`}>第{idex + 1}天</a></li>
-                                })}
+                        {/* 此處有更改 */}
+                        <div style={{ width: '300px', height: '650px', backgroundColor: 'rgba(0,0,0,0.6)', borderRadius: '5px' }}>
+                            <div style={{ paddingTop: "15px", color: 'white', paddingLeft: '25px', marginBottom: '30px' }}>
+                                <h4 style={{ fontWeight: 'bold' }}><i class="fa fa-star" aria-hidden="true" style={{ marginRight: '15px' }}></i>熱門文章</h4>
+                            </div>
+                            <ul class="details">
+                                {/* {populardata.map((item, id) => {
+                                    if (id < 3) {
+                                        return <li onClick={toBlogPage} class="" style={{ height: '110px', marginBottom: '70px', cursor: 'pointer' }} >
+                                            <div class="blog-card" style={{ height: '160px', width: '260px' }}>
+                                                <div class="meta">
+                                                    <div id={`blogid${item.blogid}`} class="photo" style={{ backgroundImage: `url(${item.blogdetail.url})`, height: '160px', width: '260px' }}></div>
+                                                    
+                                                    <ul id={`blogid${item.blogid}`} class="details" style={{ height: '160px', width: '105px' }}>
+                                                        <li class="fa fa-pencil" id={`blogid${item.blogid}`}>     {item.blogdetail.title}</li>
+                                                        <li class="date" id={`blogid${item.blogid}`}>{item.blogcreatetime.slice(0, 10)}</li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+
+                                })} */}
+
                             </ul>
-                        </nav>
+
+                        </div>
                     </div>
                 </div>
             </div>

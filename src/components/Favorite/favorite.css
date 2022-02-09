@@ -102,8 +102,8 @@
 	 letter-spacing: 1px;
 }
 
-#bloglist::-webkit-scrollbar-thumb {
-	border-radius: 10px;
+#bloglist1::-webkit-scrollbar-thumb {
+	border-radius: 5px;
 	background-image: -webkit-gradient(linear,
 					   left bottom,
 					   left top,
@@ -231,3 +231,19 @@
 	 transform: rotateY(-180deg);
 }
  
+#favoriteCardTitle{
+	overflow: hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 1;
+-webkit-box-orient: vertical;
+}
+
+#favoriteCardScript{
+	overflow: hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 1;
+-webkit-box-orient: vertical;
+
+}

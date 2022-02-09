@@ -138,13 +138,13 @@ export default function BlogShow() {
                             //item.blogdetail = JSON.parse(item.blogdetail);
                             return <div class="miniCard">
                                 <div class="myblog-imgbox" >
-                                    <img src={item.blogdetail.url} class="img-fluid" alt="" style={{ height: '105px', width: '186px', objectFit: 'scale-down', objectPosition: '50% 50%' }} />
+                                    <img src={item.blogdetail.url} class="img-fluid" alt="" style={{ height: '105px', width: '186px', objectFit: 'cover', objectPosition: '50% 50%' }} />
                                 </div>
                                 <div class="myblog-content" style={{ padding: '10px' }}>
                                     <h5 id="myblog-cardtitle" >{item.blogdetail.title}</h5>
                                     <p id="myblog-descript" >{item.blogdetail.decrption}</p>
-                                    <button onClick={deleteBlog} id={`blogid${item.blogid}`} class="btn btn-primary" style={{ fontSize: '12px' }}>刪除 <i class="fa fa-angle-right"></i></button>
-                                    <button onClick={editExistBlog} id={`blogid${item.blogid}`} class="btn btn-primary" style={{ fontSize: '12px', marginLeft: '15px' }}>編輯 <i class="fa fa-angle-right"></i></button>
+                                    <button onClick={deleteBlog} id={`blogid${item.blogid}`} class="btn btn-secondary" style={{ fontSize: '12px',marginLeft:'40px'  }}>刪除 <i class="fa fa-angle-right"></i></button>
+                                    <button onClick={editExistBlog} id={`blogid${item.blogid}`} class="btn btn-secondary" style={{ fontSize: '12px', marginLeft: '10px' }}>編輯 <i class="fa fa-angle-right"></i></button>
                                 </div>
                             </div>
 

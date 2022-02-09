@@ -125,7 +125,7 @@ export default function BlogShow({ user }) {
 
                                         </div>
                                         <div>
-                                            <img src={item.eachplace[i].pic} style={{ width: '300px', height: '300px' }}></img>
+                                            <img src={item.eachplace[i].pic} style={{ width: '300px', height: '300px',marginLeft:'50px' }}></img>
                                         </div>
                                     </div>)
                                 } else {
