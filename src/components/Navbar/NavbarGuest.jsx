@@ -61,8 +61,8 @@ export default function NavbarGuest({setSearch}) {
                 </div>
                 <button onClick={() => setShowLinks(!showLinks)}><ReorderIcon /></button>
             </div>
-            <div className="middleSide">
-                MY LOGO
+            <div className="middleSide" style={{marginLeft:'100px'}}>
+               
             </div>
             <div className="rightSide">
                 <input type="search" name="" id="" placeholder='Search...' ref={searchRef} />

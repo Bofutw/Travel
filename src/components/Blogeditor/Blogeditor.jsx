@@ -320,7 +320,7 @@ export default function BlogShow() {
                                 </div>)
                             }
 
-                            return <><h2 id={idex} style={{ boxShadow: '0 2px', paddingBottom: '10px', width: '400px', marginTop: '60px' }}><i class="fa fa-map-o" aria-hidden="true"></i>  第{idex + 1}天</h2>{list}</>
+                            return <><h2 id={idex} style={{ boxShadow: '0 2px', paddingBottom: '10px', width: '400px', marginTop: '60px' }}><i class="fa fa-map-o" aria-hidden="true"></i>  第 {idex + 1} 天</h2>{list}</>
                         })}
                         <Button sx={{ left: '900px', top: '20px' /* position: 'absolute', right:'0px' */ }} onClick={save} color='success' size='large' variant='contained' startIcon={<SaveIcon></SaveIcon>}>儲存編輯內容</Button>
                     </div>
@@ -329,21 +329,20 @@ export default function BlogShow() {
             <div>
                 <div class="rightcolumn">
                     <div style={{ width: '300px', height: '450px', backgroundColor: 'rgba(0,0,0,0.6)', borderRadius: '5px', marginTop: '15px', marginLeft: '20px' }}>
+                       
                         <div class="card1" style={{ backgroundColor: 'transparent' }}>
-                            <div class="card1" style={{ backgroundColor: 'transparent' }}>
 
-                                <div class="" style={{ color: 'white', fontSize: '24px' }}><img alt="Avatar" src={memberdata.membericon} style={{ height: "100px", width: '100px', "border-radius": "50%", marginRight: '10px' }} />{` ${memberdata.membernickname}`}</div>
+                                <div class="" style={{ color: 'white', fontSize: '24px',fontWeight: 'bold' }}><img alt="Avatar" src={memberdata.membericon} style={{ height: "100px", width: '100px', "border-radius": "50%", marginRight: '10px' }} />{` ${memberdata.membernickname}`}</div>
                                 <br />
-                                <p style={{ color: 'white' }}>{memberdata.memberintro}</p>
-                            </div>
-                           
+                                <p style={{ color: 'white',marginBottom:'0px',overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', fontWeight: 'bold' ,WebkitLineClamp:'2',WebkitBoxOrient: 'vertical' }}>{memberdata.memberintro}</p>
                         </div>
+                       
                         <div class="card1" style={{ backgroundColor: 'transparent' }}>
                             <h4 style={{ color: 'white', fontWeight: 'bold' }}><i class="fa fa-newspaper-o" aria-hidden="true" style={{ marginRight: '10px' }}></i>旅遊目錄</h4>
                             <nav style={{ color: 'white' }}>
                                 <ul>
                                     {blog.blogdetail.eachDay.map((item, idex) => {
-                                        return <li><a href={`#${idex}`} id='blogshow-day' style={{ marginLeft: '37px', resize: 'none', overflow: "scroll" }}>第{idex + 1}天</a></li>
+                                        return <li><a href={`#${idex}`} id='blogshow-day' style={{ marginLeft: '37px', resize: 'none', overflow: "scroll",fontWeight: 'bold' }}>第 {idex + 1} 天</a></li>
                                     })}
 
                                 </ul>
