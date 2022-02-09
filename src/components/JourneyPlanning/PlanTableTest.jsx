@@ -219,11 +219,14 @@ function PlanTableTest({setResault,place,setOpen}) {
 
     }
     
-    function deleteItem(e){ //delete event     
-        jsondata = JSON.parse(window.localStorage.jsondata)
-        jsondata.journeydetail = JSON.parse(jsondata.journeydetail)
-        jsondata.journeydetail.eachDays[daypointer].eachPlaces.splice(parseInt(e.target.id.substr(6,1)),1);
-        localStore(jsondata)
+    function deleteItem(e){ //delete event   
+      
+      // console.log(e.target.closest("a") )
+      // console.log(e.target.closest("a").id) 
+       jsondata = JSON.parse(window.localStorage.jsondata)
+       jsondata.journeydetail = JSON.parse(jsondata.journeydetail)
+        jsondata.journeydetail.eachDays[daypointer].eachPlaces.splice(parseInt(e.target.closest("a").id.substr(6,1)),1);
+       localStore(jsondata)
         setT2open(true);
     }
 
@@ -345,10 +348,12 @@ function PlanTableTest({setResault,place,setOpen}) {
                     key={item.AttractionsId}
                     draggableId={"draggable-" + item.AttractionsId}
                     index={i}
+                    
                   >
                     {(provided, snapshot) => (
                         
                       <ListItem 
+                      
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
@@ -383,9 +388,9 @@ function PlanTableTest({setResault,place,setOpen}) {
                         {/* {} */}
                        {/*  <DragHandle {...provided.dragHandleProps} /> */}
 
-                        <b>{item.placeName}</b>
+                        <b id="test">{item.placeName}</b>
                         {/* <Button id={`delbtn${i}`} variant="outlined" startIcon={<DeleteIcon />} className='delbutton' onClick={deleteItem}></Button> */}
-                        <IconButton  color='error' aria-label="delete" id={`delbtn${i}`} className='delbutton' onClick={deleteItem} size='small'><DeleteIcon /></IconButton>
+                        {< a id={`delbtn${i}`}><IconButton  color='error' aria-label="delete" id={`delbtn${i}`} className='delbutton' onClick={deleteItem} size='small'><DeleteIcon /></IconButton></ a>  }
                         {/* <button id={`delbtn${i}`} className='delbutton' onClick={deleteItem}>刪除</button> */}
                       </ListItem>                    
                     )}   
