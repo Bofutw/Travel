@@ -8,112 +8,112 @@ import './SearchPage.css'
 
 function Blog({ search }) {
     //拿取搜尋值
-    const [data,setData] = useState([]);
-    const [searchinput,setSearchinput] = useState([]);
-    const [searchtext,setSearchtext] = useState([]);
-    const [populardata,setPopulardata] = useState([]);
-    const [popularbloger,setPopularbloger] = useState([]);
-    useEffect(()=>{
-        if(!search&&!window.localStorage.searchbloger){        
-             
-            fetchData("")           
-            getPopularData(); 
+    const [data, setData] = useState([]);
+    const [searchinput, setSearchinput] = useState([]);
+    const [searchtext, setSearchtext] = useState([]);
+    const [populardata, setPopulardata] = useState([]);
+    const [popularbloger, setPopularbloger] = useState([]);
+    useEffect(() => {
+        if (!search && !window.localStorage.searchbloger) {
+
+            fetchData("")
+            getPopularData();
             getPopularBloger();
-        } else if(window.localStorage.searchbloger){           
+        } else if (window.localStorage.searchbloger) {
             let temp = window.localStorage.searchbloger.split(",")
             //setSearchinput(temp[0])
-            fetchDataBybloger(temp[0],temp[1])
-            window.localStorage.removeItem("searchbloger");         
-            getPopularData(); 
+            fetchDataBybloger(temp[0], temp[1])
+            window.localStorage.removeItem("searchbloger");
+            getPopularData();
             getPopularBloger();
         }
-    },[]) 
-                                      
+    }, [])
+
     useEffect(() => {
-        if(search){
+        if (search) {
             fetchData(search)
-            getPopularData(); 
+            getPopularData();
             getPopularBloger();
         }
 
     }, [search])
 
 
-    function fetchDataBybloger(memberid,nickname){
-        
+    function fetchDataBybloger(memberid, nickname) {
+
         //alert("key:"+keyword)
         fetch(`http://localhost:8080/blog/memberid=${memberid}`)
-        .then((res)=>{
-            return res.json()
-        } )
-        .then((result)=>{
-            for(let i =0;i<result.length;i++){
-                result[i].blogdetail = JSON.parse(result[i].blogdetail)
-            }
-            console.log(result)
-            setData(result)
-            setSearchtext(nickname)
-        })
+            .then((res) => {
+                return res.json()
+            })
+            .then((result) => {
+                for (let i = 0; i < result.length; i++) {
+                    result[i].blogdetail = JSON.parse(result[i].blogdetail)
+                }
+                console.log(result)
+                setData(result)
+                setSearchtext(nickname)
+            })
     }
 
-    function fetchData(keyword){
-        
+    function fetchData(keyword) {
+
         //alert("key:"+keyword)
         fetch(`http://localhost:8080/blog/keyword=${keyword}`)
-        .then((res)=>{
-            return res.json()
-        } )
-        .then((result)=>{
-            for(let i =0;i<result.length;i++){
-                result[i].blogdetail = JSON.parse(result[i].blogdetail)
-            }
-            console.log(result)
-            setData(result)
-            setSearchinput(keyword?keyword:"全部")
-            setSearchtext(keyword?keyword:"全部")
-        })
+            .then((res) => {
+                return res.json()
+            })
+            .then((result) => {
+                for (let i = 0; i < result.length; i++) {
+                    result[i].blogdetail = JSON.parse(result[i].blogdetail)
+                }
+                console.log(result)
+                setData(result)
+                setSearchinput(keyword ? keyword : "全部")
+                setSearchtext(keyword ? keyword : "全部")
+            })
     }
-     function getPopularData(){
+    function getPopularData() {
         fetch("http://localhost:8080/blog/topblog")
-        .then((res)=>{
-            
-            return res.json()
-        })
-        .then((result)=>{
-            
-            for(let i =0;i<result.length;i++){
-                console.log(result[i].blogdetail)
-                result[i].blogdetail = JSON.parse(result[i].blogdetail)
-            }
-            console.log(result)
-            setPopulardata(result)
-        })
-    }
-    function getPopularBloger(){
-        fetch("http://localhost:8080/member/popularbloger")
-        .then((res)=>{
-            
-            return res.json()
-        })
-        .then((result)=>{
+            .then((res) => {
 
-            console.log(result)
-            setPopularbloger(result)
-        })
+                return res.json()
+            })
+            .then((result) => {
+
+                for (let i = 0; i < result.length; i++) {
+                    console.log(result[i].blogdetail)
+                    result[i].blogdetail = JSON.parse(result[i].blogdetail)
+                }
+                console.log(result)
+                setPopulardata(result)
+            })
     }
-    function toBlogPage(e){
-       
-        fetch("http://localhost:8080/blog/"+(e.target.id).slice(6,8))
-        .then((res)=>{           
-            return res.json()
-        })
-        .then((result)=>{
-            window.localStorage.blogdata = JSON.stringify(result)
-            window.location.href = "/Blogshow"
- 
-        })
+    function getPopularBloger() {
+        fetch("http://localhost:8080/member/popularbloger")
+            .then((res) => {
+
+                return res.json()
+            })
+            .then((result) => {
+
+                console.log(result)
+                setPopularbloger(result)
+            })
     }
-    function blogerClick(e){
+    function toBlogPage(e) {
+
+        fetch("http://localhost:8080/blog/" + (e.target.id).slice(6, 8))
+            .then((res) => {
+                return res.json()
+            })
+            .then((result) => {
+                window.localStorage.blogdata = JSON.stringify(result)
+                window.location.href = "/Blogshow"
+
+            })
+    }
+    function blogerClick(e) {
         search = e.target.id.split(",")[0];
         window.localStorage.searchbloger = e.target.id;
         window.location.reload()
@@ -182,26 +182,26 @@ function Blog({ search }) {
                 <div style={{ display: 'grid', gridTemplateColumns: '75% 25% ', backgroundImage: 'url("")', backgroundSize: '100% 100%' }}>
                     {/* <div></div> */}
                     <div style={{ paddingBottom: '10px', overflow: 'scroll', resize: 'none', height: '1040px' }}>
-                    {data.map((item)=>{
-                        return <div class="blog-card">
-                        <div class="meta">
-                            <div class="photo" style={{ backgroundImage: `url(${item.blogdetail.url})` }}></div>
-                            <ul class="details">
-                                <li class="date">{item.blogcreatetime.slice(0,10)}</li>
-                              
-                            </ul>
-                        </div>
-                        <div class="description">
-                            <h1 style={{width:'388px',height:'60px'}}>{item.blogdetail.title}</h1>
-                            
-                            <p style={{width:'388px',height:'40px'}}> {item.blogdetail.decrption}</p>
-                            <p class="read-more" style={{cursor: 'pointer'}}>
-                                <a onClick={toBlogPage} id={`blogid${item.blogid}`}>Read More</a>
-                            </p>
-                        </div>
-                    </div>
-                    
-                    })}
+                        {data.map((item) => {
+                            return <div class="blog-card">
+                                <div class="meta">
+                                    <div class="photo" style={{ backgroundImage: `url(${item.blogdetail.url})` }}></div>
+                                    <ul class="details">
+                                        <li class="date">{item.blogcreatetime.slice(0, 10)}</li>
+
+                                    </ul>
+                                </div>
+                                <div class="description">
+                                    <h1 style={{ width: '388px', height: '60px' }}>{item.blogdetail.title}</h1>
+
+                                    <p style={{ width: '388px', height: '40px' }}> {item.blogdetail.decrption}</p>
+                                    <p class="read-more" style={{ cursor: 'pointer' }}>
+                                        <a onClick={toBlogPage} id={`blogid${item.blogid}`}>...更多</a>
+                                    </p>
+                                </div>
+                            </div>
+
+                        })}
                     </div>
                     <div>
                         <div >
@@ -210,19 +210,19 @@ function Blog({ search }) {
                                     <h4><i class="fa fa-address-book-o" aria-hidden="true" style={{ marginRight: '15px' }}></i>熱門作家</h4>
                                 </div>
                                 <ul class="details">
-                                    {popularbloger.map((item,id)=>{
-                                        if(id<3){
-                                            return <li onClick={blogerClick}  class="" style={{ height: '90px',cursor: 'pointer' }}><img alt="Avatar" id={item.memberid +","+ item.membernickname} src={item.membericon} style={{ width: '60px', height: '60px', marginLeft: '20px',"border-radius": "50%" }} />
-                                            <ul style={{ marginLeft: '100px', marginTop: '-63px', marginRight: '20px' }}>
-                                                <li id={item.memberid +","+ item.membernickname} style={{ color: 'white', fontWeight: 'bold', fontSize: "18px" }}>{item.membernickname}</li>
-                                                <li id={item.memberid +","+ item.membernickname} className='detail-member-intro' >{item.memberintro}</li>
-                                            </ul>
-                                        </li>
+                                    {popularbloger.map((item, id) => {
+                                        if (id < 3) {
+                                            return <li onClick={blogerClick} class="" style={{ height: '90px', cursor: 'pointer' }}><img alt="Avatar" id={item.memberid + "," + item.membernickname} src={item.membericon} style={{ width: '60px', height: '60px', marginLeft: '20px', "border-radius": "50%" }} />
+                                                <ul style={{ marginLeft: '100px', marginTop: '-63px', marginRight: '20px' }}>
+                                                    <li id={item.memberid + "," + item.membernickname} style={{ color: 'white', fontWeight: 'bold', fontSize: "18px" }}>{item.membernickname}</li>
+                                                    <li id={item.memberid + "," + item.membernickname} className='detail-member-intro' >{item.memberintro}</li>
+                                                </ul>
+                                            </li>
                                         }
-                                        
+
                                     })}
-                                    
-                                   
+
+
                                 </ul>
 
                             </div>
@@ -233,21 +233,21 @@ function Blog({ search }) {
                                     <h4><i class="fa fa-star" aria-hidden="true" style={{ marginRight: '15px' }}></i>熱門文章</h4>
                                 </div>
                                 <ul class="details">
-                                    {populardata.map((item,id)=>{
-                                        if(id<3){
-                                            return <li onClick={toBlogPage}class="" style={{ height: '110px', marginBottom: '70px',cursor: 'pointer' }} >
-                                            <div class="blog-card" style={{ height: '160px', width: '260px' }}>
-                                                <div class="meta">
-                                                    <div id={`blogid${item.blogid}`} class="photo" style={{ backgroundImage: `url(${item.blogdetail.url})`, height: '160px', width: '260px' }}></div>
-                                                    {/* `url(${item.blogdetail.url})` */}
-                                                    <ul id={`blogid${item.blogid}`} class="details" style={{ height: '160px', width: '105px' }}>
-                                                        <li class="fa fa-pencil" id={`blogid${item.blogid}`}>     {item.blogdetail.title}</li>
-                                                        <li class="date" id={`blogid${item.blogid}`}>{item.blogcreatetime.slice(0,10)}</li>
-    
-                                                    </ul>
+                                    {populardata.map((item, id) => {
+                                        if (id < 3) {
+                                            return <li onClick={toBlogPage} class="" style={{ height: '110px', marginBottom: '70px', cursor: 'pointer' }} >
+                                                <div class="blog-card" style={{ height: '160px', width: '260px' }}>
+                                                    <div class="meta">
+                                                        <div id={`blogid${item.blogid}`} class="photo" style={{ backgroundImage: `url(${item.blogdetail.url})`, height: '160px', width: '260px' }}></div>
+                                                        {/* `url(${item.blogdetail.url})` */}
+                                                        <ul id={`blogid${item.blogid}`} class="details" style={{ height: '160px', width: '105px' }}>
+                                                            <li class="fa fa-pencil" id={`blogid${item.blogid}`}>     {item.blogdetail.title}</li>
+                                                            <li class="date" id={`blogid${item.blogid}`}>{item.blogcreatetime.slice(0, 10)}</li>
+
+                                                        </ul>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </li>
+                                            </li>
                                         }
 
                                     })}
