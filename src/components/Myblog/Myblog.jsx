@@ -9,7 +9,8 @@ export default function BlogShow() {
     let journeyid;
     const [blog, setBlog] = useState([]);
     const [journey, setJourney] = useState([]);
-    const [show, setShow] = useState(false);
+
+
 
     useEffect(() => {
         memberid = window.localStorage.memberid;
@@ -17,8 +18,7 @@ export default function BlogShow() {
         getmemberjourney(memberid)
     }, [])
     function popcard(e) {
-        e.preventDefault();
-        setShow(true);
+
         journeyid = document.getElementById(`popcard-${e.target.id.slice(8, 11)}`).value.slice(9, 13)
         document.getElementById("journeyname").innerHTML = `為 <b>${document.getElementById("popcard-" + e.target.id.slice(8, 11)).closest('div').querySelector('h5').innerText}</b> 寫下一些回憶`
         document.getElementById("buttonForNewBlog").setAttribute("style", "")
@@ -92,59 +92,6 @@ export default function BlogShow() {
             })
 
     }
-
-    function getmemberjourney(id) {
-        fetch(`http://localhost:8080/journey/memberid=${id}`)
-            .then((res) => {
-                console.log(res)
-                return res.json();
-            })
-            .then((result) => {
-                console.log(result)
-
-                for (let i = 0; i < result.length; i++) {
-                    console.log(result[i].blogdetail)
-                    result[i].journeydetail = JSON.parse(result[i].journeydetail)
-                }
-                setJourney(result)
-            })
-
-    }
-    function editExistBlog(e) {
-        fetch(`http://localhost:8080/blog/${e.target.id.slice(6, 10)}`)
-            .then((res) => {
-                return res.json();
-            })
-            .then((result) => {
-                window.localStorage.blog = JSON.stringify(result)
-                window.localStorage.removeItem("journeyforblog")
-                window.location.href = "/Blogeditor";
-            })
-
-    }
-    function editExistJourney() {
-
-        fetch(`http://localhost:8080/journey/${journeyid}`)
-            .then((res) => {
-                return res.json();
-            })
-            .then((result) => {
-                window.localStorage.journeyforblog = JSON.stringify(result)
-                window.localStorage.removeItem("blog")
-                window.location.href = "/Blogeditor";
-            })
-
-    }
-    function deleteBlog(e) {
-
-        fetch(`http://localhost:8080/blog/${e.target.id.slice(6, 10)}`, {
-            method: "DELETE"
-        })
-            .then((res) => {
-                window.location.reload();
-            })
-
-    }
     return (
 
         <div >
@@ -156,7 +103,10 @@ export default function BlogShow() {
                 </h2>
 
                 <div class="popup" id="popup">
-                    <a class="popup__close" href="#" style={{}} onClick={() => setShow(false)}>X</a>
+                    <a
+                        class="popup__close"
+                        href="#"
+                    >X</a>
                     <div class="popup-inner">
                         <div style={{ marginTop: '30px' }}>
                             <h2>—撰寫遊記—</h2>
@@ -165,7 +115,7 @@ export default function BlogShow() {
                         </div>
                         <p id='journeyname'>-選擇想要新增的旅遊紀錄吧-</p>
                         {/*   <button id ={"buttonForNewBlog"}onClick={editExistJourney} style={{ marginLeft: '650px', marginBottom: '13px', display:"none" }}></button> */}
-                        <button id={"buttonForNewBlog"} color='success' variant="contained" style={{ display: (show ? "" : "none") }} size="large" onClick={editExistJourney}>出發 ➢</button>
+                        <button id={"buttonForNewBlog"} color='success' variant="contained" style={{ display: 'none' }} size="large" onClick={editExistJourney}>出發 ➢</button>
                         <div class="popup__text">
                             {journey.map((item, id) => {
                                 return <div><input type='radio' id={`popcard-${id}`} name='popcard' style={{ display: "none" }} value={"journeyid" + item.journeyid} />
