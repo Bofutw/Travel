@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 
 import TextField from '@mui/material/TextField';
 import { DropzoneArea } from 'material-ui-dropzone';
-import { Button } from '@mui/material';
+import { alertTitleClasses, Button } from '@mui/material';
 import { MuiThemeProvider, createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import { green } from '@mui/material/colors';
 import SaveIcon from '@mui/icons-material/Save';
@@ -16,6 +16,53 @@ export default function BlogShow() {
     const [upload, setOpload] = useState(false);
     let blog;
     let data;
+    const [populardata, setPopulardata] = useState([]);
+    const [memberdata, setMemberdata] = useState([]);
+    useEffect(() => {
+        getPopularData();
+        getMemberData();
+    }, []);
+    function toBlogPage(e) {
+
+        fetch("http://localhost:8080/blog/" + (e.target.id).slice(6, 8))
+            .then((res) => {
+
+                return res.json()
+            })
+            .then((result) => {
+                window.localStorage.blogdata = JSON.stringify(result)
+                window.location.href = "/Blogshow"
+
+            })
+    }
+    function getPopularData() {
+        fetch("http://localhost:8080/blog/topblog")
+            .then((res) => {
+
+                return res.json()
+            })
+            .then((result) => {
+
+                for (let i = 0; i < result.length; i++) {
+                    console.log(result[i].blogdetail)
+                    result[i].blogdetail = JSON.parse(result[i].blogdetail)
+                }
+                console.log(result)
+                setPopulardata(result)
+            })
+    }
+    function getMemberData() {
+        //alert(window.localStorage.memberid)
+        let id = window.localStorage.memberid
+        fetch("http://localhost:8080/member/"+id)
+            .then((res) => {
+
+                return res.json()
+            })
+            .then((result) => {
+                setMemberdata(result)
+            })
+    }
     function initblog() {
 
         blog = {};
@@ -281,22 +328,25 @@ export default function BlogShow() {
             </div>
             <div>
                 <div class="rightcolumn">
-                <div style={{ width: '300px', height: '450px', backgroundColor: 'rgba(0,0,0,0.6)', borderRadius: '5px', marginTop: '15px', marginLeft: '20px' }}>
+                    <div style={{ width: '300px', height: '450px', backgroundColor: 'rgba(0,0,0,0.6)', borderRadius: '5px', marginTop: '15px', marginLeft: '20px' }}>
                         <div class="card1" style={{ backgroundColor: 'transparent' }}>
+                            <div class="card1" style={{ backgroundColor: 'transparent' }}>
 
-                            <div class="" style={{ color: 'white', fontSize: '24px' }}><img alt="Avatar"  style={{ height: "100px", width: '100px', "border-radius": "50%", marginRight: '10px' }} /></div>
-                            <br />
-                            <p style={{ color: 'white' }}></p>
+                                <div class="" style={{ color: 'white', fontSize: '24px' }}><img alt="Avatar" src={memberdata.membericon} style={{ height: "100px", width: '100px', "border-radius": "50%", marginRight: '10px' }} />{` ${memberdata.membernickname}`}</div>
+                                <br />
+                                <p style={{ color: 'white' }}>{memberdata.memberintro}</p>
+                            </div>
+                           
                         </div>
                         <div class="card1" style={{ backgroundColor: 'transparent' }}>
                             <h4 style={{ color: 'white', fontWeight: 'bold' }}><i class="fa fa-newspaper-o" aria-hidden="true" style={{ marginRight: '10px' }}></i>旅遊目錄</h4>
                             <nav style={{ color: 'white' }}>
-                                {/* <ul>
-                                    {blogdata.blogdetail.eachDay.map((item, idex) => {
+                                <ul>
+                                    {blog.blogdetail.eachDay.map((item, idex) => {
                                         return <li><a href={`#${idex}`} id='blogshow-day' style={{ marginLeft: '37px', resize: 'none', overflow: "scroll" }}>第{idex + 1}天</a></li>
                                     })}
 
-                                </ul> */}
+                                </ul>
                             </nav>
                         </div>
                     </div>
@@ -307,13 +357,13 @@ export default function BlogShow() {
                                 <h4 style={{ fontWeight: 'bold' }}><i class="fa fa-star" aria-hidden="true" style={{ marginRight: '15px' }}></i>熱門文章</h4>
                             </div>
                             <ul class="details">
-                                {/* {populardata.map((item, id) => {
+                                {populardata.map((item, id) => {
                                     if (id < 3) {
                                         return <li onClick={toBlogPage} class="" style={{ height: '110px', marginBottom: '70px', cursor: 'pointer' }} >
                                             <div class="blog-card" style={{ height: '160px', width: '260px' }}>
                                                 <div class="meta">
                                                     <div id={`blogid${item.blogid}`} class="photo" style={{ backgroundImage: `url(${item.blogdetail.url})`, height: '160px', width: '260px' }}></div>
-                                                    
+                                                    {/* `url(${item.blogdetail.url})` */}
                                                     <ul id={`blogid${item.blogid}`} class="details" style={{ height: '160px', width: '105px' }}>
                                                         <li class="fa fa-pencil" id={`blogid${item.blogid}`}>     {item.blogdetail.title}</li>
                                                         <li class="date" id={`blogid${item.blogid}`}>{item.blogcreatetime.slice(0, 10)}</li>
@@ -324,7 +374,7 @@ export default function BlogShow() {
                                         </li>
                                     }
 
-                                })} */}
+                                })}
 
                             </ul>
 

@@ -117,7 +117,7 @@ export default function BlogShow() {
                                             <img id={`element-${id}`} src="\blogimg\b1\44879896482_720c553daa_c.jpg" class="img-fluid" alt="" style={{ height: '100px', width: '150px' }} />
                                         </div>
                                         <div id={`element-${id}`} class="myblog-content" style={{ padding: '10px' }}>
-                                            <h5 style={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', fontWeight: 'bold' }} id={`element-${id}`}>{item.journeydetail.title}</h5>
+                                            <h5 style={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', fontWeight: 'bold' ,WebkitLineClamp:'1',WebkitBoxOrient: 'vertical'}} id={`element-${id}`}>{item.journeydetail.title}</h5>
                                             <div id={`element-${id}`}>{`(${item.journeydetail.beginDate})`}</div>
                                         </div>
                                     </div></div>
