@@ -106,7 +106,7 @@ useEffect(() => {
       margin={{
         top: 20,
         right: 40,
-        left: -40,
+        left: -30,
         bottom: 5
       }}
     >

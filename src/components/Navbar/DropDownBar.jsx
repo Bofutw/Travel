@@ -83,7 +83,7 @@ const Dropdownbar = () => {
           <ListItemIcon>
             <StarIcon fontSize="medium" sx={{ color: "#ffea00" }}></StarIcon>
           </ListItemIcon>
-          <li style={{ fontWeight: "bolder" }}>個人收藏</li>
+          <li style={{ fontWeight: "bolder" }}>旅遊收藏</li>
         </MenuItem>
       </Link>
       {/* <MenuItem>

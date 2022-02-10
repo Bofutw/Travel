@@ -84,14 +84,10 @@ const HomeSection = () => {
                         <div className="image">
                             <a href=""><img src="./img/img1.jpg" alt="" /></a>
                         </div>
-                        <div className="text-box">
-                            <h3>Lorem Ipsum</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                                labore et dolore magna
-                                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                commodo consequat. Duis
-                                aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                pariatur.</p>
+                        <div className="text-box" style={{marginTop:'70px'}}>
+                            <h3></h3>
+                            <p style={{fontSize:'20px',fontWeight:'bold'}}>深入挖掘在地旅遊體驗行程，我們把安排旅程變得更簡單、更即時。
+我們深信自由行是最能貼近在地的旅遊方式，每一趟旅程，都是一場精彩的饗宴。並希望每個愛旅行的你，都能和我們一樣，享受自由行的美好。</p>
                         </div>
                     </div>
                     <div className="media-icons">
@@ -107,16 +103,13 @@ const HomeSection = () => {
                     <h3 className="section-title">熱門景點</h3>
                     <div className="content02">
                         <div className="image02">
-                            <img src="./img/img2.jpg" alt="" />
+                            <img src="\img\maxresdefault.jpg" alt="" />
                         </div>
                         <div className="info">
-                            <h4 className="info-title">101風景美不勝收</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                                labore et dolore magna
-                                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                commodo consequat. Duis
-                                aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                pariatur.</p>
+                            <h4 className="info-title" style={{fontWeight:'bold'}}>101風景美不勝收</h4>
+                            <p style={{fontSize:'20px',fontWeight:'bold'}}>TAIPEI 101座落於台北最菁華地段，是國內建築界有史以來最大的工程專案。在外觀上形成有節奏的律動美感，開創國際摩天大樓新風格。
+                              標高382公尺的89樓觀景台，擁有全方位絕佳的觀景視野，欣賞台北日與夜不同的城市之美！
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -128,10 +121,8 @@ const HomeSection = () => {
                         <div className="media-info">
 
                             <div className="text-box03">
-                                <h3>西門町</h3>
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis inventore iure expedita nulla, cupiditate error.</p>
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis inventore iure expedita nulla, cupiditate error.</p>
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis inventore iure expedita nulla, cupiditate error.</p>
+                                <h3 style={{fontWeight:'bold'}}>西門町</h3>
+                                <p style={{fontSize:'20px',fontWeight:'bold'}}>西門町有許多著名的地標及商場，像是IG打卡景點的彩虹地景、擁有100多年歷史的西門紅樓、時代性指標的萬年商業大樓、充滿美式風格的西門町美國街等；還有多樣美食聚集在此，如港式料理、台式料理、美式料理、飲料冰品、咖啡廳、酒吧等各式餐點。</p>
 
                             </div>
 

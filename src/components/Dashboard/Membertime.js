@@ -57,8 +57,10 @@ export default function Chart() {
             style={theme.typography.body2}
           />
           <YAxis
+            tickCount={1}
             stroke={theme.palette.text.secondary}
-            style={theme.typography.body2}
+            style={theme.typography.body2}  
+            
           >
             <Label
               angle={270}
