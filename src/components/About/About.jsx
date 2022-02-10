@@ -13,12 +13,12 @@ class About extends Component {
                         </div>
                         <div class="content">
                             <div class="image-1">
-                                <img src="./images/AnyConv.com__FDvbbL5agAESgxk-p-2000.jpeg" alt="" />
+                                <img src="\img\worknew.png" alt="" style={{weight:'300px',width:'650px'}}/>
                             </div>
                             <div class="about-text-1">
-                                <h4 style={{ marginLeft: '20px' }}>–設計專屬的旅程與回憶–</h4>
-                                <p style={{ fontSize: '18px' }}>每一段旅途都是人生的一段故事，或許其中有溫暖也有苦澀，但在未來回顧時也都將成為心中一處深刻的風景。
-                                    <br />我們希望利用此網站和用戶一起留下這些回憶，共同譜寫更多的旅遊故事。</p>
+                                <h4 style={{ marginLeft: '55px' }}>– Logo 設計理念 –</h4>
+                                <p style={{ fontSize: '18px' }}>    每一段旅途都是人生的一段故事，或許其中有溫暖也有苦澀，但在未來回顧時也都將成為心中一處深刻的風景。
+                                    <br />我們將旅人搭配地標與交通工具的飛機做結合，設計出「旅」字，也為每段旅程都能劃下美好的句點！</p>
                             </div>
                         </div>
                     </div>

@@ -19,11 +19,11 @@ const Footer = () => {
                         <div className="footer-col">
                             <h4>網站地圖</h4>
                             <ul>
-                                <li><Link to="/" onClick={handleClick}><a>首頁</a></Link></li>
-                                <li><Link to="/blog" onClick={handleClick}><a >部落格</a></Link></li>
-                                <li><Link to="/journeyplanhome" onClick={handleClick}><a >行程規劃</a></Link></li>
-                                <li><Link to="/qa" onClick={handleClick}><a>常見問題</a></Link></li>
-                                <li><Link to="/about" onClick={handleClick}><a >關於我們</a></Link></li>
+                                <li><Link to="/" onClick={handleClick}><a style={{fontWeight:'bold'}}>首頁</a></Link></li>
+                                <li><Link to="/blog" onClick={handleClick}><a style={{fontWeight:'bold'}}>部落格</a></Link></li>
+                                <li><Link to="/journeyplanhome" onClick={handleClick}><a style={{fontWeight:'bold'}}>行程規劃</a></Link></li>
+                                <li><Link to="/qa" onClick={handleClick}><a style={{fontWeight:'bold'}}>常見問題</a></Link></li>
+                                <li><Link to="/about" onClick={handleClick}><a style={{fontWeight:'bold'}}>關於我們</a></Link></li>
                             </ul>
                         </div>
                         {/*

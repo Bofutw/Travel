@@ -94,7 +94,7 @@
     max-width: 400px;
     border: 1px solid rgba(83, 72, 72, 0.1);
     transform: translate(-80px, 50px);
-    margin-top: 70px;
+    margin-top: -80px;
 }
 
 .content .about-text-2 {

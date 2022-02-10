@@ -206,7 +206,7 @@ function Blog() {
 
                 </div>
                 <div>
-                    <div style={{ width: '300px', height: `${(popularbloger.length) * 130 + 20}px`, backgroundColor: 'rgba(0,0,0,0.6)', borderRadius: '5px', marginTop: '15px', marginLeft: '40px' }}>
+                    <div style={{ width: '300px', height: `${(popularbloger.length) * 115+15}px`, backgroundColor: 'rgba(0,0,0,0.6)', borderRadius: '5px', marginTop: '15px', marginLeft: '40px',marginBottom:'50px' }}>
                         <div style={{ paddingTop: "15px", color: 'white', paddingLeft: '25px', marginBottom: '20px' }}>
                             <h4><i class="fa fa-address-book-o" aria-hidden="true" style={{ marginRight: '15px' }}></i>熱門作家</h4>
                         </div>
