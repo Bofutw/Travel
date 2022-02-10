@@ -26,10 +26,7 @@ import About from "./components/About/About";
 import Blog from "./components/Blog/Blog";
 import Myblog from "./components/Myblog/Myblog";
 import BlogShow from "./components/Blog-show/BlogShow";
-import BlogShow2 from "./components/Blog-show/BlogShow2";
-import BlogShow3 from "./components/Blog-show/BlogShow3";
-import BlogShow4 from "./components/Blog-show/BlogShow4";
-import BlogShow5 from "./components/Blog-show/BlogShow5";
+
 import Blogeditor from "./components/Blogeditor/Blogeditor";
 import Dashboard from './components/Dashboard/Dashboard';
 import QuestionAnswer from './components/QA/QuestionAnswer';
@@ -114,10 +111,7 @@ function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/myblog" element={<Myblog />} />
           <Route path="/blogshow" element={<BlogShow user={user} />} />
-          <Route path="/blogshow2" element={<BlogShow2 />} />
-          <Route path="/blogshow3" element={<BlogShow3 />} />
-          <Route path="/blogshow4" element={<BlogShow4 />} />
-          <Route path="/blogshow5" element={<BlogShow5 />} />
+          
           <Route path="/blogeditor" element={<Blogeditor />} />
           {user && <Route path="/profile" element={<Profile3 />} />}
           {user && <Route path="/favorite" element={<Favorite />} />}

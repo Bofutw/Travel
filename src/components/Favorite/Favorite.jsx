@@ -105,7 +105,7 @@ const Favorite = () => {
                                                                     </Typography>
                                                                 </CardContent>
                                                                 <CardActions sx={{paddingBottom:'0px' }}>
-                                                                    <Button sx={{ marginLeft: '55%' }} size="smail" id={item.blogid} onClick={test2} endIcon={<SendIcon />} >瀏覽Blog</Button>
+                                                                    <Button sx={{ marginLeft: '55%' }} size="smail" id={item.blogid} onClick={test2} endIcon={<SendIcon id={item.blogid} onClick={test2}/>} >瀏覽Blog</Button>
                                                                 </CardActions>
                                                             </Box>
                                                         </Card>

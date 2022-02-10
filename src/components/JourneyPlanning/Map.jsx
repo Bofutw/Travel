@@ -12,7 +12,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import PlanTable from './PlanTable';
+
 import './map.css'
 import { ButtonBase } from '@mui/material';
 import PlanTableTest from './PlanTableTest';

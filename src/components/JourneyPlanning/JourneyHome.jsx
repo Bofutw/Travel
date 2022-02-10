@@ -113,7 +113,7 @@ function deleteButton(e){
         alignItems="center"
         spacing={2} > */}
         
-          <Button color='primary' variant="outlined" endIcon={<MovingIcon/>} sx={{marginX:'10px'}} size="small" id={item.journeyid} onClick={continuteButton}>繼續旅程</Button>
+          <Button color='primary' variant="outlined" endIcon={<MovingIcon id={item.journeyid} onClick={continuteButton}/>} sx={{marginX:'10px'}} size="small" id={item.journeyid} onClick={continuteButton}>繼續旅程</Button>
           <Button color='warning' variant="outlined" endIcon={<WrongLocationIcon  />} size="small" id={"del"+item.journeyid} onClick={deleteButton}>旅程掰掰</Button>
           
          {/* </Stack> */}
